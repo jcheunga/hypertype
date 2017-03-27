@@ -4,6 +4,7 @@ import * as NavigationState from '../../modules/navigation/NavigationState';
 
 // Initial state
 const initialState = Map({
+  playerId: "ABC123",
   isLoading: false,
   inGame: false,
   gameId: "",
@@ -13,13 +14,11 @@ const initialState = Map({
 // Actions
 // Quick Play
 const FIND_GAME_REQUEST = 'PlayState/FIND_GAME_REQUEST';
-const FIND_GAME_SUCCESS = 'PlayState/FIND_GAME_SUCCESS';
-const FIND_GAME_FAILURE = 'PlayState/FIND_GAME_FAILURE';
-
-const CREATE_GAME_SUCCESS = 'PlayState/CREATE_GAME_SUCCESS';
-const CREATE_GAME_FAILURE = 'PlayState/CREATE_GAME_FAILURE';
-
-const LEAVE_GAME = 'PlayState/LEAVE_GAME_REQUEST';
+export const FIND_GAME_SUCCESS = 'PlayState/FIND_GAME_SUCCESS';
+export const CREATE_GAME_REQUEST = 'PlayState/CREATE_GAME_REQUEST';
+export const CREATE_GAME_SUCCESS = 'PlayState/CREATE_GAME_SUCCESS';
+export const RESPONSE_FAILURE = 'PlayState/RESPONSE_FAILURE';
+const LEAVE_GAME = 'PlayState/LEAVE_GAME';
 
 // Action creators
 export function findGame(id) {
@@ -37,38 +36,40 @@ export function leaveGame(id) {
 }
 
 // Reducer
-export default function CityStateReducer(state = initialState, action = {}) {
+export default function PlayStateReducer(state = initialState, action = {}) {
   
   switch (action.type) {
     case FIND_GAME_REQUEST:
       return loop(
         state
           .set('isLoading', true),
-        Effects.promise(findRoom, action.payload)
+        Effects.promise(findRoom, action.payload, FIND_GAME_SUCCESS, CREATE_GAME_REQUEST)
       );
 
     case FIND_GAME_SUCCESS:
       return loop(
         state
           .set('isLoading', false)
+          .set('inGame', true)
           .set('room', action.payload),
         Effects.constant(NavigationState.pushRoute({
           key: 'Type',
           title: 'Type fast'
         }))
       );
-
-    case FIND_GAME_FAILURE:
+    
+    case CREATE_GAME_REQUEST:
       return loop(
         state
           .set('isLoading', true),
-        Effects.promise(createRoom, action.payload, CREATE_GAME_SUCCESS)
+        Effects.promise(findRoom, action.payload, CREATE_GAME_SUCCESS)
       );
 
     case CREATE_GAME_SUCCESS:
       return loop(
         state
           .set('isLoading', false)
+          .set('inGame', true)
           .set('room', action.payload),
         Effects.constant(NavigationState.pushRoute({
           key: 'Type',
@@ -76,7 +77,7 @@ export default function CityStateReducer(state = initialState, action = {}) {
         }))
       );
 
-    case CREATE_GAME_FAILURE:
+    case RESPONSE_FAILURE:
       return state
         .set('isLoading', false)
         .set('inGame', false)
