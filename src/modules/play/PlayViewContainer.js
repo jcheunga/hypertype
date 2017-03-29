@@ -7,10 +7,10 @@ import * as PlayStateActions from './PlayState';
 
 export default connect(
   state => ({
-    office: state.getIn(['city', 'value']),
-    loading: state.getIn(['city', 'loading']),
-    place: state.getIn(['city', 'place']),
-    position: state.getIn(['city', 'position'])
+    isLoading: state.getIn(['playState', 'loading']),
+    inGame: state.getIn(['playState', 'inGame']),
+    gameId: state.getIn(['playState', 'gameId']),
+    gameStartTime: state.getIn(['playState', 'gameStartTime'])
   }),
   dispatch => {
     return {

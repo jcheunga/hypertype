@@ -23,6 +23,14 @@ class PlayView extends Component {
     super(props);
   }
 
+  quickPlay = () => {
+
+  }
+
+  multiPlay = () => {
+    
+  }
+
   render() { 
     return (
       <View style={styles.container}>

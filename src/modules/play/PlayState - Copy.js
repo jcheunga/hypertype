@@ -4,7 +4,7 @@ import * as NavigationState from '../../modules/navigation/NavigationState';
 
 // Initial state
 const initialState = Map({
-  playerId: "",
+  playerId: "ABC123",
   isLoading: false,
   inGame: false,
   gameId: "",

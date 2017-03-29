@@ -7,14 +7,13 @@ import * as TypeStateActions from './TypeState';
 
 export default connect(
   state => ({
-    office: state.getIn(['city', 'value']),
-    loading: state.getIn(['city', 'loading']),
-    place: state.getIn(['city', 'place']),
-    position: state.getIn(['city', 'position'])
+    gameId: state.getIn(['playState', 'gameId']),
+    gameStartTime: state.getIn(['playState', 'gameStartTime'])
   }),
   dispatch => {
     return {
-      navigationStateActions: bindActionCreators(NavigationStateActions, dispatch)
+      navigationStateActions: bindActionCreators(NavigationStateActions, dispatch),
+      playStateActions: bindActionCreators(PlayStateActions, dispatch)
     };
   }
 )(TypeView);
