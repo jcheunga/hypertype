@@ -24,7 +24,8 @@ class PlayView extends Component {
   }
 
   quickPlay = () => {
-
+    console.log("Quick play pressed");
+    this.props.playStateActions.findGame("1234ABCDE");
   }
 
   multiPlay = () => {
@@ -36,20 +37,18 @@ class PlayView extends Component {
       <View style={styles.container}>
         <View style={styles.buttonsContainer}>
         <Text>WELCOME TO TYPESPRINT</Text>
+        <Text>{this.props.errorMessage}</Text>
         <Button
           text="Quick play"
           buttonStyle={theme.buttons.primary}
           textStyle={theme.fonts.primary}
-          action={() => this.props.navigationStateActions.pushRoute({
-            key: 'Type',
-            title: 'Type fast!'
-          })}
+          action={() => this.quickPlay()}
         />
         <Button
           text="Multi play"
           buttonStyle={theme.buttons.primary}
           textStyle={theme.fonts.primary}
-          action={() => console.log("pressed")}
+          action={() => console.log("Multiplay pressed")}
         />
         </View>
       </View>

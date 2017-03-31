@@ -26,7 +26,7 @@ export default function AppRouter(props) {
   }
 
   if (key === 'Type') {
-    return <TypeViewContainer room={route.room}/>;
+    return <TypeViewContainer />;
   }
 
   throw new Error('Unknown navigation key: ' + key);

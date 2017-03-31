@@ -40,6 +40,12 @@ class TypeView extends Component {
     };
   }
 
+  componentWillMount () {
+    if (!this.props.gameId || !this.props.inGame) {
+      this.props.navigationStateActions.popRoute();
+    }
+  }
+
   componentDidMount () {
     this.countInterval = setInterval(() => {
       if (this.state.countdownTime === 0) {
@@ -61,7 +67,10 @@ class TypeView extends Component {
   }
 
   componentWillUnmount () {
+    console.log("Are you sure?");
     clearInterval(this.countInterval);
+    this.props.playStateActions.leaveGame();    
+    this.props.navigationStateActions.popRoute();
   }
 
   createLetters () {
@@ -164,6 +173,7 @@ class TypeView extends Component {
         <Text style={{color: 'white'}}>Current Letter: {this.state.currentLetter + 1}</Text>
         <Text style={{color: 'white'}}>Input Text: {this.state.inputText}</Text>
         <Text style={{marginBottom: 10, color: 'white'}}>Finished: {this.state.finishedTyping ? 'True' : 'False'}</Text>
+        <Text style={{color: 'white'}}>Game ID: {this.props.gameId}</Text>
         <Button
           onPress={this.resetGame}
           title="Reset"

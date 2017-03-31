@@ -1,6 +1,7 @@
 import {Map} from 'immutable';
 import {loop, Effects} from 'redux-loop';
 import * as NavigationState from '../../modules/navigation/NavigationState';
+import { findRoom, createRoom } from '../../services/roomService'
 
 // Initial state
 const initialState = Map({
@@ -8,15 +9,14 @@ const initialState = Map({
   isLoading: false,
   inGame: false,
   gameId: "",
-  room: ""
+  gameStartTime: "",
+  errorMessage: ""
 });
 
 // Actions
 // Quick Play
 const FIND_GAME = 'PlayState/FIND_GAME';
-const FIND_GAME_SUCCESS = 'PlayState/FIND_GAME_SUCCESS';
-export const CREATE_GAME_REQUEST = 'PlayState/CREATE_GAME_REQUEST';
-export const CREATE_GAME_SUCCESS = 'PlayState/CREATE_GAME_SUCCESS';
+export const FIND_GAME_SUCCESS = 'PlayState/FIND_GAME_SUCCESS';
 export const RESPONSE_FAILURE = 'PlayState/RESPONSE_FAILURE';
 const LEAVE_GAME = 'PlayState/LEAVE_GAME';
 
@@ -46,38 +46,12 @@ export default function PlayStateReducer(state = initialState, action = {}) {
         Effects.promise(findRoom, action.payload)
       );
 
-    case FIND_GAME_REQUEST:
-      return loop(
-        state
-          .set('isLoading', true),
-        Effects.promise(joinRoom, action.payload, FIND_GAME_SUCCESS)
-      );
-
     case FIND_GAME_SUCCESS:
       return loop(
         state
           .set('isLoading', false)
           .set('inGame', true)
-          .set('room', action.payload),
-        Effects.constant(NavigationState.pushRoute({
-          key: 'Type',
-          title: 'Type fast'
-        }))
-      );
-    
-    case CREATE_GAME_REQUEST:
-      return loop(
-        state
-          .set('isLoading', true),
-        Effects.promise(findRoom, action.payload)
-      );
-
-    case CREATE_GAME_SUCCESS:
-      return loop(
-        state
-          .set('isLoading', false)
-          .set('inGame', true)
-          .set('room', action.payload),
+          .set('gameId', action.payload.gameId),
         Effects.constant(NavigationState.pushRoute({
           key: 'Type',
           title: 'Type fast'
@@ -95,7 +69,8 @@ export default function PlayStateReducer(state = initialState, action = {}) {
       return state
         .set('isLoading', false)
         .set('inGame', false)
-        .set('gameId', "");
+        .set('gameId', "")
+        .set('errorMessage', 'You left the game');
 
     default:
       return state;
