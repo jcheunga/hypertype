@@ -4,8 +4,6 @@ import {
   CREATE_GAME_SUCCESS,
   RESPONSE_FAILURE
 } from '../modules/play/PlayState';
-import * as Utils from '../utils/Utils';
-import * as env from '../../env';
 
 export function findRoom(id) {
   let user = id;
@@ -13,61 +11,56 @@ export function findRoom(id) {
   let createGameIdAdded = true;
 
   var fetchGame = new Promise(function(resolve, reject) {
-    if (user) {
-      if (foundGame) {
-        if (hasGameId) {
-          resolve(
-            {
-              gameId: "findGameId"
-            }
-          );
-        } else {
-          reject({ message: "Error joining" })
-        }
+    if (foundGame) {
+      let quoteToType = "Hi there how are you?";
+      let quoteReferralURL = "www.google.com";
+      let findGameId = "123456";
+      let gameStartTime = Date.now(); 
+      let gameEndTime = gameStartTime + 10000;
+      if (hasGameId) {
+        resolve(
+          {
+            gameId: findGameId,
+            gameStartTime: gameStartTime,
+            gameEndTime: gameEndTime,
+            quoteToType: quoteToType,
+            quoteReferralURL: quoteReferralURL
+          }
+        );
       } else {
-        let createGameId = Date.now()+Math.floor(Math.random()*1000).toString();
-        if (createGameIdAdded) {
-          resolve(
-            {
-              gameId: createGameId
-            }
-          );
-        } else {
-          reject({ message: "Error creating" })
-        }        
+        reject({ message: "Error joining" })
       }
     } else {
-      if (foundGame) {
-        if (hasGameId) {
-          resolve(
-            {
-              gameId: "findGameId"
-            }
-          );
-        } else {
-          reject({ message: "Error joining" })
-        }
+      let createGameId = Date.now()+Math.floor(Math.random()*1000).toString();
+      let quoteToType = "Hi there how are you?";
+      let quoteReferralURL = "www.google.com";
+      let gameStartTime = Date.now();
+      let gameEndTime = gameStartTime + 10000;
+      if (createGameIdAdded) {
+        resolve(
+          {
+            gameId: createGameId,
+            gameStartTime: gameStartTime,
+            gameEndTime: gameEndTime,
+            quoteToType: quoteToType,
+            quoteReferralURL: quoteReferralURL
+          }
+        );
       } else {
-        let createGameId = Date.now()+Math.floor(Math.random()*1000).toString();
-        if (createGameIdAdded) {
-          resolve(
-            {
-              gameId: createGameId
-            }
-          );
-        } else {
-          reject({ message: "Error creating" })
-        }        
-      }
+        reject({ message: "Error creating" })
+      }        
     }
-    // resolve({gameId: 'Hey'});
   });
 
   return fetchGame
-    .then((response) => ({type: FIND_GAME_SUCCESS, payload: { gameId: response.gameId }}))
+    .then((response) => ({type: FIND_GAME_SUCCESS, payload: response }))
     .catch((error) => ({type: RESPONSE_FAILURE, payload: error.message}))
 }
 
 export function createRoom() {
+
+}
+
+function getQuoteToType() {
 
 }

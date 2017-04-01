@@ -1,5 +1,4 @@
 import * as theme from '../../utils/theme';
-// import Button from '../../components/Button';
 import React, {PropTypes, Component} from 'react';
 import {
   StyleSheet,
@@ -22,7 +21,7 @@ class TypeView extends Component {
 
   constructor (props) {
     super(props)
-    this.textToType = "Hi there, how are you?";
+    this.textToType = this.props.quoteToType;
     this.words = this.textToType.split(" ");
     this.letterCount = this.textToType.split(" ").join("").length;
     this.wordCount = this.textToType.split(" ").length;
@@ -141,16 +140,6 @@ class TypeView extends Component {
     
   }
 
-  resetGame = () => {
-    this.setState({
-      currentWord: 0,
-      currentString: "",
-      currentLetter: 0,
-      inputText: "",
-      finishedTyping: false
-    });
-  };
-
   render () {   
     const showCountdownView = this.state.countdownView ?
       <View>
@@ -174,11 +163,7 @@ class TypeView extends Component {
         <Text style={{color: 'white'}}>Input Text: {this.state.inputText}</Text>
         <Text style={{marginBottom: 10, color: 'white'}}>Finished: {this.state.finishedTyping ? 'True' : 'False'}</Text>
         <Text style={{color: 'white'}}>Game ID: {this.props.gameId}</Text>
-        <Button
-          onPress={this.resetGame}
-          title="Reset"
-          color="red"
-        />
+        <Text style={{color: 'white'}}>Quote URL: {this.props.quoteReferralURL}</Text>
       </View>
     : null;
 

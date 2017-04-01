@@ -5,12 +5,14 @@ import { findRoom, createRoom } from '../../services/roomService'
 
 // Initial state
 const initialState = Map({
-  playerId: "",
   isLoading: false,
   inGame: false,
   gameId: "",
   gameStartTime: "",
-  errorMessage: ""
+  gameEndTime: "",
+  errorMessage: "",
+  quoteToType: "",
+  quoteReferralURL: ""
 });
 
 // Actions
@@ -28,10 +30,9 @@ export function findGame(id) {
   };
 }
 
-export function leaveGame(id) {
+export function leaveGame() {
   return {
-    type: LEAVE_GAME,
-    payload: id
+    type: LEAVE_GAME
   };
 }
 
@@ -42,7 +43,8 @@ export default function PlayStateReducer(state = initialState, action = {}) {
     case FIND_GAME:
       return loop(
         state
-          .set('isLoading', true),
+          .set('isLoading', true)
+          .set('errorMessage', ""),
         Effects.promise(findRoom, action.payload)
       );
 
@@ -51,7 +53,11 @@ export default function PlayStateReducer(state = initialState, action = {}) {
         state
           .set('isLoading', false)
           .set('inGame', true)
-          .set('gameId', action.payload.gameId),
+          .set('gameId', action.payload.gameId)
+          .set('gameStartTime', action.payload.gameStartTime)
+          .set('gameEndTime', action.payload.gameEndTime)
+          .set('quoteToType', action.payload.quoteToType)
+          .set('quoteReferralURL', action.payload.quoteReferralURL),
         Effects.constant(NavigationState.pushRoute({
           key: 'Type',
           title: 'Type fast'
@@ -62,7 +68,11 @@ export default function PlayStateReducer(state = initialState, action = {}) {
       return state
         .set('isLoading', false)
         .set('inGame', false)
-        .set('gameId', "")
+        .set('gameId', "")        
+        .set('gameStartTime', "")
+        .set('gameEndTime', "")
+        .set('quoteToType', "")
+        .set('quoteReferralURL', "")
         .set('errorMessage', action.payload);
 
     case LEAVE_GAME:
@@ -70,7 +80,11 @@ export default function PlayStateReducer(state = initialState, action = {}) {
         .set('isLoading', false)
         .set('inGame', false)
         .set('gameId', "")
-        .set('errorMessage', 'You left the game');
+        .set('gameStartTime', "")
+        .set('gameEndTime', "")
+        .set('quoteToType', "")
+        .set('quoteReferralURL', "")
+        .set('errorMessage', "You left the game");
 
     default:
       return state;

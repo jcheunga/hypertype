@@ -9,7 +9,10 @@ import * as PlayStateActions from '../play/PlayState';
 export default connect(
   state => ({
     inGame: state.getIn(['playState', 'inGame']),
-    gameId: state.getIn(['playState', 'gameId'])
+    gameId: state.getIn(['playState', 'gameId']),
+    gameStartTime: state.getIn(['playState', 'gameStartTime']),
+    quoteToType: state.getIn(['playState', 'quoteToType']),
+    quoteReferralURL: state.getIn(['playState', 'quoteReferralURL'])
   }),
   dispatch => {
     return {
