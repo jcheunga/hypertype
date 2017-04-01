@@ -3,14 +3,9 @@ import Button from '../../components/Button';
 import React, {PropTypes, Component} from 'react';
 import {
   StyleSheet,
-  Image,
   Text,
   View,
-  ListView,
-  Platform,
-  Dimensions,
-  ActivityIndicator,
-  TouchableOpacity
+  Dimensions
 } from 'react-native';
 
 const window = Dimensions.get('window');
@@ -24,8 +19,7 @@ class PlayView extends Component {
   }
 
   quickPlay = () => {
-    console.log("Quick play pressed");
-    this.props.playStateActions.findGame("1234ABCDE");
+    this.props.playStateActions.findGame("1234ABCDE"); // Get id from user or random guest name
   }
 
   multiPlay = () => {

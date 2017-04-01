@@ -5,7 +5,7 @@ import {
   RESPONSE_FAILURE
 } from '../modules/play/PlayState';
 
-export function findRoom(id) {
+export function findRoom (id) {
   let user = id;
   let foundGame = false;
   let createGameIdAdded = true;
@@ -57,10 +57,10 @@ export function findRoom(id) {
     .catch((error) => ({type: RESPONSE_FAILURE, payload: error.message}))
 }
 
-export function createRoom() {
+export function createRoom () {
 
 }
 
-function getQuoteToType() {
+function getQuoteToType () {
 
 }
