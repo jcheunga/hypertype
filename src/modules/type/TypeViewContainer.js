@@ -11,6 +11,7 @@ export default connect(
     inGame: state.getIn(['playState', 'inGame']),
     gameId: state.getIn(['playState', 'gameId']),
     gameStartTime: state.getIn(['playState', 'gameStartTime']),
+    gameEndTime: state.getIn(['playState', 'gameEndTime']),
     quoteToType: state.getIn(['playState', 'quoteToType']),
     quoteReferralURL: state.getIn(['playState', 'quoteReferralURL'])
   }),

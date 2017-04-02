@@ -9,9 +9,7 @@ export default connect(
   state => ({
     errorMessage: state.getIn(['playState', 'errorMessage']),
     isLoading: state.getIn(['playState', 'loading']),
-    inGame: state.getIn(['playState', 'inGame']),
-    gameId: state.getIn(['playState', 'gameId']),
-    gameStartTime: state.getIn(['playState', 'gameStartTime'])
+    inGame: state.getIn(['playState', 'inGame'])
   }),
   dispatch => {
     return {

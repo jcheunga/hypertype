@@ -15,6 +15,8 @@ class CountdownScreen extends Component {
     return (
       <View>
         <Text style={{color: 'white'}}>Countdown: {this.props.countdownTime}</Text>
+        <Text style={{color: 'white'}}>Number of players joined: 5</Text>
+        <Text style={{color: 'white'}}>Half screen ad</Text>
       </View>
     );
   }
