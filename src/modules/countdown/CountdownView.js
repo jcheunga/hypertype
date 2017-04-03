@@ -3,9 +3,9 @@ import {
   Text,
   View
 } from 'react-native';
-import * as theme from '../utils/theme';
+import * as theme from '../../utils/theme';
 
-class CountdownScreen extends Component {
+class CountdownView extends Component {
   static displayName = 'CountdownScreen';
   static propTypes = {
     countdownTime: PropTypes.number.isRequired
@@ -22,4 +22,4 @@ class CountdownScreen extends Component {
   }
 }
 
-export default CountdownScreen;
+export default CountdownView;

@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import TypeView from './TypeView';
+import TyperaceView from './TyperaceView';
 import * as NavigationStateActions from '../navigation/NavigationState';
 import * as PlayStateActions from '../play/PlayState';
 
@@ -20,4 +20,4 @@ export default connect(
       playStateActions: bindActionCreators(PlayStateActions, dispatch)
     };
   }
-)(TypeView);
+)(TyperaceView);

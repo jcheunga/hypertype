@@ -4,10 +4,19 @@ import {
   Text,
   View
 } from 'react-native';
-import * as theme from '../utils/theme';
+import * as theme from '../../utils/theme';
 
-class ScoreScreen extends Component {
+class ScoreView extends Component {
   static displayName = 'ScoreScreen';
+
+  startNewQuickGame = () => {
+    this.props.playStateActions.findGame("1234ABCDE");
+  }
+
+  leaveGame = () => {
+    this.props.playStateActions.leaveGame();    
+    this.props.navigationStateActions.popRoute();
+  }
 
   render() {
     return (
@@ -32,4 +41,4 @@ class ScoreScreen extends Component {
   }
 }
 
-export default ScoreScreen;
+export default ScoreView;

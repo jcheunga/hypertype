@@ -8,9 +8,9 @@ import {
   Dimensions
 } from 'react-native';
 
-import CountdownScreen from '../../components/CountdownScreen';
-import TypeScreen from '../../components/TypeScreen';
-import ScoreScreen from '../../components/ScoreScreen';
+import CountdownViewContainer from '../countdown/CountdownViewContainer';
+import TyperaceViewContainer from '../typerace/TyperaceViewContainer';
+import ScoreViewContainer from '../score/ScoreViewContainer';
 
 const window = Dimensions.get('window');
 
@@ -57,6 +57,10 @@ class TypeView extends Component {
 
   componentWillUnmount () {
     clearInterval(this.countInterval);
+    this.leaveGame();  
+  }
+
+  leaveGame = () => {
     this.props.playStateActions.leaveGame();    
     this.props.navigationStateActions.popRoute();
   }
@@ -70,15 +74,15 @@ class TypeView extends Component {
 
   render () {   
     const showCountdownView = this.state.countdownView ?
-      <CountdownScreen countdownTime={this.state.countdownTime}/>
+      <CountdownViewContainer countdownTime={this.state.countdownTime}/>
     : null;
 
     const showTypingView = this.state.typingView ?
-      <TypeScreen quoteToType={this.props.quoteToType} finishTyping={this.finishTyping}/>
+      <TyperaceViewContainer quoteToType={this.props.quoteToType} finishTyping={this.finishTyping}/>
     : null;
 
     const showfinishedTypingView = this.state.finishedTypingView ?
-      <ScoreScreen />
+      <ScoreViewContainer />
     : null;
 
     return (

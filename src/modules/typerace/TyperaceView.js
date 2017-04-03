@@ -5,9 +5,9 @@ import {
   TextInput,
   View
 } from 'react-native';
-import * as theme from '../utils/theme';
+import * as theme from '../../utils/theme';
 
-class TypeScreen extends Component {
+class TyperaceView extends Component {
   static displayName = 'TypeScreen';
   static propTypes = {
     quoteToType: PropTypes.string.isRequired
@@ -124,4 +124,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default TypeScreen;
+export default TyperaceView;
