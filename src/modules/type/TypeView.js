@@ -22,7 +22,7 @@ class TypeView extends Component {
 
   constructor (props) {
     super(props)
-    this.countdownTime = (this.props.gameEndTime - Date.now()) / 1000;
+    this.countdownTime = (this.props.countdownEndTime - Date.now()) / 1000;
 
     this.state = {
       countdownTime: 3,

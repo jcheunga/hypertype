@@ -8,8 +8,8 @@ const initialState = Map({
   isLoading: false,
   inGame: false,
   gameId: "",
-  gameStartTime: "",
-  gameEndTime: "",
+  countdownStartTime: "",
+  countdownEndTime: "",
   errorMessage: "",
   quoteToType: "",
   quoteReferralURL: ""
@@ -54,8 +54,8 @@ export default function PlayStateReducer(state = initialState, action = {}) {
           .set('isLoading', false)
           .set('inGame', true)
           .set('gameId', action.payload.gameId)
-          .set('gameStartTime', action.payload.gameStartTime)
-          .set('gameEndTime', action.payload.gameEndTime)
+          .set('countdownStartTime', action.payload.countdownStartTime)
+          .set('countdownEndTime', action.payload.countdownEndTime)
           .set('quoteToType', action.payload.quoteToType)
           .set('quoteReferralURL', action.payload.quoteReferralURL),
         Effects.constant(NavigationState.pushRoute({
@@ -69,8 +69,8 @@ export default function PlayStateReducer(state = initialState, action = {}) {
         .set('isLoading', false)
         .set('inGame', false)
         .set('gameId', "")        
-        .set('gameStartTime', "")
-        .set('gameEndTime', "")
+        .set('countdownStartTime', "")
+        .set('countdownEndTime', "")
         .set('quoteToType', "")
         .set('quoteReferralURL', "")
         .set('errorMessage', action.payload);
@@ -80,8 +80,8 @@ export default function PlayStateReducer(state = initialState, action = {}) {
         .set('isLoading', false)
         .set('inGame', false)
         .set('gameId', "")
-        .set('gameStartTime', "")
-        .set('gameEndTime', "")
+        .set('countdownStartTime', "")
+        .set('countdownEndTime', "")
         .set('quoteToType', "")
         .set('quoteReferralURL', "")
         .set('errorMessage', "You left the game");

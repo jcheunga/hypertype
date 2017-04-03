@@ -9,8 +9,8 @@ export default connect(
   state => ({
     inGame: state.getIn(['playState', 'inGame']),
     gameId: state.getIn(['playState', 'gameId']),
-    gameStartTime: state.getIn(['playState', 'gameStartTime']),
-    gameEndTime: state.getIn(['playState', 'gameEndTime']),
+    countdownStartTime: state.getIn(['playState', 'countdownStartTime']),
+    countdownEndTime: state.getIn(['playState', 'countdownEndTime']),
     quoteToType: state.getIn(['playState', 'quoteToType']),
     quoteReferralURL: state.getIn(['playState', 'quoteReferralURL'])
   }),
