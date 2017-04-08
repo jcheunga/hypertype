@@ -16,16 +16,13 @@ const window = Dimensions.get('window');
 
 class TypeView extends Component {
   static displayName = 'TypeView';
-  static propTypes = {
-    countdownTime: PropTypes.number.isRequired
-  }
 
   constructor (props) {
     super(props)
     this.countdownTime = (this.props.countdownEndTime - Date.now()) / 1000;
 
     this.state = {
-      countdownTime: 3,
+      countdownTime: this.countdownTime,
       countdownView: true,      
       typingView: false,
       finishedTypingView: false
