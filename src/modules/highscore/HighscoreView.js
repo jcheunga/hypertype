@@ -28,6 +28,12 @@ class HighscoreView extends Component {
       <View style={styles.container}>
         <View style={styles.body}>
           <Text style={styles.bodyText}>
+            Highscores
+          </Text>
+          <Text style={styles.bodyText}>
+            All time / Daily
+          </Text>
+          <Text style={styles.bodyText}>
             International
           </Text>
           <Text style={styles.bodyText}>

@@ -15,14 +15,14 @@ export function findRoom (id) {
       let quoteToType = "Hi there how are you?";
       let quoteReferralURL = "www.google.com";
       let findGameId = "123456";
-      let gameStartTime = Date.now(); 
-      let gameEndTime = gameStartTime + 10000;
+      let countdownStartTime = Date.now(); 
+      let countdownEndTime = countdownStartTime + 10000;
       if (hasGameId) {
         resolve(
           {
             gameId: findGameId,
-            gameStartTime: gameStartTime,
-            gameEndTime: gameEndTime,
+            countdownStartTime: countdownStartTime,
+            countdownEndTime: countdownEndTime,
             quoteToType: quoteToType,
             quoteReferralURL: quoteReferralURL
           }
@@ -34,14 +34,14 @@ export function findRoom (id) {
       let createGameId = Date.now()+Math.floor(Math.random()*1000).toString();
       let quoteToType = "Hi there how are you?";
       let quoteReferralURL = "www.google.com";
-      let gameStartTime = Date.now();
-      let gameEndTime = gameStartTime + 10000;
+      let countdownStartTime = Date.now();
+      let countdownEndTime = countdownStartTime + 10000;
       if (createGameIdAdded) {
         resolve(
           {
             gameId: createGameId,
-            gameStartTime: gameStartTime,
-            gameEndTime: gameEndTime,
+            countdownStartTime: countdownStartTime,
+            countdownEndTime: countdownEndTime,
             quoteToType: quoteToType,
             quoteReferralURL: quoteReferralURL
           }

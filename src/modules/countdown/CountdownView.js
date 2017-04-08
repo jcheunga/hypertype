@@ -14,7 +14,7 @@ class CountdownView extends Component {
   render() {
     return (
       <View>
-        <Text style={{color: 'white'}}>Countdown: {this.props.countdownTime}</Text>
+        <Text style={{color: 'white'}}>Countdown: {this.props.countdownTime === 0 ? 'GO!' : this.props.countdownTime}</Text>
         <Text style={{color: 'white'}}>Number of players joined: 5</Text>
         <Text style={{color: 'white'}}>Half screen ad</Text>
       </View>

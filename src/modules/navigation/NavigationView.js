@@ -100,7 +100,8 @@ const styles = StyleSheet.create({
   },
   navigationBar: {
     backgroundColor: theme.colors.navBar,
-    borderBottomWidth: 0
+    borderBottomWidth: 0,
+    height: 40
   }
 });
 
