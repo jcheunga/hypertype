@@ -15,6 +15,7 @@ class TyperaceView extends Component {
 
   constructor (props) {
     super(props)
+    
     this.textToType = this.props.quoteToType;
     this.words = this.textToType.split(" ");
     this.letterCount = this.textToType.split(" ").join("").length;

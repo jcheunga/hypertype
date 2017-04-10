@@ -19,21 +19,14 @@ const initialState = Map({
 // Quick Play
 const FIND_GAME = 'PlayState/FIND_GAME';
 export const FIND_GAME_SUCCESS = 'PlayState/FIND_GAME_SUCCESS';
+export const FIND_NEW_GAME_SUCCESS = 'PlayState/FIND_GAME_SUCCESS';
 export const RESPONSE_FAILURE = 'PlayState/RESPONSE_FAILURE';
-const GET_SCORE_SCREEN = 'PlayState/GET_SCORE_SCREEN';
 const LEAVE_GAME = 'PlayState/LEAVE_GAME';
 
 // Action creators
 export function findGame(id) {
   return {
     type: FIND_GAME,
-    payload: id
-  };
-}
-
-export function getScoreScreen(id) {
-  return {
-    type: GET_SCORE_SCREEN,
     payload: id
   };
 }
@@ -72,6 +65,16 @@ export default function PlayStateReducer(state = initialState, action = {}) {
         }))
       );
 
+    case FIND_NEW_GAME_SUCCESS:
+      return state
+        .set('isLoading', false)
+        .set('inGame', true)
+        .set('gameId', action.payload.gameId)
+        .set('countdownStartTime', action.payload.countdownStartTime)
+        .set('countdownEndTime', action.payload.countdownEndTime)
+        .set('quoteToType', action.payload.quoteToType)
+        .set('quoteReferralURL', action.payload.quoteReferralURL)
+
     case RESPONSE_FAILURE:
       return state
         .set('isLoading', false)
@@ -82,10 +85,6 @@ export default function PlayStateReducer(state = initialState, action = {}) {
         .set('quoteToType', "")
         .set('quoteReferralURL', "")
         .set('errorMessage', action.payload);
-
-    case GET_SCORE_SCREEN:
-      return state
-        .set('inGame', false)
 
     case LEAVE_GAME:
       return state

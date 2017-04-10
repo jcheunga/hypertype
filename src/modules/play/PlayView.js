@@ -32,6 +32,7 @@ class PlayView extends Component {
         <View style={styles.buttonsContainer}>
         <Text>WELCOME TO TYPESPRINT</Text>
         <Text>{this.props.errorMessage}</Text>
+        <Text>{this.props.isLoading ? "Finding game.." : null}</Text>
         <Button
           text="Quick play"
           buttonStyle={theme.buttons.primary}

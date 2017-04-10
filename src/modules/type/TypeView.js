@@ -8,9 +8,9 @@ import {
   Dimensions
 } from 'react-native';
 
-import CountdownViewContainer from '../countdown/CountdownViewContainer';
-import TyperaceViewContainer from '../typerace/TyperaceViewContainer';
-import ScoreViewContainer from '../score/ScoreViewContainer';
+import CountdownView from '../countdown/CountdownView';
+import TyperaceView from '../typerace/TyperaceView';
+import ScoreView from '../score/ScoreView';
 
 const window = Dimensions.get('window');
 
@@ -19,42 +19,35 @@ class TypeView extends Component {
 
   constructor (props) {
     super(props)
-    this.countdownTime = (this.props.countdownEndTime - Date.now()) / 1000;
 
     this.state = {
-      countdownTime: this.countdownTime,
-      countdownView: true,      
+      countdownEndTime: props.countdownEndTime,
+      countdownView: true,
       typingView: false,
-      finishedTypingView: false
+      scoreView: false
     };
   }
 
   componentWillMount () {
     if (!this.props.gameId || !this.props.inGame) {
-      this.props.navigationStateActions.popRoute();
+      this.leaveGame();
     }
   }
 
-  componentDidMount () {
-    this.countInterval = setInterval(() => {
-      if (this.state.countdownTime === 0) {
-        this.setState({
-          countdownView: false,
-          typingView: true
-        })     
-        clearInterval(this.countInterval);
-      }
-      if (this.state.countdownTime > 0) {
-        this.setState({
-          countdownTime: this.state.countdownTime - 1
-        })
-      }      
-    }, 1000);
+  componentWillReceiveProps (nextProps) {
+    this.setState({
+      countdownEndTime: nextProps.countdownEndTime,
+      countdownView: true,
+      scoreView: false
+    });
   }
 
   componentWillUnmount () {
-    clearInterval(this.countInterval);
     this.leaveGame();  
+  }  
+  
+  startNewQuickGame = () => {
+    this.props.playStateActions.findGame("1234ABCDE");
   }
 
   leaveGame = () => {
@@ -62,31 +55,38 @@ class TypeView extends Component {
     this.props.navigationStateActions.popRoute();
   }
 
-  finishTyping = () => {
+  finishCountdown = () => {
     this.setState({
-      typingView: false,
-      finishedTypingView: true
+      countdownView: false,
+      typingView: true
     });
   }
 
-  render () {   
+  finishTyping = () => {
+    this.setState({
+      typingView: false,
+      scoreView: true
+    });
+  }
+
+  render () { 
     const showCountdownView = this.state.countdownView ?
-      <CountdownViewContainer countdownTime={this.state.countdownTime}/>
+      <CountdownView finishCountdown={this.finishCountdown} countdownEndTime={this.state.countdownEndTime}/>
     : null;
 
     const showTypingView = this.state.typingView ?
-      <TyperaceViewContainer quoteToType={this.props.quoteToType} finishTyping={this.finishTyping}/>
+      <TyperaceView quoteToType={this.props.quoteToType} finishTyping={this.finishTyping}/>
     : null;
 
-    const showfinishedTypingView = this.state.finishedTypingView ?
-      <ScoreViewContainer />
+    const showScoreView = this.state.scoreView ?
+      <ScoreView startNewQuickGame={this.startNewQuickGame} leaveGame={this.leaveGame}/>
     : null;
 
     return (
       <View style={styles.container}>
         { showCountdownView }
         { showTypingView }
-        { showfinishedTypingView }
+        { showScoreView }
       </View>
     )
   }

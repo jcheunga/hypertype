@@ -9,6 +9,7 @@ export function findRoom (id) {
   let user = id;
   let foundGame = false;
   let createGameIdAdded = true;
+  let countdownAmount = 5000;
 
   var fetchGame = new Promise(function(resolve, reject) {
     if (foundGame) {
@@ -16,7 +17,7 @@ export function findRoom (id) {
       let quoteReferralURL = "www.google.com";
       let findGameId = "123456";
       let countdownStartTime = Date.now(); 
-      let countdownEndTime = countdownStartTime + 10000;
+      let countdownEndTime = countdownStartTime + countdownAmount;
       if (hasGameId) {
         resolve(
           {
@@ -31,11 +32,11 @@ export function findRoom (id) {
         reject({ message: "Error joining" })
       }
     } else {
-      let createGameId = Date.now()+Math.floor(Math.random()*1000).toString();
+      let createGameId = Date.now()+Math.floor(Math.random() * 1000).toString();
       let quoteToType = "Hi there how are you?";
       let quoteReferralURL = "www.google.com";
       let countdownStartTime = Date.now();
-      let countdownEndTime = countdownStartTime + 10000;
+      let countdownEndTime = countdownStartTime + countdownAmount;
       if (createGameIdAdded) {
         resolve(
           {

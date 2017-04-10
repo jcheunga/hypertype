@@ -9,15 +9,6 @@ import * as theme from '../../utils/theme';
 class ScoreView extends Component {
   static displayName = 'ScoreScreen';
 
-  startNewQuickGame = () => {
-    this.props.playStateActions.findGame("1234ABCDE");
-  }
-
-  leaveGame = () => {
-    this.props.playStateActions.leaveGame();    
-    this.props.navigationStateActions.popRoute();
-  }
-
   render() {
     return (
       <View>
@@ -28,13 +19,13 @@ class ScoreView extends Component {
           text="Play again?"
           buttonStyle={theme.buttons.primary}
           textStyle={theme.fonts.primary}
-          action={() => console.log("play again")}
+          action={() => this.props.startNewQuickGame("1234ABCD")}
         />
         <Button
           text="Back to main menu"
           buttonStyle={theme.buttons.primary}
           textStyle={theme.fonts.primary}
-          action={() => console.log("main menu")}
+          action={() => this.props.leaveGame()}
         />
       </View>
     );
