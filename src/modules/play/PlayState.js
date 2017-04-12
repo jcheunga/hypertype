@@ -17,6 +17,7 @@ const initialState = Map({
 
 // Actions
 // Quick Play
+const REMOVE_ERRORS = 'PlayState/REMOVE_ERRORS'; 
 const FIND_GAME = 'PlayState/FIND_GAME';
 export const FIND_GAME_SUCCESS = 'PlayState/FIND_GAME_SUCCESS';
 export const FIND_NEW_GAME_SUCCESS = 'PlayState/FIND_GAME_SUCCESS';
@@ -24,10 +25,16 @@ export const RESPONSE_FAILURE = 'PlayState/RESPONSE_FAILURE';
 const LEAVE_GAME = 'PlayState/LEAVE_GAME';
 
 // Action creators
-export function findGame(id) {
+export function removeErrors() {
+  return {
+    type: REMOVE_ERRORS
+  }
+}
+
+export function findGame(id, inGame) {
   return {
     type: FIND_GAME,
-    payload: id
+    payload: {id: id, inGame: inGame}
   };
 }
 
@@ -41,6 +48,10 @@ export function leaveGame() {
 export default function PlayStateReducer(state = initialState, action = {}) {
   
   switch (action.type) {
+    case REMOVE_ERRORS:
+      return state
+        .set('errorMessage', "");
+
     case FIND_GAME:
       return loop(
         state

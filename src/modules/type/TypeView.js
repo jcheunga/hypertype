@@ -29,7 +29,7 @@ class TypeView extends Component {
   }
 
   componentWillMount () {
-    if (!this.props.gameId || !this.props.inGame) {
+    if (!this.props.gameId || !this.props.inGame || this.countdownToSeconds(this.props.countdownEndTime) < 0 || this.countdownToSeconds(this.props.countdownEndTime) > 10) {
       this.leaveGame();
     }
   }
@@ -45,9 +45,13 @@ class TypeView extends Component {
   componentWillUnmount () {
     this.leaveGame();  
   }  
+
+  countdownToSeconds = (countdownValue) => {
+    return Math.round((countdownValue - Date.now()) / 1000);
+  }
   
   startNewQuickGame = () => {
-    this.props.playStateActions.findGame("1234ABCDE");
+    this.props.playStateActions.findGame("1234ABCDE", this.props.inGame);
   }
 
   leaveGame = () => {

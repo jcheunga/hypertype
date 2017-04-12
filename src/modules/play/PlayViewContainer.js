@@ -8,7 +8,7 @@ import * as PlayStateActions from './PlayState';
 export default connect(
   state => ({
     errorMessage: state.getIn(['playState', 'errorMessage']),
-    isLoading: state.getIn(['playState', 'loading']),
+    isLoading: state.getIn(['playState', 'isLoading']),
     inGame: state.getIn(['playState', 'inGame'])
   }),
   dispatch => {

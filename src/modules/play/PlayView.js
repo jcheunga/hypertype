@@ -19,32 +19,35 @@ class PlayView extends Component {
   }
 
   quickPlay = () => {
-    this.props.playStateActions.findGame("1234ABCDE"); // Get id from user or random guest name
+    this.props.playStateActions.findGame("1234ABCDE", this.props.inGame); // Get id from user or random guest name
   }
 
   multiPlay = () => {
     // TODO
+    // console.log(this.dropdown.alert);
+    // this.dropdown.alert('Custom', 'You clicked multiplayer');
+    console.log('Multiplay clicked');
   }
 
   render() { 
     return (
       <View style={styles.container}>
         <View style={styles.buttonsContainer}>
-        <Text>WELCOME TO TYPESPRINT</Text>
-        <Text>{this.props.errorMessage}</Text>
-        <Text>{this.props.isLoading ? "Finding game.." : null}</Text>
-        <Button
-          text="Quick play"
-          buttonStyle={theme.buttons.primary}
-          textStyle={theme.fonts.primary}
-          action={() => this.quickPlay()}
-        />
-        <Button
-          text="Multi play"
-          buttonStyle={theme.buttons.primary}
-          textStyle={theme.fonts.primary}
-          action={() => console.log("Multiplay pressed")}
-        />
+          <Text>WELCOME TO TYPESPRINT</Text>
+          <Text>{this.props.isLoading}</Text>
+          <Text>{this.props.isLoading ? "Finding game.." : null}</Text>
+          <Button
+            text="Quick play"
+            buttonStyle={theme.buttons.primary}
+            textStyle={theme.fonts.primary}
+            action={() => this.quickPlay()}
+          />
+          <Button
+            text="Multi play"
+            buttonStyle={theme.buttons.primary}
+            textStyle={theme.fonts.primary}
+            action={() => this.multiPlay()}
+          />
         </View>
       </View>
     );
@@ -52,9 +55,6 @@ class PlayView extends Component {
 }
 
 const styles = StyleSheet.create({
-  swiper: {
-    flex: 1
-  },
   container: {
     flex: 1,
     backgroundColor: theme.colors.background,

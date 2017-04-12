@@ -7,7 +7,7 @@ import {
 import * as theme from '../../utils/theme';
 
 class ScoreView extends Component {
-  static displayName = 'ScoreScreen';
+  static displayName = 'ScoreView';
 
   render() {
     return (

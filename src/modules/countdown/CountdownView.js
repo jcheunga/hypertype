@@ -16,12 +16,6 @@ class CountdownView extends Component {
     };
   }
 
-  // componentWillMount () {
-  //   if (this.state.countdownTime < 0 || this.state.countdownTime > 10) {
-  //     this.props.navigationStateActions.popRoute();
-  //   }
-  // }
-
   componentDidMount () {
     this.countInterval = setInterval(() => {
       if (this.state.countdownTime === 0) {
@@ -38,7 +32,6 @@ class CountdownView extends Component {
 
   componentWillUnmount () {
     clearInterval(this.countInterval);
-    console.log(this.state.countdownTime);
   }
 
   countdownToSeconds = (countdownValue) => {
@@ -46,7 +39,6 @@ class CountdownView extends Component {
   }
 
   render() {
-    console.log(this.state.countdownTime);
     return (
       <View>
         <Text style={{color: 'white'}}>Countdown: {this.state.countdownTime === 0 ? 'GO!' : this.state.countdownTime}</Text>

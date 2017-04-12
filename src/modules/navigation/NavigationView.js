@@ -14,6 +14,8 @@ import AppRouter from '../AppRouter';
 import TabBar from '../../components/TabBar';
 import * as theme from '../../utils/theme';
 
+import DropdownAlert from 'react-native-dropdownalert';
+
 // Customize bottom tab bar height here if desired
 const TAB_BAR_HEIGHT = 50;
 
@@ -38,6 +40,11 @@ const NavigationView = React.createClass({
   },
   // NavigationHeader accepts a prop style
   // NavigationHeader.title accepts a prop textStyle
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.errorMessage) {
+      this.dropdown.alert('custom', nextProps.errorMessage);
+    }
+  },
   renderHeader(sceneProps) {
     return (
       <NavigationHeader
@@ -63,6 +70,9 @@ const NavigationView = React.createClass({
       </View>
     );
   },
+  closeAlert () {
+    this.props.playStateActions.removeErrors();
+  },
   render() {
     const {tabs} = this.props.navigationState;
     const tabKey = tabs.routes[tabs.index].key;
@@ -81,6 +91,16 @@ const NavigationView = React.createClass({
           tabs={tabs}
           currentTabIndex={tabs.index}
           switchTab={this.props.switchTab}
+        />
+        <DropdownAlert
+          ref={(ref) => this.dropdown = ref}
+          containerStyle={{
+            backgroundColor: '#cd853f'
+          }}
+          onClose={this.closeAlert}
+          onCancel={this.closeAlert}
+          showCancel={false}
+          imageSrc={'https://facebook.github.io/react/img/logo_og.png'}
         />
       </View>
     );

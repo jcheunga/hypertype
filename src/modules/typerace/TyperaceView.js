@@ -8,7 +8,7 @@ import {
 import * as theme from '../../utils/theme';
 
 class TyperaceView extends Component {
-  static displayName = 'TypeScreen';
+  static displayName = 'TyperaceView';
   static propTypes = {
     quoteToType: PropTypes.string.isRequired
   }
