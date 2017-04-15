@@ -9,6 +9,10 @@ import * as theme from '../../utils/theme';
 class ScoreView extends Component {
   static displayName = 'ScoreView';
 
+  leaveGame = () => {
+    this.props.leaveGame();
+  }
+
   render() {
     return (
       <View>
@@ -25,7 +29,7 @@ class ScoreView extends Component {
           text="Back to main menu"
           buttonStyle={theme.buttons.primary}
           textStyle={theme.fonts.primary}
-          action={() => this.props.leaveGame()}
+          action={() => this.leaveGame()}
         />
       </View>
     );

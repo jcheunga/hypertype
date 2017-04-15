@@ -16,6 +16,12 @@ class CountdownView extends Component {
     };
   }
 
+  // componentWillMount () {
+  //   if (this.countdownToSeconds(this.state.countdownTime) < 0 || this.countdownToSeconds(this.state.countdownTime) > 10) {
+  //     console.log("countdown view unmounting");
+  //   }
+  // }
+
   componentDidMount () {
     this.countInterval = setInterval(() => {
       if (this.state.countdownTime === 0) {

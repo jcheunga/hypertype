@@ -6,7 +6,7 @@ import {
   RESPONSE_FAILURE
 } from '../modules/play/PlayState';
 
-const quoteArr = ["Hi there how are you?", "Windows Powershell", "Android Emulator"];
+const quoteArr = ["a", "b", "c"];
 const minimum = 0;
 const maximum = 2;
 
@@ -14,7 +14,7 @@ export function findRoom (payload) {
   let user = payload.id;
   let foundGame = false;
   let createGameIdAdded = true;
-  let countdownAmount = 5000;
+  let countdownAmount = 1000;
   let randomnumber = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
   
   var fetchGame = new Promise(function(resolve, reject) {

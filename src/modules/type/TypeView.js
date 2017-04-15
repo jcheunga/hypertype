@@ -43,7 +43,9 @@ class TypeView extends Component {
   }
 
   componentWillUnmount () {
-    this.leaveGame();  
+    // console.log("leave game from typeview from compwillunmount");
+    // this.props.playStateActions.leaveGame();
+    // // this.leaveGame();
   }  
 
   countdownToSeconds = (countdownValue) => {
@@ -74,15 +76,15 @@ class TypeView extends Component {
   }
 
   render () { 
-    const showCountdownView = this.state.countdownView ?
+    const showCountdownView = this.state.countdownView && this.props.countdownEndTime !== 0 ?
       <CountdownView finishCountdown={this.finishCountdown} countdownEndTime={this.state.countdownEndTime}/>
     : null;
 
-    const showTypingView = this.state.typingView ?
+    const showTypingView = this.state.typingView && this.props.inGame ?
       <TyperaceView quoteToType={this.props.quoteToType} finishTyping={this.finishTyping}/>
     : null;
 
-    const showScoreView = this.state.scoreView ?
+    const showScoreView = this.state.scoreView && this.props.inGame ?
       <ScoreView startNewQuickGame={this.startNewQuickGame} leaveGame={this.leaveGame}/>
     : null;
 
