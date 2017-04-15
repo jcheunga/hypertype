@@ -2,16 +2,16 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {pushRoute, popRoute, switchTab, navigationCompleted} from './NavigationState';
 import NavigationView from './NavigationView';
-import * as PlayStateActions from '../play/PlayState';
+import * as ErrorStateActions from '../error/ErrorState';
 
 export default connect(
   state => ({
-    errorMessage: state.getIn(['playState', 'errorMessage']),
+    errorMessage: state.getIn(['errorState', 'errorMessage']),
     navigationState: state.get('navigationState').toJS()
   }),
   dispatch => {
     return {
-      playStateActions: bindActionCreators(PlayStateActions, dispatch),
+      errorStateActions: bindActionCreators(ErrorStateActions, dispatch),
       switchTab: bindActionCreators(switchTab, dispatch),
       pushRoute: bindActionCreators(pushRoute, dispatch),
       onNavigateBack: bindActionCreators(popRoute, dispatch),

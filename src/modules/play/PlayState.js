@@ -1,6 +1,7 @@
 import {Map} from 'immutable';
 import {loop, Effects} from 'redux-loop';
 import * as NavigationState from '../../modules/navigation/NavigationState';
+import * as ErrorState from '../../modules/error/ErrorState';
 import { findRoom, createRoom } from '../../services/roomService'
 
 // Initial state
@@ -10,14 +11,12 @@ const initialState = Map({
   gameId: "",
   countdownStartTime: 0,
   countdownEndTime: 0,
-  errorMessage: "",
   quoteToType: "",
   quoteReferralURL: ""
 });
 
 // Actions
 // Quick Play
-const REMOVE_ERRORS = 'PlayState/REMOVE_ERRORS'; 
 const FIND_GAME = 'PlayState/FIND_GAME';
 export const FIND_GAME_SUCCESS = 'PlayState/FIND_GAME_SUCCESS';
 export const FIND_NEW_GAME_SUCCESS = 'PlayState/FIND_GAME_SUCCESS';
@@ -25,12 +24,6 @@ export const RESPONSE_FAILURE = 'PlayState/RESPONSE_FAILURE';
 const LEAVE_GAME = 'PlayState/LEAVE_GAME';
 
 // Action creators
-export function removeErrors() {
-  return {
-    type: REMOVE_ERRORS
-  }
-}
-
 export function findGame(id, inGame) {
   return {
     type: FIND_GAME,
@@ -48,15 +41,10 @@ export function leaveGame() {
 export default function PlayStateReducer(state = initialState, action = {}) {
   
   switch (action.type) {
-    case REMOVE_ERRORS:
-      return state
-        .set('errorMessage', "");
-
     case FIND_GAME:
       return loop(
         state
-          .set('isLoading', true)
-          .set('errorMessage', ""),
+          .set('isLoading', true),
         Effects.promise(findRoom, action.payload)
       );
 
@@ -87,26 +75,36 @@ export default function PlayStateReducer(state = initialState, action = {}) {
         .set('quoteReferralURL', action.payload.quoteReferralURL)
 
     case RESPONSE_FAILURE:
-      return state
-        .set('isLoading', false)
-        .set('inGame', false)
-        .set('gameId', "")        
-        .set('countdownStartTime', 0)
-        .set('countdownEndTime', 0)
-        .set('quoteToType', "")
-        .set('quoteReferralURL', "")
-        .set('errorMessage', action.payload);
+      return loop(
+        state
+          .set('isLoading', false)
+          .set('inGame', false)
+          .set('gameId', "")        
+          .set('countdownStartTime', 0)
+          .set('countdownEndTime', 0)
+          .set('quoteToType', "")
+          .set('quoteReferralURL', ""),
+        Effects.constant(ErrorState.addError({
+          type: 'ADD_ERROR', 
+          error: action.payload
+        }))
+      );
 
     case LEAVE_GAME:
-      return state
-        .set('isLoading', false)
-        .set('inGame', false)
-        .set('gameId', "")
-        .set('countdownStartTime', 0)
-        .set('countdownEndTime', 0)
-        .set('quoteToType', "")
-        .set('quoteReferralURL', "")
-        .set('errorMessage', "You left the game");
+      return loop(
+        state
+          .set('isLoading', false)
+          .set('inGame', false)
+          .set('gameId', "")
+          .set('countdownStartTime', 0)
+          .set('countdownEndTime', 0)
+          .set('quoteToType', "")
+          .set('quoteReferralURL', ""),
+        Effects.constant(ErrorState.addError({
+          type: 'ADD_ERROR', 
+          error: "You left the game"
+        }))
+      );
 
     default:
       return state;

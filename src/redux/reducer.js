@@ -3,13 +3,15 @@ import {loop, combineReducers} from 'redux-loop';
 import NavigationStateReducer from '../modules/navigation/NavigationState';
 import SessionStateReducer, {RESET_STATE} from '../modules/session/SessionState';
 import PlayStateReducer from '../modules/play/PlayState';
+import ErrorStateReducer from '../modules/error/ErrorState';
 
 const reducers = {
   // @NOTE: By convention, the navigation state must live in a subtree called
   //`navigationState`
   navigationState: NavigationStateReducer,  
   session: SessionStateReducer,
-  playState: PlayStateReducer
+  playState: PlayStateReducer,
+  errorState: ErrorStateReducer
 };
 
 // initial state, accessor and mutator for supporting root-level

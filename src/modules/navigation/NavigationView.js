@@ -71,7 +71,7 @@ const NavigationView = React.createClass({
     );
   },
   closeAlert () {
-    this.props.playStateActions.removeErrors();
+    this.props.errorStateActions.removeError();
   },
   render() {
     const {tabs} = this.props.navigationState;

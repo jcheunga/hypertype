@@ -42,12 +42,6 @@ class TypeView extends Component {
     });
   }
 
-  componentWillUnmount () {
-    // console.log("leave game from typeview from compwillunmount");
-    // this.props.playStateActions.leaveGame();
-    // // this.leaveGame();
-  }  
-
   countdownToSeconds = (countdownValue) => {
     return Math.round((countdownValue - Date.now()) / 1000);
   }
