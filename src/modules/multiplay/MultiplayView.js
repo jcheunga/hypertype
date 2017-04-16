@@ -11,8 +11,8 @@ import {
 
 const window = Dimensions.get('window');
 
-class PlayView extends Component {
-  static displayName = 'PlayView';
+class MultiplayView extends Component {
+  static displayName = 'MultiplayView';
 
   // Initialize the hardcoded data
   constructor(props) {
@@ -100,4 +100,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default PlayView;
+export default MultiplayView;

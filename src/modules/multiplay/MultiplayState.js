@@ -17,11 +17,11 @@ const initialState = Map({
 
 // Actions
 // Quick Play
-const FIND_GAME = 'PlayState/FIND_GAME';
-export const FIND_GAME_SUCCESS = 'PlayState/FIND_GAME_SUCCESS';
-export const FIND_NEW_GAME_SUCCESS = 'PlayState/FIND_GAME_SUCCESS';
-export const RESPONSE_FAILURE = 'PlayState/RESPONSE_FAILURE';
-const LEAVE_GAME = 'PlayState/LEAVE_GAME';
+const FIND_GAME = 'MultiplayState/FIND_GAME';
+export const FIND_GAME_SUCCESS = 'MultiplayState/FIND_GAME_SUCCESS';
+export const FIND_NEW_GAME_SUCCESS = 'MultiplayState/FIND_GAME_SUCCESS';
+export const RESPONSE_FAILURE = 'MultiplayState/RESPONSE_FAILURE';
+const LEAVE_GAME = 'MultiplayState/LEAVE_GAME';
 
 // Action creators
 export function findGame(id, inGame) {
@@ -38,7 +38,7 @@ export function leaveGame() {
 }
 
 // Reducer
-export default function PlayStateReducer(state = initialState, action = {}) {
+export default function MultiplayStateReducer(state = initialState, action = {}) {
   
   switch (action.type) {
     case FIND_GAME:
