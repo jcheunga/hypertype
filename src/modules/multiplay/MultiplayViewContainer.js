@@ -7,7 +7,6 @@ import * as MultiplayStateActions from './MultiplayState';
 
 export default connect(
   state => ({
-    errorMessage: state.getIn(['playState', 'errorMessage']),
     isLoading: state.getIn(['playState', 'isLoading']),
     inGame: state.getIn(['playState', 'inGame'])
   }),

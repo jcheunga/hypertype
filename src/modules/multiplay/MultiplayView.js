@@ -8,6 +8,8 @@ import {
   Image,
   Dimensions
 } from 'react-native';
+import CreateGameView from './CreateGameView';
+import JoinGameView from './JoinGameView';
 
 const window = Dimensions.get('window');
 
@@ -17,44 +19,71 @@ class MultiplayView extends Component {
   // Initialize the hardcoded data
   constructor(props) {
     super(props);
+
+    this.state = {
+      multiplayView: true,
+      createGameView: false,
+      joinGameView: false
+    }
   }
 
-  componentDidMount () {
-    // this.props.playStateActions.leaveGame();  
+  createGame = () => {
+    this.setState({
+      multiplayView: false,
+      createGameView: true
+    });
   }
 
-  quickPlay = () => {
-    this.props.playStateActions.findGame("1234ABCDE", this.props.inGame); // Get id from user or random guest name
+  joinGame = () => {
+    this.setState({      
+      multiplayView: false,
+      joinGameView: true
+    });
   }
 
-  multiPlay = () => {
-    // TODO
+  resetView = () => {
+    this.setState({
+      multiplayView: true,
+      createGameView: false,
+      joinGameView: false
+    });
   }
 
   render() { 
+    const showMultiplayView = this.state.multiplayView ? 
+      <View>
+        <Text>Create game</Text>
+        <Button
+          text="Create game"
+          buttonStyle={theme.buttons.primary}
+          textStyle={theme.fonts.primary}
+          action={() => this.createGame()}
+        />
+        <Text>Join game</Text>
+        <Button
+          text="Join game"
+          buttonStyle={theme.buttons.primary}
+          textStyle={theme.fonts.primary}
+          action={() => this.joinGame()}
+        />
+      </View>
+    : null;
+
+    const showCreateGameView = this.state.createGameView ? 
+    <CreateGameView resetView={this.resetView}/>
+    : null;
+
+    const showJoinGameView = this.state.joinGameView ? 
+    <JoinGameView resetView={this.resetView}/>
+    : null;
+
     return (
       <View style={styles.container}>
-        <View style={styles.buttonsContainer}>
-          <Image 
-            style={{width: 50, height: 50}}
-            source={{uri: 'https://facebook.github.io/react/img/logo_og.png'}}
-          />
-          <Text>WELCOME TO TYPESPRINT</Text>
-          <Button
-            text="Quick play"
-            buttonStyle={theme.buttons.primary}
-            textStyle={theme.fonts.primary}
-            action={() => this.quickPlay()}
-          />
-          <Button
-            text="Multi play"
-            buttonStyle={theme.buttons.primary}
-            textStyle={theme.fonts.primary}
-            action={() => this.multiPlay()}
-          />
-        </View>
+        {showMultiplayView}
+        {showCreateGameView}
+        {showJoinGameView}
       </View>
-    );
+    )
   }
 }
 

@@ -28,7 +28,10 @@ class PlayView extends Component {
   }
 
   multiPlay = () => {
-    // TODO
+    this.props.navigationStateActions.pushRoute({
+      key: 'Multiplay',
+      title: 'Multiplay'
+    })
   }
 
   render() { 

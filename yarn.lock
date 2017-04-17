@@ -3862,9 +3862,9 @@ react-dom@^15.4.0, react-dom@~15.4.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
 
-react-native-dropdownalert@^2.7.0:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/react-native-dropdownalert/-/react-native-dropdownalert-2.7.0.tgz#97f15132cf07e8423bfd7722f3d08257416bce89"
+react-native-dropdownalert@^2.7.1:
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/react-native-dropdownalert/-/react-native-dropdownalert-2.7.1.tgz#c15aeb879111382b4d57e79d2feeeb35ed7e32f1"
 
 react-native-mock@~0.2.5:
   version "0.2.9"

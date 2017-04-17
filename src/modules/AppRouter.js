@@ -5,6 +5,7 @@ import PlayViewContainer from './play/PlayViewContainer';
 import HighscoreViewContainer from './highscore/HighscoreViewContainer';
 import ProfileViewContainer from './profile/ProfileViewContainer';
 import TypeViewContainer from './type/TypeViewContainer';
+import MultiplayViewContainer from './multiplay/MultiplayViewContainer';
 
 /**
  * AppRouter is responsible for mapping a navigator scene to a view
@@ -27,6 +28,10 @@ export default function AppRouter(props) {
 
   if (key === 'Type') {
     return <TypeViewContainer />;
+  }
+
+  if (key === 'Multiplay') {
+    return <MultiplayViewContainer />;
   }
 
   throw new Error('Unknown navigation key: ' + key);
