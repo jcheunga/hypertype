@@ -19,7 +19,7 @@ const initialState = Map({
 // Quick Play
 const FIND_GAME = 'MultiplayState/FIND_GAME';
 export const FIND_GAME_SUCCESS = 'MultiplayState/FIND_GAME_SUCCESS';
-export const FIND_NEW_GAME_SUCCESS = 'MultiplayState/FIND_GAME_SUCCESS';
+export const FIND_NEW_GAME_SUCCESS = 'MultiplayState/FIND_NEW_GAME_SUCCESS';
 export const RESPONSE_FAILURE = 'MultiplayState/RESPONSE_FAILURE';
 const LEAVE_GAME = 'MultiplayState/LEAVE_GAME';
 
