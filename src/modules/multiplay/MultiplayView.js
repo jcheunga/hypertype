@@ -27,11 +27,19 @@ class MultiplayView extends Component {
     }
   }
 
+  // CLEAR STATE AT THIS SCREEN
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.isCreated) {
+      this.setState({
+        multiplayView: false,
+        createGameView: true
+      });
+    }    
+  }
+
   createGame = () => {
-    this.setState({
-      multiplayView: false,
-      createGameView: true
-    });
+    this.props.multiplayStateActions.createGame();
   }
 
   joinGame = () => {
@@ -59,6 +67,7 @@ class MultiplayView extends Component {
           textStyle={theme.fonts.primary}
           action={() => this.createGame()}
         />
+        <Text>{this.props.isCreating ? "Creating game..." : null}</Text>
         <Text>Join game</Text>
         <Button
           text="Join game"

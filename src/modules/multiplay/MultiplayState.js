@@ -2,11 +2,14 @@ import {Map} from 'immutable';
 import {loop, Effects} from 'redux-loop';
 import * as NavigationState from '../../modules/navigation/NavigationState';
 import * as ErrorState from '../../modules/error/ErrorState';
-import { findRoom, createRoom } from '../../services/roomService';
+import { joinRoom, createRoom } from '../../services/multiplayService';
 
 // Initial state
 const initialState = Map({
-  isLoading: false,
+  isCreating: false,
+  isCreated: false,
+  isJoining: false,
+  isJoined: false,
   inGame: false,
   gameId: "",
   countdownStartTime: 0,
@@ -17,17 +20,29 @@ const initialState = Map({
 
 // Actions
 // Quick Play
-const FIND_GAME = 'MultiplayState/FIND_GAME';
-export const FIND_GAME_SUCCESS = 'MultiplayState/FIND_GAME_SUCCESS';
-export const FIND_NEW_GAME_SUCCESS = 'MultiplayState/FIND_NEW_GAME_SUCCESS';
+const CREATE_GAME = 'MultiplayState/CREATE_GAME';
+export const CREATE_GAME_SUCCESS = 'MultiplayState/CREATE_GAME_SUCCESS';
+export const CREATE_NEW_GAME_SUCCESS = 'MultiplayState/CREATE_NEW_GAME_SUCCESS';
+
+const JOIN_GAME = 'MultiplayState/JOIN_GAME';
+export const JOIN_GAME_SUCCESS = 'MultiplayState/JOIN_GAME_SUCCESS';
+export const JOIN_NEW_GAME_SUCCESS = 'MultiplayState/JOIN_NEW_GAME_SUCCESS';
+
 export const RESPONSE_FAILURE = 'MultiplayState/RESPONSE_FAILURE';
 const LEAVE_GAME = 'MultiplayState/LEAVE_GAME';
 
 // Action creators
-export function findGame(id, inGame) {
+export function createGame(inGame) {
   return {
-    type: FIND_GAME,
-    payload: {id: id, inGame: inGame}
+    type: CREATE_GAME,
+    payload: {inGame: inGame}
+  };
+}
+
+export function joinGame(gameId, inGame) {
+  return {
+    type: JOIN_GAME,
+    payload: {gameId: gameId, inGame: inGame}
   };
 }
 
