@@ -56,32 +56,28 @@ export function leaveGame() {
 export default function MultiplayStateReducer(state = initialState, action = {}) {
   
   switch (action.type) {
-    case FIND_GAME:
+    case CREATE_GAME:
       return loop(
         state
-          .set('isLoading', true),
-        Effects.promise(findRoom, action.payload)
+          .set('isCreating', true),
+        Effects.promise(createRoom, action.payload)
       );
 
-    case FIND_GAME_SUCCESS:
-      return loop(
-        state
-          .set('isLoading', false)
-          .set('inGame', true)
-          .set('gameId', action.payload.gameId)
-          .set('countdownStartTime', action.payload.countdownStartTime)
-          .set('countdownEndTime', action.payload.countdownEndTime)
-          .set('quoteToType', action.payload.quoteToType)
-          .set('quoteReferralURL', action.payload.quoteReferralURL),
-        Effects.constant(NavigationState.pushRoute({
-          key: 'Type',
-          title: 'Type fast'
-        }))
-      );
-
-    case FIND_NEW_GAME_SUCCESS:
+    case CREATE_GAME_SUCCESS:
       return state
-        .set('isLoading', false)
+        .set('isCreating', false)
+        .set('isCreated', true)
+        .set('inGame', true)
+        .set('gameId', action.payload.gameId)
+        .set('countdownStartTime', action.payload.countdownStartTime)
+        .set('countdownEndTime', action.payload.countdownEndTime)
+        .set('quoteToType', action.payload.quoteToType)
+        .set('quoteReferralURL', action.payload.quoteReferralURL)
+
+    case CREATE_NEW_GAME_SUCCESS:
+      return state
+        .set('isCreating', false)
+        .set('isCreated', true)
         .set('inGame', true)
         .set('gameId', action.payload.gameId)
         .set('countdownStartTime', action.payload.countdownStartTime)
@@ -92,7 +88,10 @@ export default function MultiplayStateReducer(state = initialState, action = {})
     case RESPONSE_FAILURE:
       return loop(
         state
-          .set('isLoading', false)
+          .set('isCreating', false)
+          .set('isCreated', false)
+          .set('isJoining', false)
+          .set('isJoined', false)
           .set('inGame', false)
           .set('gameId', "")        
           .set('countdownStartTime', 0)
@@ -105,7 +104,10 @@ export default function MultiplayStateReducer(state = initialState, action = {})
     case LEAVE_GAME:
       return loop(
         state
-          .set('isLoading', false)
+          .set('isCreating', false)
+          .set('isCreated', false)
+          .set('isJoining', false)
+          .set('isJoined', false)
           .set('inGame', false)
           .set('gameId', "")
           .set('countdownStartTime', 0)
