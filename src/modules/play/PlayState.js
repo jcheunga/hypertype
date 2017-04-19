@@ -2,7 +2,7 @@ import {Map} from 'immutable';
 import {loop, Effects} from 'redux-loop';
 import * as NavigationState from '../../modules/navigation/NavigationState';
 import * as ErrorState from '../../modules/error/ErrorState';
-import { findRoom, createRoom } from '../../services/roomService';
+import { findRoom } from '../../services/roomService';
 
 // Initial state
 const initialState = Map({
@@ -63,7 +63,8 @@ export default function PlayStateReducer(state = initialState, action = {}) {
           title: 'Type fast'
         }))
       );
-
+    
+    // FIX BACKSPACE FOR ANDROID TO LEAVE GAME OR LEAVE GAME ON PLAY VIEW
     case FIND_NEW_GAME_SUCCESS:
       return state
         .set('isLoading', false)
