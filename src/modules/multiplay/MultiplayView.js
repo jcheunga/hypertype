@@ -50,6 +50,7 @@ class MultiplayView extends Component {
   }
 
   resetView = () => {
+    this.props.multiplayStateActions.leaveGame();
     this.setState({
       multiplayView: true,
       createGameView: false,

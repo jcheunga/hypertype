@@ -36,9 +36,12 @@ class CreateGameView extends Component {
           <Text style={styles.bodyText}>
             Players in game
           </Text>
-          <Text style={styles.bodyText}>
-            Start game
-          </Text>
+          <Button
+            text="Start game"
+            buttonStyle={theme.buttons.primary}
+            textStyle={theme.fonts.primary}
+            action={() => this.props.resetView()}
+          />
           <Button
             text="Return to mutliplayer menu"
             buttonStyle={theme.buttons.primary}
