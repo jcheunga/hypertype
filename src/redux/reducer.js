@@ -4,6 +4,7 @@ import NavigationStateReducer from '../modules/navigation/NavigationState';
 import SessionStateReducer, {RESET_STATE} from '../modules/session/SessionState';
 import PlayStateReducer from '../modules/play/PlayState';
 import ErrorStateReducer from '../modules/error/ErrorState';
+import MultiplayStateReducer from '../modules/multiplay/MultiplayState';
 
 const reducers = {
   // @NOTE: By convention, the navigation state must live in a subtree called
@@ -11,7 +12,8 @@ const reducers = {
   navigationState: NavigationStateReducer,  
   session: SessionStateReducer,
   playState: PlayStateReducer,
-  errorState: ErrorStateReducer
+  errorState: ErrorStateReducer,
+  multiplayState: MultiplayStateReducer
 };
 
 // initial state, accessor and mutator for supporting root-level

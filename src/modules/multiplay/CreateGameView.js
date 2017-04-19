@@ -23,7 +23,7 @@ class CreateGameView extends Component {
     super(props);
   }
 
-  render() { 
+  render() {
     return (
       <View style={styles.container}>
         <View style={styles.userContainer}>          
@@ -31,7 +31,7 @@ class CreateGameView extends Component {
             Share the game id to join your game
           </Text>
           <Text style={styles.bodyText}>
-            Create Game ID
+            Game id: {this.props.gameId}
           </Text>
           <Text style={styles.bodyText}>
             Players in game
