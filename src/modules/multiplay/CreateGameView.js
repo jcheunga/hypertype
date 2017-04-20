@@ -26,7 +26,7 @@ class CreateGameView extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.userContainer}>          
+        <View style={styles.userContainer}>
           <Text style={styles.bodyText}>
             Share the game id to join your game
           </Text>
@@ -40,7 +40,7 @@ class CreateGameView extends Component {
             text="Start game"
             buttonStyle={theme.buttons.primary}
             textStyle={theme.fonts.primary}
-            action={() => this.props.resetView()}
+            action={() => this.props.startGame()}
           />
           <Button
             text="Return to mutliplayer menu"

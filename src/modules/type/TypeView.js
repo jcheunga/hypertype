@@ -45,13 +45,13 @@ class TypeView extends Component {
   countdownToSeconds = (countdownValue) => {
     return Math.round((countdownValue - Date.now()) / 1000);
   }
-  
+
   startNewQuickGame = () => {
     this.props.playStateActions.findGame("1234ABCDE", this.props.inGame);
   }
 
   leaveGame = () => {
-    this.props.playStateActions.leaveGame();    
+    this.props.playStateActions.leaveGame();
     this.props.navigationStateActions.popRoute();
   }
 
@@ -69,7 +69,7 @@ class TypeView extends Component {
     });
   }
 
-  render () { 
+  render () {
     const showCountdownView = this.state.countdownView && this.props.countdownEndTime !== 0 ?
       <CountdownView finishCountdown={this.finishCountdown} countdownEndTime={this.state.countdownEndTime}/>
     : null;

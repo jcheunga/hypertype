@@ -24,10 +24,10 @@ class JoinGameView extends Component {
     super(props);
   }
 
-  render() { 
+  render() {
     return (
       <View style={styles.container}>
-        <View style={styles.userContainer}>          
+        <View style={styles.userContainer}>
           <Text style={styles.bodyText}>
             Enter in game id to join game
           </Text>
@@ -36,7 +36,7 @@ class JoinGameView extends Component {
             text="Join game"
             buttonStyle={theme.buttons.primary}
             textStyle={theme.fonts.primary}
-            action={() => this.props.resetView()}
+            action={() => this.props.joinGame()}
           />
           <Text style={styles.bodyText}>
             Players in game
