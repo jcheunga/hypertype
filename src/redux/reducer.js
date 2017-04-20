@@ -6,14 +6,20 @@ import PlayStateReducer from '../modules/play/PlayState';
 import ErrorStateReducer from '../modules/error/ErrorState';
 import MultiplayStateReducer from '../modules/multiplay/MultiplayState';
 
+import { feathersServices, feathersAuthentication } from '../feathers';
+
 const reducers = {
   // @NOTE: By convention, the navigation state must live in a subtree called
   //`navigationState`
-  navigationState: NavigationStateReducer,  
+  navigationState: NavigationStateReducer,
   session: SessionStateReducer,
   playState: PlayStateReducer,
   errorState: ErrorStateReducer,
-  multiplayState: MultiplayStateReducer
+  multiplayState: MultiplayStateReducer,
+
+  auth: feathersAuthentication.reducer,
+  users: feathersServices.users.reducer,
+  posts: feathersServices.posts.reducer
 };
 
 // initial state, accessor and mutator for supporting root-level
