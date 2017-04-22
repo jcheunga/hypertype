@@ -10,7 +10,7 @@ import { AsyncStorage } from 'react-native';
 import reduxifyServices, { getServicesStatus } from 'feathers-reduxify-services';
 import reduxifyAuthentication from 'feathers-reduxify-authentication';
 
-const API_URL = 'http://10.0.2.2:3000';
+const API_URL = 'http://10.0.2.2:3030';
 const options = {transports: ['websocket'], pingTimeout: 3000, pingInterval: 5000, jsonp: false};
 const socket = io(API_URL, options);
 
