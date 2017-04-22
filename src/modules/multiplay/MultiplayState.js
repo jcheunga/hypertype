@@ -8,6 +8,8 @@ import { joinRoom, createRoom } from '../../services/multiplayService';
 const initialState = Map({
   isCreating: false,
   isCreated: false,
+  isStarting: false,
+  isStarted: false,
   isJoining: false,
   isJoined: false,
   inGame: false,
@@ -77,6 +79,20 @@ export default function MultiplayStateReducer(state = initialState, action = {})
       return state
         .set('isCreating', false)
         .set('isCreated', true)
+        .set('inGame', true)
+        .set('gameId', action.payload.gameId)
+
+    case START_GAME:
+      return loop(
+        state
+          .set('isStarting', true),
+        Effects.promise(startGame, action.payload)
+      );
+
+    case START_GAME_SUCCESS:
+      return state
+        .set('isStarting', false)
+        .set('isStarted', true)
         .set('inGame', true)
         .set('gameId', action.payload.gameId)
         .set('countdownStartTime', action.payload.countdownStartTime)

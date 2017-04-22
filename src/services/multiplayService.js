@@ -12,19 +12,47 @@ const minimum = 0;
 const maximum = 2;
 
 export function createRoom (payload) {
-  let user;
-  let createdGame = true;
-  let createGameIdAdded = true;
-  let countdownAmount = 1000;
-  let randomnumber = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
+  const user = "abc";
+  const createdGame = true;
+  const createGameIdAdded = true;
+  const randomnumber = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
 
-  let fetchGame = new Promise(function(resolve, reject) {
+  const fetchGame = new Promise(function(resolve, reject) {
     if (createdGame) {
-      let createGameId = Date.now() + Math.floor(Math.random() * 1000).toString();
-      let quoteToType = quoteArr[randomnumber];
-      let quoteReferralURL = "www.google.com";
-      let countdownStartTime = Date.now(); 
-      let countdownEndTime = countdownStartTime + countdownAmount;
+      const createGameId = Date.now() + Math.floor(Math.random() * 1000).toString();
+      const quoteToType = quoteArr[randomnumber];
+      const quoteReferralURL = "www.google.com";
+      if (createGameIdAdded) {
+        resolve(
+          {
+            gameId: createGameId
+          }
+        );
+      } else {
+        reject({ message: "Error creating" })
+      }
+    }
+  });
+
+  return fetchGame
+    .then((response) => ({type: payload.inGame ? CREATE_NEW_GAME_SUCCESS : CREATE_GAME_SUCCESS, payload: response }))
+    .catch((error) => ({type: RESPONSE_FAILURE, payload: error.message}))
+}
+
+export function startGame (payload) {
+  const user = "abc";
+  const startedGame = true;
+  const startGameIdAdded = true;
+  const countdownAmount = 1000;
+  const randomnumber = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
+
+  const fetchGame = new Promise(function(resolve, reject) {
+    if (startedGame) {
+      const createGameId = Date.now() + Math.floor(Math.random() * 1000).toString();
+      const quoteToType = quoteArr[randomnumber];
+      const quoteReferralURL = "www.google.com";
+      const countdownStartTime = Date.now();
+      const countdownEndTime = countdownStartTime + countdownAmount;
       if (createGameIdAdded) {
         resolve(
           {
@@ -44,10 +72,6 @@ export function createRoom (payload) {
   return fetchGame
     .then((response) => ({type: payload.inGame ? CREATE_NEW_GAME_SUCCESS : CREATE_GAME_SUCCESS, payload: response }))
     .catch((error) => ({type: RESPONSE_FAILURE, payload: error.message}))
-}
-
-export function startGame (payload) {
-
 }
 
 export function joinRoom (payload) {
