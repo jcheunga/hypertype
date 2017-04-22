@@ -9,19 +9,19 @@ const minimum = 0;
 const maximum = 2;
 
 export function findRoom (payload) {
-  let user = payload.id;
-  let foundGame = false;
-  let createGameIdAdded = true;
-  let countdownAmount = 1000;
-  let randomnumber = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
-  
-  let fetchGame = new Promise(function(resolve, reject) {
+  const user = payload.id;
+  const foundGame = false;
+  const createGameIdAdded = true;
+  const countdownAmount = 1000;
+  const randomnumber = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
+
+  const fetchGame = new Promise(function(resolve, reject) {
     if (foundGame) {
-      let quoteToType = quoteArr[randomnumber];
-      let quoteReferralURL = "www.google.com";
-      let findGameId = "123456";
-      let countdownStartTime = Date.now(); 
-      let countdownEndTime = countdownStartTime + countdownAmount;
+      const quoteToType = quoteArr[randomnumber];
+      const quoteReferralURL = "www.google.com";
+      const findGameId = "123456";
+      const countdownStartTime = Date.now();
+      const countdownEndTime = countdownStartTime + countdownAmount;
       if (hasGameId) {
         resolve(
           {
@@ -36,11 +36,11 @@ export function findRoom (payload) {
         reject({ message: "Error joining" })
       }
     } else {
-      let createGameId = Date.now() + Math.floor(Math.random() * 1000).toString();
-      let quoteToType = quoteArr[randomnumber];
-      let quoteReferralURL = "www.google.com";
-      let countdownStartTime = Date.now();
-      let countdownEndTime = countdownStartTime + countdownAmount;
+      const createGameId = Date.now() + Math.floor(Math.random() * 1000).toString();
+      const quoteToType = quoteArr[randomnumber];
+      const quoteReferralURL = "www.google.com";
+      const countdownStartTime = Date.now();
+      const countdownEndTime = countdownStartTime + countdownAmount;
       if (createGameIdAdded) {
         resolve(
           {
@@ -53,7 +53,7 @@ export function findRoom (payload) {
         );
       } else {
         reject({ message: "Error creating" })
-      }        
+      }
     }
   });
 
