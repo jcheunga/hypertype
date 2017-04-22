@@ -9,6 +9,8 @@ export default connect(
   state => ({
     isCreating: state.getIn(['multiplayState', 'isCreating']),
     isCreated: state.getIn(['multiplayState', 'isCreated']),
+    isStarting: state.getIn(['multiplayState', 'isStarting']),
+    isStarted: state.getIn(['multiplayState', 'isStarted']),
     isJoining: state.getIn(['multiplayState', 'isJoining']),
     isJoined: state.getIn(['multiplayState', 'isJoined']),
     inGame: state.getIn(['multiplayState', 'inGame']),
