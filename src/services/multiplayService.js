@@ -35,7 +35,7 @@ export function createRoom (payload) {
   });
 
   return fetchGame
-    .then((response) => ({type: payload.inGame ? CREATE_NEW_GAME_SUCCESS : CREATE_GAME_SUCCESS, payload: response }))
+    .then((response) => ({type: CREATE_GAME_SUCCESS, payload: response }))
     .catch((error) => ({type: RESPONSE_FAILURE, payload: error.message}))
 }
 
