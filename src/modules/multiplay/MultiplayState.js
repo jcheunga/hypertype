@@ -2,7 +2,7 @@ import {Map} from 'immutable';
 import {loop, Effects} from 'redux-loop';
 import * as NavigationState from '../../modules/navigation/NavigationState';
 import * as ErrorState from '../../modules/error/ErrorState';
-import { joinRoom, createRoom } from '../../services/multiplayService';
+import { joinRoomService, createRoomService, startGameService } from '../../services/multiplayService';
 
 // Initial state
 const initialState = Map({
@@ -13,6 +13,7 @@ const initialState = Map({
   isJoining: false,
   isJoined: false,
   inGame: false,
+  gameCreator: false,
   gameId: "",
   countdownStartTime: 0,
   countdownEndTime: 0,
@@ -71,11 +72,19 @@ export default function MultiplayStateReducer(state = initialState, action = {})
     case CREATE_GAME:
       return loop(
         state
-          .set('isCreating', true),
-        Effects.promise(createRoom, action.payload)
+          .set('isCreating', true)
+          .set('gameCreator', true),
+        Effects.promise(createRoomService, action.payload)
       );
 
     case CREATE_GAME_SUCCESS:
+      return state
+        .set('isCreating', false)
+        .set('isCreated', true)
+        .set('inGame', true)
+        .set('gameId', action.payload.gameId)
+
+    case CREATE_NEW_GAME_SUCCESS:
       return state
         .set('isCreating', false)
         .set('isCreated', true)
@@ -86,19 +95,25 @@ export default function MultiplayStateReducer(state = initialState, action = {})
       return loop(
         state
           .set('isStarting', true),
-        Effects.promise(startGame, action.payload)
+        Effects.promise(startGameService, action.payload)
       );
 
     case START_GAME_SUCCESS:
-      return state
-        .set('isStarting', false)
-        .set('isStarted', true)
-        .set('inGame', true)
-        .set('gameId', action.payload.gameId)
-        .set('countdownStartTime', action.payload.countdownStartTime)
-        .set('countdownEndTime', action.payload.countdownEndTime)
-        .set('quoteToType', action.payload.quoteToType)
-        .set('quoteReferralURL', action.payload.quoteReferralURL)
+      return loop(
+        state
+          .set('isStarting', false)
+          .set('isStarted', true)
+          .set('inGame', true)
+          .set('gameId', action.payload.gameId)
+          .set('countdownStartTime', action.payload.countdownStartTime)
+          .set('countdownEndTime', action.payload.countdownEndTime)
+          .set('quoteToType', action.payload.quoteToType)
+          .set('quoteReferralURL', action.payload.quoteReferralURL),
+        Effects.constant(NavigationState.pushRoute({
+          key: 'MultiplayType',
+          title: 'Type fast'
+        }))
+      );
 
     case RESPONSE_FAILURE:
       return loop(
@@ -114,7 +129,8 @@ export default function MultiplayStateReducer(state = initialState, action = {})
           .set('countdownStartTime', 0)
           .set('countdownEndTime', 0)
           .set('quoteToType', "")
-          .set('quoteReferralURL', ""),
+          .set('quoteReferralURL', "")
+          .set('gameCreator', false),
         Effects.constant(ErrorState.addError(action.payload))
       );
 
@@ -132,7 +148,8 @@ export default function MultiplayStateReducer(state = initialState, action = {})
           .set('countdownStartTime', 0)
           .set('countdownEndTime', 0)
           .set('quoteToType', "")
-          .set('quoteReferralURL', ""),
+          .set('quoteReferralURL', "")
+          .set('gameCreator', false),
         Effects.constant(ErrorState.addError("You have left the game!"))
       );
 

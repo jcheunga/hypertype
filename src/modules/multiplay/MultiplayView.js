@@ -42,6 +42,10 @@ class MultiplayView extends Component {
     this.props.multiplayStateActions.createGame(this.props.inGame);
   }
 
+  startGame = () => {
+    this.props.multiplayStateActions.startGame(this.props.gameId);
+  }
+
   joinGame = () => {
     this.setState({
       multiplayView: false,
@@ -80,11 +84,11 @@ class MultiplayView extends Component {
     : null;
 
     const showCreateGameView = this.state.createGameView ?
-    <CreateGameView {...this.props} resetView={this.resetView}/>
+    <CreateGameView {...this.props} startGame={this.startGame} resetView={this.resetView}/>
     : null;
 
     const showJoinGameView = this.state.joinGameView ?
-    <JoinGameView resetView={this.resetView}/>
+    <JoinGameView resetView={this.resetView} joinGame={this.joinGame}/>
     : null;
 
     return (
