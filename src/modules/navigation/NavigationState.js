@@ -71,6 +71,11 @@ const initialState = fromJS({
     index: 0,
     routes: [{key: 'Multiplay', title: 'Multiplay'}]
   },
+  // Scenes for the `MultiplayTypeTab` tab.
+  MultiplayTypeTab: {
+    index: 0,
+    routes: [{key: 'MultiplayType', title: 'Type fast'}]
+  },
 });
 
 function updateCurrentSceneStack(state, updater) {
