@@ -2,7 +2,7 @@ import {Map} from 'immutable';
 import {loop, Effects} from 'redux-loop';
 import * as NavigationState from '../../modules/navigation/NavigationState';
 import * as ErrorState from '../../modules/error/ErrorState';
-import { findRoom } from '../../services/roomService';
+import { findRoomService } from '../../services/roomService';
 
 // Initial state
 const initialState = Map({
@@ -24,7 +24,7 @@ export const RESPONSE_FAILURE = 'PlayState/RESPONSE_FAILURE';
 const LEAVE_GAME = 'PlayState/LEAVE_GAME';
 
 // Action creators
-export function findGame(id, inGame) {
+export function findGame(id, inGame) { // FIX THIS WITH ID OF USER
   return {
     type: FIND_GAME,
     payload: {id: id, inGame: inGame}
@@ -39,13 +39,13 @@ export function leaveGame() {
 
 // Reducer
 export default function PlayStateReducer(state = initialState, action = {}) {
-  
+
   switch (action.type) {
     case FIND_GAME:
       return loop(
         state
           .set('isLoading', true),
-        Effects.promise(findRoom, action.payload)
+        Effects.promise(findRoomService, action.payload)
       );
 
     case FIND_GAME_SUCCESS:
@@ -63,7 +63,7 @@ export default function PlayStateReducer(state = initialState, action = {}) {
           title: 'Type fast'
         }))
       );
-    
+
     // FIX BACKSPACE FOR ANDROID TO LEAVE GAME OR LEAVE GAME ON PLAY VIEW
     case FIND_NEW_GAME_SUCCESS:
       return state
@@ -80,7 +80,7 @@ export default function PlayStateReducer(state = initialState, action = {}) {
         state
           .set('isLoading', false)
           .set('inGame', false)
-          .set('gameId', "")        
+          .set('gameId', "")
           .set('countdownStartTime', 0)
           .set('countdownEndTime', 0)
           .set('quoteToType', "")
