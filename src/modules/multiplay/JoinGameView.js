@@ -36,10 +36,10 @@ class JoinGameView extends Component {
             text="Join game"
             buttonStyle={theme.buttons.primary}
             textStyle={theme.fonts.primary}
-            action={() => this.props.joinGame()}
+            action={() => this.props.joinGameWithId()}
           />
           <Text style={styles.bodyText}>
-            Players in game
+            Joining - Joined - Players in game
           </Text>
           <Button
             text="Return to mutliplayer menu"

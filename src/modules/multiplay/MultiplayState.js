@@ -115,6 +115,28 @@ export default function MultiplayStateReducer(state = initialState, action = {})
         }))
       );
 
+    case JOIN_GAME:
+      return loop(
+        state
+          .set('isJoining', true)
+          .set('gameCreator', false),
+        Effects.promise(joinRoomService, action.payload)
+      );
+
+    case JOIN_GAME_SUCCESS:
+      return state
+        .set('isJoining', false)
+        .set('isJoined', true)
+        .set('inGame', true)
+        .set('gameId', action.payload.gameId)
+
+    case JOIN_NEW_GAME_SUCCESS:
+      return state
+        .set('isJoining', false)
+        .set('isJoined', true)
+        .set('inGame', true)
+        .set('gameId', action.payload.gameId)
+
     case RESPONSE_FAILURE:
       return loop(
         state
