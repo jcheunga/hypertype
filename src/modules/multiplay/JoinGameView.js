@@ -24,6 +24,10 @@ class JoinGameView extends Component {
     super(props);
   }
 
+  componentWillReceiveProps (nextProps) {
+
+  }
+
   render() {
     return (
       <View style={styles.container}>
