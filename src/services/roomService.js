@@ -3,6 +3,7 @@ import {
   FIND_NEW_GAME_SUCCESS,
   RESPONSE_FAILURE
 } from '../modules/play/PlayState';
+import { createRandomGameId, getQuoteToType } from '../utils/Utils';
 
 export function findRoomService (payload) {
   const user = payload.id;
@@ -31,7 +32,7 @@ export function findRoomService (payload) {
         reject({ message: "Error joining" })
       }
     } else {
-      const createGameId = Date.now() + Math.floor(Math.random() * 1000).toString();
+      const createGameId = createRandomGameId();
       const quoteToType = getQuoteToType();
       const quoteReferralURL = "www.google.com";
       const countdownStartTime = Date.now();
@@ -55,15 +56,4 @@ export function findRoomService (payload) {
   return fetchGame
     .then((response) => ({type: payload.inGame ? FIND_NEW_GAME_SUCCESS : FIND_GAME_SUCCESS, payload: response }))
     .catch((error) => ({type: RESPONSE_FAILURE, payload: error.message}))
-}
-
-function getQuoteToType () {
-  const quoteArr = ["a", "b", "c"];
-  return quoteArr[randomNumber()];
-}
-
-function randomNumber () {
-  const minimum = 0;
-  const maximum = 2;
-  return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
 }
