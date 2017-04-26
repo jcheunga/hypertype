@@ -27,7 +27,9 @@ class MultiplayView extends Component {
     }
   }
 
-  // CLEAR STATE AT THIS SCREEN
+  componentWillMount () {
+    console.log(this.props.gameId);
+  }
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.isCreated) {
@@ -53,8 +55,8 @@ class MultiplayView extends Component {
     });
   }
 
-  joinGameWithId = () => {
-    this.props.multiplayStateActions.joinGame(this.props.gameId, this.props.inGame);
+  joinGameWithId = (enteredGameId) => {
+    this.props.multiplayStateActions.joinGame(enteredGameId, this.props.inGame);
   }
 
   resetView = () => {
@@ -67,9 +69,9 @@ class MultiplayView extends Component {
   }
 
   render() {
+    // console.log(this.props.gameId);
     const showMultiplayView = this.state.multiplayView ?
       <View>
-        <Text>Create game</Text>
         <Button
           text="Create game"
           buttonStyle={theme.buttons.primary}
@@ -77,7 +79,6 @@ class MultiplayView extends Component {
           action={() => this.createGame()}
         />
         <Text>{this.props.isCreating ? "Creating game..." : null}</Text>
-        <Text>Join game</Text>
         <Button
           text="Join game"
           buttonStyle={theme.buttons.primary}
@@ -92,7 +93,7 @@ class MultiplayView extends Component {
     : null;
 
     const showJoinGameView = this.state.joinGameView ?
-    <JoinGameView resetView={this.resetView} joinGameWithId={this.joinGameWithId}/>
+    <JoinGameView {...this.props} resetView={this.resetView} joinGameWithId={this.joinGameWithId}/>
     : null;
 
     return (

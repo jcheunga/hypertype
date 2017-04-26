@@ -22,10 +22,22 @@ class JoinGameView extends Component {
   // Initialize the hardcoded data
   constructor(props) {
     super(props);
+
+    this.state = {
+      enteredGameId: ""
+    };
   }
 
   componentWillReceiveProps (nextProps) {
+    if (nextProps.isStarted && this.props.inGame) {
+      console.log("game is started");
+    }
+  }
 
+  handleIdInput = (e) => {
+    this.setState({
+      enteredGameId: e.nativeEvent.text
+    });
   }
 
   render() {
@@ -35,15 +47,15 @@ class JoinGameView extends Component {
           <Text style={styles.bodyText}>
             Enter in game id to join game
           </Text>
-          <TextInput style={{width: 100}}/>
+          <TextInput onChange={(e) => this.handleIdInput(e)} value={this.state.enteredGameId.toUpperCase()} style={{width: 100}}/>
           <Button
             text="Join game"
             buttonStyle={theme.buttons.primary}
             textStyle={theme.fonts.primary}
-            action={() => this.props.joinGameWithId()}
+            action={() => this.props.joinGameWithId(this.state.enteredGameId)}
           />
           <Text style={styles.bodyText}>
-            Joining - Joined - Players in game
+            Joining - Joined - Players in game {this.props.gameId}
           </Text>
           <Button
             text="Return to mutliplayer menu"

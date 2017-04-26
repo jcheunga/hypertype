@@ -20,13 +20,13 @@ class CountdownView extends Component {
     this.countInterval = setInterval(() => {
       if (this.state.countdownTime === 0) {
         clearInterval(this.countInterval);
-        this.props.finishCountdown();        
+        this.props.finishCountdown();
       }
       if (this.state.countdownTime > 0) {
         this.setState({
           countdownTime: this.state.countdownTime - 1
         })
-      }      
+      }
     }, 1000);
   }
 

@@ -23,6 +23,10 @@ class CreateGameView extends Component {
     super(props);
   }
 
+  componentWillMount () {
+    console.log(this.props.gameId);
+  }
+
   render() {
     return (
       <View style={styles.container}>

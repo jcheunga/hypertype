@@ -32,7 +32,9 @@ export const START_GAME_SUCCESS = 'MultiplayState/START_GAME_SUCCESS';
 
 const JOIN_GAME = 'MultiplayState/JOIN_GAME';
 export const JOIN_GAME_SUCCESS = 'MultiplayState/JOIN_GAME_SUCCESS';
-export const JOIN_NEW_GAME_SUCCESS = 'MultiplayState/JOIN_NEW_GAME_SUCCESS';
+
+const START_GAME_FOR_JOINS = 'MultiplayState/START_GAME_FOR_JOINS';
+export const START_GAME_FOR_JOINS_SUCCESS = 'MultiplayState/START_GAME_FOR_JOINS_SUCCESS';
 
 export const RESPONSE_FAILURE = 'MultiplayState/RESPONSE_FAILURE';
 const LEAVE_GAME = 'MultiplayState/LEAVE_GAME';
@@ -59,6 +61,13 @@ export function joinGame(gameId, inGame) {
   };
 }
 
+export function startGameForJoins(gameId) {
+  return {
+    type: START_GAME_FOR_JOINS,
+    payload: {gameId: gameId}
+  };
+}
+
 export function leaveGame() {
   return {
     type: LEAVE_GAME
@@ -72,23 +81,15 @@ export default function MultiplayStateReducer(state = initialState, action = {})
     case CREATE_GAME:
       return loop(
         state
-          .set('isCreating', true)
-          .set('gameCreator', true),
+          .set('isCreating', true),
         Effects.promise(createRoomService, action.payload)
       );
 
     case CREATE_GAME_SUCCESS:
       return state
         .set('isCreating', false)
-        .set('isCreated', true)
-        .set('inGame', true)
-        .set('gameId', action.payload.gameId)
-
-    case CREATE_NEW_GAME_SUCCESS:
-      return state
-        .set('isCreating', false)
-        .set('isCreated', true)
-        .set('inGame', true)
+        .set('isCreated', action.payload.isCreated)
+        .set('inGame', action.payload.isCreated)
         .set('gameId', action.payload.gameId)
 
     case START_GAME:
@@ -102,8 +103,8 @@ export default function MultiplayStateReducer(state = initialState, action = {})
       return loop(
         state
           .set('isStarting', false)
-          .set('isStarted', true)
-          .set('inGame', true)
+          .set('isStarted', action.payload.isStarted)
+          .set('inGame',  action.payload.isStarted)
           .set('gameId', action.payload.gameId)
           .set('countdownStartTime', action.payload.countdownStartTime)
           .set('countdownEndTime', action.payload.countdownEndTime)
@@ -126,15 +127,8 @@ export default function MultiplayStateReducer(state = initialState, action = {})
     case JOIN_GAME_SUCCESS:
       return state
         .set('isJoining', false)
-        .set('isJoined', true)
-        .set('inGame', true)
-        .set('gameId', action.payload.gameId)
-
-    case JOIN_NEW_GAME_SUCCESS:
-      return state
-        .set('isJoining', false)
-        .set('isJoined', true)
-        .set('inGame', true)
+        .set('isJoined', action.payload.isJoined)
+        .set('inGame', action.payload.isJoined)
         .set('gameId', action.payload.gameId)
 
     case RESPONSE_FAILURE:

@@ -1,11 +1,13 @@
 import {
   CREATE_GAME_SUCCESS,
-  CREATE_NEW_GAME_SUCCESS,
   START_GAME_SUCCESS,
   JOIN_GAME_SUCCESS,
-  JOIN_NEW_GAME_SUCCESS,
+  START_GAME_FOR_JOINS,
   RESPONSE_FAILURE
 } from '../modules/multiplay/MultiplayState';
+import { createRandomGameId, getQuoteToType } from '../utils/Utils';
+
+// IF BOTH IN SAME GAMEID AND PRESS PLAY AGAIN THEN CREATE NEW ID AND SEND TO BOTH PEOPLE
 
 export function createRoomService (payload) {
   const user = "abc";
@@ -14,23 +16,24 @@ export function createRoomService (payload) {
 
   const createGame = new Promise(function(resolve, reject) {
     if (createdGame) {
-      const createGameId = Date.now() + Math.floor(Math.random() * 1000).toString();
+      const createGameId = createRandomGameId();
       const quoteToType = getQuoteToType();
       const quoteReferralURL = "www.google.com";
       if (createGameIdAdded) {
         resolve(
           {
-            gameId: createGameId
+            gameId: createGameId,
+            isCreated: true
           }
         );
       } else {
-        reject({ message: "Error creating game" })
+        reject({ message: "Error creating" })
       }
     }
   });
 
   return createGame
-    .then((response) => ({type: payload.inGame ? CREATE_NEW_GAME_SUCCESS : CREATE_GAME_SUCCESS, payload: response }))
+    .then((response) => ({type: CREATE_GAME_SUCCESS, payload: response }))
     .catch((error) => ({type: RESPONSE_FAILURE, payload: error.message}))
 }
 
@@ -55,11 +58,11 @@ export function startGameService (payload) {
             countdownEndTime: countdownEndTime,
             quoteToType: quoteToType,
             quoteReferralURL: quoteReferralURL,
-            gameStarted: true
+            isStarted: true
           }
         );
       } else {
-        reject({ message: "Error starting game" })
+        reject({ message: "Error starting" })
       }
     }
   });
@@ -70,37 +73,35 @@ export function startGameService (payload) {
 }
 
 export function joinRoomService (payload) {
+  const gameId = payload.gameId.toUpperCase();
   const user = "asd";
   const joinedGame = true;
   const joinGameIdAdded = true;
 
+  // PLACEHOLDER - NEED TO SEARCH FOR IT
+  const quoteToType = getQuoteToType();
+  const quoteReferralURL = "www.google.com";
+
   const joinGame = new Promise(function(resolve, reject) {
     if (joinedGame) {
-      const gameId = payload.gameId;
       if (joinGameIdAdded) {
         resolve(
           {
-            gameId: gameId
+            gameId: gameId,
+            isJoined: true
           }
         );
       } else {
-        reject({ message: "Error joining game" })
+        reject({ message: "Error joining" })
       }
     }
   });
 
   return joinGame
-    .then((response) => ({type: payload.inGame ? JOIN_NEW_GAME_SUCCESS : JOIN_GAME_SUCCESS, payload: response }))
+    .then((response) => ({type: JOIN_GAME_SUCCESS, payload: response }))
     .catch((error) => ({type: RESPONSE_FAILURE, payload: error.message}))
 }
 
-function getQuoteToType () {
-  const quoteArr = ["a", "b", "c"];
-  return quoteArr[randomNumber()];
-}
+export function startGameForJoinsService (payload) {
 
-function randomNumber () {
-  const minimum = 0;
-  const maximum = 2;
-  return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
 }

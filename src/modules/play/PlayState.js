@@ -24,10 +24,10 @@ export const RESPONSE_FAILURE = 'PlayState/RESPONSE_FAILURE';
 const LEAVE_GAME = 'PlayState/LEAVE_GAME';
 
 // Action creators
-export function findGame(id, inGame) { // FIX THIS WITH ID OF USER
+export function findGame(inGame) { // FIX THIS WITH ID OF USER
   return {
     type: FIND_GAME,
-    payload: {id: id, inGame: inGame}
+    payload: {inGame: inGame}
   };
 }
 
@@ -52,7 +52,7 @@ export default function PlayStateReducer(state = initialState, action = {}) {
       return loop(
         state
           .set('isLoading', false)
-          .set('inGame', true)
+          .set('inGame', action.payload.inGame)
           .set('gameId', action.payload.gameId)
           .set('countdownStartTime', action.payload.countdownStartTime)
           .set('countdownEndTime', action.payload.countdownEndTime)
@@ -68,7 +68,7 @@ export default function PlayStateReducer(state = initialState, action = {}) {
     case FIND_NEW_GAME_SUCCESS:
       return state
         .set('isLoading', false)
-        .set('inGame', true)
+        .set('inGame', action.payload.inGame)
         .set('gameId', action.payload.gameId)
         .set('countdownStartTime', action.payload.countdownStartTime)
         .set('countdownEndTime', action.payload.countdownEndTime)

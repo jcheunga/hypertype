@@ -19,6 +19,7 @@ export default connect(
     countdownEndTime: state.getIn(['multiplayState', 'countdownEndTime']),
     quoteToType: state.getIn(['multiplayState', 'quoteToType']),
     quoteReferralURL: state.getIn(['multiplayState', 'quoteReferralURL']),
+    gameCreator: state.getIn(['multiplayState', 'gameCreator'])
   }),
   dispatch => {
     return {

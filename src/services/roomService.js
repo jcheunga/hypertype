@@ -6,7 +6,7 @@ import {
 import { createRandomGameId, getQuoteToType } from '../utils/Utils';
 
 export function findRoomService (payload) {
-  const user = payload.id;
+  const user = "abc";
   const foundGame = false;
   const createGameIdAdded = true;
   const countdownAmount = 1000;
@@ -25,7 +25,8 @@ export function findRoomService (payload) {
             countdownStartTime: countdownStartTime,
             countdownEndTime: countdownEndTime,
             quoteToType: quoteToType,
-            quoteReferralURL: quoteReferralURL
+            quoteReferralURL: quoteReferralURL,
+            inGame: true
           }
         );
       } else {
@@ -44,7 +45,8 @@ export function findRoomService (payload) {
             countdownStartTime: countdownStartTime,
             countdownEndTime: countdownEndTime,
             quoteToType: quoteToType,
-            quoteReferralURL: quoteReferralURL
+            quoteReferralURL: quoteReferralURL,
+            inGame: true
           }
         );
       } else {
