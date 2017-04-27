@@ -1,12 +1,12 @@
 import * as theme from '../../utils/theme';
-import Button from '../../components/Button';
 import React, {PropTypes, Component} from 'react';
 import {
   StyleSheet,
   Text,
   View,
   Image,
-  Dimensions
+  Dimensions,
+  Button
 } from 'react-native';
 
 const window = Dimensions.get('window');
@@ -45,16 +45,12 @@ class PlayView extends Component {
           />
           <Text>WELCOME TO TYPESPRINT</Text>
           <Button
-            text="Quick play"
-            buttonStyle={theme.buttons.primary}
-            textStyle={theme.fonts.primary}
-            action={() => this.quickPlay()}
+            title="Quick play"
+            onPress={() => this.quickPlay()}
           />
           <Button
-            text="Multi play"
-            buttonStyle={theme.buttons.primary}
-            textStyle={theme.fonts.primary}
-            action={() => this.multiPlay()}
+            title="Multi play"
+            onPress={() => this.multiPlay()}
           />
         </View>
       </View>
@@ -68,40 +64,6 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.background,
     justifyContent: 'center'
   },
-  cityCard: {
-    flex: 1,
-    overflow: 'hidden',
-    width: window.width,
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    marginTop: 20
-  },
-  image: {
-    height: 180,
-    width: 180,
-    borderRadius: 90,
-    borderWidth: 3,
-    borderColor: theme.colors.tab
-  },
-  title: {
-    marginTop: 20
-  },
-  pageIndicator: {
-    marginBottom: 20
-  },
-  buttonsContainer: {
-    flex: 1,
-    margin: 10,
-    justifyContent: 'center'
-  },
-  spinner: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: window.width,
-    height: window.height,
-    backgroundColor: theme.colors.spinner
-  }
 });
 
 export default PlayView;

@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import TyperaceView from './TyperaceView';
-import * as NavigationStateActions from '../navigation/NavigationState';
+import {NavigationActions} from 'react-navigation';
 import * as PlayStateActions from '../play/PlayState';
 
 
@@ -12,7 +12,7 @@ export default connect(
   }),
   dispatch => {
     return {
-      navigationStateActions: bindActionCreators(NavigationStateActions, dispatch),
+      navigate: bindActionCreators(NavigationActions.navigate, dispatch),
       playStateActions: bindActionCreators(PlayStateActions, dispatch)
     };
   }

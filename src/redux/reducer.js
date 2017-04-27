@@ -1,18 +1,18 @@
 import {Map, fromJS} from 'immutable';
-import {loop, combineReducers} from 'redux-loop';
-import NavigationStateReducer from '../modules/navigation/NavigationState';
+import {loop, combineReducers} from 'redux-loop-symbol-ponyfill';
+import NavigatorStateReducer from '../modules/navigator/NavigatorState';
 import SessionStateReducer, {RESET_STATE} from '../modules/session/SessionState';
+
 import PlayStateReducer from '../modules/play/PlayState';
 import ErrorStateReducer from '../modules/error/ErrorState';
 import MultiplayStateReducer from '../modules/multiplay/MultiplayState';
-
 import { feathersServices, feathersAuthentication } from '../feathers';
 
 const reducers = {
-  // @NOTE: By convention, the navigation state must live in a subtree called
-  //`navigationState`
-  navigationState: NavigationStateReducer,
+  // Navigator states
+  navigatorState: NavigatorStateReducer,
   session: SessionStateReducer,
+
   playState: PlayStateReducer,
   errorState: ErrorStateReducer,
   multiplayState: MultiplayStateReducer,
@@ -20,6 +20,7 @@ const reducers = {
   auth: feathersAuthentication.reducer,
   users: feathersServices.users.reducer,
   posts: feathersServices.posts.reducer
+
 };
 
 // initial state, accessor and mutator for supporting root-level

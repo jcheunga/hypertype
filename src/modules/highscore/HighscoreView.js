@@ -1,5 +1,4 @@
 import * as theme from '../../utils/theme';
-import Button from '../../components/Button';
 import React, {PropTypes, Component} from 'react';
 import {
   StyleSheet,
@@ -16,14 +15,16 @@ import {
 const window = Dimensions.get('window');
 
 class HighscoreView extends Component {
-  static displayeName = 'HighscoreView';
+  static navigationOptions = {
+    title: 'Highscore'
+  }
 
   // Initialize the hardcoded data
   constructor(props) {
     super(props);
   }
 
-  render() { 
+  render() {
     return (
       <View style={styles.container}>
         <View style={styles.body}>

@@ -1,6 +1,6 @@
 import {Map} from 'immutable';
 import {loop, Effects} from 'redux-loop';
-import * as NavigationState from '../../modules/navigation/NavigationState';
+import {NavigationActions} from 'react-navigation';
 import * as ErrorState from '../../modules/error/ErrorState';
 import { joinRoom, createRoom } from '../../services/authService';
 
@@ -54,7 +54,7 @@ export function leaveGame() {
 
 // Reducer
 export default function AuthStateReducer(state = initialState, action = {}) {
-  
+
   switch (action.type) {
     case CREATE_GAME:
       return loop(

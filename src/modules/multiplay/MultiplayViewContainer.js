@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import MultiplayView from './MultiplayView';
-import * as NavigationStateActions from '../navigation/NavigationState';
+import {NavigationActions} from 'react-navigation';
 import * as MultiplayStateActions from './MultiplayState';
 
 
@@ -23,7 +23,7 @@ export default connect(
   }),
   dispatch => {
     return {
-      navigationStateActions: bindActionCreators(NavigationStateActions, dispatch),
+      navigate: bindActionCreators(NavigationActions.navigate, dispatch),
       multiplayStateActions: bindActionCreators(MultiplayStateActions, dispatch)
     };
   }

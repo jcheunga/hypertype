@@ -27,7 +27,7 @@ export function removeError() {
 
 // Reducer
 export default function ErrorStateReducer(state = initialState, action = {}) {
-  
+
   switch (action.type) {
     case ADD_ERROR:
       return state

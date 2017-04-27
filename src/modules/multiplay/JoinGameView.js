@@ -1,5 +1,4 @@
 import * as theme from '../../utils/theme';
-import Button from '../../components/Button';
 import React, {PropTypes, Component} from 'react';
 import {
   StyleSheet,
@@ -11,7 +10,8 @@ import {
   Platform,
   Dimensions,
   ActivityIndicator,
-  TouchableOpacity
+  TouchableOpacity,
+  Button
 } from 'react-native';
 
 const window = Dimensions.get('window');
@@ -49,19 +49,15 @@ class JoinGameView extends Component {
           </Text>
           <TextInput onChange={(e) => this.handleIdInput(e)} value={this.state.enteredGameId.toUpperCase()} style={{width: 100}}/>
           <Button
-            text="Join game"
-            buttonStyle={theme.buttons.primary}
-            textStyle={theme.fonts.primary}
-            action={() => this.props.joinGameWithId(this.state.enteredGameId)}
+            title="Join game"
+            onPress={() => this.props.joinGameWithId(this.state.enteredGameId)}
           />
           <Text style={styles.bodyText}>
             Joining - Joined - Players in game {this.props.gameId}
           </Text>
           <Button
-            text="Return to mutliplayer menu"
-            buttonStyle={theme.buttons.primary}
-            textStyle={theme.fonts.primary}
-            action={() => this.props.resetView()}
+            title="Return to mutliplayer menu"
+            onPress={() => this.props.resetView()}
           />
         </View>
       </View>

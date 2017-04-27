@@ -1,12 +1,12 @@
 import * as theme from '../../utils/theme';
-import Button from '../../components/Button';
 import React, {PropTypes, Component} from 'react';
 import {
   StyleSheet,
   Text,
   View,
   Image,
-  Dimensions
+  Dimensions,
+  Button
 } from 'react-native';
 import CreateGameView from './CreateGameView';
 import JoinGameView from './JoinGameView';
@@ -73,17 +73,13 @@ class MultiplayView extends Component {
     const showMultiplayView = this.state.multiplayView ?
       <View>
         <Button
-          text="Create game"
-          buttonStyle={theme.buttons.primary}
-          textStyle={theme.fonts.primary}
-          action={() => this.createGame()}
+          title="Create game"
+          onPress={() => this.createGame()}
         />
         <Text>{this.props.isCreating ? "Creating game..." : null}</Text>
         <Button
-          text="Join game"
-          buttonStyle={theme.buttons.primary}
-          textStyle={theme.fonts.primary}
-          action={() => this.joinGame()}
+          title="Join game"
+          onPress={() => this.joinGame()}
         />
       </View>
     : null;

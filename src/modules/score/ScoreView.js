@@ -1,8 +1,8 @@
-import Button from '../../components/Button';
 import React, {PropTypes, Component} from 'react';
 import {
   Text,
-  View
+  View,
+  Button
 } from 'react-native';
 import * as theme from '../../utils/theme';
 
@@ -20,16 +20,12 @@ class ScoreView extends Component {
         <Text style={{color: 'white'}}>This quote was from link to AMZN</Text>
         <Text style={{color: 'white'}}>You placed 1st!</Text>
         <Button
-          text="Play again?"
-          buttonStyle={theme.buttons.primary}
-          textStyle={theme.fonts.primary}
-          action={() => this.props.startNewQuickGame("1234ABCD")}
+          title="Play again?"
+          onPress={() => this.props.startNewQuickGame("1234ABCD")}
         />
         <Button
-          text="Back to main menu"
-          buttonStyle={theme.buttons.primary}
-          textStyle={theme.fonts.primary}
-          action={() => this.leaveGame()}
+          title="Back to main menu"
+          onPress={() => this.leaveGame()}
         />
       </View>
     );

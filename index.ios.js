@@ -5,7 +5,7 @@ import AppViewContainer from './src/modules/AppViewContainer';
 import React, {Component} from 'react';
 import {AppRegistry} from 'react-native';
 
-class LunchWheel extends Component {
+class PepperoniAppTemplate extends Component {
   render() {
     return (
       <Provider store={store}>
@@ -15,4 +15,4 @@ class LunchWheel extends Component {
   }
 }
 
-AppRegistry.registerComponent('LunchWheel', () => LunchWheel);
+AppRegistry.registerComponent('PepperoniAppTemplate', () => PepperoniAppTemplate);

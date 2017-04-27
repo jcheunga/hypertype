@@ -1,5 +1,4 @@
 import * as theme from '../../utils/theme';
-import Button from '../../components/Button';
 import React, {PropTypes, Component} from 'react';
 import {
   StyleSheet,
@@ -10,7 +9,8 @@ import {
   Platform,
   Dimensions,
   ActivityIndicator,
-  TouchableOpacity
+  TouchableOpacity,
+  Button
 } from 'react-native';
 
 const window = Dimensions.get('window');
@@ -40,16 +40,12 @@ class CreateGameView extends Component {
             Players in game
           </Text>
           <Button
-            text="Start game"
-            buttonStyle={theme.buttons.primary}
-            textStyle={theme.fonts.primary}
-            action={() => this.props.startGame()}
+            title="Start game"
+            onPress={() => this.props.startGame()}
           />
           <Button
-            text="Return to mutliplayer menu"
-            buttonStyle={theme.buttons.primary}
-            textStyle={theme.fonts.primary}
-            action={() => this.props.resetView()}
+            title="Return to mutliplayer menu"
+            onPress={() => this.props.resetView()}
           />
         </View>
       </View>

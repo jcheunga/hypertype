@@ -1,5 +1,4 @@
 import * as theme from '../../utils/theme';
-import Button from '../../components/Button';
 import React, {PropTypes, Component} from 'react';
 import {
   StyleSheet,
@@ -10,7 +9,8 @@ import {
   Platform,
   Dimensions,
   ActivityIndicator,
-  TouchableOpacity
+  TouchableOpacity,
+  Button
 } from 'react-native';
 
 const window = Dimensions.get('window');
@@ -23,10 +23,10 @@ class ProfileView extends Component {
     super(props);
   }
 
-  render() { 
+  render() {
     return (
       <View style={styles.container}>
-        <View style={styles.userContainer}>          
+        <View style={styles.userContainer}>
           <Text style={styles.bodyText}>
             Welcome, Guest
           </Text>

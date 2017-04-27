@@ -15,7 +15,7 @@ class TyperaceView extends Component {
 
   constructor (props) {
     super(props)
-    
+
     this.textToType = this.props.quoteToType;
     this.words = this.textToType.split(" ");
     this.letterCount = this.textToType.split(" ").join("").length;
@@ -25,7 +25,7 @@ class TyperaceView extends Component {
       currentWord: 0,
       currentString: "",
       currentLetter: 0,
-      inputText: "",     
+      inputText: "",
     };
   }
 
@@ -38,18 +38,18 @@ class TyperaceView extends Component {
       wordArr.push(individualLetterArr);
     }
 
-    return wordArr.map(function(word, i) {      
+    return wordArr.map(function(word, i) {
       return (
         <Text style={{color: 'white', marginRight: 4}} key={i} word={i}>
           {
-            word.map(function(letter , j) { 
-              return (  
+            word.map(function(letter , j) {
+              return (
                 <Text key={j} letter={j}>{letter}</Text>
               )
             })
           }
         </Text>
-      )      
+      )
     })
   }
 
@@ -72,7 +72,7 @@ class TyperaceView extends Component {
         }
       }
 
-      // FINISH GAME AFTER LAST CORRECT WORD       
+      // FINISH GAME AFTER LAST CORRECT WORD
       if (this.state.currentWord === this.wordCount - 1 && text === this.words[this.wordCount - 1] ) {
         this.setState({
           inputText: ""
@@ -82,18 +82,18 @@ class TyperaceView extends Component {
 
       // SPACE AND CORRECT WORD
       if (text.length === this.words[this.state.currentWord].length + 1 && text.substring(this.words[this.state.currentWord].length, this.words[this.state.currentWord].length + 1) === " " && text.trim() === this.words[this.state.currentWord]) {
-        
+
         if (text.trim().length === this.words[this.state.currentWord].length) {
           this.setState({
             currentWord: this.state.currentWord + 1,
             currentLetter: 0,
             inputText: ""
           });
-        }        
+        }
       }
-      
-    }    
-    
+
+    }
+
   }
 
   render() {
@@ -102,7 +102,7 @@ class TyperaceView extends Component {
         <View style={{flexWrap: 'wrap', alignItems: 'flex-start', flexDirection:'row',}}>
           {this.createLetters()}
         </View>
-        <TextInput 
+        <TextInput
           ref='typeit'
           onChangeText={(text) => this.onTextInput(text)}
           value={this.state.inputText}

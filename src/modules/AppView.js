@@ -1,6 +1,6 @@
 import React, {PropTypes, Component} from 'react';
-import {View, StyleSheet, ActivityIndicator} from 'react-native';
-import NavigationViewContainer from './navigation/NavigationViewContainer';
+import {View, StyleSheet, StatusBar, ActivityIndicator} from 'react-native';
+import NavigatorViewContainer from './navigator/NavigatorViewContainer';
 import * as snapshotUtil from '../utils/snapshot';
 import * as SessionStateActions from '../modules/session/SessionState';
 import store from '../redux/store';
@@ -35,14 +35,15 @@ class AppView extends Component {
     if (!this.props.isReady) {
       return (
         <View style={{flex: 1}}>
-          <ActivityIndicator style={styles.centered}/>
+          <ActivityIndicator style={styles.centered} />
         </View>
       );
     }
 
     return (
       <View style={{flex: 1}}>
-        <NavigationViewContainer />
+        <StatusBar backgroundColor='#455a64' barStyle='light-content' />
+        <NavigatorViewContainer />
         {__DEV__ && <DeveloperMenu />}
       </View>
     );
