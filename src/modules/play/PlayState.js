@@ -1,8 +1,9 @@
 import {Map} from 'immutable';
-import {loop, Effects} from 'redux-loop';
+import {loop, Effects} from 'redux-loop-symbol-ponyfill';
 import {NavigationActions} from 'react-navigation';
 import * as ErrorState from '../../modules/error/ErrorState';
 import { findRoomService } from '../../services/roomService';
+import AppNavigator from '../navigator/Navigator';
 
 // Initial state
 const initialState = Map({
@@ -58,10 +59,7 @@ export default function PlayStateReducer(state = initialState, action = {}) {
           .set('countdownEndTime', action.payload.countdownEndTime)
           .set('quoteToType', action.payload.quoteToType)
           .set('quoteReferralURL', action.payload.quoteReferralURL),
-        Effects.constant(NavigationState.pushRoute({
-          key: 'Type',
-          title: 'Type fast'
-        }))
+        Effects.constant(NavigationActions.navigate({ routeName: 'TypeView' }))
       );
 
     // FIX BACKSPACE FOR ANDROID TO LEAVE GAME OR LEAVE GAME ON PLAY VIEW

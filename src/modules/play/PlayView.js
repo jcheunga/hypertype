@@ -25,21 +25,18 @@ class PlayView extends Component {
   }
 
   quickPlay = () => {
-    this.props.playStateActions.findGame("1234ABCDE", this.props.inGame); // Get id from user or random guest name
+    this.props.playStateActions.findGame(this.props.inGame);
   }
 
   multiPlay = () => {
-    this.props.navigationStateActions.pushRoute({
-      key: 'Multiplay',
-      title: 'Multiplay'
-    })
+    this.props.navigationStateActions.navigate({ routeName: 'Multiplay' })
   }
 
-  render() { 
+  render() {
     return (
       <View style={styles.container}>
         <View style={styles.buttonsContainer}>
-          <Image 
+          <Image
             style={{width: 50, height: 50}}
             source={{uri: 'https://facebook.github.io/react/img/logo_og.png'}}
           />

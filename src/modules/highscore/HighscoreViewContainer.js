@@ -9,7 +9,7 @@ export default connect(
   null,
   dispatch => {
     return {
-      navigate: bindActionCreators(NavigationActions.navigate, dispatch)
+      navigationStateActions: bindActionCreators(NavigationActions, dispatch)
     };
   }
 )(HighscoreView);

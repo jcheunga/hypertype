@@ -23,7 +23,7 @@ export default connect(
   }),
   dispatch => {
     return {
-      navigate: bindActionCreators(NavigationActions.navigate, dispatch),
+      navigationStateActions: bindActionCreators(NavigationActions, dispatch),
       multiplayStateActions: bindActionCreators(MultiplayStateActions, dispatch)
     };
   }
