@@ -11,6 +11,7 @@ import {
 import CountdownView from '../countdown/CountdownView';
 import TyperaceView from '../typerace/TyperaceView';
 import ScoreView from '../score/ScoreView';
+import { countdownToSeconds } from '../../utils/Utils';
 
 const window = Dimensions.get('window');
 
@@ -29,7 +30,7 @@ class TypeView extends Component {
   }
 
   componentWillMount () {
-    if (!this.props.gameId || !this.props.inGame || this.countdownToSeconds(this.props.countdownEndTime) < 0 || this.countdownToSeconds(this.props.countdownEndTime) > 10) {
+    if (!this.props.gameId || !this.props.inGame || countdownToSeconds(this.props.countdownEndTime) < 0 || countdownToSeconds(this.props.countdownEndTime) > 10) {
       this.leaveGame();
     }
   }
@@ -40,10 +41,6 @@ class TypeView extends Component {
       countdownView: true,
       scoreView: false
     });
-  }
-
-  countdownToSeconds = (countdownValue) => {
-    return Math.round((countdownValue - Date.now()) / 1000);
   }
 
   startNewQuickGame = () => {

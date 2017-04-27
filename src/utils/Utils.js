@@ -19,3 +19,7 @@ export function getQuoteToType () {
   const quoteArr = ["a", "b", "c"];
   return quoteArr[getRandomNumberBetweenRange(0, 3)];
 }
+
+export function countdownToSeconds (countdownValue) {
+  return Math.round((countdownValue - Date.now()) / 1000);
+}

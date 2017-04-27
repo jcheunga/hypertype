@@ -24,7 +24,6 @@ class CreateGameView extends Component {
   }
 
   componentWillMount () {
-    console.log(this.props.gameId);
   }
 
   render() {

@@ -11,6 +11,7 @@ import {
 import CountdownView from '../countdown/CountdownView';
 import TyperaceView from '../typerace/TyperaceView';
 import ScoreView from '../score/ScoreView';
+import { countdownToSeconds } from '../../utils/Utils';
 
 const window = Dimensions.get('window');
 
@@ -29,7 +30,7 @@ class TypeView extends Component {
   }
 
   componentWillMount () {
-    if (!this.props.gameId || !this.props.inGame || this.countdownToSeconds(this.props.countdownEndTime) < 0 || this.countdownToSeconds(this.props.countdownEndTime) > 10) {
+    if (!this.props.gameId || !this.props.inGame || countdownToSeconds(this.props.countdownEndTime) < 0 || countdownToSeconds(this.props.countdownEndTime) > 10) {
       this.leaveGame();
     }
   }
@@ -42,10 +43,6 @@ class TypeView extends Component {
     });
   }
 
-  countdownToSeconds = (countdownValue) => {
-    return Math.round((countdownValue - Date.now()) / 1000);
-  }
-
   createNewGame = () => {
     // this.props.multiplayStateActions.findGame("1234ABCDE", this.props.inGame);
   }
@@ -53,10 +50,6 @@ class TypeView extends Component {
   leaveGame = () => {
     this.props.multiplayStateActions.leaveGame();
     this.props.navigationStateActions.popRoute(); // CHANGE TO REPLACE ROUTE
-    // this.props.navigationStateActions.replaceRoute({
-    //       key: 'Play',
-    //       title: 'Type fast'
-    //     })
   }
 
   finishCountdown = () => {

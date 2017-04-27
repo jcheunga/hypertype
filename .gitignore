@@ -73,3 +73,8 @@ fastlane/screenshots
 
 ios/LunchWheel/main.jsbundle
 ios/LunchWheel/main.jsbundle.meta
+
+# Haul
+#
+haul-debug.log
+.happypack
