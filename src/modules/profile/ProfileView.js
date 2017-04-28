@@ -18,6 +18,12 @@ const window = Dimensions.get('window');
 class ProfileView extends Component {
   static displayName = 'ProfileView';
 
+  static navigationOptions = {
+    header: {
+      visible: false
+    }
+  }
+
   // Initialize the hardcoded data
   constructor(props) {
     super(props);

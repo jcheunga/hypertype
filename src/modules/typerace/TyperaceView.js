@@ -9,8 +9,11 @@ import * as theme from '../../utils/theme';
 
 class TyperaceView extends Component {
   static displayName = 'TyperaceView';
-  static propTypes = {
-    quoteToType: PropTypes.string.isRequired
+
+  static navigationOptions = {
+    header: {
+      visible: false
+    }
   }
 
   constructor (props) {

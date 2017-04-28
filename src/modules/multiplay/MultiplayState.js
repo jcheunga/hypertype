@@ -1,5 +1,5 @@
 import {Map} from 'immutable';
-import {loop, Effects} from 'redux-loop';
+import {loop, Effects} from 'redux-loop-symbol-ponyfill';
 import {NavigationActions} from 'react-navigation';
 import * as ErrorState from '../../modules/error/ErrorState';
 import { joinRoomService, createRoomService, startGameService } from '../../services/multiplayService';
@@ -110,7 +110,7 @@ export default function MultiplayStateReducer(state = initialState, action = {})
           .set('countdownEndTime', action.payload.countdownEndTime)
           .set('quoteToType', action.payload.quoteToType)
           .set('quoteReferralURL', action.payload.quoteReferralURL),
-        Effects.constant(NavigationActions.navigate({ routeName: 'MultiplayTypeView' }))
+        Effects.constant(NavigationActions.navigate({ routeName: 'Multiplay' }))
       );
 
     case JOIN_GAME:

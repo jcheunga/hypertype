@@ -73,7 +73,7 @@ export function startGameService (payload) {
 }
 
 export function joinRoomService (payload) {
-  const gameId = payload.gameId.toUpperCase();
+  const gameId = payload.gameId;
   const user = "asd";
   const joinedGame = true;
   const joinGameIdAdded = true;

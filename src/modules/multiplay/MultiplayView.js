@@ -16,6 +16,12 @@ const window = Dimensions.get('window');
 class MultiplayView extends Component {
   static displayName = 'MultiplayView';
 
+  static navigationOptions = {
+    header: {
+      visible: false
+    }
+  }
+
   // Initialize the hardcoded data
   constructor(props) {
     super(props);
@@ -69,7 +75,6 @@ class MultiplayView extends Component {
   }
 
   render() {
-    // console.log(this.props.gameId);
     const showMultiplayView = this.state.multiplayView ?
       <View>
         <Button

@@ -29,17 +29,6 @@ export const MainScreenNavigator = TabNavigator({
   }
 });
 
-MainScreenNavigator.navigationOptions = {
-  title: 'Hyper Type',
-  header: {
-    titleStyle: {color: 'white'},
-    style: {
-      backgroundColor: headerColor,
-      elevation: 0 // disable header elevation when TabNavigator visible
-    }
-  }
-};
-
 // Root navigator is a StackNavigator
 const AppNavigator = StackNavigator({
   Home: {screen: MainScreenNavigator},

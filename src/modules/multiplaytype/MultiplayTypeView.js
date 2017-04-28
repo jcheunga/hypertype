@@ -18,6 +18,12 @@ const window = Dimensions.get('window');
 class TypeView extends Component {
   static displayName = 'TypeView';
 
+  static navigationOptions = {
+    header: {
+      visible: false
+    }
+  }
+
   constructor (props) {
     super(props)
 
@@ -67,7 +73,7 @@ class TypeView extends Component {
   }
 
   render () {
-    const showCountdownView = this.state.countdownView && this.props.countdownEndTime !== 0 ?
+    const showCountdownView = this.state.countdownView && countdownToSeconds(this.props.countdownEndTime) > 0 ?
       <CountdownView finishCountdown={this.finishCountdown} countdownEndTime={this.state.countdownEndTime}/>
     : null;
 

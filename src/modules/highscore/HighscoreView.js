@@ -15,8 +15,12 @@ import {
 const window = Dimensions.get('window');
 
 class HighscoreView extends Component {
+  static displayName = 'HighscoreView';
+
   static navigationOptions = {
-    title: 'Highscore'
+    header: {
+      visible: false
+    }
   }
 
   // Initialize the hardcoded data

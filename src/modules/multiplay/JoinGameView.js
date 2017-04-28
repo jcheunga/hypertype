@@ -47,7 +47,7 @@ class JoinGameView extends Component {
           <Text style={styles.bodyText}>
             Enter in game id to join game
           </Text>
-          <TextInput onChange={(e) => this.handleIdInput(e)} value={this.state.enteredGameId.toUpperCase()} style={{width: 100}}/>
+          <TextInput onChange={(e) => this.handleIdInput(e)} value={this.state.enteredGameId} style={{width: 100}}/>
           <Button
             title="Join game"
             onPress={() => this.props.joinGameWithId(this.state.enteredGameId)}

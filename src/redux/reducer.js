@@ -20,7 +20,6 @@ const reducers = {
   auth: feathersAuthentication.reducer,
   users: feathersServices.users.reducer,
   posts: feathersServices.posts.reducer
-
 };
 
 // initial state, accessor and mutator for supporting root-level

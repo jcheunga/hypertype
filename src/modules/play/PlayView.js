@@ -14,6 +14,12 @@ const window = Dimensions.get('window');
 class PlayView extends Component {
   static displayName = 'PlayView';
 
+  static navigationOptions = {
+    header: {
+      visible: false
+    }
+  }
+
   // Initialize the hardcoded data
   constructor(props) {
     super(props);
