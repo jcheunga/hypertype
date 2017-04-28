@@ -49,7 +49,7 @@ class TypeView extends Component {
 
   leaveGame = () => {
     this.props.multiplayStateActions.leaveGame();
-    this.props.navigationStateActions.popRoute(); // CHANGE TO REPLACE ROUTE
+    this.props.navigationStateActions.back(); // CHANGE TO REPLACE ROUTE
   }
 
   finishCountdown = () => {

@@ -28,7 +28,7 @@ class MultiplayView extends Component {
   }
 
   componentWillMount () {
-    console.log(this.props.gameId);
+    // console.log(this.props.gameId);
   }
 
   componentWillReceiveProps (nextProps) {

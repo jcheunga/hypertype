@@ -23,7 +23,7 @@ class CountdownView extends Component {
         clearInterval(this.countInterval);
         this.props.finishCountdown();
       }
-      if (this.state.countdownTime > 0) {
+      if (this.state.countdownTime >= 1) {
         this.setState({
           countdownTime: this.state.countdownTime - 1
         })

@@ -4,7 +4,6 @@ import {
   View,
   Button
 } from 'react-native';
-import * as theme from '../../utils/theme';
 
 class ScoreView extends Component {
   static displayName = 'ScoreView';
@@ -21,7 +20,7 @@ class ScoreView extends Component {
         <Text style={{color: 'white'}}>You placed 1st!</Text>
         <Button
           title="Play again?"
-          onPress={() => this.props.startNewQuickGame("1234ABCD")}
+          onPress={() => this.props.startNewQuickGame()}
         />
         <Button
           title="Back to main menu"
