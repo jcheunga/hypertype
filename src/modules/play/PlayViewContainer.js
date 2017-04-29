@@ -13,7 +13,8 @@ export default connect(
   dispatch => {
     return {
       navigationStateActions: bindActionCreators(NavigationActions, dispatch),
-      playStateActions: bindActionCreators(PlayStateActions, dispatch)
+      playStateActions: bindActionCreators(PlayStateActions, dispatch),
+      multiplayStateActions: bindActionCreators(PlayStateActions, dispatch)
     };
   }
 )(PlayView);
