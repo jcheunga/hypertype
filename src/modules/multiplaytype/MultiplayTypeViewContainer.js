@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import MultiplayTypeView from './MultiplayTypeView';
+import MultiplayTypeView from '../multiplaytype/MultiplayTypeView';
 import {NavigationActions} from 'react-navigation';
 import * as MultiplayStateActions from '../multiplay/MultiplayState';
 

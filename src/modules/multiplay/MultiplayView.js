@@ -74,17 +74,25 @@ class MultiplayView extends Component {
     });
   }
 
+  gotoMainMenu = () => {
+    this.props.navigationStateActions.back();
+  }
+
   render() {
     const showMultiplayView = this.state.multiplayView ?
       <View>
+        <Text>{this.props.isCreating ? "Creating game..." : null}</Text>
         <Button
           title="Create game"
           onPress={() => this.createGame()}
         />
-        <Text>{this.props.isCreating ? "Creating game..." : null}</Text>
         <Button
           title="Join game"
           onPress={() => this.joinGame()}
+        />
+        <Button
+          title="Back to main menu"
+          onPress={() => this.gotoMainMenu()}
         />
       </View>
     : null;

@@ -15,8 +15,8 @@ import { countdownToSeconds } from '../../utils/Utils';
 
 const window = Dimensions.get('window');
 
-class TypeView extends Component {
-  static displayName = 'TypeView';
+class MultiplayTypeView extends Component {
+  static displayName = 'MultiplayTypeView';
 
   static navigationOptions = {
     header: {
@@ -28,61 +28,73 @@ class TypeView extends Component {
     super(props)
 
     this.state = {
-      countdownEndTime: props.countdownEndTime,
+      countdownEndTime: countdownToSeconds(props.countdownEndTime),
       countdownView: true,
       typingView: false,
-      scoreView: false
+      scoreView: false,
     };
   }
 
   componentWillMount () {
-    if (!this.props.gameId || !this.props.inGame || countdownToSeconds(this.props.countdownEndTime) < 0 || countdownToSeconds(this.props.countdownEndTime) > 10) {
+    if (!this.props.gameId || !this.props.inGame) {
       this.leaveGame();
     }
   }
 
   componentWillReceiveProps (nextProps) {
-    this.setState({
-      countdownEndTime: nextProps.countdownEndTime,
-      countdownView: true,
-      scoreView: false
-    });
+    if (nextProps.countdownEndTime) {
+      this.setState({
+        countdownEndTime: countdownToSeconds(nextProps.countdownEndTime),
+        countdownView: true,
+        scoreView: false,
+        typingView: false
+      });
+    }
   }
 
-  createNewGame = () => {
-    // this.props.multiplayStateActions.findGame("1234ABCDE", this.props.inGame);
+  startNewQuickGame = () => {
+    this.props.multiplayStateActions.leaveGame();
+    this.props.multiplayStateActions.findGame(this.props.inGame);
   }
 
   leaveGame = () => {
     this.props.multiplayStateActions.leaveGame();
-    this.props.navigationStateActions.back(); // CHANGE TO REPLACE ROUTE
+    this.props.navigationStateActions.reset({
+      index: 1,
+      actions: [
+        { type: 'Navigation/NAVIGATE', routeName:'Home'},
+        { type: 'Navigation/NAVIGATE', routeName:'Multiplay'}
+      ]
+    });
   }
 
   finishCountdown = () => {
     this.setState({
       countdownView: false,
-      typingView: true
+      typingView: true,
+      scoreView: false
     });
   }
 
   finishTyping = () => {
     this.setState({
+      countdownView: false,
       typingView: false,
       scoreView: true
     });
   }
 
   render () {
-    const showCountdownView = this.state.countdownView && countdownToSeconds(this.props.countdownEndTime) > 0 ?
-      <CountdownView finishCountdown={this.finishCountdown} countdownEndTime={this.state.countdownEndTime}/>
+    const showCountdownView = this.state.countdownView && this.props.inGame && this.props.gameId ?
+      <CountdownView {...this.props} finishCountdown={this.finishCountdown} countdownEndTime={this.state.countdownEndTime}/>
     : null;
 
-    const showTypingView = this.state.typingView && this.props.inGame ?
-      <TyperaceView quoteToType={this.props.quoteToType} finishTyping={this.finishTyping}/>
+    const showTypingView = this.state.typingView && this.props.inGame && this.props.gameId ?
+      <TyperaceView {...this.props} finishTyping={this.finishTyping}/>
     : null;
 
-    const showScoreView = this.state.scoreView && this.props.inGame ?
-      <ScoreView createNewGame={this.createNewGame} leaveGame={this.leaveGame}/>
+    const showScoreView = this.state.scoreView && this.props.inGame && this.props.gameId ?
+      <ScoreView {...this.props} startNewQuickGame={this.startNewQuickGame} leaveGame={this.leaveGame}/>
     : null;
 
     return (
@@ -103,4 +115,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default TypeView;
+export default MultiplayTypeView;

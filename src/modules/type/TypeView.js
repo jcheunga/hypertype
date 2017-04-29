@@ -28,7 +28,7 @@ class TypeView extends Component {
     super(props)
 
     this.state = {
-      countdownEndTime: props.countdownEndTime,
+      countdownEndTime: countdownToSeconds(props.countdownEndTime),
       countdownView: true,
       typingView: false,
       scoreView: false
@@ -36,59 +36,62 @@ class TypeView extends Component {
   }
 
   componentWillMount () {
-    if (!this.props.gameId || !this.props.inGame || countdownToSeconds(this.props.countdownEndTime) < 0 || countdownToSeconds(this.props.countdownEndTime) > 10) {
+    if (!this.props.gameId || !this.props.inGame) {
       this.leaveGame();
     }
   }
 
   componentWillReceiveProps (nextProps) {
-    this.setState({
-      countdownEndTime: nextProps.countdownEndTime,
-      countdownView: true,
-      scoreView: false
-    });
+    if (nextProps.countdownEndTime) {
+      this.setState({
+        countdownEndTime: countdownToSeconds(nextProps.countdownEndTime),
+        countdownView: true,
+        scoreView: false,
+        typingView: false
+      });
+    }
   }
 
   startNewQuickGame = () => {
-    this.props.playStateActions.findGame("1234ABCDE", this.props.inGame);
+    this.props.playStateActions.leaveGame();
+    this.props.playStateActions.findGame(this.props.inGame);
   }
 
   leaveGame = () => {
     this.props.playStateActions.leaveGame();
-    this.props.navigationStateActions.back();
-    // this.props.navigationStateActions.reset({
-    //   index: 0,
-    //   actions: [
-    //     this.props.navigationStateActions.navigate({routeName: 'Play'})
-    //   ]
-    // });
+    this.props.navigationStateActions.reset({
+      index: 0,
+      actions: [{ type: 'Navigation/NAVIGATE', routeName:'Home'}]
+    });
   }
 
   finishCountdown = () => {
     this.setState({
       countdownView: false,
-      typingView: true
+      typingView: true,
+      scoreView: false
     });
   }
 
   finishTyping = () => {
     this.setState({
+      countdownView: false,
       typingView: false,
       scoreView: true
     });
   }
 
   render () {
-    const showCountdownView = this.state.countdownView && countdownToSeconds(this.props.countdownEndTime) > 0 ?
-      <CountdownView finishCountdown={this.finishCountdown} countdownEndTime={this.state.countdownEndTime}/>
+    const showCountdownView = this.state.countdownView && this.props.inGame && this.props.gameId ?
+      <CountdownView {...this.props} finishCountdown={this.finishCountdown} countdownEndTime={this.state.countdownEndTime}/>
     : null;
 
-    const showTypingView = this.state.typingView && this.props.inGame ?
-      <TyperaceView quoteToType={this.props.quoteToType} finishTyping={this.finishTyping}/>
+    const showTypingView = this.state.typingView && this.props.inGame && this.props.gameId ?
+      <TyperaceView {...this.props} finishTyping={this.finishTyping}/>
     : null;
 
-    const showScoreView = this.state.scoreView && this.props.inGame ?
-      <ScoreView startNewQuickGame={this.startNewQuickGame} leaveGame={this.leaveGame}/>
+    const showScoreView = this.state.scoreView && this.props.inGame && this.props.gameId ?
+      <ScoreView {...this.props} startNewQuickGame={this.startNewQuickGame} leaveGame={this.leaveGame}/>
     : null;
 
     return (

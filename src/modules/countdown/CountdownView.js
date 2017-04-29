@@ -4,7 +4,6 @@ import {
   View
 } from 'react-native';
 import * as theme from '../../utils/theme';
-import { countdownToSeconds } from '../../utils/Utils';
 
 class CountdownView extends Component {
   static displayName = 'CountdownScreen';
@@ -13,8 +12,10 @@ class CountdownView extends Component {
     super(props);
 
     this.state = {
-      countdownTime: countdownToSeconds(props.countdownEndTime)
+      countdownTime: props.countdownEndTime
     };
+
+    this.countInterval;
   }
 
   componentDidMount () {

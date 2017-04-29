@@ -21,5 +21,5 @@ export function getQuoteToType () {
 }
 
 export function countdownToSeconds (countdownValue) {
-  return Math.round((countdownValue - Date.now()) / 1000);
+  return Math.abs(Math.round((countdownValue - Date.now()) / 1000));
 }

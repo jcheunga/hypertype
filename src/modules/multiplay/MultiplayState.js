@@ -110,7 +110,9 @@ export default function MultiplayStateReducer(state = initialState, action = {})
           .set('countdownEndTime', action.payload.countdownEndTime)
           .set('quoteToType', action.payload.quoteToType)
           .set('quoteReferralURL', action.payload.quoteReferralURL),
-        Effects.constant(NavigationActions.navigate({ routeName: 'Multiplay' }))
+        Effects.constant(NavigationActions.navigate({
+          routeName: 'MultiplayTypeView'
+        }))
       );
 
     case JOIN_GAME:

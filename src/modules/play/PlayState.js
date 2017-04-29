@@ -25,7 +25,7 @@ export const RESPONSE_FAILURE = 'PlayState/RESPONSE_FAILURE';
 const LEAVE_GAME = 'PlayState/LEAVE_GAME';
 
 // Action creators
-export function findGame(inGame) { // FIX THIS WITH ID OF USER
+export function findGame(inGame) {
   return {
     type: FIND_GAME,
     payload: {inGame: inGame}
@@ -59,7 +59,9 @@ export default function PlayStateReducer(state = initialState, action = {}) {
           .set('countdownEndTime', action.payload.countdownEndTime)
           .set('quoteToType', action.payload.quoteToType)
           .set('quoteReferralURL', action.payload.quoteReferralURL),
-        Effects.constant(NavigationActions.navigate({ routeName: 'TypeView' }))
+        Effects.constant(NavigationActions.navigate({
+          routeName: 'TypeView'
+        }))
       );
 
     // FIX BACKSPACE FOR ANDROID TO LEAVE GAME OR LEAVE GAME ON PLAY VIEW
