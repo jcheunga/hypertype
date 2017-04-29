@@ -29,32 +29,39 @@ class MultiplayTypeView extends Component {
 
     this.state = {
       countdownEndTime: countdownToSeconds(props.countdownEndTime),
-      countdownView: true,
+      countdownView: false,
       typingView: false,
-      scoreView: false,
+      scoreView: false
     };
   }
 
   componentWillMount () {
-    if (!this.props.gameId || !this.props.inGame) {
+    if (!this.props.gameId || !this.props.inGame || countdownToSeconds(this.props.countdownEndTime) < 0 || countdownToSeconds(this.props.countdownEndTime) > 10) {
       this.leaveGame();
+    } else {
+      this.setState({countdownView: true});
     }
   }
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.countdownEndTime) {
-      this.setState({
-        countdownEndTime: countdownToSeconds(nextProps.countdownEndTime),
-        countdownView: true,
-        scoreView: false,
-        typingView: false
-      });
+      if (countdownToSeconds(nextProps.countdownEndTime) < 0 || countdownToSeconds(nextProps.countdownEndTime) > 10) {
+        this.leaveGame();
+      } else {
+        this.setState({
+          countdownEndTime: countdownToSeconds(nextProps.countdownEndTime),
+          countdownView: true,
+          scoreView: false,
+          typingView: false
+        });
+      }
     }
   }
 
   startNewQuickGame = () => {
+    // IF JOINER OR CREATOR
     this.props.multiplayStateActions.leaveGame();
-    this.props.multiplayStateActions.findGame(this.props.inGame);
+    this.props.multiplayStateActions.createNewGame(this.props.inGame);
   }
 
   leaveGame = () => {
