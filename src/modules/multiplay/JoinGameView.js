@@ -29,8 +29,14 @@ class JoinGameView extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.isStarted && this.props.inGame) {
-      console.log("game is started");
+    // console.log(nextProps);
+    if (nextProps.isStarted && this.props.isJoined) {
+      console.log("should be navigating but why not?")
+      // this.props.multiplayStateActions.startGameForJoins(this.props.gameId);
+      // this.props.navigationStateActions.back();
+      this.props.navigationStateActions.navigate({
+          routeName: 'MultiplayTypeView'
+        })
     }
   }
 
@@ -58,6 +64,10 @@ class JoinGameView extends Component {
           <Button
             title="Return to mutliplayer menu"
             onPress={() => this.props.resetView()}
+          />
+          <Button
+            title="Mess with props"
+            onPress={() => this.props.messWithProps()}
           />
         </View>
       </View>

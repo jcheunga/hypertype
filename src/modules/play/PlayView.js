@@ -25,7 +25,7 @@ class PlayView extends Component {
     super(props);
   }
 
-  componentDidMount () {
+  componentWillMount () {
     this.props.playStateActions.leaveGame();
     this.props.multiplayStateActions.leaveGame();
     // PROBABY USE COMPONENTWILLMOUNT

@@ -2,7 +2,7 @@ import {Map} from 'immutable';
 import {loop, Effects} from 'redux-loop-symbol-ponyfill';
 import {NavigationActions} from 'react-navigation';
 import * as ErrorState from '../../modules/error/ErrorState';
-import { joinRoomService, createRoomService, startGameService } from '../../services/multiplayService';
+import { joinRoomService, createRoomService, startGameService, startGameForJoinsService } from '../../services/multiplayService';
 
 // Initial state
 const initialState = Map({
@@ -13,7 +13,7 @@ const initialState = Map({
   isJoining: false,
   isJoined: false,
   inGame: false,
-  gameCreator: false,
+  gameCreator: null,
   gameId: "",
   countdownStartTime: 0,
   countdownEndTime: 0,
@@ -38,6 +38,8 @@ export const START_GAME_FOR_JOINS_SUCCESS = 'MultiplayState/START_GAME_FOR_JOINS
 
 export const RESPONSE_FAILURE = 'MultiplayState/RESPONSE_FAILURE';
 const LEAVE_GAME = 'MultiplayState/LEAVE_GAME';
+
+const MESS_WITH_PROPS = 'MultiplayState/MESS_WITH_PROPS';
 
 // Action creators
 export function createGame(inGame) {
@@ -74,6 +76,12 @@ export function leaveGame() {
   };
 }
 
+export function messWithProps() {
+  return {
+    type: MESS_WITH_PROPS
+  };
+}
+
 // Reducer
 export default function MultiplayStateReducer(state = initialState, action = {}) {
 
@@ -81,7 +89,8 @@ export default function MultiplayStateReducer(state = initialState, action = {})
     case CREATE_GAME:
       return loop(
         state
-          .set('isCreating', true),
+          .set('isCreating', true)
+          .set('gameCreator', true),
         Effects.promise(createRoomService, action.payload)
       );
 
@@ -129,19 +138,21 @@ export default function MultiplayStateReducer(state = initialState, action = {})
         .set('isJoined', action.payload.isJoined)
         .set('inGame', action.payload.isJoined)
         .set('gameId', action.payload.gameId)
+        .set('gameCreator', false)
 
     case START_GAME_FOR_JOINS:
       return loop(
         state
-          .set('isStarting', true),
-        Effects.promise(startGameService, action.payload)
+          // .set('isStarting', true),
+          .set('gameCreator', false),
+        Effects.promise(startGameForJoinsService, action.payload)
       );
 
     case START_GAME_FOR_JOINS_SUCCESS:
       return loop(
         state
-          .set('isStarting', false)
-          .set('isStarted', action.payload.isStarted)
+          // .set('isStarting', false)
+          // .set('isStarted', action.payload.isStarted)
           .set('inGame',  action.payload.isStarted)
           .set('gameId', action.payload.gameId)
           .set('countdownStartTime', action.payload.countdownStartTime)
@@ -168,7 +179,7 @@ export default function MultiplayStateReducer(state = initialState, action = {})
           .set('countdownEndTime', 0)
           .set('quoteToType', "")
           .set('quoteReferralURL', "")
-          .set('gameCreator', false),
+          .set('gameCreator', null),
         Effects.constant(ErrorState.addError(action.payload))
       );
 
@@ -187,9 +198,13 @@ export default function MultiplayStateReducer(state = initialState, action = {})
           .set('countdownEndTime', 0)
           .set('quoteToType', "")
           .set('quoteReferralURL', "")
-          .set('gameCreator', false),
+          .set('gameCreator', null),
         Effects.constant(ErrorState.addError("You have left the game!"))
       );
+
+    case MESS_WITH_PROPS:
+      return state
+        .set('isStarted', true)
 
     default:
       return state;

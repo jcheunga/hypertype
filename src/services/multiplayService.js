@@ -2,7 +2,7 @@ import {
   CREATE_GAME_SUCCESS,
   START_GAME_SUCCESS,
   JOIN_GAME_SUCCESS,
-  START_GAME_FOR_JOINS,
+  START_GAME_FOR_JOINS_SUCCESS,
   RESPONSE_FAILURE
 } from '../modules/multiplay/MultiplayState';
 import { createRandomGameId, getQuoteToType } from '../utils/Utils';
@@ -103,5 +103,39 @@ export function joinRoomService (payload) {
 }
 
 export function startGameForJoinsService (payload) {
+  console.log("startgameforjoinsservice called");
+  const user = "abc";
+  const startedGame = true;
+  const startGameIdAdded = true;
+  const countdownAmount = 1000;
 
+  const startGameForJoins = new Promise(function(resolve, reject) {
+    if (startedGame) {
+      const startGameId = payload.gameId;
+      const quoteToType = getQuoteToType();
+      const quoteReferralURL = "www.google.com";
+      const countdownStartTime = Date.now();
+      const countdownEndTime = countdownStartTime + countdownAmount;
+      if (startGameIdAdded) {
+        resolve(
+          {
+            gameId: startGameId,
+            countdownStartTime: countdownStartTime,
+            countdownEndTime: countdownEndTime,
+            quoteToType: quoteToType,
+            quoteReferralURL: quoteReferralURL,
+            isStarted: true
+          }
+        );
+      } else {
+        reject({ message: "Error starting" })
+      }
+    }
+  });
+
+  console.log("should be returning start game for joins");
+
+  return startGameForJoins
+    .then((response) => ({type: START_GAME_FOR_JOINS_SUCCESS, payload: response }))
+    .catch((error) => ({type: RESPONSE_FAILURE, payload: error.message}))
 }

@@ -78,6 +78,10 @@ class MultiplayView extends Component {
     this.props.navigationStateActions.back();
   }
 
+  messWithProps = () => {
+    this.props.multiplayStateActions.messWithProps();
+  }
+
   render() {
     const showMultiplayView = this.state.multiplayView ?
       <View>
@@ -102,7 +106,7 @@ class MultiplayView extends Component {
     : null;
 
     const showJoinGameView = this.state.joinGameView ?
-    <JoinGameView {...this.props} resetView={this.resetView} joinGameWithId={this.joinGameWithId}/>
+    <JoinGameView {...this.props} resetView={this.resetView} joinGameWithId={this.joinGameWithId} messWithProps={this.messWithProps}/>
     : null;
 
     return (
