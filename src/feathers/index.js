@@ -34,13 +34,13 @@ const mapServicePathsToNames = {
 const prioritizedListServices = ['auth', 'users', 'posts', 'rooms'];
 
 // Reduxify feathers-authentication
-// export const feathersAuthentication = reduxifyAuthentication(app);
+export const feathersAuthentication = reduxifyAuthentication(app);
   // { isUserAuthorized: (user) => user.isVerified } // user must be verified to authenticate
 // );
 
 // Reduxify feathers services
 export const feathersServices = reduxifyServices(app, mapServicePathsToNames);
-app.service('post').find().then((res) => console.log(res));
+
 // Convenience method to get status of feathers services, incl feathers-authentication
 // export const getFeathersStatus =
 //   (servicesRootState, names = prioritizedListServices) =>

@@ -6,21 +6,24 @@ import SessionStateReducer, {RESET_STATE} from '../modules/session/SessionState'
 import PlayStateReducer from '../modules/play/PlayState';
 import ErrorStateReducer from '../modules/error/ErrorState';
 import MultiplayStateReducer from '../modules/multiplay/MultiplayState';
-import { feathersServices } from '../feathers';
+
+import AppStateReducer from '../modules/AppState';
+import { feathersServices, feathersAuthentication} from '../feathers';
 
 const reducers = {
   // Navigator states
   navigatorState: NavigatorStateReducer,
   session: SessionStateReducer,
+  appState: AppStateReducer,
 
   playState: PlayStateReducer,
   errorState: ErrorStateReducer,
   multiplayState: MultiplayStateReducer,
 
-  // auth: feathersAuthentication.reducer,
+  auth: feathersAuthentication.reducer,
   users: feathersServices.users.reducer,
   posts: feathersServices.posts.reducer,
-  rooms: feathersServices.posts.reducer,
+  rooms: feathersServices.rooms.reducer,
 };
 
 // initial state, accessor and mutator for supporting root-level

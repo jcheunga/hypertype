@@ -6,35 +6,46 @@ import * as SessionStateActions from '../modules/session/SessionState';
 import store from '../redux/store';
 import DeveloperMenu from '../components/DeveloperMenu';
 
-import { feathersServices } from '../feathers';
+import app from '../feathers';
 
 class AppView extends Component {
   static displayName = 'AppView';
 
   static propTypes = {
-    isReady: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired
+    isReady: PropTypes.bool.isRequired
   };
+
+  constructor(props) {
+    super(props)
+    this.connect();
+  }
+
+  connect = () => {
+    app.io.on('connect', () => {
+      console.log("app connected");
+      this.props.AppStateActions.connectApp();
+    });
+
+    app.io.on('disconnect', () => {
+      console.log("app disconnected");
+      this.props.AppStateActions.disconnectApp();
+    });
+  }
 
   componentDidMount() {
     snapshotUtil.resetSnapshot()
       .then(snapshot => {
-        const {dispatch} = this.props;
 
         if (snapshot) {
-          dispatch(SessionStateActions.resetSessionStateFromSnapshot(snapshot));
+          this.props.SessionStateActions.resetSessionStateFromSnapshot(snapshot);
         } else {
-          dispatch(SessionStateActions.initializeSessionState());
+          this.props.SessionStateActions.initializeSessionState();
         }
 
         store.subscribe(() => {
           snapshotUtil.saveSnapshot(store.getState());
         });
       });
-
-      // store.dispatch(feathersServices.rooms.create({quote: "Should be working"}));
-
-      // store.dispatch(feathersServices.rooms.find()).then(res => console.log(res));
   }
 
   render() {

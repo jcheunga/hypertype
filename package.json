@@ -62,7 +62,6 @@
     "redux-loop": "2.1.0",
     "redux-loop-symbol-ponyfill": "^2.2.0",
     "redux-persist": "^4.7.1",
-    "redux-promise": "^0.5.3",
     "redux-promise-middleware": "^4.2.0",
     "redux-thunk": "^2.0.1",
     "socket.io-client": "^1.7.3",

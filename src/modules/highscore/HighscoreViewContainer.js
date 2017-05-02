@@ -8,7 +8,7 @@ import {feathersServices} from '../../feathers';
 
 export default connect(
   state => ({
-    state: state
+    rooms: state
   }),
   dispatch => {
     return {
