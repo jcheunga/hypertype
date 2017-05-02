@@ -133,8 +133,6 @@ export function startGameForJoinsService (payload) {
     }
   });
 
-  console.log("should be returning start game for joins");
-
   return startGameForJoins
     .then((response) => ({type: START_GAME_FOR_JOINS_SUCCESS, payload: response }))
     .catch((error) => ({type: RESPONSE_FAILURE, payload: error.message}))

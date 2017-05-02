@@ -6,6 +6,8 @@ import * as SessionStateActions from '../modules/session/SessionState';
 import store from '../redux/store';
 import DeveloperMenu from '../components/DeveloperMenu';
 
+import { feathersServices } from '../feathers';
+
 class AppView extends Component {
   static displayName = 'AppView';
 
@@ -29,6 +31,10 @@ class AppView extends Component {
           snapshotUtil.saveSnapshot(store.getState());
         });
       });
+
+      // store.dispatch(feathersServices.rooms.create({quote: "Should be working"}));
+
+      // store.dispatch(feathersServices.rooms.find()).then(res => console.log(res));
   }
 
   render() {

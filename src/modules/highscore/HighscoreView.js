@@ -12,6 +12,8 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+import app from '../../feathers';
+
 const window = Dimensions.get('window');
 
 class HighscoreView extends Component {
@@ -26,9 +28,11 @@ class HighscoreView extends Component {
   // Initialize the hardcoded data
   constructor(props) {
     super(props);
+    // this.props.feathersServices.find().then((data) => console.log(data));
   }
 
   render() {
+    // console.log(this.props);
     return (
       <View style={styles.container}>
         <View style={styles.body}>

@@ -6,7 +6,7 @@ import SessionStateReducer, {RESET_STATE} from '../modules/session/SessionState'
 import PlayStateReducer from '../modules/play/PlayState';
 import ErrorStateReducer from '../modules/error/ErrorState';
 import MultiplayStateReducer from '../modules/multiplay/MultiplayState';
-import { feathersServices, feathersAuthentication } from '../feathers';
+import { feathersServices } from '../feathers';
 
 const reducers = {
   // Navigator states
@@ -17,9 +17,10 @@ const reducers = {
   errorState: ErrorStateReducer,
   multiplayState: MultiplayStateReducer,
 
-  auth: feathersAuthentication.reducer,
+  // auth: feathersAuthentication.reducer,
   users: feathersServices.users.reducer,
-  posts: feathersServices.posts.reducer
+  posts: feathersServices.posts.reducer,
+  rooms: feathersServices.posts.reducer,
 };
 
 // initial state, accessor and mutator for supporting root-level

@@ -4,12 +4,16 @@ import HighscoreView from './HighscoreView';
 import {NavigationActions} from 'react-navigation';
 import * as HighscoreStateActions from './HighscoreState';
 
+import {feathersServices} from '../../feathers';
 
 export default connect(
-  null,
+  state => ({
+    state: state
+  }),
   dispatch => {
     return {
-      navigationStateActions: bindActionCreators(NavigationActions, dispatch)
+      navigationStateActions: bindActionCreators(NavigationActions, dispatch),
+      feathersServices: bindActionCreators(feathersServices.rooms, dispatch),
     };
   }
 )(HighscoreView);

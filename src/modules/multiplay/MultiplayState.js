@@ -18,7 +18,8 @@ const initialState = Map({
   countdownStartTime: 0,
   countdownEndTime: 0,
   quoteToType: "",
-  quoteReferralURL: ""
+  quoteReferralURL: "",
+  joinGameStarted: false,
 });
 
 // Actions
@@ -118,7 +119,8 @@ export default function MultiplayStateReducer(state = initialState, action = {})
           .set('countdownStartTime', action.payload.countdownStartTime)
           .set('countdownEndTime', action.payload.countdownEndTime)
           .set('quoteToType', action.payload.quoteToType)
-          .set('quoteReferralURL', action.payload.quoteReferralURL),
+          .set('quoteReferralURL', action.payload.quoteReferralURL)
+          .set('joinGameStarted', true),
         Effects.constant(NavigationActions.navigate({
           routeName: 'MultiplayTypeView'
         }))
@@ -142,17 +144,13 @@ export default function MultiplayStateReducer(state = initialState, action = {})
 
     case START_GAME_FOR_JOINS:
       return loop(
-        state
-          // .set('isStarting', true),
-          .set('gameCreator', false),
+        state,
         Effects.promise(startGameForJoinsService, action.payload)
       );
 
     case START_GAME_FOR_JOINS_SUCCESS:
       return loop(
         state
-          // .set('isStarting', false)
-          // .set('isStarted', action.payload.isStarted)
           .set('inGame',  action.payload.isStarted)
           .set('gameId', action.payload.gameId)
           .set('countdownStartTime', action.payload.countdownStartTime)
@@ -179,7 +177,8 @@ export default function MultiplayStateReducer(state = initialState, action = {})
           .set('countdownEndTime', 0)
           .set('quoteToType', "")
           .set('quoteReferralURL', "")
-          .set('gameCreator', null),
+          .set('gameCreator', null)
+          .set('joinGameStarted', false),
         Effects.constant(ErrorState.addError(action.payload))
       );
 
@@ -198,13 +197,14 @@ export default function MultiplayStateReducer(state = initialState, action = {})
           .set('countdownEndTime', 0)
           .set('quoteToType', "")
           .set('quoteReferralURL', "")
-          .set('gameCreator', null),
+          .set('gameCreator', null)
+          .set('joinGameStarted', false),
         Effects.constant(ErrorState.addError("You have left the game!"))
       );
 
     case MESS_WITH_PROPS:
       return state
-        .set('isStarted', true)
+        .set('joinGameStarted', true)
 
     default:
       return state;

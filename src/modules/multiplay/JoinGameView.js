@@ -24,20 +24,32 @@ class JoinGameView extends Component {
     super(props);
 
     this.state = {
-      enteredGameId: ""
+      enteredGameId: "",
+      gameStarted: false,
+      gameJoined: false
     };
   }
 
   componentWillReceiveProps (nextProps) {
-    // console.log(nextProps);
-    if (nextProps.isStarted && this.props.isJoined) {
-      console.log("should be navigating but why not?")
-      // this.props.multiplayStateActions.startGameForJoins(this.props.gameId);
-      // this.props.navigationStateActions.back();
-      this.props.navigationStateActions.navigate({
-          routeName: 'MultiplayTypeView'
-        })
+    if (nextProps.isJoined) {
+      this.setState({
+        gameJoined: true,
+      })
     }
+
+    if (nextProps.joinGameStarted && this.state.gameJoined) {
+      console.log("game will begin");
+      this.props.multiplayStateActions.startGameForJoins(this.props.gameId);
+    }
+    // console.log(nextProps);
+    // if (nextProps.isStarted && this.props.isJoined) {
+    //   console.log("should be navigating but why not?");
+    //   // this.props.multiplayStateActions.startGameForJoins(this.props.gameId);
+    //   // this.props.navigationStateActions.back();
+    //   this.props.navigationStateActions.navigate({
+    //       routeName: 'MultiplayTypeView'
+    //     })
+    // }
   }
 
   handleIdInput = (e) => {
@@ -47,13 +59,14 @@ class JoinGameView extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <View style={styles.container}>
         <View style={styles.userContainer}>
           <Text style={styles.bodyText}>
             Enter in game id to join game
           </Text>
-          <TextInput onChange={(e) => this.handleIdInput(e)} value={this.state.enteredGameId} style={{width: 100}}/>
+          <TextInput editable={!this.state.gameJoined} onChange={(e) => this.handleIdInput(e)} value={this.state.enteredGameId} style={{width: 100}}/>
           <Button
             title="Join game"
             onPress={() => this.props.joinGameWithId(this.state.enteredGameId)}
