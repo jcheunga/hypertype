@@ -39,7 +39,7 @@ class JoinGameView extends Component {
 
     if (nextProps.joinGameStarted && this.state.gameJoined) {
       console.log("game will begin");
-      this.props.multiplayStateActions.startGameForJoins(this.props.gameId);
+      // this.props.multiplayStateActions.startGameForJoins(this.props.gameId);
     }
     // console.log(nextProps);
     // if (nextProps.isStarted && this.props.isJoined) {

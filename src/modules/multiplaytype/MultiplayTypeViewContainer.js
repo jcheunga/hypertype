@@ -7,13 +7,13 @@ import * as MultiplayStateActions from '../multiplay/MultiplayState';
 
 export default connect(
   state => ({
-    inGame: state.getIn(['multiplayState', 'inGame']),
-    gameId: state.getIn(['multiplayState', 'gameId']),
-    countdownStartTime: state.getIn(['multiplayState', 'countdownStartTime']),
-    countdownEndTime: state.getIn(['multiplayState', 'countdownEndTime']),
-    quoteToType: state.getIn(['multiplayState', 'quoteToType']),
-    quoteReferralURL: state.getIn(['multiplayState', 'quoteReferralURL']),
-    gameCreator: state.getIn(['multiplayState', 'gameCreator'])
+    inGame: state.multiplayState.inGame,
+    gameId: state.multiplayState.gameId,
+    countdownStartTime: state.multiplayState.countdownStartTime,
+    countdownEndTime: state.multiplayState.countdownEndTime,
+    quoteToType: state.multiplayState.quoteToType,
+    quoteReferralURL: state.multiplayState.quoteReferralURL,
+    gameCreator: state.multiplayState.gameCreator
   }),
   dispatch => {
     return {

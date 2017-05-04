@@ -13,7 +13,7 @@ export default connect(
   dispatch => {
     return {
       navigationStateActions: bindActionCreators(NavigationActions, dispatch),
-      feathersServices: bindActionCreators(feathersServices.rooms, dispatch),
+      // feathersServices: bindActionCreators(feathersServices.rooms, dispatch),
     };
   }
 )(HighscoreView);

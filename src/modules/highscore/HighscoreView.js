@@ -28,7 +28,7 @@ class HighscoreView extends Component {
   // Initialize the hardcoded data
   constructor(props) {
     super(props);
-    // this.props.feathersServices.create({quote: "This should work"}).catch((err) => console.log(err));
+    // this.props.feathersServices.find();
   }
 
   render() {

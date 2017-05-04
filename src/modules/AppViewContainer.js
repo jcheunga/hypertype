@@ -6,8 +6,7 @@ import * as SessionStateActions from './session/SessionState';
 
 export default connect(
   state => ({
-    isReady: state.getIn(['session', 'isReady']),
-    isConnected: state.getIn(['appState', 'isConnected'])
+    isReady: state.session.isReady
   }),
   dispatch => {
     return {

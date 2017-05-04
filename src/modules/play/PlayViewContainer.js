@@ -8,8 +8,8 @@ import * as MultiplayStateActions from '../multiplay/MultiplayState';
 
 export default connect(
   state => ({
-    isLoading: state.getIn(['playState', 'isLoading']),
-    inGame: state.getIn(['playState', 'inGame'])
+    isLoading: state.playState.isLoading,
+    inGame: state.playState.inGame
   }),
   dispatch => {
     return {

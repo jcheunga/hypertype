@@ -7,12 +7,12 @@ import * as PlayStateActions from '../play/PlayState';
 
 export default connect(
   state => ({
-    inGame: state.getIn(['playState', 'inGame']),
-    gameId: state.getIn(['playState', 'gameId']),
-    countdownStartTime: state.getIn(['playState', 'countdownStartTime']),
-    countdownEndTime: state.getIn(['playState', 'countdownEndTime']),
-    quoteToType: state.getIn(['playState', 'quoteToType']),
-    quoteReferralURL: state.getIn(['playState', 'quoteReferralURL'])
+    inGame: state.playState.inGame,
+    gameId: state.playState.gameId,
+    countdownStartTime: state.playState.countdownStartTime,
+    countdownEndTime: state.playState.countdownEndTime,
+    quoteToType: state.playState.quoteToType,
+    quoteReferralURL: state.playState.quoteReferralURL
   }),
   dispatch => {
     return {

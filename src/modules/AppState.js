@@ -1,11 +1,10 @@
-import {Map} from 'immutable';
 import {loop, Effects} from 'redux-loop-symbol-ponyfill';
 import {NavigationActions} from 'react-navigation';
 
 // Initial state
-const initialState = Map({
+const initialState = {
   isConnected: false
-});
+};
 
 // Actions
 const CONNECT_APP = 'AppState/CONNECT_APP';
@@ -29,12 +28,16 @@ export default function AppStateReducer(state = initialState, action = {}) {
 
   switch (action.type) {
     case CONNECT_APP:
-      return state
-        .set('isConnected', true)
+      return {
+        ...state,
+        isConnected: true
+      };
 
     case DISCONNECT_APP:
-      return state
-        .set('isConnected', false)
+      return {
+        ...state,
+        isConnected: false
+      };
 
     default:
       return state;

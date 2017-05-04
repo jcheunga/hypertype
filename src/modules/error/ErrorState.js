@@ -1,10 +1,9 @@
-import {Map} from 'immutable';
 import {loop, Effects} from 'redux-loop';
 
 // Initial state
-const initialState = Map({
+const initialState = {
   errorMessage: ""
-});
+};
 
 // Actions
 // Quick Play
@@ -30,12 +29,16 @@ export default function ErrorStateReducer(state = initialState, action = {}) {
 
   switch (action.type) {
     case ADD_ERROR:
-      return state
-        .set('errorMessage', action.payload);
+      return {
+        ...state,
+        errorMessage: action.payload
+      };
 
     case REMOVE_ERROR:
-      return state
-        .set('errorMessage', "");
+      return {
+        ...state,
+        errorMessage: ""
+      };
 
     default:
       return state;

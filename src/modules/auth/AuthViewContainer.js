@@ -7,7 +7,7 @@ import * as AuthStateActions from './AuthState';
 
 export default connect(
   state => ({
-    user: state.getIn(['authState', 'user']),
+    user: state.authState.user,
   }),
   dispatch => {
     return {

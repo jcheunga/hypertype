@@ -7,20 +7,20 @@ import * as MultiplayStateActions from './MultiplayState';
 
 export default connect(
   state => ({
-    isCreating: state.getIn(['multiplayState', 'isCreating']),
-    isCreated: state.getIn(['multiplayState', 'isCreated']),
-    isStarting: state.getIn(['multiplayState', 'isStarting']),
-    isStarted: state.getIn(['multiplayState', 'isStarted']),
-    isJoining: state.getIn(['multiplayState', 'isJoining']),
-    isJoined: state.getIn(['multiplayState', 'isJoined']),
-    inGame: state.getIn(['multiplayState', 'inGame']),
-    gameId: state.getIn(['multiplayState', 'gameId']),
-    countdownStartTime: state.getIn(['multiplayState', 'countdownStartTime']),
-    countdownEndTime: state.getIn(['multiplayState', 'countdownEndTime']),
-    quoteToType: state.getIn(['multiplayState', 'quoteToType']),
-    quoteReferralURL: state.getIn(['multiplayState', 'quoteReferralURL']),
-    gameCreator: state.getIn(['multiplayState', 'gameCreator']),
-    joinGameStarted: state.getIn(['multiplayState', 'joinGameStarted'])
+    isCreating: state.multiplayState.isCreating,
+    isCreated: state.multiplayState.isCreated,
+    isStarting: state.multiplayState.isStarting,
+    isStarted: state.multiplayState.isStarted,
+    isJoining: state.multiplayState.isJoining,
+    isJoined: state.multiplayState.isJoined,
+    inGame: state.multiplayState.inGame,
+    gameId: state.multiplayState.gameId,
+    countdownStartTime: state.multiplayState.countdownStartTime,
+    countdownEndTime: state.multiplayState.countdownEndTime,
+    quoteToType: state.multiplayState.quoteToType,
+    quoteReferralURL: state.multiplayState.quoteReferralURL,
+    gameCreator: state.multiplayState.gameCreator,
+    joinGameStarted: state.multiplayState.joinGameStarted
   }),
   dispatch => {
     return {

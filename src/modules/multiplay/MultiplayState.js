@@ -1,11 +1,10 @@
-import {Map} from 'immutable';
 import {loop, Effects} from 'redux-loop-symbol-ponyfill';
 import {NavigationActions} from 'react-navigation';
 import * as ErrorState from '../../modules/error/ErrorState';
 import { joinRoomService, createRoomService, startGameService, startGameForJoinsService } from '../../services/multiplayService';
 
 // Initial state
-const initialState = Map({
+const initialState = {
   isCreating: false,
   isCreated: false,
   isStarting: false,
@@ -14,13 +13,13 @@ const initialState = Map({
   isJoined: false,
   inGame: false,
   gameCreator: null,
-  gameId: "",
-  countdownStartTime: 0,
-  countdownEndTime: 0,
-  quoteToType: "",
-  quoteReferralURL: "",
-  joinGameStarted: false,
-});
+  gameId: null,
+  countdownStartTime: null,
+  countdownEndTime: null,
+  quoteToType: null,
+  quoteReferralURL: null,
+  joinGameStarted: false
+};
 
 // Actions
 // Quick Play
@@ -37,8 +36,7 @@ export const JOIN_GAME_SUCCESS = 'MultiplayState/JOIN_GAME_SUCCESS';
 const START_GAME_FOR_JOINS = 'MultiplayState/START_GAME_FOR_JOINS';
 export const START_GAME_FOR_JOINS_SUCCESS = 'MultiplayState/START_GAME_FOR_JOINS_SUCCESS';
 
-export const RESPONSE_FAILURE = 'MultiplayState/RESPONSE_FAILURE';
-const LEAVE_GAME = 'MultiplayState/LEAVE_GAME';
+export const LEAVE_GAME = 'MultiplayState/LEAVE_GAME';
 
 const MESS_WITH_PROPS = 'MultiplayState/MESS_WITH_PROPS';
 
@@ -89,38 +87,46 @@ export default function MultiplayStateReducer(state = initialState, action = {})
   switch (action.type) {
     case CREATE_GAME:
       return loop(
-        state
-          .set('isCreating', true)
-          .set('gameCreator', true),
+        {
+          ...state,
+          isCreating: true,
+          gameCreator: true
+        },
         Effects.promise(createRoomService, action.payload)
       );
 
     case CREATE_GAME_SUCCESS:
-      return state
-        .set('isCreating', false)
-        .set('isCreated', action.payload.isCreated)
-        .set('inGame', action.payload.isCreated)
-        .set('gameId', action.payload.gameId)
+      return {
+        ...state,
+        isCreating: false,
+        isCreated: action.payload.isCreated,
+        inGame: action.payload.isCreated,
+        gameId: action.payload.gameId
+      };
 
     case START_GAME:
       return loop(
-        state
-          .set('isStarting', true),
+        {
+          ...state,
+          isStarting: true
+        },
         Effects.promise(startGameService, action.payload)
       );
 
     case START_GAME_SUCCESS:
       return loop(
-        state
-          .set('isStarting', false)
-          .set('isStarted', action.payload.isStarted)
-          .set('inGame',  action.payload.isStarted)
-          .set('gameId', action.payload.gameId)
-          .set('countdownStartTime', action.payload.countdownStartTime)
-          .set('countdownEndTime', action.payload.countdownEndTime)
-          .set('quoteToType', action.payload.quoteToType)
-          .set('quoteReferralURL', action.payload.quoteReferralURL)
-          .set('joinGameStarted', true),
+        {
+          ...state,
+          isStarting: false,
+          isStarted: action.payload.isStarted,
+          inGame: action.payload.isStarted,
+          gameId: action.payload.gameId,
+          countdownStartTime: action.payload.countdownStartTime,
+          countdownEndTime: action.payload.countdownEndTime,
+          quoteToType: action.payload.quoteToType,
+          quoteReferralURL: action.payload.quoteReferralURL,
+          joinGameStarted: true
+        },
         Effects.constant(NavigationActions.navigate({
           routeName: 'MultiplayTypeView'
         }))
@@ -128,83 +134,75 @@ export default function MultiplayStateReducer(state = initialState, action = {})
 
     case JOIN_GAME:
       return loop(
-        state
-          .set('isJoining', true)
-          .set('gameCreator', false),
+        {
+          ...state,
+          isJoining: true,
+          gameCreator: true
+        },
         Effects.promise(joinRoomService, action.payload)
       );
 
     case JOIN_GAME_SUCCESS:
-      return state
-        .set('isJoining', false)
-        .set('isJoined', action.payload.isJoined)
-        .set('inGame', action.payload.isJoined)
-        .set('gameId', action.payload.gameId)
-        .set('gameCreator', false)
+      return {
+        ...state,
+        isJoining: false,
+        isJoined: action.payload.isJoined,
+        inGame: action.payload.isJoined,
+        gameId: action.payload.gameId,
+        gameCreator: false
+      };
 
     case START_GAME_FOR_JOINS:
       return loop(
-        state,
+        {
+          ...state
+        },
         Effects.promise(startGameForJoinsService, action.payload)
       );
 
     case START_GAME_FOR_JOINS_SUCCESS:
       return loop(
-        state
-          .set('inGame',  action.payload.isStarted)
-          .set('gameId', action.payload.gameId)
-          .set('countdownStartTime', action.payload.countdownStartTime)
-          .set('countdownEndTime', action.payload.countdownEndTime)
-          .set('quoteToType', action.payload.quoteToType)
-          .set('quoteReferralURL', action.payload.quoteReferralURL),
+        {
+          ...state,
+          inGame: action.payload.isStarted,
+          gameId: action.payload.gameId,
+          countdownStartTime: action.payload.countdownStartTime,
+          countdownEndTime: action.payload.countdownEndTime,
+          quoteToType: action.payload.quoteToType,
+          quoteReferralURL: action.payload.quoteReferralURL
+        },
         Effects.constant(NavigationActions.navigate({
           routeName: 'MultiplayTypeView'
         }))
       );
 
-    case RESPONSE_FAILURE:
+    case LEAVE_GAME:
       return loop(
-        state
-          .set('isCreating', false)
-          .set('isCreated', false)
-          .set('isStarting', false)
-          .set('isStarted', false)
-          .set('isJoining', false)
-          .set('isJoined', false)
-          .set('inGame', false)
-          .set('gameId', "")
-          .set('countdownStartTime', 0)
-          .set('countdownEndTime', 0)
-          .set('quoteToType', "")
-          .set('quoteReferralURL', "")
-          .set('gameCreator', null)
-          .set('joinGameStarted', false),
+        {
+          ...state,
+          isCreating: false,
+          isCreated: false,
+          isStarting: false,
+          isStarted: false,
+          isJoining: false,
+          isJoined: false,
+          inGame: false,
+          gameId: null,
+          countdownStartTime: null,
+          countdownEndTime: null,
+          quoteToType: null,
+          quoteReferralURL: null,
+          gameCreator: null,
+          joinGameStarted: false
+        },
         Effects.constant(ErrorState.addError(action.payload))
       );
 
-    case LEAVE_GAME:
-      return loop(
-        state
-          .set('isCreating', false)
-          .set('isCreated', false)
-          .set('isStarting', false)
-          .set('isStarted', false)
-          .set('isJoining', false)
-          .set('isJoined', false)
-          .set('inGame', false)
-          .set('gameId', "")
-          .set('countdownStartTime', 0)
-          .set('countdownEndTime', 0)
-          .set('quoteToType', "")
-          .set('quoteReferralURL', "")
-          .set('gameCreator', null)
-          .set('joinGameStarted', false),
-        Effects.constant(ErrorState.addError("You have left the game!"))
-      );
-
     case MESS_WITH_PROPS:
-      return state
-        .set('joinGameStarted', true)
+      return {
+        ...state,
+        joinGameStarted: true
+      };
 
     default:
       return state;

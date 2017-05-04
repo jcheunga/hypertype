@@ -1,7 +1,7 @@
 import {
   FIND_GAME_SUCCESS,
   FIND_NEW_GAME_SUCCESS,
-  RESPONSE_FAILURE
+  LEAVE_GAME
 } from '../modules/play/PlayState';
 import { createRandomGameId, getQuoteToType } from '../utils/Utils';
 
@@ -57,5 +57,5 @@ export function findRoomService (payload) {
 
   return fetchGame
     .then((response) => ({type: payload.inGame ? FIND_NEW_GAME_SUCCESS : FIND_GAME_SUCCESS, payload: response }))
-    .catch((error) => ({type: RESPONSE_FAILURE, payload: error.message}))
+    .catch((error) => ({type: LEAVE_GAME, payload: error.message}))
 }

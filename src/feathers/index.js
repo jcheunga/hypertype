@@ -25,13 +25,14 @@ export default app;
 
 // See feathers-reduxify-services::default
 const mapServicePathsToNames = {
-  users: 'users',
-  posts: 'posts',
-  rooms: 'rooms'
+  user: 'user',
+  room: 'room',
+  multiroom: 'multiroom',
+  highscore: 'highscore'
 };
 
 // See feathers-reduxify-services::getServicesStatus. Order highest priority msg first.
-const prioritizedListServices = ['auth', 'users', 'posts', 'rooms'];
+const prioritizedListServices = ['auth', 'user', 'room', 'multiroom', 'highscore'];
 
 // Reduxify feathers-authentication
 export const feathersAuthentication = reduxifyAuthentication(app);
