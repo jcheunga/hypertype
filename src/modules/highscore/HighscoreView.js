@@ -9,7 +9,8 @@ import {
   Platform,
   Dimensions,
   ActivityIndicator,
-  TouchableOpacity
+  TouchableOpacity,
+  Button
 } from 'react-native';
 
 import app from '../../feathers';
@@ -28,7 +29,44 @@ class HighscoreView extends Component {
   // Initialize the hardcoded data
   constructor(props) {
     super(props);
-    // this.props.feathersServices.find();
+    this.state = {
+      data: []
+    }
+  }
+
+  componentDidMount () {
+    app.service("highscores")
+      .find()
+      .then(this._parseData)
+      .catch(err => console.log(err));
+
+    app.service("highscores")
+      .on("created", this._parseData);
+  }
+
+  componentWillUnmount () {
+    app.service("highscores")
+      .removeListener("created", this._parseDataListener);
+  }
+
+  _parseData = (res) => {
+    this.setState({
+      data: res.data
+    });
+  }
+
+  _fetchScores = () => {
+    if (this.state.data.length > 0) {
+      return this.state.data.map((highscore, index) => {
+        return (
+          <Text key={index}>{highscore.playerName}: {highscore.wpm}</Text>
+        );
+      });
+    } else {
+      return (
+        <Text>Loading...</Text>
+      );
+    }
   }
 
   render() {
@@ -39,14 +77,11 @@ class HighscoreView extends Component {
             Highscores
           </Text>
           <Text style={styles.bodyText}>
-            All time / Daily
+            International Local Tabs
           </Text>
-          <Text style={styles.bodyText}>
-            International
-          </Text>
-          <Text style={styles.bodyText}>
-            Local
-          </Text>
+          <View>
+            {this._fetchScores()}
+          </View>
         </View>
       </View>
     );

@@ -20,10 +20,10 @@ const reducers = {
   multiplayState: MultiplayStateReducer,
 
   auth: feathersAuthentication.reducer,
-  user: feathersServices.user.reducer,
-  room: feathersServices.room.reducer,
-  multiroom: feathersServices.multiroom.reducer,
-  highscore: feathersServices.highscore.reducer
+  users: feathersServices.users.reducer,
+  rooms: feathersServices.rooms.reducer,
+  multirooms: feathersServices.multirooms.reducer,
+  highscores: feathersServices.highscores.reducer
 };
 
 const namespacedReducer = combineReducers(reducers);

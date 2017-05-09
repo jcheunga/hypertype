@@ -10,7 +10,7 @@ import { AsyncStorage } from 'react-native';
 import reduxifyServices, { getServicesStatus } from 'feathers-reduxify-services';
 import reduxifyAuthentication from 'feathers-reduxify-authentication';
 
-const API_URL = 'http://10.0.2.2:9090';
+const API_URL = 'http://10.0.2.2:3030';
 const options = {transports: ['websocket'], pingTimeout: 3000, pingInterval: 5000, jsonp: false};
 const socket = io(API_URL, options);
 
@@ -25,14 +25,14 @@ export default app;
 
 // See feathers-reduxify-services::default
 const mapServicePathsToNames = {
-  user: 'user',
-  room: 'room',
-  multiroom: 'multiroom',
-  highscore: 'highscore'
+  users: 'users',
+  rooms: 'rooms',
+  multirooms: 'multirooms',
+  highscores: 'highscores'
 };
 
 // See feathers-reduxify-services::getServicesStatus. Order highest priority msg first.
-const prioritizedListServices = ['auth', 'user', 'room', 'multiroom', 'highscore'];
+const prioritizedListServices = ['auth', 'users', 'rooms', 'multirooms', 'highscores'];
 
 // Reduxify feathers-authentication
 export const feathersAuthentication = reduxifyAuthentication(app);
@@ -41,6 +41,8 @@ export const feathersAuthentication = reduxifyAuthentication(app);
 
 // Reduxify feathers services
 export const feathersServices = reduxifyServices(app, mapServicePathsToNames);
+
+// console.log(app);
 
 // Convenience method to get status of feathers services, incl feathers-authentication
 // export const getFeathersStatus =

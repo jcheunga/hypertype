@@ -39,6 +39,9 @@ class ProfileView extends Component {
           <Text style={styles.bodyText}>
             Login to save your scores and favourite quotes
           </Text>
+          <Text style={styles.bodyText}>
+            LOGIN BUTTON OR LOGOUT BUTTON
+          </Text>
         </View>
       </View>
     );
