@@ -6,10 +6,16 @@ import * as HighscoreStateActions from './HighscoreState';
 
 
 export default connect(
-  null,
+  state => ({
+    isFetching: state.highscoreState.isFetching,
+    isFetched: state.highscoreState.isFetched,
+    scores: state.highscoreState.scores,
+    hasError: state.highscoreState.hasError,
+  }),
   dispatch => {
     return {
-      navigationStateActions: bindActionCreators(NavigationActions, dispatch)
+      navigationStateActions: bindActionCreators(NavigationActions, dispatch),
+      highscoreStateActions: bindActionCreators(HighscoreStateActions, dispatch)
     };
   }
 )(HighscoreView);

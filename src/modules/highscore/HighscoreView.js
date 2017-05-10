@@ -29,45 +29,53 @@ class HighscoreView extends Component {
   // Initialize the hardcoded data
   constructor(props) {
     super(props);
-    this.state = {
-      data: []
-    }
   }
 
   componentDidMount () {
     app.service("highscores")
-      .find()
-      .then(this._parseData)
-      .catch(err => console.log(err));
-
-    app.service("highscores")
-      .on("created", this._parseData);
-  }
-
-  componentWillUnmount () {
-    app.service("highscores")
-      .removeListener("created", this._parseDataListener);
-  }
-
-  _parseData = (res) => {
-    this.setState({
-      data: res.data
-    });
+      .on("created", this._fetchScores());
   }
 
   _fetchScores = () => {
-    if (this.state.data.length > 0) {
-      return this.state.data.map((highscore, index) => {
+    this.props.highscoreStateActions.fetchScores();
+  }
+
+  _showScores = () => {
+    if (this.props.scores.length > 0) {
+      return this.props.scores.map((highscore, index) => {
         return (
           <Text key={index}>{highscore.playerName}: {highscore.wpm}</Text>
         );
       });
     } else {
+      return null;
+    }
+  }
+
+  _showLoading = () => {
+    if (this.props.isFetching) {
       return (
         <Text>Loading...</Text>
       );
     }
   }
+
+  _showError = () => {
+    if (this.props.hasError) {
+      return (
+        <View>
+          <Text>Error Loading...</Text>
+          <Button
+            title="Refresh"
+            onPress={() => this._fetchScores()}
+          />
+        </View>
+      );
+    }
+  }
+
+  // _renderView = () => {
+  // }
 
   render() {
     return (
@@ -76,11 +84,10 @@ class HighscoreView extends Component {
           <Text style={styles.bodyText}>
             Highscores
           </Text>
-          <Text style={styles.bodyText}>
-            International Local Tabs
-          </Text>
           <View>
-            {this._fetchScores()}
+            {this._showScores()}
+            {this._showLoading()}
+            {this._showError()}
           </View>
         </View>
       </View>

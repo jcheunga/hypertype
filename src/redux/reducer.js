@@ -5,6 +5,7 @@ import SessionStateReducer, {RESET_STATE} from '../modules/session/SessionState'
 import PlayStateReducer from '../modules/play/PlayState';
 import ErrorStateReducer from '../modules/error/ErrorState';
 import MultiplayStateReducer from '../modules/multiplay/MultiplayState';
+import HighscoreStateReducer from '../modules/highscore/HighscoreState';
 
 import AppStateReducer from '../modules/AppState';
 import { feathersServices, feathersAuthentication} from '../feathers';
@@ -18,12 +19,13 @@ const reducers = {
   playState: PlayStateReducer,
   errorState: ErrorStateReducer,
   multiplayState: MultiplayStateReducer,
+  highscoreState: HighscoreStateReducer,
 
-  auth: feathersAuthentication.reducer,
-  users: feathersServices.users.reducer,
-  rooms: feathersServices.rooms.reducer,
-  multirooms: feathersServices.multirooms.reducer,
-  highscores: feathersServices.highscores.reducer
+  // auth: feathersAuthentication.reducer,
+  // users: feathersServices.users.reducer,
+  // rooms: feathersServices.rooms.reducer,
+  // multirooms: feathersServices.multirooms.reducer,
+  // highscores: feathersServices.highscores.reducer
 };
 
 const namespacedReducer = combineReducers(reducers);
