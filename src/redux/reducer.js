@@ -6,9 +6,10 @@ import PlayStateReducer from '../modules/play/PlayState';
 import ErrorStateReducer from '../modules/error/ErrorState';
 import MultiplayStateReducer from '../modules/multiplay/MultiplayState';
 import HighscoreStateReducer from '../modules/highscore/HighscoreState';
+import ProfileStateReducer from '../modules/profile/ProfileState';
 
 import AppStateReducer from '../modules/AppState';
-import { feathersServices, feathersAuthentication} from '../feathers';
+import { feathersAuthentication} from '../feathers';
 
 const reducers = {
   // Navigator states
@@ -20,12 +21,9 @@ const reducers = {
   errorState: ErrorStateReducer,
   multiplayState: MultiplayStateReducer,
   highscoreState: HighscoreStateReducer,
+  profileState: ProfileStateReducer
 
-  // auth: feathersAuthentication.reducer,
-  // users: feathersServices.users.reducer,
-  // rooms: feathersServices.rooms.reducer,
-  // multirooms: feathersServices.multirooms.reducer,
-  // highscores: feathersServices.highscores.reducer
+  // auth: feathersAuthentication.reducer
 };
 
 const namespacedReducer = combineReducers(reducers);

@@ -12,7 +12,6 @@ const initialState = {
 };
 
 // Actions
-// Quick Play
 const FETCH_SCORES = 'HighscoreState/FETCH_SCORES';
 export const FETCH_SCORES_SUCCESS = 'HighscoreState/FETCH_SCORES_SUCCESS';
 export const FETCH_FAILURE = 'HighscoreState/FETCH_FAILURE';

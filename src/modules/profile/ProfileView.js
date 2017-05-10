@@ -27,6 +27,61 @@ class ProfileView extends Component {
   // Initialize the hardcoded data
   constructor(props) {
     super(props);
+
+    this.state = {
+      loginView: true,
+      registerView: false
+    };
+  }
+
+  _loginAccount = () => {
+    this.props.profileStateActions.loginAccount();
+  }
+
+  _logoutAccount = () => {
+    this.props.profileStateActions.logoutAccount();
+  }
+
+  _registerAccount = () => {
+    this.props.profileStateActions.registerAccount();
+  }
+
+  _deleteAccount = () => {
+    this.props.profileStateActions.deleteAccount();
+  }
+
+  _switchLoginView = () => {
+    this.setState({
+      loginView: true,
+      registerView: false
+    });
+  }
+
+  _switchRegisterView = () => {
+    this.setState({
+      loginView: false,
+      registerView: true
+    });
+  }
+
+  _showLoginView = () => {
+    if (this.state.loginView) {
+      return (
+        <Text>LOGIN</Text>
+      )
+    } else {
+      return null;
+    }
+  }
+
+  _showRegisterView = () => {
+    if (this.state.registerView) {
+      return (
+        <Text>REGISTER</Text>
+      )
+    } else {
+      return null;
+    }
   }
 
   render() {
@@ -34,14 +89,23 @@ class ProfileView extends Component {
       <View style={styles.container}>
         <View style={styles.userContainer}>
           <Text style={styles.bodyText}>
-            Welcome, Guest
+            { this.props.user ? "Welcome User" : "Welcome Guest 123456" }
           </Text>
           <Text style={styles.bodyText}>
             Login to save your scores and favourite quotes
           </Text>
-          <Text style={styles.bodyText}>
-            LOGIN BUTTON OR LOGOUT BUTTON
-          </Text>
+          <View>
+            {this._showLoginView()}
+            {this._showRegisterView()}
+          </View>
+          <Button
+            title="Login"
+            onPress={() => this._switchLoginView()}
+          />
+          <Button
+            title="Register Account"
+            onPress={() => this._switchRegisterView()}
+          />
         </View>
       </View>
     );
