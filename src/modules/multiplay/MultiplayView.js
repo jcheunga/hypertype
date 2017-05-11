@@ -1,4 +1,4 @@
-import * as theme from '../../utils/theme';
+
 import React, {PropTypes, Component} from 'react';
 import {
   StyleSheet,
@@ -122,7 +122,7 @@ class MultiplayView extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.colors.background,
+    backgroundColor: '#eaf8fd',
     justifyContent: 'center'
   },
   cityCard: {
@@ -132,13 +132,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     marginTop: 20
-  },
-  image: {
-    height: 180,
-    width: 180,
-    borderRadius: 90,
-    borderWidth: 3,
-    borderColor: theme.colors.tab
   },
   title: {
     marginTop: 20
@@ -150,14 +143,6 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 10,
     justifyContent: 'center'
-  },
-  spinner: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: window.width,
-    height: window.height,
-    backgroundColor: theme.colors.spinner
   }
 });
 

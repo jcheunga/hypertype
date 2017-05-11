@@ -1,4 +1,4 @@
-import * as theme from '../../utils/theme';
+
 import React, {PropTypes, Component} from 'react';
 import {
   StyleSheet,
@@ -118,7 +118,7 @@ class MultiplayTypeView extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.colors.background
+    backgroundColor: '#eaf8fd'
   }
 });
 

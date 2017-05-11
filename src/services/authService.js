@@ -4,7 +4,7 @@ import {
   REGISTER_ACCOUNT_SUCCESS,
   DELETE_ACCOUNT_SUCCESS,
   RESPONSE_FAILURE
-} from '../modules/profile/ProfileState';
+} from '../modules/auth/AuthState';
 
 import app from '../feathers';
 

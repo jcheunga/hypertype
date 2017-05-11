@@ -1,4 +1,4 @@
-import * as theme from '../../utils/theme';
+
 import React, {PropTypes, Component} from 'react';
 import {
   StyleSheet,
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: theme.colors.background
+    backgroundColor: '#eaf8fd'
   },
   userContainer: {
     justifyContent: 'center',

@@ -17,6 +17,7 @@ export const MainScreenNavigator = TabNavigator({
   Highscore: {screen: HighscoreViewContainer},
   Profile: {screen: ProfileViewContainer},
 }, {
+  // lazyLoad: true,
   tabBarPosition: 'bottom',
   tabBarOptions: {
     ...Platform.select({

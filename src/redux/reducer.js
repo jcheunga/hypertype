@@ -6,7 +6,7 @@ import PlayStateReducer from '../modules/play/PlayState';
 import ErrorStateReducer from '../modules/error/ErrorState';
 import MultiplayStateReducer from '../modules/multiplay/MultiplayState';
 import HighscoreStateReducer from '../modules/highscore/HighscoreState';
-import ProfileStateReducer from '../modules/profile/ProfileState';
+import AuthStateReducer from '../modules/auth/AuthState';
 
 import AppStateReducer from '../modules/AppState';
 import { feathersAuthentication} from '../feathers';
@@ -21,7 +21,7 @@ const reducers = {
   errorState: ErrorStateReducer,
   multiplayState: MultiplayStateReducer,
   highscoreState: HighscoreStateReducer,
-  profileState: ProfileStateReducer
+  authState: AuthStateReducer
 
   // auth: feathersAuthentication.reducer
 };

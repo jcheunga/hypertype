@@ -2,6 +2,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import ProfileView from './ProfileView';
 import {NavigationActions} from 'react-navigation';
+import * as AuthStateActions from './AuthState';
 
 
 export default connect(
@@ -10,7 +11,8 @@ export default connect(
   }),
   dispatch => {
     return {
-      navigationStateActions: bindActionCreators(NavigationActions, dispatch)
+      navigationStateActions: bindActionCreators(NavigationActions, dispatch),
+      authStateActions: bindActionCreators(AuthStateActions, dispatch)
     };
   }
 )(ProfileView);

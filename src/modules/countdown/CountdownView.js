@@ -3,7 +3,7 @@ import {
   Text,
   View
 } from 'react-native';
-import * as theme from '../../utils/theme';
+
 
 class CountdownView extends Component {
   static displayName = 'CountdownScreen';
