@@ -13,6 +13,9 @@ import {
   Button
 } from 'react-native';
 
+import LoginView from './LoginView';
+import RegisterView from './RegisterView';
+
 const window = Dimensions.get('window');
 
 class AuthView extends Component {
@@ -89,6 +92,9 @@ class AuthView extends Component {
     return (
       <View>
         <View style={styles.userContainer}>
+          <Text style={styles.bodyText}>
+            Login to save your scores and favourite quotes
+          </Text>
           <View>
             {this._showLoginView()}
             {this._showRegisterView()}

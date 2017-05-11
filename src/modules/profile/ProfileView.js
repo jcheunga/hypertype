@@ -1,4 +1,3 @@
-
 import React, {PropTypes, Component} from 'react';
 import {
   StyleSheet,
@@ -14,9 +13,8 @@ import {
   Button
 } from 'react-native';
 
-import LoginView from './LoginView';
-import RegisterView from './RegisterView';
 import UserProfileView from './UserProfileView';
+import AuthViewContainer from '../auth/AuthViewContainer';
 
 const window = Dimensions.get('window');
 
@@ -35,15 +33,14 @@ class ProfileView extends Component {
   }
 
   render() {
+    const userView = this.props.user ? <UserProfileView /> : <AuthViewContainer />;
     return (
       <View style={styles.container}>
         <View style={styles.userContainer}>
           <Text style={styles.bodyText}>
             { this.props.user ? "Welcome User" : "Welcome Guest 123456" }
           </Text>
-          <Text style={styles.bodyText}>
-            Login to save your scores and favourite quotes
-          </Text>
+          {userView}
         </View>
       </View>
     );
