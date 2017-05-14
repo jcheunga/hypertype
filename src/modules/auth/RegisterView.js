@@ -30,9 +30,16 @@ class RegisterView extends Component {
     super(props);
 
     this.state = {
+      username: "",
       email: "",
       password: ""
     };
+  }
+
+  _handleUsernameChange = (text) => {
+    this.setState({
+      username: text
+    });
   }
 
   _handleEmailChange = (text) => {
@@ -47,14 +54,16 @@ class RegisterView extends Component {
     });
   }
 
-  render() {
-    const commonInputProps = {
-      style: [styles.input, styles.greyFont],
-      placeholderTextColor: '#AAA',
-      autoCorrect: false,
-      autoCapitalize: 'none'
+  _registerAccount = () => {
+    const userData = {
+      username: this.state.username,
+      email: this.state.email,
+      password: this.state.password
     };
+    this.props.authStateActions.registerAccount(userData);
+  }
 
+  render() {
     return (
       <View>
         <View style={styles.userContainer}>
@@ -77,6 +86,17 @@ class RegisterView extends Component {
           <View>
             <TextInput
               style={styles.input}
+              placeholder='Username'
+              autoCorrect={false}
+              autoCapitalize='none'
+              returnKeyType='next'
+              value={this.state.username}
+              onChangeText={this._handleUsernameChange}
+            />
+          </View>
+          <View>
+            <TextInput
+              style={styles.input}
               secureTextEntry={true}
               placeholder='Password'
               autoCorrect={false}
@@ -88,7 +108,7 @@ class RegisterView extends Component {
           </View>
           <Button
             title="Register"
-            onPress={() => console.log("abc")}
+            onPress={() => this._registerAccount()}
           />
         </View>
       </View>

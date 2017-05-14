@@ -1,17 +1,20 @@
 import {loop, Effects} from 'redux-loop-symbol-ponyfill';
 import {NavigationActions} from 'react-navigation';
 import * as ErrorState from '../../modules/error/ErrorState';
-import { loginAccountService, logoutAccountService, registerAccountService, deleteAccountService } from '../../services/authService';
+import { loginAccountService, logoutAccountService, registerAccountService, deleteAccountService, authenticateAccountService } from '../../services/authService';
 
 // Initial state
 const initialState = {
   user: null,
+  authenticated: false,
   isLoggingIn: false,
   isLoggedIn: false,
   isLoggingOut: false,
   isLoggedOut: false,
   isRegistering: false,
   isRegisterd: false,
+  isAuthenticating: false,
+  isAuthenticated: false,
   hasError: false
 };
 
@@ -28,13 +31,16 @@ export const REGISTER_ACCOUNT_SUCCESS = 'AuthState/REGISTER_ACCOUNT_SUCCESS';
 const DELETE_ACCOUNT = 'AuthState/DELETE_ACCOUNT';
 export const DELETE_ACCOUNT_SUCCESS = 'AuthState/DELETE_ACCOUNT_SUCCESS';
 
+const AUTHENTICATE_ACCOUNT = 'AuthState/AUTHENTICATE_ACCOUNT';
+export const AUTHENTICATE_ACCOUNT_SUCCESS = 'AuthState/AUTHENTICATE_ACCOUNT_SUCCESS';
+
 export const RESPONSE_FAILURE = 'AuthState/RESPONSE_FAILURE';
 
 // Action creators
 export function loginAccount (userData) {
   return {
     type: LOGIN_ACCOUNT,
-    payload: {userData: userData}
+    payload: userData
   };
 }
 
@@ -47,13 +53,20 @@ export function logoutAccount () {
 export function registerAccount (userData) {
   return {
     type: REGISTER_ACCOUNT,
-    payload: {userData: userData}
+    payload: userData
   };
 }
 
 export function deleteAccount () {
   return {
     type: DELETE_ACCOUNT
+  };
+}
+
+export function authenticateAccount (userData) {
+  return {
+    type: AUTHENTICATE_ACCOUNT,
+    payload: userData
   };
 }
 
@@ -72,48 +85,52 @@ export default function AuthStateReducer(state = initialState, action = {}) {
       );
 
     case LOGIN_ACCOUNT_SUCCESS:
-      return {
-        ...state,
-        isLoggingIn: false,
-        isLoggedIn: action.payload.isLoggedIn,
-        user: action.payload.user
-      };
+      return loop(
+        {
+          ...state,
+          isLoggingIn: false,
+          isLoggedIn: action.payload.isLoggedIn
+        },
+        Effects.constant(authenticateAccount(action.payload))
+      );
 
     case LOGOUT_ACCOUNT:
       return loop(
         {
           ...state,
-          isLoggingIn: true,
-          isLoggedIn: false,
+          isLoggingOut: true,
+          isLoggedOut: false,
         },
-        Effects.promise(loginAccountService, action.payload)
+        Effects.promise(logoutAccountService, action.payload)
       );
 
     case LOGOUT_ACCOUNT_SUCCESS:
       return {
         ...state,
-        isLoggingIn: false,
-        isLoggedIn: action.payload.isLoggedIn,
-        user: action.payload.user
+        isLoggingOut: false,
+        isLoggedOut: action.payload.isLoggedOut,
+        user: null
       };
 
     case REGISTER_ACCOUNT:
       return loop(
         {
           ...state,
-          isLoggingIn: true,
-          isLoggedIn: false,
+          isRegistering: true,
+          isRegistered: false,
         },
-        Effects.promise(loginAccountService, action.payload)
+        Effects.promise(registerAccountService, action.payload)
       );
 
     case REGISTER_ACCOUNT_SUCCESS:
-      return {
-        ...state,
-        isLoggingIn: false,
-        isLoggedIn: action.payload.isLoggedIn,
-        user: action.payload.user
-      };
+      return loop(
+        {
+          ...state,
+          isRegistering: false,
+          isRegistered: action.payload.isRegistered
+        },
+        Effects.constant(authenticateAccount(action.payload.user))
+      );
 
     case DELETE_ACCOUNT:
       return loop(
@@ -122,7 +139,7 @@ export default function AuthStateReducer(state = initialState, action = {}) {
           isLoggingIn: true,
           isLoggedIn: false,
         },
-        Effects.promise(loginAccountService, action.payload)
+        Effects.promise(deleteAccountService, action.payload)
       );
 
     case DELETE_ACCOUNT_SUCCESS:
@@ -130,6 +147,24 @@ export default function AuthStateReducer(state = initialState, action = {}) {
         ...state,
         isLoggingIn: false,
         isLoggedIn: action.payload.isLoggedIn,
+        user: action.payload.user
+      };
+
+    case AUTHENTICATE_ACCOUNT:
+      return loop(
+        {
+          ...state,
+          isAuthenticating: true,
+          isAuthenticated: false,
+        },
+        Effects.promise(authenticateAccountService, action.payload)
+      );
+
+    case AUTHENTICATE_ACCOUNT_SUCCESS:
+      return {
+        ...state,
+        isAuthenticating: false,
+        isAuthenticated: action.payload.isAuthenticated,
         user: action.payload.user
       };
 
@@ -142,6 +177,8 @@ export default function AuthStateReducer(state = initialState, action = {}) {
         isLoggedOut: false,
         isRegistering: false,
         isRegisterd: false,
+        isAuthenticating: false,
+        isAuthenticated: false,
         hasError: true
       };
 

@@ -24,6 +24,12 @@ class AppView extends Component {
     app.io.on('connect', () => {
       console.log("app connected");
       this.props.AppStateActions.connectApp();
+
+      this.props.AuthStateActions.authenticateAccount().then(() => {
+        console.log('authenticated after reconnection');
+      }).catch(error => {
+        console.log('error authenticating after reconnection', error.message);
+      });
     });
 
     app.io.on('disconnect', () => {

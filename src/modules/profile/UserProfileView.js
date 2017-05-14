@@ -30,6 +30,14 @@ class UserProfileView extends Component {
     super(props);
   }
 
+  _logoutAccount = () => {
+    this.props.authStateActions.logoutAccount();
+  }
+
+  _deleteAccount = () => {
+    this.props.authStateActions.deleteAccount();
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -43,6 +51,10 @@ class UserProfileView extends Component {
           <Text style={styles.bodyText}>
             My Highscores
           </Text>
+          <Button
+            title="Login"
+            onPress={() => this._logoutAccount()}
+          />
         </View>
       </View>
     );

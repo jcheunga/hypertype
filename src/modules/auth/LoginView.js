@@ -30,14 +30,14 @@ class LoginView extends Component {
     super(props);
 
     this.state = {
-      email: "",
+      username: "",
       password: ""
     };
   }
 
-  _handleEmailChange = (text) => {
+  _handleUsernameChange = (text) => {
     this.setState({
-      email: text
+      username: text
     });
   }
 
@@ -45,6 +45,10 @@ class LoginView extends Component {
     this.setState({
       password: text
     });
+  }
+
+  _loginAccount = () => {
+    this.props.authStateActions.loginAccount();
   }
 
   render() {
@@ -58,11 +62,10 @@ class LoginView extends Component {
             <TextInput
               style={styles.input}
               // autoFocus={true}
-              placeholder='Email'
-              keyBoardType='email-address'
+              placeholder='Username'
               returnKeyType='next'
-              value={this.state.email}
-              onChangeText={this._handleEmailChange}
+              value={this.state.username}
+              onChangeText={this._handleUsernameChange}
             />
           </View>
           <View>
@@ -77,7 +80,7 @@ class LoginView extends Component {
           </View>
           <Button
             title="Login"
-            onPress={() => console.log("abc")}
+            onPress={() => this._loginAccount()}
           />
         </View>
       </View>

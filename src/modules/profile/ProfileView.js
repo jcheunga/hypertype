@@ -33,13 +33,10 @@ class ProfileView extends Component {
   }
 
   render() {
-    const userView = this.props.user ? <UserProfileView /> : <AuthViewContainer />;
+    const userView = this.props.user ? <UserProfileView {...this.props}/> : <AuthViewContainer />;
     return (
       <View style={styles.container}>
         <View style={styles.userContainer}>
-          <Text style={styles.bodyText}>
-            { this.props.user ? "Welcome User" : "Welcome Guest 123456" }
-          </Text>
           {userView}
         </View>
       </View>

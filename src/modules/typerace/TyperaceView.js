@@ -43,7 +43,7 @@ class TyperaceView extends Component {
 
     return wordArr.map(function(word, i) {
       return (
-        <Text style={{color: 'white', marginRight: 4}} key={i} word={i}>
+        <Text style={{color: 'blue', marginRight: 4}} key={i} word={i}>
           {
             word.map(function(letter , j) {
               return (

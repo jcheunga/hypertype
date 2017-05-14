@@ -37,23 +37,6 @@ class AuthView extends Component {
     };
   }
 
-
-  _loginAccount = () => {
-    this.props.authStateActions.loginAccount();
-  }
-
-  _logoutAccount = () => {
-    this.props.authStateActions.logoutAccount();
-  }
-
-  _registerAccount = () => {
-    this.props.authStateActions.registerAccount();
-  }
-
-  _deleteAccount = () => {
-    this.props.authStateActions.deleteAccount();
-  }
-
   _switchLoginView = () => {
     this.setState({
       loginView: true,
@@ -71,7 +54,7 @@ class AuthView extends Component {
   _showLoginView = () => {
     if (this.state.loginView) {
       return (
-        <LoginView />
+        <LoginView {...this.props}/>
       )
     } else {
       return null;
@@ -81,7 +64,7 @@ class AuthView extends Component {
   _showRegisterView = () => {
     if (this.state.registerView) {
       return (
-        <RegisterView />
+        <RegisterView {...this.props}/>
       )
     } else {
       return null;
@@ -92,6 +75,9 @@ class AuthView extends Component {
     return (
       <View>
         <View style={styles.userContainer}>
+          <Text style={styles.bodyText}>
+            Welcome Guest 123456
+          </Text>
           <Text style={styles.bodyText}>
             Login to save your scores and favourite quotes
           </Text>

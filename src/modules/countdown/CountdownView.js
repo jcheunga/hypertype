@@ -39,9 +39,9 @@ class CountdownView extends Component {
   render() {
     return (
       <View>
-        <Text style={{color: 'white'}}>Countdown: {this.state.countdownTime === 0 ? 'GO!' : this.state.countdownTime}</Text>
-        <Text style={{color: 'white'}}>Number of players joined: 5</Text>
-        <Text style={{color: 'white'}}>Half screen ad</Text>
+        <Text style={{color: 'blue'}}>Countdown: {this.state.countdownTime === 0 ? 'GO!' : this.state.countdownTime}</Text>
+        <Text style={{color: 'blue'}}>Number of players joined: 5</Text>
+        <Text style={{color: 'blue'}}>Half screen ad</Text>
       </View>
     );
   }

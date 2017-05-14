@@ -3,6 +3,7 @@ import {
   LOGOUT_ACCOUNT_SUCCESS,
   REGISTER_ACCOUNT_SUCCESS,
   DELETE_ACCOUNT_SUCCESS,
+  AUTHENTICATE_ACCOUNT_SUCCESS,
   RESPONSE_FAILURE
 } from '../modules/auth/AuthState';
 
@@ -11,20 +12,12 @@ import app from '../feathers';
 export function loginAccountService (payload) {
 
   const loginAccount = new Promise(function(resolve, reject) {
-    // app.service("highscores")
-    //   .find()
-    //   .then((res) => {
-    //     resolve({
-    //       data: res.data,
-    //       isFetched: true
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     reject({
-    //       message: err,
-    //       hasError: true
-    //     })
-    //   });
+    const userData = {
+      username: payload.username,
+      email: payload.email,
+      password: payload.password
+    };
+    // return authenticate(payload);
   });
 
   return loginAccount
@@ -35,20 +28,16 @@ export function loginAccountService (payload) {
 export function logoutAccountService (payload) {
 
   const logoutAccount = new Promise(function(resolve, reject) {
-    // app.service("highscores")
-    //   .find()
-    //   .then((res) => {
-    //     resolve({
-    //       data: res.data,
-    //       isFetched: true
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     reject({
-    //       message: err,
-    //       hasError: true
-    //     })
-    //   });
+    app.logout()
+      .then((result) => {
+        console.log(result);
+        resolve({
+          isLoggedOut: true
+        });
+      })
+      .catch((error) => {
+        reject(error)
+      });
   });
 
   return logoutAccount
@@ -57,22 +46,22 @@ export function logoutAccountService (payload) {
 }
 
 export function registerAccountService (payload) {
-
+  const userData = {
+    username: payload.username,
+    email: payload.email,
+    password: payload.password
+  };
   const registerAccount = new Promise(function(resolve, reject) {
-    // app.service("highscores")
-    //   .find()
-    //   .then((res) => {
-    //     resolve({
-    //       data: res.data,
-    //       isFetched: true
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     reject({
-    //       message: err,
-    //       hasError: true
-    //     })
-    //   });
+    app.service('users').create(userData)
+      .then((result) => {
+        resolve({
+          isRegistered: true,
+          user: result
+        });
+      })
+      .catch((error) => {
+        reject(error)
+      });
   });
 
   return registerAccount
@@ -83,23 +72,56 @@ export function registerAccountService (payload) {
 export function deleteAccountService (payload) {
 
   const deleteAccount = new Promise(function(resolve, reject) {
-    // app.service("highscores")
-    //   .find()
-    //   .then((res) => {
-    //     resolve({
-    //       data: res.data,
-    //       isFetched: true
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     reject({
-    //       message: err,
-    //       hasError: true
-    //     })
-    //   });
+
   });
 
   return deleteAccount
     .then((response) => ({type: DELETE_ACCOUNT_SUCCESS, payload: response }))
+    .catch((error) => ({type: RESPONSE_FAILURE, payload: error}))
+}
+
+export function authenticateAccountService (payload) {
+  console.log(payload);
+  if (payload) {
+    const userData = {
+      strategy: 'local',
+      username: payload.username,
+      password: payload.password
+    };
+  }
+
+  const authenticateAccount = new Promise(function(resolve, reject) {
+    console.log("started");
+    if (payload) {
+      authenticate(userData);
+    } else {
+      authenticate();
+    }
+
+    function authenticate(options) {
+      options = options ? options : undefined;
+      return this._authenticate(options).then(user => {
+        console.log('authenticated successfully', user._id, user.email);
+        return Promise.resolve(user);
+      }).catch(error => {
+        console.log('authenticated failed', error.message);
+        console.log(error);
+        return Promise.reject(error);
+      });
+    }
+
+    function _authenticate(payload) {
+      return app.authenticate(payload)
+        .then(response => {
+          return app.passport.verifyJWT(response.accessToken);
+        })
+        .then(payload => {
+          return app.service('users').get(payload.userId);
+        }).catch(e => Promise.reject(e));
+    }
+  });
+
+  return authenticateAccount
+    .then((response) => ({type: AUTHENTICATE_ACCOUNT_SUCCESS, payload: response }))
     .catch((error) => ({type: RESPONSE_FAILURE, payload: error}))
 }
