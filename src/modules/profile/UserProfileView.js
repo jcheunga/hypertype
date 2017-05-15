@@ -52,7 +52,7 @@ class UserProfileView extends Component {
             My Highscores
           </Text>
           <Button
-            title="Login"
+            title="Logout"
             onPress={() => this._logoutAccount()}
           />
         </View>

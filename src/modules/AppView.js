@@ -7,6 +7,7 @@ import store from '../redux/store';
 import DeveloperMenu from '../components/DeveloperMenu';
 
 import app from '../feathers';
+import { AsyncStorage } from 'react-native';
 
 class AppView extends Component {
   static displayName = 'AppView';
@@ -25,11 +26,14 @@ class AppView extends Component {
       console.log("app connected");
       this.props.AppStateActions.connectApp();
 
-      this.props.AuthStateActions.authenticateAccount().then(() => {
-        console.log('authenticated after reconnection');
-      }).catch(error => {
-        console.log('error authenticating after reconnection', error.message);
-      });
+      if (AsyncStorage['feathers-jwt']) {
+        this.props.AuthStateActions.authenticateAccount().then(() => {
+          console.log('authenticated after reconnection');
+        }).catch(error => {
+          console.log('error authenticating after reconnection');
+        });
+      }
+
     });
 
     app.io.on('disconnect', () => {

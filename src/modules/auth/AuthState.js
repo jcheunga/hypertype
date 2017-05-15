@@ -1,14 +1,11 @@
 import {loop, Effects} from 'redux-loop-symbol-ponyfill';
 import {NavigationActions} from 'react-navigation';
 import * as ErrorState from '../../modules/error/ErrorState';
-import { loginAccountService, logoutAccountService, registerAccountService, deleteAccountService, authenticateAccountService } from '../../services/authService';
+import { authenticateAccountService, logoutAccountService, registerAccountService, deleteAccountService } from '../../services/authService';
 
 // Initial state
 const initialState = {
   user: null,
-  authenticated: false,
-  isLoggingIn: false,
-  isLoggedIn: false,
   isLoggingOut: false,
   isLoggedOut: false,
   isRegistering: false,
@@ -19,8 +16,8 @@ const initialState = {
 };
 
 // Actions
-const LOGIN_ACCOUNT = 'AuthState/LOGIN_ACCOUNT';
-export const LOGIN_ACCOUNT_SUCCESS = 'AuthState/LOGIN_ACCOUNT_SUCCESS';
+const AUTHENTICATE_ACCOUNT = 'AuthState/AUTHENTICATE_ACCOUNT';
+export const AUTHENTICATE_ACCOUNT_SUCCESS = 'AuthState/AUTHENTICATE_ACCOUNT_SUCCESS';
 
 const LOGOUT_ACCOUNT = 'AuthState/LOGOUT_ACCOUNT';
 export const LOGOUT_ACCOUNT_SUCCESS = 'AuthState/LOGOUT_ACCOUNT_SUCCESS';
@@ -31,15 +28,12 @@ export const REGISTER_ACCOUNT_SUCCESS = 'AuthState/REGISTER_ACCOUNT_SUCCESS';
 const DELETE_ACCOUNT = 'AuthState/DELETE_ACCOUNT';
 export const DELETE_ACCOUNT_SUCCESS = 'AuthState/DELETE_ACCOUNT_SUCCESS';
 
-const AUTHENTICATE_ACCOUNT = 'AuthState/AUTHENTICATE_ACCOUNT';
-export const AUTHENTICATE_ACCOUNT_SUCCESS = 'AuthState/AUTHENTICATE_ACCOUNT_SUCCESS';
-
 export const RESPONSE_FAILURE = 'AuthState/RESPONSE_FAILURE';
 
 // Action creators
-export function loginAccount (userData) {
+export function authenticateAccount (userData) {
   return {
-    type: LOGIN_ACCOUNT,
+    type: AUTHENTICATE_ACCOUNT,
     payload: userData
   };
 }
@@ -63,36 +57,27 @@ export function deleteAccount () {
   };
 }
 
-export function authenticateAccount (userData) {
-  return {
-    type: AUTHENTICATE_ACCOUNT,
-    payload: userData
-  };
-}
-
 // Reducer
 export default function AuthStateReducer(state = initialState, action = {}) {
 
   switch (action.type) {
-    case LOGIN_ACCOUNT:
+    case AUTHENTICATE_ACCOUNT:
       return loop(
         {
           ...state,
-          isLoggingIn: true,
-          isLoggedIn: false,
+          isAuthenticating: true,
+          isAuthenticated: false,
         },
-        Effects.promise(loginAccountService, action.payload)
+        Effects.promise(authenticateAccountService, action.payload)
       );
 
-    case LOGIN_ACCOUNT_SUCCESS:
-      return loop(
-        {
-          ...state,
-          isLoggingIn: false,
-          isLoggedIn: action.payload.isLoggedIn
-        },
-        Effects.constant(authenticateAccount(action.payload))
-      );
+    case AUTHENTICATE_ACCOUNT_SUCCESS:
+      return {
+        ...state,
+        isAuthenticating: false,
+        isAuthenticated: action.payload.isAuthenticated,
+        user: action.payload.user
+      };
 
     case LOGOUT_ACCOUNT:
       return loop(
@@ -123,6 +108,7 @@ export default function AuthStateReducer(state = initialState, action = {}) {
       );
 
     case REGISTER_ACCOUNT_SUCCESS:
+      console.log(action.payload);
       return loop(
         {
           ...state,
@@ -147,24 +133,6 @@ export default function AuthStateReducer(state = initialState, action = {}) {
         ...state,
         isLoggingIn: false,
         isLoggedIn: action.payload.isLoggedIn,
-        user: action.payload.user
-      };
-
-    case AUTHENTICATE_ACCOUNT:
-      return loop(
-        {
-          ...state,
-          isAuthenticating: true,
-          isAuthenticated: false,
-        },
-        Effects.promise(authenticateAccountService, action.payload)
-      );
-
-    case AUTHENTICATE_ACCOUNT_SUCCESS:
-      return {
-        ...state,
-        isAuthenticating: false,
-        isAuthenticated: action.payload.isAuthenticated,
         user: action.payload.user
       };
 

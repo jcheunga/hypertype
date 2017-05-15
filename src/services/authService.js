@@ -1,5 +1,4 @@
 import {
-  LOGIN_ACCOUNT_SUCCESS,
   LOGOUT_ACCOUNT_SUCCESS,
   REGISTER_ACCOUNT_SUCCESS,
   DELETE_ACCOUNT_SUCCESS,
@@ -9,28 +8,11 @@ import {
 
 import app from '../feathers';
 
-export function loginAccountService (payload) {
-
-  const loginAccount = new Promise(function(resolve, reject) {
-    const userData = {
-      username: payload.username,
-      email: payload.email,
-      password: payload.password
-    };
-    // return authenticate(payload);
-  });
-
-  return loginAccount
-    .then((response) => ({type: LOGIN_ACCOUNT_SUCCESS, payload: response }))
-    .catch((error) => ({type: RESPONSE_FAILURE, payload: error}))
-}
-
 export function logoutAccountService (payload) {
 
   const logoutAccount = new Promise(function(resolve, reject) {
     app.logout()
       .then((result) => {
-        console.log(result);
         resolve({
           isLoggedOut: true
         });
@@ -52,8 +34,10 @@ export function registerAccountService (payload) {
     password: payload.password
   };
   const registerAccount = new Promise(function(resolve, reject) {
+    console.log(app);
     app.service('users').create(userData)
       .then((result) => {
+        console.log(result);
         resolve({
           isRegistered: true,
           user: result
@@ -81,44 +65,57 @@ export function deleteAccountService (payload) {
 }
 
 export function authenticateAccountService (payload) {
-  console.log(payload);
-  if (payload) {
-    const userData = {
+  const userData = payload ?
+    {
       strategy: 'local',
-      username: payload.username,
+      email: payload.username,
       password: payload.password
-    };
-  }
+    } :
+    undefined;
 
   const authenticateAccount = new Promise(function(resolve, reject) {
-    console.log("started");
-    if (payload) {
-      authenticate(userData);
-    } else {
-      authenticate();
-    }
-
-    function authenticate(options) {
-      options = options ? options : undefined;
-      return this._authenticate(options).then(user => {
-        console.log('authenticated successfully', user._id, user.email);
-        return Promise.resolve(user);
-      }).catch(error => {
-        console.log('authenticated failed', error.message);
-        console.log(error);
-        return Promise.reject(error);
+    console.log("starting auth");
+    app.authenticate(userData)
+    .then(response => {
+      console.log(response);
+      return app.passport.verifyJWT(response.accessToken);
+    })
+    .then(payload => {
+      console.log(payload);
+      resolve({
+        isAuthenticated: true,
+        user: app.service('users').get(payload.userId)
       });
-    }
+    })
+    .catch(error => {
+      console.log(error);
+      reject(error);
+    });
 
-    function _authenticate(payload) {
-      return app.authenticate(payload)
-        .then(response => {
-          return app.passport.verifyJWT(response.accessToken);
-        })
-        .then(payload => {
-          return app.service('users').get(payload.userId);
-        }).catch(e => Promise.reject(e));
-    }
+
+    // _authenticate(userData).then(user => {
+    //   console.log('authenticated successfully');
+    //   resolve({
+    //     isAuthenticated: true,
+    //     user: user
+    //   });
+    // })
+    // .catch(error => {
+    //   console.log('authenticated failed', error.message);
+    //   reject(error);
+    // });
+
+    // function _authenticate(userData) {
+    //   return app.authenticate(userData)
+    //     .then(response => {
+    //       return app.passport.verifyJWT(response.accessToken);
+    //     })
+    //     .then(payload => {
+    //       console.log(payload);
+    //       return app.service('users').get(payload.userId);
+    //     })
+    //     .catch(error => {reject(error)});
+    // }
   });
 
   return authenticateAccount

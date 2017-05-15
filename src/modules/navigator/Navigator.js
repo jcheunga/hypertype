@@ -18,6 +18,7 @@ export const MainScreenNavigator = TabNavigator({
   Profile: {screen: ProfileViewContainer},
 }, {
   // lazyLoad: true,
+  swipeEnabled: false,
   tabBarPosition: 'bottom',
   tabBarOptions: {
     ...Platform.select({
