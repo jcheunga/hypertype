@@ -38,8 +38,6 @@ export const START_GAME_FOR_JOINS_SUCCESS = 'MultiplayState/START_GAME_FOR_JOINS
 
 export const LEAVE_GAME = 'MultiplayState/LEAVE_GAME';
 
-const MESS_WITH_PROPS = 'MultiplayState/MESS_WITH_PROPS';
-
 // Action creators
 export function createGame(inGame) {
   return {
@@ -72,12 +70,6 @@ export function startGameForJoins(gameId) {
 export function leaveGame() {
   return {
     type: LEAVE_GAME
-  };
-}
-
-export function messWithProps() {
-  return {
-    type: MESS_WITH_PROPS
   };
 }
 
@@ -197,12 +189,6 @@ export default function MultiplayStateReducer(state = initialState, action = {})
         },
         Effects.constant(ErrorState.addError(action.payload))
       );
-
-    case MESS_WITH_PROPS:
-      return {
-        ...state,
-        joinGameStarted: true
-      };
 
     default:
       return state;

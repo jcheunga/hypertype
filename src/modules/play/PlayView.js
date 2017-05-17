@@ -28,7 +28,6 @@ class PlayView extends Component {
   componentWillMount () {
     this.props.playStateActions.leaveGame();
     this.props.multiplayStateActions.leaveGame();
-    // PROBABY USE COMPONENTWILLMOUNT
   }
 
   quickPlay = () => {

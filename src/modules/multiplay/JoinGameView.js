@@ -83,10 +83,6 @@ class JoinGameView extends Component {
             title="Return to mutliplayer menu"
             onPress={() => this.props.resetView()}
           />
-          <Button
-            title="Mess with props"
-            onPress={() => this.props.messWithProps()}
-          />
         </View>
       </View>
     );
