@@ -43,10 +43,10 @@ class UserProfileView extends Component {
       <View style={styles.container}>
         <View style={styles.userContainer}>
           <Text style={styles.bodyText}>
-            Welcome User!
+            Welcome {this.props.user.usernames}!
           </Text>
           <Text style={styles.bodyText}>
-            Profile
+            {this.props.user.createdAt}
           </Text>
           <Text style={styles.bodyText}>
             My Highscores

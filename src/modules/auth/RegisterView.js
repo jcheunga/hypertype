@@ -56,7 +56,7 @@ class RegisterView extends Component {
 
   _registerAccount = () => {
     const userData = {
-      username: this.state.username,
+      usernames: this.state.username,
       email: this.state.email,
       password: this.state.password
     };

@@ -66,6 +66,7 @@ class JoinGameView extends Component {
             Enter in game id to join game
           </Text>
           <TextInput
+            autoCapitalize='none'
             editable={!this.state.gameJoined}
             onChange={(e) => this.handleIdInput(e)}
             value={this.state.enteredGameId}

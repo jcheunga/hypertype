@@ -29,22 +29,19 @@ export function logoutAccountService (payload) {
 
 export function registerAccountService (payload) {
   const userData = {
-    user_name: payload.username,
+    usernames: payload.usernames,
     email: payload.email,
     password: payload.password
   };
-  console.log("register");
-  console.log(userData);
   const registerAccount = new Promise(function(resolve, reject) {
     app.service('users').create(userData)
       .then((result) => {
         resolve({
           isRegistered: true,
-          user: result
+          user: Object.assign({}, result, {password: payload.password})
         });
       })
       .catch((error) => {
-        console.log(error);
         reject(error)
       });
   });
@@ -66,11 +63,10 @@ export function deleteAccountService (payload) {
 }
 
 export function authenticateAccountService (payload) {
-  console.log(payload);
   const userData = payload ?
     {
       strategy: 'local',
-      user_name: payload.username,
+      usernames: payload.usernames,
       password: payload.password
     } :
     undefined;
@@ -81,14 +77,15 @@ export function authenticateAccountService (payload) {
       return app.passport.verifyJWT(response.accessToken);
     })
     .then(payload => {
-      console.log(app.service('users').get(payload.userId));
+      return app.service('users').get(payload.userId);
+    })
+    .then(payload => {
       resolve({
         isAuthenticated: true,
-        user: app.service('users').get(payload.userId)
+        user: payload
       });
     })
     .catch(error => {
-      console.log(error);
       reject(error);
     });
   });

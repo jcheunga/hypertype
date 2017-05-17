@@ -76,7 +76,7 @@ export default function AuthStateReducer(state = initialState, action = {}) {
         ...state,
         isAuthenticating: false,
         isAuthenticated: action.payload.isAuthenticated,
-        user: true
+        user: action.payload.user
       };
 
     case LOGOUT_ACCOUNT:
@@ -113,22 +113,21 @@ export default function AuthStateReducer(state = initialState, action = {}) {
       );
 
     case REGISTER_ACCOUNT_SUCCESS:
-      console.log(action.payload);
       return loop(
         {
           ...state,
           isRegistering: false,
           isRegistered: action.payload.isRegistered
         },
-        Effects.constant(authenticateAccount(action.payload))
+        Effects.constant(authenticateAccount(action.payload.user))
       );
 
     case DELETE_ACCOUNT:
       return loop(
         {
           ...state,
-          isLoggingIn: true,
-          isLoggedIn: false,
+          isDeleting: true,
+          isDeleted: false,
         },
         Effects.promise(deleteAccountService, action.payload)
       );
@@ -136,9 +135,8 @@ export default function AuthStateReducer(state = initialState, action = {}) {
     case DELETE_ACCOUNT_SUCCESS:
       return {
         ...state,
-        isLoggingIn: false,
-        isLoggedIn: action.payload.isLoggedIn,
-        user: action.payload.user
+        isDeleting: false,
+        isDeleted: action.payload.isDeleted
       };
 
     case RESPONSE_FAILURE:
