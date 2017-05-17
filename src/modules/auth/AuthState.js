@@ -76,7 +76,7 @@ export default function AuthStateReducer(state = initialState, action = {}) {
         ...state,
         isAuthenticating: false,
         isAuthenticated: action.payload.isAuthenticated,
-        user: action.payload.user
+        user: true
       };
 
     case LOGOUT_ACCOUNT:
@@ -92,9 +92,14 @@ export default function AuthStateReducer(state = initialState, action = {}) {
     case LOGOUT_ACCOUNT_SUCCESS:
       return {
         ...state,
+        user: null,
         isLoggingOut: false,
         isLoggedOut: action.payload.isLoggedOut,
-        user: null
+        isRegistering: false,
+        isRegisterd: false,
+        isAuthenticating: false,
+        isAuthenticated: false,
+        hasError: false
       };
 
     case REGISTER_ACCOUNT:
@@ -115,7 +120,7 @@ export default function AuthStateReducer(state = initialState, action = {}) {
           isRegistering: false,
           isRegistered: action.payload.isRegistered
         },
-        Effects.constant(authenticateAccount(action.payload.user))
+        Effects.constant(authenticateAccount(action.payload))
       );
 
     case DELETE_ACCOUNT:

@@ -29,21 +29,22 @@ export function logoutAccountService (payload) {
 
 export function registerAccountService (payload) {
   const userData = {
-    username: payload.username,
+    user_name: payload.username,
     email: payload.email,
     password: payload.password
   };
+  console.log("register");
+  console.log(userData);
   const registerAccount = new Promise(function(resolve, reject) {
-    console.log(app);
     app.service('users').create(userData)
       .then((result) => {
-        console.log(result);
         resolve({
           isRegistered: true,
           user: result
         });
       })
       .catch((error) => {
+        console.log(error);
         reject(error)
       });
   });
@@ -65,23 +66,22 @@ export function deleteAccountService (payload) {
 }
 
 export function authenticateAccountService (payload) {
+  console.log(payload);
   const userData = payload ?
     {
       strategy: 'local',
-      email: payload.username,
+      user_name: payload.username,
       password: payload.password
     } :
     undefined;
 
   const authenticateAccount = new Promise(function(resolve, reject) {
-    console.log("starting auth");
     app.authenticate(userData)
     .then(response => {
-      console.log(response);
       return app.passport.verifyJWT(response.accessToken);
     })
     .then(payload => {
-      console.log(payload);
+      console.log(app.service('users').get(payload.userId));
       resolve({
         isAuthenticated: true,
         user: app.service('users').get(payload.userId)
@@ -91,31 +91,6 @@ export function authenticateAccountService (payload) {
       console.log(error);
       reject(error);
     });
-
-
-    // _authenticate(userData).then(user => {
-    //   console.log('authenticated successfully');
-    //   resolve({
-    //     isAuthenticated: true,
-    //     user: user
-    //   });
-    // })
-    // .catch(error => {
-    //   console.log('authenticated failed', error.message);
-    //   reject(error);
-    // });
-
-    // function _authenticate(userData) {
-    //   return app.authenticate(userData)
-    //     .then(response => {
-    //       return app.passport.verifyJWT(response.accessToken);
-    //     })
-    //     .then(payload => {
-    //       console.log(payload);
-    //       return app.service('users').get(payload.userId);
-    //     })
-    //     .catch(error => {reject(error)});
-    // }
   });
 
   return authenticateAccount

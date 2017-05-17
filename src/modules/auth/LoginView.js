@@ -50,7 +50,6 @@ class LoginView extends Component {
   _loginAccount = () => {
     const userData = {
       username: this.state.username,
-      // email: this.state.email,
       password: this.state.password
     };
     this.props.authStateActions.authenticateAccount(userData);

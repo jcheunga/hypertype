@@ -26,6 +26,19 @@ class AppView extends Component {
       console.log("app connected");
       this.props.AppStateActions.connectApp();
 
+      const userData = {
+        email: "pop",
+        username: "pop",
+        password: "pop"
+      };
+      app.service('users').create(userData)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
       if (AsyncStorage['feathers-jwt']) {
         this.props.AuthStateActions.authenticateAccount().then(() => {
           console.log('authenticated after reconnection');
