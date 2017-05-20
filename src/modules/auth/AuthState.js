@@ -3,9 +3,12 @@ import {NavigationActions} from 'react-navigation';
 import * as ErrorState from '../../modules/error/ErrorState';
 import { authenticateAccountService, logoutAccountService, registerAccountService, deleteAccountService } from '../../services/authService';
 
+import { createRandomGuestUserId } from '../../utils/Utils';
+
 // Initial state
 const initialState = {
   user: null,
+  guestUsername: createRandomGuestUserId(),
   isLoggingOut: false,
   isLoggedOut: false,
   isRegistering: false,

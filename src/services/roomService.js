@@ -8,83 +8,74 @@ import { createRandomGameId, getQuoteToType } from '../utils/Utils';
 import app from '../feathers';
 
 export function findRoomService (payload) {
-  const user = "abc";
-  const foundGame = false;
-  const createGameIdAdded = true;
-  const countdownAmount = 1000;
+  const user = payload.user;
+  const countdownAmount = 5000;
 
   const fetchGame = new Promise(function(resolve, reject) {
-
     app.service("rooms")
       .find({
         $limit: 1,
         query: {
-          countdownEndTime: {
-            $lte: Date.now() + 5000
+          gameStartTime: {
+            $gte: Date.now() + countdownAmount
           }
         }
       })
-      .then((payload) => {
-        console.log(payload);
-        // if (payload.total === 0) {
-        //   return app.service("rooms").update({
+      .then((response) => {
+        if (response.total !== 0) {
+          const playerToAdd = {
+            playerId: payload.user.usernames,
+            gameCreator: false,
+            wpm: 0,
+            completed: false
+          };
+          const roomId = response.data[0]._id;
+          const patchedplayerList = response.data[0].playerList;
+          patchedplayerList.push(playerToAdd);
+          return app.service("rooms").patch(roomId, {
+            playerList: patchedplayerList
+          });
+        } else {
+          const quoteToType = getQuoteToType();
+          const createGameId = createRandomGameId();
+          const countdownStartTime = Date.now();
+          const gameStartTime = countdownStartTime + countdownAmount;
+          const gameEndTime = gameStartTime + 120000;
 
-        //   })
-        // } else {
-        //   return app.service("rooms").create({
-
-        //   })
-        // }
+          const createRoomData = {
+            gameId: createGameId,
+            gameStartTime: gameStartTime,
+            gameEndTime: gameEndTime,
+            quoteToType: quoteToType,
+            quoteAfflink: quoteToType,
+            playerList: [
+              {
+                playerId: payload.user.usernames,
+                gameCreator: true,
+                wpm: 0,
+                completed: false
+              }
+            ]
+          };
+          return app.service("rooms").create(createRoomData);
+        }
       })
-      // .then((response) => {
-      //   resolve();
-      // })
+      .then((response) => {
+        resolve(
+          {
+            gameId: response.gameId,
+            gameStartTime: response.gameStartTime,
+            gameEndTime: response.gameEndTime,
+            quoteToType: response.quoteToType,
+            quoteAfflink: response.quoteAfflink,
+            inGame: true
+          }
+        );
+      })
       .catch((error) => {
         console.log(error);
-        reject({ message: "Error creating" });
+        reject({ message: error });
       })
-
-    // if (foundGame) {
-    //   const quoteToType = getQuoteToType();
-    //   const quoteReferralURL = "www.google.com";
-    //   const findGameId = "123456";
-    //   const countdownStartTime = Date.now();
-    //   const countdownEndTime = countdownStartTime + countdownAmount;
-    //   if (hasGameId) {
-    //     resolve(
-    //       {
-    //         gameId: findGameId,
-    //         countdownStartTime: countdownStartTime,
-    //         countdownEndTime: countdownEndTime,
-    //         quoteToType: quoteToType,
-    //         quoteReferralURL: quoteReferralURL,
-    //         inGame: true
-    //       }
-    //     );
-    //   } else {
-    //     reject({ message: "Error joining" })
-    //   }
-    // } else {
-    //   const createGameId = createRandomGameId();
-    //   const quoteToType = getQuoteToType();
-    //   const quoteReferralURL = "www.google.com";
-    //   const countdownStartTime = Date.now();
-    //   const countdownEndTime = countdownStartTime + countdownAmount;
-    //   if (createGameIdAdded) {
-    //     resolve(
-    //       {
-    //         gameId: createGameId,
-    //         countdownStartTime: countdownStartTime,
-    //         countdownEndTime: countdownEndTime,
-    //         quoteToType: quoteToType,
-    //         quoteReferralURL: quoteReferralURL,
-    //         inGame: true
-    //       }
-    //     );
-    //   } else {
-    //     reject({ message: "Error creating" })
-    //   }
-    // }
   });
 
   return fetchGame

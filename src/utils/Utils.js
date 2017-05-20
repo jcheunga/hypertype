@@ -8,6 +8,14 @@ export function getRandomNumberBetweenRange(max, min) {
 }
 
 export function createRandomGameId () {
+  var alphabet = "abcdefghijklmnopqrstuvwxyz";
+  var letterPart = alphabet[getRandomNumberBetweenRange(0, 26)] + alphabet[getRandomNumberBetweenRange(0, 26)];
+  var numberPart = getRandomNumberBetweenRange(1000, 9999).toString();
+  var totalGameId = letterPart + numberPart;
+  return totalGameId
+}
+
+export function createRandomGuestUserId () {
   var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var letterPart = alphabet[getRandomNumberBetweenRange(0, 26)] + alphabet[getRandomNumberBetweenRange(0, 26)];
   var numberPart = getRandomNumberBetweenRange(1000, 9999).toString();

@@ -28,7 +28,7 @@ class MultiplayTypeView extends Component {
     super(props)
 
     this.state = {
-      countdownEndTime: countdownToSeconds(props.countdownEndTime),
+      gameStartTime: countdownToSeconds(props.gameStartTime),
       countdownView: false,
       typingView: false,
       scoreView: false
@@ -36,7 +36,7 @@ class MultiplayTypeView extends Component {
   }
 
   componentWillMount () {
-    if (!this.props.gameId || !this.props.inGame || countdownToSeconds(this.props.countdownEndTime) < 0 || countdownToSeconds(this.props.countdownEndTime) > 10) {
+    if (!this.props.gameId || !this.props.inGame || countdownToSeconds(this.props.gameStartTime) < 0 || countdownToSeconds(this.props.gameStartTime) > 10) {
       this.leaveGame();
     } else {
       this.setState({countdownView: true});
@@ -44,12 +44,12 @@ class MultiplayTypeView extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.countdownEndTime) {
-      if (countdownToSeconds(nextProps.countdownEndTime) < 0 || countdownToSeconds(nextProps.countdownEndTime) > 10) {
+    if (nextProps.gameStartTime) {
+      if (countdownToSeconds(nextProps.gameStartTime) < 0 || countdownToSeconds(nextProps.gameStartTime) > 10) {
         this.leaveGame();
       } else {
         this.setState({
-          countdownEndTime: countdownToSeconds(nextProps.countdownEndTime),
+          gameStartTime: countdownToSeconds(nextProps.gameStartTime),
           countdownView: true,
           scoreView: false,
           typingView: false
@@ -93,7 +93,7 @@ class MultiplayTypeView extends Component {
 
   render () {
     const showCountdownView = this.state.countdownView && this.props.inGame && this.props.gameId ?
-      <CountdownView {...this.props} finishCountdown={this.finishCountdown} countdownEndTime={this.state.countdownEndTime}/>
+      <CountdownView {...this.props} finishCountdown={this.finishCountdown} gameStartTime={this.state.gameStartTime}/>
     : null;
 
     const showTypingView = this.state.typingView && this.props.inGame && this.props.gameId ?

@@ -9,10 +9,10 @@ const initialState = {
   isLoading: false,
   inGame: false,
   gameId: null,
-  countdownStartTime: null,
-  countdownEndTime: null,
+  gameStartTime: null,
+  gameEndTime: null,
   quoteToType: null,
-  quoteReferralURL: null
+  quoteAfflink: null
 };
 
 // Actions
@@ -23,10 +23,10 @@ export const FIND_NEW_GAME_SUCCESS = 'PlayState/FIND_NEW_GAME_SUCCESS';
 export const LEAVE_GAME = 'PlayState/LEAVE_GAME';
 
 // Action creators
-export function findGame(inGame) {
+export function findGame(inGame, user) {
   return {
     type: FIND_GAME,
-    payload: {inGame: inGame}
+    payload: {inGame: inGame, user: user}
   };
 }
 
@@ -56,10 +56,10 @@ export default function PlayStateReducer(state = initialState, action = {}) {
           isLoading: false,
           inGame: action.payload.inGame,
           gameId: action.payload.gameId,
-          countdownStartTime: action.payload.countdownStartTime,
-          countdownEndTime: action.payload.countdownEndTime,
+          gameStartTime: action.payload.gameStartTime,
+          gameEndTime: action.payload.gameEndTime,
           quoteToType: action.payload.quoteToType,
-          quoteReferralURL: action.payload.quoteReferralURL
+          quoteAfflink: action.payload.quoteReferralURL
         },
         Effects.constant(NavigationActions.navigate({
           routeName: 'TypeView'
@@ -73,10 +73,10 @@ export default function PlayStateReducer(state = initialState, action = {}) {
         isLoading: false,
         inGame: action.payload.inGame,
         gameId: action.payload.gameId,
-        countdownStartTime: action.payload.countdownStartTime,
-        countdownEndTime: action.payload.countdownEndTime,
+        gameStartTime: action.payload.gameStartTime,
+        gameEndTime: action.payload.gameEndTime,
         quoteToType: action.payload.quoteToType,
-        quoteReferralURL: action.payload.quoteReferralURL
+        quoteAfflink: action.payload.quoteReferralURL
       };
 
     case LEAVE_GAME:
@@ -86,10 +86,10 @@ export default function PlayStateReducer(state = initialState, action = {}) {
           isLoading: false,
           inGame: false,
           gameId: null,
-          countdownStartTime: null,
-          countdownEndTime: null,
+          gameStartTime: null,
+          gameEndTime: null,
           quoteToType: null,
-          quoteReferralURL: null
+          quoteAfflink: null
         },
         Effects.constant(ErrorState.addError(action.payload))
       );

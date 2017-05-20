@@ -23,7 +23,6 @@ class AppView extends Component {
 
   connect = () => {
     app.io.on('connect', () => {
-      console.log("app connected");
       this.props.AppStateActions.connectApp();
 
       if (AsyncStorage['feathers-jwt']) {
@@ -34,7 +33,6 @@ class AppView extends Component {
     });
 
     app.io.on('disconnect', () => {
-      console.log("app disconnected");
       this.props.AppStateActions.disconnectApp();
     });
   }

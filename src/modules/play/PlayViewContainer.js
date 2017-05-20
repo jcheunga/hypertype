@@ -9,7 +9,9 @@ import * as MultiplayStateActions from '../multiplay/MultiplayState';
 export default connect(
   state => ({
     isLoading: state.playState.isLoading,
-    inGame: state.playState.inGame
+    inGame: state.playState.inGame,
+    user: state.authState.user,
+    guestUsername: state.authState.guestUsername
   }),
   dispatch => {
     return {

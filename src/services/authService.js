@@ -35,10 +35,10 @@ export function registerAccountService (payload) {
   };
   const registerAccount = new Promise(function(resolve, reject) {
     app.service('users').create(userData)
-      .then((result) => {
+      .then((response) => {
         resolve({
           isRegistered: true,
-          user: Object.assign({}, result, {password: payload.password})
+          user: Object.assign({}, response, {password: payload.password})
         });
       })
       .catch((error) => {
@@ -76,13 +76,13 @@ export function authenticateAccountService (payload) {
     .then(response => {
       return app.passport.verifyJWT(response.accessToken);
     })
-    .then(payload => {
-      return app.service('users').get(payload.userId);
+    .then(response => {
+      return app.service('users').get(response.userId);
     })
-    .then(payload => {
+    .then(response => {
       resolve({
         isAuthenticated: true,
-        user: payload
+        user: response
       });
     })
     .catch(error => {

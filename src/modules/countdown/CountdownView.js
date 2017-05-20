@@ -12,7 +12,7 @@ class CountdownView extends Component {
     super(props);
 
     this.state = {
-      countdownTime: props.countdownEndTime
+      countdownTime: props.gameStartTime
     };
 
     this.countInterval;

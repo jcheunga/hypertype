@@ -49,13 +49,13 @@ export function startGameService (payload) {
       const quoteToType = getQuoteToType();
       const quoteReferralURL = "www.google.com";
       const countdownStartTime = Date.now();
-      const countdownEndTime = countdownStartTime + countdownAmount;
+      const gameStartTime = countdownStartTime + countdownAmount;
       if (startGameIdAdded) {
         resolve(
           {
             gameId: startGameId,
             countdownStartTime: countdownStartTime,
-            countdownEndTime: countdownEndTime,
+            gameStartTime: gameStartTime,
             quoteToType: quoteToType,
             quoteReferralURL: quoteReferralURL,
             isStarted: true
@@ -115,13 +115,13 @@ export function startGameForJoinsService (payload) {
       const quoteToType = getQuoteToType();
       const quoteReferralURL = "www.google.com";
       const countdownStartTime = Date.now();
-      const countdownEndTime = countdownStartTime + countdownAmount;
+      const gameStartTime = countdownStartTime + countdownAmount;
       if (startGameIdAdded) {
         resolve(
           {
             gameId: startGameId,
             countdownStartTime: countdownStartTime,
-            countdownEndTime: countdownEndTime,
+            gameStartTime: gameStartTime,
             quoteToType: quoteToType,
             quoteReferralURL: quoteReferralURL,
             isStarted: true
