@@ -56,7 +56,7 @@ export function startGame(gameId, room) {
 export function joinGame(gameId, inGame, user) {
   return {
     type: JOIN_GAME,
-    payload: {gameId: gameId, inGame: inGame, user: user, room: room}
+    payload: {gameId: gameId, inGame: inGame, user: user}
   };
 }
 

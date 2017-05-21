@@ -17,6 +17,7 @@ export function findRoomService (payload) {
       .find({
         $limit: 1,
         query: {
+          completed: false,
           gameStartTime: {
             $gte: Date.now() + countdownCutOffAmount
           }
@@ -25,7 +26,7 @@ export function findRoomService (payload) {
       .then((response) => {
         if (response.total !== 0) {
           const playerToAdd = {
-            playerId: payload.user.usernames,
+            playerId: user.usernames,
             gameCreator: false,
             wpm: 0,
             completed: false
@@ -49,6 +50,7 @@ export function findRoomService (payload) {
             gameEndTime: gameEndTime,
             quoteToType: quoteToType,
             quoteAfflink: quoteToType,
+            completed: false,
             playerList: [
               {
                 playerId: payload.user.usernames,
@@ -74,7 +76,6 @@ export function findRoomService (payload) {
         );
       })
       .catch((error) => {
-        console.log(error);
         reject({ message: error });
       });
   });

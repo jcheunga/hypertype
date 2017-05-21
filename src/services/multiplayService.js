@@ -22,9 +22,10 @@ export function createRoomService (payload) {
       gameId: createGameId,
       quoteToType: quoteToType,
       quoteAfflink: quoteToType,
+      completed: false,
       playerList: [
         {
-          playerId: payload.user.usernames,
+          playerId: user.usernames,
           gameCreator: true,
           wpm: 0,
           completed: false
@@ -34,7 +35,6 @@ export function createRoomService (payload) {
 
     app.service("multirooms").create(createRoomData)
       .then((response) => {
-        console.log(response);
         resolve(
           {
             gameId: response.gameId,
@@ -43,7 +43,6 @@ export function createRoomService (payload) {
           }
         );
       }).catch((error) => {
-        console.log(error);
         reject({ message: error })
       });
   });
@@ -84,7 +83,6 @@ export function startGameService (payload) {
         );
       })
       .catch((error) => {
-        console.log(error);
         reject({ message: "Error creating" });
       });
   });
@@ -104,22 +102,36 @@ export function joinRoomService (payload) {
       .find({
         $limit: 1,
         query: {
+          completed: false,
           gameId: gameId
         }
       })
       .then((response) => {
-        const playerToAdd = {
-          playerId: payload.user.usernames,
-          gameCreator: false,
-          wpm: 0,
-          completed: false
-        };
-        const roomId = response.data[0]._id;
-        const patchedplayerList = response.data[0].playerList;
-        patchedplayerList.push(playerToAdd);
-        return app.service("multirooms").patch(roomId, {
-          playerList: patchedplayerList
-        });
+        if (response.total !== 0) {
+          const playerToAdd = {
+            playerId: user.usernames,
+            gameCreator: false,
+            wpm: 0,
+            completed: false
+          };
+          const roomId = response.data[0]._id;
+          const patchedplayerList = response.data[0].playerList;
+          let matched = false;
+          for (let i = 0; i < patchedplayerList.length; i++) {
+            if (patchedplayerList[i].playerId === user.usernames) {
+              matched = true;
+              break;
+            }
+          }
+          if (!matched) {
+            patchedplayerList.push(playerToAdd);
+          }
+          return app.service("multirooms").patch(roomId, {
+            playerList: patchedplayerList
+          });
+        } else {
+          throw new Error("Invalid ID entered");
+        }
       })
       .then((response) => {
         resolve(
@@ -131,8 +143,7 @@ export function joinRoomService (payload) {
         );
       })
       .catch((error) => {
-        console.log(error);
-        reject({ message: "Error joining" });
+        reject({ message: error });
       });
   });
 
