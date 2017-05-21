@@ -14,7 +14,7 @@ export default connect(
     gameEndTime: state.playState.gameEndTime,
     gameStartTime: state.playState.gameStartTime,
     quoteToType: state.playState.quoteToType,
-    quoteReferralURL: state.playState.quoteReferralURL
+    quoteAfflink: state.playState.quoteAfflink
   }),
   dispatch => {
     return {

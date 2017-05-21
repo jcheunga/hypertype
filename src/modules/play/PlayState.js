@@ -59,7 +59,7 @@ export default function PlayStateReducer(state = initialState, action = {}) {
           gameStartTime: action.payload.gameStartTime,
           gameEndTime: action.payload.gameEndTime,
           quoteToType: action.payload.quoteToType,
-          quoteAfflink: action.payload.quoteReferralURL
+          quoteAfflink: action.payload.quoteAfflink
         },
         Effects.constant(NavigationActions.navigate({
           routeName: 'TypeView'
@@ -76,7 +76,7 @@ export default function PlayStateReducer(state = initialState, action = {}) {
         gameStartTime: action.payload.gameStartTime,
         gameEndTime: action.payload.gameEndTime,
         quoteToType: action.payload.quoteToType,
-        quoteAfflink: action.payload.quoteReferralURL
+        quoteAfflink: action.payload.quoteAfflink
       };
 
     case LEAVE_GAME:

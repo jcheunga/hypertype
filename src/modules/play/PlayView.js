@@ -31,7 +31,7 @@ class PlayView extends Component {
   }
 
   quickPlay = () => {
-    let user = this.props.user ? this.props.user : {usernames: this.props.guestUsername}
+    let user = this.props.user ? this.props.user : {usernames: this.props.guestUsername};
     this.props.playStateActions.findGame(this.props.inGame, user);
   }
 

@@ -12,8 +12,11 @@ export default connect(
     gameEndTime: state.multiplayState.gameEndTime,
     gameStartTime: state.multiplayState.gameStartTime,
     quoteToType: state.multiplayState.quoteToType,
-    quoteReferralURL: state.multiplayState.quoteReferralURL,
-    gameCreator: state.multiplayState.gameCreator
+    quoteAfflink: state.multiplayState.quoteAfflink,
+    gameCreator: state.multiplayState.gameCreator,
+    roomJoined: state.multiplayState.roomJoined,
+    user: state.authState.user,
+    guestUsername: state.authState.guestUsername
   }),
   dispatch => {
     return {

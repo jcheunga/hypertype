@@ -17,8 +17,8 @@ const initialState = {
   gameEndTime: null,
   gameStartTime: null,
   quoteToType: null,
-  quoteReferralURL: null,
-  joinGameStarted: false
+  quoteAfflink: null,
+  roomJoined: null
 };
 
 // Actions
@@ -39,31 +39,31 @@ export const START_GAME_FOR_JOINS_SUCCESS = 'MultiplayState/START_GAME_FOR_JOINS
 export const LEAVE_GAME = 'MultiplayState/LEAVE_GAME';
 
 // Action creators
-export function createGame(inGame) {
+export function createGame(inGame, user) {
   return {
     type: CREATE_GAME,
-    payload: {inGame: inGame}
+    payload: {inGame: inGame, user: user}
   };
 }
 
-export function startGame(gameId) {
+export function startGame(gameId, room) {
   return {
     type: START_GAME,
-    payload: {gameId: gameId}
+    payload: {gameId: gameId, room: room}
   };
 }
 
-export function joinGame(gameId, inGame) {
+export function joinGame(gameId, inGame, user) {
   return {
     type: JOIN_GAME,
-    payload: {gameId: gameId, inGame: inGame}
+    payload: {gameId: gameId, inGame: inGame, user: user, room: room}
   };
 }
 
-export function startGameForJoins(gameId) {
+export function startGameForJoins(gameId, room) {
   return {
     type: START_GAME_FOR_JOINS,
-    payload: {gameId: gameId}
+    payload: {gameId: gameId, room: room}
   };
 }
 
@@ -81,8 +81,7 @@ export default function MultiplayStateReducer(state = initialState, action = {})
       return loop(
         {
           ...state,
-          isCreating: true,
-          gameCreator: true
+          isCreating: true
         },
         Effects.promise(createRoomService, action.payload)
       );
@@ -91,9 +90,11 @@ export default function MultiplayStateReducer(state = initialState, action = {})
       return {
         ...state,
         isCreating: false,
+        gameCreator: true,
         isCreated: action.payload.isCreated,
         inGame: action.payload.isCreated,
-        gameId: action.payload.gameId
+        gameId: action.payload.gameId,
+        roomJoined: action.payload.room
       };
 
     case START_GAME:
@@ -113,11 +114,11 @@ export default function MultiplayStateReducer(state = initialState, action = {})
           isStarted: action.payload.isStarted,
           inGame: action.payload.isStarted,
           gameId: action.payload.gameId,
-          gameEndTime: action.payload.gameEndTime,
           gameStartTime: action.payload.gameStartTime,
+          gameEndTime: action.payload.gameEndTime,
+          roomJoined: action.payload.room,
           quoteToType: action.payload.quoteToType,
-          quoteReferralURL: action.payload.quoteReferralURL,
-          joinGameStarted: true
+          quoteAfflink: action.payload.quoteAfflink,
         },
         Effects.constant(NavigationActions.navigate({
           routeName: 'MultiplayTypeView'
@@ -128,8 +129,7 @@ export default function MultiplayStateReducer(state = initialState, action = {})
       return loop(
         {
           ...state,
-          isJoining: true,
-          gameCreator: true
+          isJoining: true
         },
         Effects.promise(joinRoomService, action.payload)
       );
@@ -141,7 +141,8 @@ export default function MultiplayStateReducer(state = initialState, action = {})
         isJoined: action.payload.isJoined,
         inGame: action.payload.isJoined,
         gameId: action.payload.gameId,
-        gameCreator: false
+        gameCreator: false,
+        roomJoined: action.payload.room
       };
 
     case START_GAME_FOR_JOINS:
@@ -158,10 +159,8 @@ export default function MultiplayStateReducer(state = initialState, action = {})
           ...state,
           inGame: action.payload.isStarted,
           gameId: action.payload.gameId,
-          gameEndTime: action.payload.gameEndTime,
           gameStartTime: action.payload.gameStartTime,
-          quoteToType: action.payload.quoteToType,
-          quoteReferralURL: action.payload.quoteReferralURL
+          gameEndTime: action.payload.gameEndTime
         },
         Effects.constant(NavigationActions.navigate({
           routeName: 'MultiplayTypeView'
@@ -183,9 +182,9 @@ export default function MultiplayStateReducer(state = initialState, action = {})
           gameEndTime: null,
           gameStartTime: null,
           quoteToType: null,
-          quoteReferralURL: null,
+          quoteAfflink: null,
           gameCreator: null,
-          joinGameStarted: false
+          roomJoined: null
         },
         Effects.constant(ErrorState.addError(action.payload))
       );

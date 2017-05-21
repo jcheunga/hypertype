@@ -7,29 +7,45 @@ import {
 } from '../modules/multiplay/MultiplayState';
 import { createRandomGameId, getQuoteToType } from '../utils/Utils';
 
+import app from '../feathers';
+
 // IF BOTH IN SAME GAMEID AND PRESS PLAY AGAIN THEN CREATE NEW ID AND SEND TO BOTH PEOPLE
 
 export function createRoomService (payload) {
-  const user = "abc";
-  const createdGame = true;
-  const createGameIdAdded = true;
+  const user = payload.user;
 
   const createGame = new Promise(function(resolve, reject) {
-    if (createdGame) {
-      const createGameId = createRandomGameId();
-      const quoteToType = getQuoteToType();
-      const quoteReferralURL = "www.google.com";
-      if (createGameIdAdded) {
+    const quoteToType = getQuoteToType();
+    const createGameId = createRandomGameId();
+
+    const createRoomData = {
+      gameId: createGameId,
+      quoteToType: quoteToType,
+      quoteAfflink: quoteToType,
+      playerList: [
+        {
+          playerId: payload.user.usernames,
+          gameCreator: true,
+          wpm: 0,
+          completed: false
+        }
+      ]
+    };
+
+    app.service("multirooms").create(createRoomData)
+      .then((response) => {
+        console.log(response);
         resolve(
           {
-            gameId: createGameId,
-            isCreated: true
+            gameId: response.gameId,
+            isCreated: true,
+            room: response
           }
         );
-      } else {
-        reject({ message: "Error creating" })
-      }
-    }
+      }).catch((error) => {
+        console.log(error);
+        reject({ message: error })
+      });
   });
 
   return createGame
@@ -38,33 +54,39 @@ export function createRoomService (payload) {
 }
 
 export function startGameService (payload) {
-  const user = "abc";
-  const startedGame = true;
-  const startGameIdAdded = true;
-  const countdownAmount = 1000;
+  const user = payload.user;
+  const roomId = payload.room._id;
+  const countdownAmount = 5000;
 
   const startGame = new Promise(function(resolve, reject) {
-    if (startedGame) {
-      const startGameId = payload.gameId;
-      const quoteToType = getQuoteToType();
-      const quoteReferralURL = "www.google.com";
-      const countdownStartTime = Date.now();
-      const gameStartTime = countdownStartTime + countdownAmount;
-      if (startGameIdAdded) {
+
+    const countdownStartTime = Date.now();
+    const gameStartTime = countdownStartTime + countdownAmount;
+    const gameEndTime = gameStartTime + 120000;
+
+    app.service("multirooms")
+      .patch(roomId, {
+          gameStartTime: gameStartTime,
+          gameEndTime: gameEndTime,
+          gameStarted: true
+      })
+      .then((response) => {
         resolve(
           {
-            gameId: startGameId,
-            countdownStartTime: countdownStartTime,
-            gameStartTime: gameStartTime,
-            quoteToType: quoteToType,
-            quoteReferralURL: quoteReferralURL,
-            isStarted: true
+            gameId: response.gameId,
+            gameStartTime: response.gameStartTime,
+            gameEndTime: response.gameEndTime,
+            quoteToType: response.quoteToType,
+            quoteAfflink: response.quoteToType,
+            isStarted: true,
+            room: response
           }
         );
-      } else {
-        reject({ message: "Error starting" })
-      }
-    }
+      })
+      .catch((error) => {
+        console.log(error);
+        reject({ message: "Error creating" });
+      });
   });
 
   return startGame
@@ -74,27 +96,44 @@ export function startGameService (payload) {
 
 export function joinRoomService (payload) {
   const gameId = payload.gameId;
-  const user = "asd";
-  const joinedGame = true;
-  const joinGameIdAdded = true;
-
-  // PLACEHOLDER - NEED TO SEARCH FOR IT
-  const quoteToType = getQuoteToType();
-  const quoteReferralURL = "www.google.com";
+  const user = payload.user;
 
   const joinGame = new Promise(function(resolve, reject) {
-    if (joinedGame) {
-      if (joinGameIdAdded) {
+
+    app.service("multirooms")
+      .find({
+        $limit: 1,
+        query: {
+          gameId: gameId
+        }
+      })
+      .then((response) => {
+        const playerToAdd = {
+          playerId: payload.user.usernames,
+          gameCreator: false,
+          wpm: 0,
+          completed: false
+        };
+        const roomId = response.data[0]._id;
+        const patchedplayerList = response.data[0].playerList;
+        patchedplayerList.push(playerToAdd);
+        return app.service("multirooms").patch(roomId, {
+          playerList: patchedplayerList
+        });
+      })
+      .then((response) => {
         resolve(
           {
-            gameId: gameId,
+            gameId: response.gameId,
+            room: response,
             isJoined: true
           }
         );
-      } else {
-        reject({ message: "Error joining" })
-      }
-    }
+      })
+      .catch((error) => {
+        console.log(error);
+        reject({ message: "Error joining" });
+      });
   });
 
   return joinGame
@@ -103,17 +142,13 @@ export function joinRoomService (payload) {
 }
 
 export function startGameForJoinsService (payload) {
-  console.log("startgameforjoinsservice called");
-  const user = "abc";
-  const startedGame = true;
-  const startGameIdAdded = true;
-  const countdownAmount = 1000;
+  let user = payload.user;
 
   const startGameForJoins = new Promise(function(resolve, reject) {
     if (startedGame) {
       const startGameId = payload.gameId;
       const quoteToType = getQuoteToType();
-      const quoteReferralURL = "www.google.com";
+      const quoteAfflink = "www.google.com";
       const countdownStartTime = Date.now();
       const gameStartTime = countdownStartTime + countdownAmount;
       if (startGameIdAdded) {
@@ -123,7 +158,7 @@ export function startGameForJoinsService (payload) {
             countdownStartTime: countdownStartTime,
             gameStartTime: gameStartTime,
             quoteToType: quoteToType,
-            quoteReferralURL: quoteReferralURL,
+            quoteAfflink: quoteAfflink,
             isStarted: true
           }
         );

@@ -10,6 +10,7 @@ import app from '../feathers';
 export function findRoomService (payload) {
   const user = payload.user;
   const countdownAmount = 5000;
+  const countdownCutOffAmount = 5000;
 
   const fetchGame = new Promise(function(resolve, reject) {
     app.service("rooms")
@@ -17,7 +18,7 @@ export function findRoomService (payload) {
         $limit: 1,
         query: {
           gameStartTime: {
-            $gte: Date.now() + countdownAmount
+            $gte: Date.now() + countdownCutOffAmount
           }
         }
       })
@@ -75,7 +76,7 @@ export function findRoomService (payload) {
       .catch((error) => {
         console.log(error);
         reject({ message: error });
-      })
+      });
   });
 
   return fetchGame

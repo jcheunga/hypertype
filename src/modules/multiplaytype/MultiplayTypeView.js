@@ -61,7 +61,8 @@ class MultiplayTypeView extends Component {
   startNewQuickGame = () => {
     // IF JOINER OR CREATOR
     this.props.multiplayStateActions.leaveGame();
-    this.props.multiplayStateActions.createNewGame(this.props.inGame);
+    let user = this.props.user ? this.props.user : {usernames: this.props.guestUsername};
+    this.props.multiplayStateActions.createNewGame(this.props.inGame, user);
   }
 
   leaveGame = () => {

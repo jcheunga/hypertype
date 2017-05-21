@@ -36,7 +36,6 @@ class TypeView extends Component {
   }
 
   componentWillMount () {
-    console.log("mounting");
     if (!this.props.gameId || !this.props.inGame || countdownToSeconds(this.props.gameStartTime) < 0 || countdownToSeconds(this.props.gameStartTime) > 10) {
       this.leaveGame();
     } else {
@@ -60,7 +59,7 @@ class TypeView extends Component {
   }
 
   startNewQuickGame = () => {
-    let user = this.props.user ? this.props.user : {usernames: this.props.guestUsername}
+    let user = this.props.user ? this.props.user : {usernames: this.props.guestUsername};
     this.props.playStateActions.leaveGame();
     this.props.playStateActions.findGame(this.props.inGame, user);
   }

@@ -47,11 +47,12 @@ class MultiplayView extends Component {
   }
 
   createGame = () => {
-    this.props.multiplayStateActions.createGame(this.props.inGame);
+    let user = this.props.user ? this.props.user : {usernames: this.props.guestUsername};
+    this.props.multiplayStateActions.createGame(this.props.inGame, user);
   }
 
   startGame = () => {
-    this.props.multiplayStateActions.startGame(this.props.gameId);
+    this.props.multiplayStateActions.startGame(this.props.gameId, this.props.roomJoined);
   }
 
   joinGame = () => {
@@ -62,7 +63,8 @@ class MultiplayView extends Component {
   }
 
   joinGameWithId = (enteredGameId) => {
-    this.props.multiplayStateActions.joinGame(enteredGameId, this.props.inGame);
+    let user = this.props.user ? this.props.user : {usernames: this.props.guestUsername};
+    this.props.multiplayStateActions.joinGame(enteredGameId, this.props.inGame, user);
   }
 
   resetView = () => {
@@ -76,10 +78,6 @@ class MultiplayView extends Component {
 
   gotoMainMenu = () => {
     this.props.navigationStateActions.back();
-  }
-
-  messWithProps = () => {
-    this.props.multiplayStateActions.messWithProps();
   }
 
   render() {
@@ -106,7 +104,7 @@ class MultiplayView extends Component {
     : null;
 
     const showJoinGameView = this.state.joinGameView ?
-    <JoinGameView {...this.props} resetView={this.resetView} joinGameWithId={this.joinGameWithId} messWithProps={this.messWithProps}/>
+    <JoinGameView {...this.props} resetView={this.resetView} joinGameWithId={this.joinGameWithId}/>
     : null;
 
     return (
