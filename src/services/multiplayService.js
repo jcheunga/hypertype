@@ -154,29 +154,35 @@ export function joinRoomService (payload) {
 
 export function startGameForJoinsService (payload) {
   let user = payload.user;
+  let room = payload.room;
 
   const startGameForJoins = new Promise(function(resolve, reject) {
-    if (startedGame) {
-      const startGameId = payload.gameId;
-      const quoteToType = getQuoteToType();
-      const quoteAfflink = "www.google.com";
-      const countdownStartTime = Date.now();
-      const gameStartTime = countdownStartTime + countdownAmount;
-      if (startGameIdAdded) {
+
+    app.service("multirooms")
+      .find({
+        $limit: 1,
+        query: {
+          _id: room._id,
+          completed: false
+        }
+      })
+      .then((response) => {
         resolve(
           {
-            gameId: startGameId,
-            countdownStartTime: countdownStartTime,
-            gameStartTime: gameStartTime,
-            quoteToType: quoteToType,
-            quoteAfflink: quoteAfflink,
+            gameId: response.startGameId,
+            gameEndTime: response.gameEndTime,
+            gameStartTime: response.gameStartTime,
+            quoteToType: response.quoteToType,
+            quoteAfflink: response.quoteAfflink,
+            room: response,
             isStarted: true
           }
         );
-      } else {
+      })
+      .catch((error) => {
+        console.log(error);
         reject({ message: "Error starting" })
-      }
-    }
+      })
   });
 
   return startGameForJoins

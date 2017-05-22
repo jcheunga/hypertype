@@ -14,6 +14,8 @@ import {
   Button
 } from 'react-native';
 
+import app from '../../feathers';
+
 const window = Dimensions.get('window');
 
 class JoinGameView extends Component {
@@ -28,6 +30,18 @@ class JoinGameView extends Component {
       gameStarted: false,
       gameJoined: false
     };
+    this.gameStartListen();
+  }
+
+  gameStartListen = () => {
+    app.on("patched", this.handleGamePatched)
+  }
+
+  handleGamePatched = (response) => {
+    console.log(response);
+    if (response) {
+      this.props.multiplayStateActions.startGameForJoins(this.props.gameId, this.props.roomJoined);
+    }
   }
 
   componentWillReceiveProps (nextProps) {
@@ -37,10 +51,10 @@ class JoinGameView extends Component {
       })
     }
 
-    if (nextProps.joinGameStarted && this.state.gameJoined) {
-      console.log("game will begin");
-      // this.props.multiplayStateActions.startGameForJoins(this.props.gameId, this.props.roomJoined);
-    }
+    // if (nextProps.joinGameStarted && this.state.gameJoined) {
+    //   console.log("game will begin");
+    //   this.props.multiplayStateActions.startGameForJoins(this.props.gameId, this.props.roomJoined);
+    // }
     // console.log(nextProps);
     // if (nextProps.isStarted && this.props.isJoined) {
     //   console.log("should be navigating but why not?");
@@ -77,7 +91,7 @@ class JoinGameView extends Component {
             onPress={() => this.props.joinGameWithId(this.state.enteredGameId)}
           />
           <Text style={styles.bodyText}>
-            Joining - Joined - Players in game {this.props.gameId}
+            {this.props.isJoining ? "Joining" : this.props.roomJoined.gameId}
           </Text>
           <Button
             title="Return to mutliplayer menu"

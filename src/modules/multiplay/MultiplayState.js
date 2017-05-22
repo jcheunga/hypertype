@@ -148,7 +148,8 @@ export default function MultiplayStateReducer(state = initialState, action = {})
     case START_GAME_FOR_JOINS:
       return loop(
         {
-          ...state
+          ...state,
+          isStarting: true
         },
         Effects.promise(startGameForJoinsService, action.payload)
       );
@@ -157,10 +158,15 @@ export default function MultiplayStateReducer(state = initialState, action = {})
       return loop(
         {
           ...state,
+          isStarting: false,
+          isStarted: action.payload.isStarted,
           inGame: action.payload.isStarted,
           gameId: action.payload.gameId,
           gameStartTime: action.payload.gameStartTime,
-          gameEndTime: action.payload.gameEndTime
+          gameEndTime: action.payload.gameEndTime,
+          roomJoined: action.payload.room,
+          quoteToType: action.payload.quoteToType,
+          quoteAfflink: action.payload.quoteAfflink,
         },
         Effects.constant(NavigationActions.navigate({
           routeName: 'MultiplayTypeView'
