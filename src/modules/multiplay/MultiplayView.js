@@ -81,7 +81,7 @@ class MultiplayView extends Component {
   }
 
   render() {
-    const showMultiplayView = this.state.multiplayView ?
+    const showMultiplayView = this.state.multiplayView || !this.props.gameId && !this.state.joinGameView ?
       <View>
         <Text>{this.props.isCreating ? "Creating game..." : null}</Text>
         <Button
