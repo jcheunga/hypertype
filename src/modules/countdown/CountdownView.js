@@ -4,6 +4,7 @@ import {
   View
 } from 'react-native';
 
+import app from '../../feathers';
 
 class CountdownView extends Component {
   static displayName = 'CountdownScreen';
@@ -12,10 +13,20 @@ class CountdownView extends Component {
     super(props);
 
     this.state = {
-      countdownTime: props.gameStartTime
+      countdownTime: props.gameStartTime,
+      noOfPlayers: 1
     };
 
     this.countInterval;
+    this.listenNumberOfPlayers();
+  }
+
+  listenNumberOfPlayers = () => {
+    app.service("multirooms").on('patched', this.handleNumberOfPlayers);
+  }
+
+  handleNumberOfPlayers = (response) => {
+    console.log(response);
   }
 
   componentDidMount () {
@@ -40,8 +51,8 @@ class CountdownView extends Component {
     return (
       <View>
         <Text style={{color: 'blue'}}>Countdown: {this.state.countdownTime === 0 ? 'GO!' : this.state.countdownTime}</Text>
-        <Text style={{color: 'blue'}}>Number of players joined: 5</Text>
-        <Text style={{color: 'blue'}}>Half screen ad</Text>
+        <Text style={{color: 'blue'}}>Number of players joined: {this.state.noOfPlayers}</Text>
+        <Text style={{color: 'blue'}}>Half screen ad (Admob)</Text>
       </View>
     );
   }
