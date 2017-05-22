@@ -15,9 +15,9 @@ class ScoreView extends Component {
   render() {
     return (
       <View>
-        <Text style={{color: 'white'}}>Quote again</Text>
-        <Text style={{color: 'white'}}>This quote was from link to AMZN</Text>
-        <Text style={{color: 'white'}}>You placed 1st!</Text>
+        <Text style={{color: 'red'}}>Quote again</Text>
+        <Text style={{color: 'red'}}>This quote was from link to AMZN</Text>
+        <Text style={{color: 'red'}}>You placed 1st!</Text>
         <Button
           title="Play again?"
           onPress={() => this.props.startNewQuickGame()}

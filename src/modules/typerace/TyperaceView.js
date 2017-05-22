@@ -112,10 +112,10 @@ class TyperaceView extends Component {
           autoCorrect={false}
           autoFocus={true}
         />
-        <Text style={{color: 'white'}}>Current Word: {this.state.currentWord + 1}</Text>
-        <Text style={{color: 'white'}}>Current Letter: {this.state.currentLetter + 1}</Text>
-        <Text style={{color: 'white'}}>Input Text: {this.state.inputText}</Text>
-        <Text style={{marginBottom: 10, color: 'white'}}>Finished: {this.state.finishedTyping ? 'True' : 'False'}</Text>
+        <Text style={{color: 'red'}}>Current Word: {this.state.currentWord + 1}</Text>
+        <Text style={{color: 'red'}}>Current Letter: {this.state.currentLetter + 1}</Text>
+        <Text style={{color: 'red'}}>Input Text: {this.state.inputText}</Text>
+        <Text style={{marginBottom: 10, color: 'red'}}>Finished: {this.state.finishedTyping ? 'True' : 'False'}</Text>
       </View>
     );
   }
