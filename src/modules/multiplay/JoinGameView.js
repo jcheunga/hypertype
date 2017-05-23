@@ -30,14 +30,14 @@ class JoinGameView extends Component {
       gameStarted: false,
       gameJoined: false
     };
-    this.gameStartListen();
+    this._gameStartListen();
   }
 
-  gameStartListen = () => {
-    app.on("patched", this.handleGamePatched)
+  _gameStartListen = () => {
+    app.service("multirooms").on("patched", this._handleGamePatched)
   }
 
-  handleGamePatched = (response) => {
+  _handleGamePatched = (response) => {
     console.log(response);
     if (response) {
       this.props.multiplayStateActions.startGameForJoins(this.props.gameId, this.props.roomJoined);
@@ -50,20 +50,6 @@ class JoinGameView extends Component {
         gameJoined: true,
       })
     }
-
-    // if (nextProps.joinGameStarted && this.state.gameJoined) {
-    //   console.log("game will begin");
-    //   this.props.multiplayStateActions.startGameForJoins(this.props.gameId, this.props.roomJoined);
-    // }
-    // console.log(nextProps);
-    // if (nextProps.isStarted && this.props.isJoined) {
-    //   console.log("should be navigating but why not?");
-    //   // this.props.multiplayStateActions.startGameForJoins(this.props.gameId);
-    //   // this.props.navigationStateActions.back();
-    //   this.props.navigationStateActions.navigate({
-    //       routeName: 'MultiplayTypeView'
-    //     })
-    // }
   }
 
   handleIdInput = (e) => {
