@@ -18,11 +18,11 @@ class CountdownView extends Component {
     };
 
     this.countInterval;
-    this._listenNumberOfPlayers();
+    this._listenToRoom();
   }
 
-  _listenNumberOfPlayers = () => {
-    app.service("multirooms").on('patched', this._handleNumberOfPlayers);
+  _listenToRoom = () => {
+    app.service("multirooms").on('patched', this._handleListenToRoom);
     const room = this.props.roomJoined;
     const roomId = room._id;
     app.service("multirooms").patch(roomId, {
@@ -30,11 +30,20 @@ class CountdownView extends Component {
     });
   }
 
-  _handleNumberOfPlayers = (response) => {
+  _handleListenToRoom = (response) => {
     console.log(response.playerList.length);
     this.setState({
       playerList: response.playerList
     });
+  }
+
+  _parsePlayerList = () => {
+    const playerList = this.state.playerList;
+    playerList.map((value, key) => {
+      return (
+        <Text style={{color: 'blue'}} key={key}>{value.usernames}</Text>
+      )
+    })
   }
 
   componentDidMount () {
@@ -53,16 +62,7 @@ class CountdownView extends Component {
 
   componentWillUnmount () {
     clearInterval(this.countInterval);
-    app.service("multirooms").removeListener('patched', this._handleNumberOfPlayers);
-  }
-
-  _parsePlayerList = () => {
-    const playerList = this.state.playerList;
-    playerList.map((value, key) => {
-      return (
-        <Text style={{color: 'blue'}} key={key}>{value.usernames}</Text>
-      )
-    })
+    app.service("multirooms").removeListener('patched', this._handleListenToRoom);
   }
 
   render() {

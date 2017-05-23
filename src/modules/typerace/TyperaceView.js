@@ -31,6 +31,34 @@ class TyperaceView extends Component {
       currentLetter: 0,
       inputText: "",
     };
+
+    this._listenToRoom();
+  }
+
+  _listenToRoom = () => { // PATCH WITH WPM
+    app.service("multirooms").on('patched', this._handleListenToRoom);
+    const room = this.props.roomJoined;
+    const roomId = room._id;
+    app.service("multirooms").patch(roomId, {
+      ...room
+    });
+  }
+
+  _handleListenToRoom = (response) => {
+    console.log(response.playerList.length);
+    this.setState({
+      playerList: response.playerList
+    });
+  }
+
+  _parsePlayerList = () => {
+    const playerList = this.state.playerList;
+    // SORT AND FIND INDEX OF CURRENT USER;
+    playerList.map((value, key) => {
+      return (
+        <Text style={{color: 'blue'}} key={key}>{value.usernames}: {value.wpm}</Text>
+      )
+    })
   }
 
   createLetters () {
@@ -98,6 +126,10 @@ class TyperaceView extends Component {
 
     }
 
+  }
+
+  componentWillUnmount () {
+    app.service("multirooms").removeListener('patched', this._handleListenToRoom);
   }
 
   render() {
