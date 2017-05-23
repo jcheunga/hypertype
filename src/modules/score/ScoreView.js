@@ -14,30 +14,25 @@ class ScoreView extends Component {
     super(props);
 
     this.state = {
-      playerList: null
+      room: this.props.roomJoined
     };
 
     this._listenToRoom();
   }
 
-  _listenToRoom = () => { // PATCH WITH COMPLETED: TRUE AND MAX 10 IN THE LIST AND SORT BY WPM
+  _listenToRoom = () => { // SORT BY COMPLETED TRUE AND WPM
     app.service(this.props.serviceType).on('patched', this._handleListenToRoom);
-    const room = this.props.roomJoined;
-    const roomId = room._id;
-    app.service(this.props.serviceType).patch(roomId, {
-      ...room
-    });
   }
 
   _handleListenToRoom = (response) => {
-    console.log(response.playerList.length);
+    console.log(response);
     this.setState({
-      playerList: response.playerList
+      room: response
     });
   }
 
   _parsePlayerList = () => {
-    const playerList = this.state.playerList;
+    const playerList = this.state.room.playerList;
     playerList.map((value, key) => {
       return (
         <Text style={{color: 'blue'}} key={key}>{value.usernames}: {value.wpm}</Text>

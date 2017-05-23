@@ -33,7 +33,16 @@ export function findRoomService (payload) {
           };
           const roomId = response.data[0]._id;
           const patchedplayerList = response.data[0].playerList;
-          patchedplayerList.push(playerToAdd);
+          let matched = false;
+          for (let i = 0; i < patchedplayerList.length; i++) {
+            if (patchedplayerList[i].playerId === user.usernames) {
+              matched = true;
+              break;
+            }
+          }
+          if (!matched) {
+            patchedplayerList.push(playerToAdd);
+          }
           return app.service("rooms").patch(roomId, {
             playerList: patchedplayerList
           });

@@ -30,6 +30,7 @@ class TyperaceView extends Component {
       currentString: "",
       currentLetter: 0,
       inputText: "",
+      room: this.props.roomJoined
     };
 
     this._listenToRoom();
@@ -37,28 +38,56 @@ class TyperaceView extends Component {
 
   _listenToRoom = () => { // PATCH WITH WPM
     app.service(this.props.serviceType).on('patched', this._handleListenToRoom);
-    const room = this.props.roomJoined;
-    const roomId = room._id;
-    app.service(this.props.serviceType).patch(roomId, {
-      ...room
-    });
   }
 
   _handleListenToRoom = (response) => {
-    console.log(response.playerList.length);
+    console.log(response);
     this.setState({
-      playerList: response.playerList
+      room: response
     });
   }
 
   _parsePlayerList = () => {
-    const playerList = this.state.playerList;
+    const playerList = this.state.room.playerList;
     // SORT AND FIND INDEX OF CURRENT USER;
     playerList.map((value, key) => {
       return (
         <Text style={{color: 'blue'}} key={key}>{value.usernames}: {value.wpm}</Text>
       )
     })
+  }
+
+  _registerTypeSpeed = () => {
+    const roomId = this.state.room._id;
+    app.service(this.props.serviceType).patch(roomId, {
+      ...room
+    });
+  }
+
+  _registerGameFinish = () => {
+    let user = user;
+    const playerToChange = {
+      playerId: user.usernames,
+      gameCreator: false,
+      wpm: 0, // PATCH THIS
+      completed: false
+    };
+    const room = this.state.room;
+    const roomId = room._id;
+    const patchedplayerList = room.playerList;
+    let matched = false;
+    for (let i = 0; i < patchedplayerList.length; i++) {
+      if (patchedplayerList[i].playerId === user.usernames) {
+        matched = true;
+        break;
+      }
+    }
+    if (!matched) {
+      patchedplayerList.push(playerToChange);
+    }
+    app.service(this.props.serviceType).patch(roomId, {
+      playerList: patchedplayerList
+    });
   }
 
   createLetters () {

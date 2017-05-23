@@ -14,31 +14,27 @@ class CountdownView extends Component {
 
     this.state = {
       countdownTime: props.gameStartTime,
-      playerList: this.props.roomJoined.playerList
+      room: this.props.roomJoined
     };
 
     this.countInterval;
     this._listenToRoom();
   }
 
-  _listenToRoom = () => {
+  _listenToRoom = () => { // PATCH WITH WPM
     app.service(this.props.serviceType).on('patched', this._handleListenToRoom);
-    const room = this.props.roomJoined;
-    const roomId = room._id;
-    app.service(this.props.serviceType).patch(roomId, {
-      ...room
-    });
   }
 
   _handleListenToRoom = (response) => {
-    console.log(response.playerList.length);
+    console.log(response);
     this.setState({
-      playerList: response.playerList
+      room: response
     });
   }
 
   _parsePlayerList = () => {
-    const playerList = this.state.playerList;
+    const playerList = this.state.room.playerList;
+    // SORT AND FIND INDEX OF CURRENT USER;
     playerList.map((value, key) => {
       return (
         <Text style={{color: 'blue'}} key={key}>{value.usernames}</Text>
