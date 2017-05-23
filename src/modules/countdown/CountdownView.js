@@ -22,10 +22,10 @@ class CountdownView extends Component {
   }
 
   _listenToRoom = () => {
-    app.service("multirooms").on('patched', this._handleListenToRoom);
+    app.service(this.props.serviceType).on('patched', this._handleListenToRoom);
     const room = this.props.roomJoined;
     const roomId = room._id;
-    app.service("multirooms").patch(roomId, {
+    app.service(this.props.serviceType).patch(roomId, {
       ...room
     });
   }
@@ -62,7 +62,7 @@ class CountdownView extends Component {
 
   componentWillUnmount () {
     clearInterval(this.countInterval);
-    app.service("multirooms").removeListener('patched', this._handleListenToRoom);
+    app.service(this.props.serviceType).removeListener('patched', this._handleListenToRoom);
   }
 
   render() {

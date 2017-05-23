@@ -21,10 +21,10 @@ class ScoreView extends Component {
   }
 
   _listenToRoom = () => { // PATCH WITH COMPLETED: TRUE AND MAX 10 IN THE LIST AND SORT BY WPM
-    app.service("multirooms").on('patched', this._handleListenToRoom);
+    app.service(this.props.serviceType).on('patched', this._handleListenToRoom);
     const room = this.props.roomJoined;
     const roomId = room._id;
-    app.service("multirooms").patch(roomId, {
+    app.service(this.props.serviceType).patch(roomId, {
       ...room
     });
   }
@@ -50,7 +50,7 @@ class ScoreView extends Component {
   }
 
   componentWillUnmount () {
-    app.service("multirooms").removeListener('patched', this._handleListenToRoom);
+    app.service(this.props.serviceType).removeListener('patched', this._handleListenToRoom);
   }
 
   render() {

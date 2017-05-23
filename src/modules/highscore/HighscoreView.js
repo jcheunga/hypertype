@@ -32,8 +32,7 @@ class HighscoreView extends Component {
   }
 
   componentDidMount () {
-    app.service("highscores")
-      .on("created", this._fetchScores());
+    app.service("highscores").on("created", this._fetchScores());
   }
 
   _fetchScores = () => {

@@ -94,15 +94,15 @@ class MultiplayTypeView extends Component {
 
   render () {
     const showCountdownView = this.state.countdownView && this.props.inGame && this.props.gameId ?
-      <CountdownView {...this.props} finishCountdown={this.finishCountdown} gameStartTime={this.state.gameStartTime}/>
+      <CountdownView {...this.props} finishCountdown={this.finishCountdown} gameStartTime={this.state.gameStartTime} serviceType="multirooms"/>
     : null;
 
     const showTypingView = this.state.typingView && this.props.inGame && this.props.gameId ?
-      <TyperaceView {...this.props} finishTyping={this.finishTyping}/>
+      <TyperaceView {...this.props} finishTyping={this.finishTyping} serviceType="multirooms"/>
     : null;
 
     const showScoreView = this.state.scoreView && this.props.inGame && this.props.gameId ?
-      <ScoreView {...this.props} startNewQuickGame={this.startNewQuickGame} leaveGame={this.leaveGame}/>
+      <ScoreView {...this.props} startNewQuickGame={this.startNewQuickGame} leaveGame={this.leaveGame} serviceType="multirooms"/>
     : null;
 
     return (

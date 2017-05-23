@@ -36,10 +36,10 @@ class TyperaceView extends Component {
   }
 
   _listenToRoom = () => { // PATCH WITH WPM
-    app.service("multirooms").on('patched', this._handleListenToRoom);
+    app.service(this.props.serviceType).on('patched', this._handleListenToRoom);
     const room = this.props.roomJoined;
     const roomId = room._id;
-    app.service("multirooms").patch(roomId, {
+    app.service(this.props.serviceType).patch(roomId, {
       ...room
     });
   }
@@ -129,7 +129,7 @@ class TyperaceView extends Component {
   }
 
   componentWillUnmount () {
-    app.service("multirooms").removeListener('patched', this._handleListenToRoom);
+    app.service(this.props.serviceType).removeListener('patched', this._handleListenToRoom);
   }
 
   render() {
