@@ -9,7 +9,6 @@ import HighscoreStateReducer from '../modules/highscore/HighscoreState';
 import AuthStateReducer from '../modules/auth/AuthState';
 
 import AppStateReducer from '../modules/AppState';
-import { feathersAuthentication} from '../feathers';
 
 const reducers = {
   // Navigator states
