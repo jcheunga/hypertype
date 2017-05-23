@@ -5,6 +5,8 @@ import {
   Button
 } from 'react-native';
 
+import app from '../../feathers';
+
 class ScoreView extends Component {
   static displayName = 'ScoreView';
 

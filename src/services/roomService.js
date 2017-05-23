@@ -71,6 +71,7 @@ export function findRoomService (payload) {
             gameEndTime: response.gameEndTime,
             quoteToType: response.quoteToType,
             quoteAfflink: response.quoteAfflink,
+            room: response,
             inGame: true
           }
         );

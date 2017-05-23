@@ -12,7 +12,8 @@ const initialState = {
   gameStartTime: null,
   gameEndTime: null,
   quoteToType: null,
-  quoteAfflink: null
+  quoteAfflink: null,
+  roomJoined: null
 };
 
 // Actions
@@ -59,10 +60,14 @@ export default function PlayStateReducer(state = initialState, action = {}) {
           gameStartTime: action.payload.gameStartTime,
           gameEndTime: action.payload.gameEndTime,
           quoteToType: action.payload.quoteToType,
-          quoteAfflink: action.payload.quoteAfflink
+          quoteAfflink: action.payload.quoteAfflink,
+          roomJoined: action.payload.room
         },
         Effects.constant(NavigationActions.navigate({
-          routeName: 'TypeView'
+          routeName: 'TypeView',
+          params: {
+            roomJoined: action.payload.room
+          }
         }))
       );
 
@@ -76,7 +81,8 @@ export default function PlayStateReducer(state = initialState, action = {}) {
         gameStartTime: action.payload.gameStartTime,
         gameEndTime: action.payload.gameEndTime,
         quoteToType: action.payload.quoteToType,
-        quoteAfflink: action.payload.quoteAfflink
+        quoteAfflink: action.payload.quoteAfflink,
+        roomJoined: action.payload.room
       };
 
     case LEAVE_GAME:
@@ -89,7 +95,8 @@ export default function PlayStateReducer(state = initialState, action = {}) {
           gameStartTime: null,
           gameEndTime: null,
           quoteToType: null,
-          quoteAfflink: null
+          quoteAfflink: null,
+          roomJoined: null
         },
         Effects.constant(ErrorState.addError(action.payload))
       );

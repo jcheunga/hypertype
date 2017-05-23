@@ -6,6 +6,7 @@ import {
   View
 } from 'react-native';
 
+import app from '../../feathers';
 
 class TyperaceView extends Component {
   static displayName = 'TyperaceView';
