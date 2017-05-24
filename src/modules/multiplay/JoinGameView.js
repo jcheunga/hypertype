@@ -14,6 +14,7 @@ import {
   Button
 } from 'react-native';
 
+import LobbyViewContainer from '../lobby/LobbyViewContainer';
 import app from '../../feathers';
 
 const window = Dimensions.get('window');
@@ -27,8 +28,14 @@ class JoinGameView extends Component {
 
     this.state = {
       enteredGameId: "",
-      gameStarted: false,
-      gameJoined: false
+      gameJoined: false,
+      room: {
+        playerList: [
+          {
+            usernames: this.props.user.usernames ? this.props.user.usernames : this.props.guestUsername
+          }
+        ]
+      }
     };
     this._gameStartListen();
   }
@@ -39,7 +46,7 @@ class JoinGameView extends Component {
 
   _handleGamePatched = (response) => {
     console.log(response);
-    if (response) {
+    if (response.gameStarted) {
       this.props.multiplayStateActions.startGameForJoins(this.props.gameId, this.props.roomJoined);
     }
   }
@@ -48,6 +55,7 @@ class JoinGameView extends Component {
     if (nextProps.isJoined) {
       this.setState({
         gameJoined: true,
+        room: nextProps.roomJoined
       })
     }
   }
@@ -59,6 +67,8 @@ class JoinGameView extends Component {
   }
 
   render() {
+    const showLobby = this.state.room ? <LobbyViewContainer roomJoined={this.state.room}/> : null;
+
     return (
       <View style={styles.container}>
         <View style={styles.userContainer}>
@@ -85,6 +95,7 @@ class JoinGameView extends Component {
           <Text style={styles.bodyText}>
             {this.props.roomJoined.gameId}
           </Text>
+          <View>{showLobby}</View>
           <Button
             title="Return to mutliplayer menu"
             onPress={() => this.props.resetView()}

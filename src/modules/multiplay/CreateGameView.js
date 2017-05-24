@@ -13,6 +13,8 @@ import {
   Button
 } from 'react-native';
 
+import LobbyViewContainer from '../lobby/LobbyViewContainer';
+
 const window = Dimensions.get('window');
 
 class CreateGameView extends Component {
@@ -21,12 +23,27 @@ class CreateGameView extends Component {
   // Initialize the hardcoded data
   constructor(props) {
     super(props);
+
+    this.state = {
+      room: props.roomJoined
+    };
+    this._gameStartListen();
   }
 
-  componentWillMount () {
+  _gameStartListen = () => {
+    app.service("multirooms").on("patched", this._handleGamePatched)
+  }
+
+  _handleGamePatched = (response) => {
+    console.log(response);
+    if (response.gameStarted) {
+      this.props.multiplayStateActions.startGameForJoins(this.props.gameId, this.props.roomJoined);
+    }
   }
 
   render() {
+    const showLobby = this.props.room ? <LobbyViewContainer roomJoined={this.state.room}/> : null;
+
     return (
       <View style={styles.container}>
         <View style={styles.userContainer}>
@@ -36,9 +53,7 @@ class CreateGameView extends Component {
           <Text style={styles.bodyText}>
             Game id: {this.props.gameId}
           </Text>
-          <Text style={styles.bodyText}>
-            Players in game
-          </Text>
+          <View>{showLobby}</View>
           <Button
             title="Start game"
             onPress={() => this.props.startGame()}

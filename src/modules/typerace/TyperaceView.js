@@ -30,7 +30,7 @@ class TyperaceView extends Component {
       currentString: "",
       currentLetter: 0,
       inputText: "",
-      room: this.props.roomJoined
+      room: props.roomJoined
     };
 
     this._listenToRoom();
@@ -45,16 +45,6 @@ class TyperaceView extends Component {
     this.setState({
       room: response
     });
-  }
-
-  _parsePlayerList = () => {
-    const playerList = this.state.room.playerList;
-    // SORT AND FIND INDEX OF CURRENT USER;
-    playerList.map((value, key) => {
-      return (
-        <Text style={{color: 'blue'}} key={key}>{value.usernames}: {value.wpm}</Text>
-      )
-    })
   }
 
   _registerTypeSpeed = () => {

@@ -14,7 +14,8 @@ export default connect(
     gameEndTime: state.playState.gameEndTime,
     gameStartTime: state.playState.gameStartTime,
     quoteToType: state.playState.quoteToType,
-    quoteAfflink: state.playState.quoteAfflink
+    quoteAfflink: state.playState.quoteAfflink,
+    roomJoined: state.playState.roomJoined
   }),
   dispatch => {
     return {

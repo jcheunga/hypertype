@@ -64,10 +64,7 @@ export default function PlayStateReducer(state = initialState, action = {}) {
           roomJoined: action.payload.room
         },
         Effects.constant(NavigationActions.navigate({
-          routeName: 'TypeView',
-          params: {
-            roomJoined: action.payload.room
-          }
+          routeName: 'TypeView'
         }))
       );
 

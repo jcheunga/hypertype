@@ -5,6 +5,7 @@ import {
   Button
 } from 'react-native';
 
+import LobbyViewContainer from '../lobby/LobbyViewContainer';
 import app from '../../feathers';
 
 class ScoreView extends Component {
@@ -14,7 +15,7 @@ class ScoreView extends Component {
     super(props);
 
     this.state = {
-      room: this.props.roomJoined
+      room: props.roomJoined
     };
 
     this._listenToRoom();
@@ -31,15 +32,6 @@ class ScoreView extends Component {
     });
   }
 
-  _parsePlayerList = () => {
-    const playerList = this.state.room.playerList;
-    playerList.map((value, key) => {
-      return (
-        <Text style={{color: 'blue'}} key={key}>{value.usernames}: {value.wpm}</Text>
-      )
-    })
-  }
-
   _leaveGame = () => {
     this.props.leaveGame();
   }
@@ -49,13 +41,13 @@ class ScoreView extends Component {
   }
 
   render() {
+    const showLobby = this.state.room ? <LobbyViewContainer roomJoined={this.state.room} showScore={true}/> : null;
+
     return (
       <View>
         <Text style={{color: 'red'}}>Quote again</Text>
         <Text style={{color: 'red'}}>This quote was from link to AMZN</Text>
-        <View>
-          {this._parsePlayerList()}
-        </View>
+        <View>{showLobby}</View>
         <Button
           title="Play again?"
           onPress={() => this.props.startNewQuickGame()}

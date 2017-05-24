@@ -121,10 +121,7 @@ export default function MultiplayStateReducer(state = initialState, action = {})
           quoteAfflink: action.payload.quoteAfflink,
         },
         Effects.constant(NavigationActions.navigate({
-          routeName: 'MultiplayTypeView',
-          params: {
-            roomJoined: action.payload.room
-          }
+          routeName: 'MultiplayTypeView'
         }))
       );
 
@@ -172,10 +169,7 @@ export default function MultiplayStateReducer(state = initialState, action = {})
           quoteAfflink: action.payload.quoteAfflink,
         },
         Effects.constant(NavigationActions.navigate({
-          routeName: 'MultiplayTypeView',
-          params: {
-            roomJoined: action.payload.room
-          }
+          routeName: 'MultiplayTypeView'
         }))
       );
 

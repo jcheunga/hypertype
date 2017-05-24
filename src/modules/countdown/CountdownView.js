@@ -14,7 +14,7 @@ class CountdownView extends Component {
 
     this.state = {
       countdownTime: props.gameStartTime,
-      room: this.props.roomJoined
+      room: props.roomJoined
     };
 
     this.countInterval;
@@ -30,16 +30,6 @@ class CountdownView extends Component {
     this.setState({
       room: response
     });
-  }
-
-  _parsePlayerList = () => {
-    const playerList = this.state.room.playerList;
-    // SORT AND FIND INDEX OF CURRENT USER;
-    playerList.map((value, key) => {
-      return (
-        <Text style={{color: 'blue'}} key={key}>{value.usernames}</Text>
-      )
-    })
   }
 
   componentDidMount () {
@@ -67,9 +57,6 @@ class CountdownView extends Component {
       <View>
         <Text style={{color: 'blue'}}>Countdown: {this.state.countdownTime === 0 ? 'GO!' : this.state.countdownTime}</Text>
         <Text style={{color: 'blue'}}>Number of players joined: {this.state.playerList.length}</Text>
-        <View>
-          {this._parsePlayerList()}
-        </View>
         <Text style={{color: 'blue'}}>Half screen ad (Admob)</Text>
       </View>
     );
