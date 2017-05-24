@@ -62,9 +62,11 @@ class MultiplayView extends Component {
     });
   }
 
-  joinGameWithId = (enteredGameId) => {
-    let user = this.props.user ? this.props.user : {usernames: this.props.guestUsername};
-    this.props.multiplayStateActions.joinGame(enteredGameId, this.props.inGame, user);
+  joinGameWithId = (enteredGameId, gameJoined) => {
+    if (!gameJoined) {
+      let user = this.props.user ? this.props.user : {usernames: this.props.guestUsername};
+      this.props.multiplayStateActions.joinGame(enteredGameId, this.props.inGame, user);
+    }
   }
 
   resetView = () => {

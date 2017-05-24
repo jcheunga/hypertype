@@ -74,13 +74,16 @@ class JoinGameView extends Component {
           />
           <Button
             title="Join game"
-            onPress={() => this.props.joinGameWithId(this.state.enteredGameId)}
+            onPress={() => this.props.joinGameWithId(this.state.enteredGameId, this.state.gameJoined)}
           />
           <Text style={styles.bodyText}>
-            {this.props.isJoining ? "Joining" : this.props.roomJoined.gameId}
+            {this.props.isJoining ? "Joining" : null}
           </Text>
           <Text style={styles.bodyText}>
             {this.props.isStarting ? "Starting" : null}
+          </Text>
+          <Text style={styles.bodyText}>
+            {this.props.roomJoined.gameId}
           </Text>
           <Button
             title="Return to mutliplayer menu"
