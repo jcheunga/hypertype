@@ -135,7 +135,8 @@ const styles = StyleSheet.create({
     fontFamily: 'System'
   },
   input: {
-    width: 100
+    width: 100,
+    height: 40
   }
 });
 

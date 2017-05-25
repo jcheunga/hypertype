@@ -158,6 +158,7 @@ class TyperaceView extends Component {
           {this.createLetters()}
         </View>
         <TextInput
+          style={{height: 40}}
           ref='typeit'
           onChangeText={(text) => this.onTextInput(text)}
           value={this.state.inputText}

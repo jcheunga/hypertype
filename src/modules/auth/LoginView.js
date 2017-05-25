@@ -64,6 +64,7 @@ class LoginView extends Component {
           </Text>
           <View>
             <TextInput
+              autoCapitalize='none'
               style={styles.input}
               // autoFocus={true}
               placeholder='Username'
@@ -74,6 +75,7 @@ class LoginView extends Component {
           </View>
           <View>
             <TextInput
+              autoCapitalize='none'
               style={styles.input}
               secureTextEntry={true}
               placeholder='Password'
@@ -111,7 +113,8 @@ const styles = StyleSheet.create({
     fontFamily: 'System'
   },
   input: {
-    width: 100
+    width: 100,
+    height: 40
   }
 });
 

@@ -76,7 +76,7 @@ class AuthView extends Component {
       <View>
         <View style={styles.userContainer}>
           <Text style={styles.bodyText}>
-            Welcome Guest {this.props.guestUsername}
+            Welcome {this.props.guestUsername}
           </Text>
           <Text style={styles.bodyText}>
             Login to save your scores and favourite quotes

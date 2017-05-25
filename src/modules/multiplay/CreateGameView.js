@@ -41,6 +41,10 @@ class CreateGameView extends Component {
     });
   }
 
+  componentWillUnmount () {
+    app.service("multirooms").removeListener("patched", this._handleGamePatched);
+  }
+
   render() {
     const showLobby = this.state.room ? <LobbyViewContainer roomJoined={this.state.room}/> : null;
 

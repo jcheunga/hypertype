@@ -32,7 +32,7 @@ class JoinGameView extends Component {
       room: {
         playerList: [
           {
-            playerId: this.props.user ? this.props.user.usernames : this.props.guestUsername
+            playerId: this.props.user.usernames ? this.props.user.usernames : this.props.guestUsername
           }
         ]
       }
@@ -71,6 +71,10 @@ class JoinGameView extends Component {
     });
   }
 
+  componentWillUnmount () {
+    app.service("multirooms").removeListener("patched", this._handleGamePatched);
+  }
+
   render() {
     const showLobby = this.state.room ? <LobbyViewContainer roomJoined={this.state.room}/> : null;
 
@@ -85,7 +89,7 @@ class JoinGameView extends Component {
             editable={!this.state.gameJoined}
             onChange={(e) => this.handleIdInput(e)}
             value={this.state.enteredGameId}
-            style={{width: 100}}
+            style={styles.input}
           />
           <Button
             title="Join game"
@@ -129,6 +133,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     fontFamily: 'System'
   },
+  input: {
+    width: 100,
+    height: 40,
+    backgroundColor: 'red'
+  }
 });
 
 export default JoinGameView;

@@ -32,7 +32,7 @@ class HighscoreView extends Component {
   }
 
   componentDidMount () {
-    app.service("highscores").on("created", this._fetchScores());
+    app.service("highscores").on("created", this._fetchScores);
   }
 
   _fetchScores = () => {
@@ -71,6 +71,10 @@ class HighscoreView extends Component {
         </View>
       );
     }
+  }
+
+  componentWillUnmount () {
+    app.service("highscores").removeListener("created", this._fetchScores);
   }
 
   // _renderView = () => {

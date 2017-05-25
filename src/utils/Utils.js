@@ -8,23 +8,24 @@ export function getRandomNumberBetweenRange(max, min) {
 }
 
 export function createRandomGameId () {
-  var alphabet = "abcdefghijklmnopqrstuvwxyz";
-  var letterPart = alphabet[getRandomNumberBetweenRange(0, 26)] + alphabet[getRandomNumberBetweenRange(0, 26)];
-  var numberPart = getRandomNumberBetweenRange(1000, 9999).toString();
-  var totalGameId = letterPart + numberPart;
+  const alphabet = "abcdefghijklmnopqrstuvwxyz";
+  const letterPart = alphabet[getRandomNumberBetweenRange(0, 26)] + alphabet[getRandomNumberBetweenRange(0, 26)];
+  const numberPart = getRandomNumberBetweenRange(1000, 9999).toString();
+  const totalGameId = letterPart + numberPart;
   return totalGameId
 }
 
 export function createRandomGuestUserId () {
-  var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  var letterPart = alphabet[getRandomNumberBetweenRange(0, 26)] + alphabet[getRandomNumberBetweenRange(0, 26)];
-  var numberPart = getRandomNumberBetweenRange(1000, 9999).toString();
-  var totalGameId = letterPart + numberPart;
-  return totalGameId
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const letterPart = alphabet[getRandomNumberBetweenRange(0, 26)] + alphabet[getRandomNumberBetweenRange(0, 26)];
+  const numberPart = getRandomNumberBetweenRange(1000, 9999).toString();
+  const totalGameId = letterPart + numberPart;
+  const gameId = "Guest" + totalGameId;
+  return gameId
 }
 
 export function getQuoteToType () {
-  const quoteArr = ["a", "b", "c"];
+  const quoteArr = ["A", "B", "C"];
   return quoteArr[getRandomNumberBetweenRange(0, 3)];
 }
 
