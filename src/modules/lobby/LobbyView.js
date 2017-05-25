@@ -34,37 +34,22 @@ class LobbyView extends Component {
 
     return playerList.map((value, key) => {
       return(
-        <Text>Player: {value.usernames} { this.props.showScore ? "- WPM: " value.wpm : null}</Text>
+        <Text key={key}>Player: {value.playerId} { this.props.showScore ? "- WPM: " + value.wpm : null}</Text>
       );
     })
   }
 
-  _keyExtractor = (item, index) => item._id;
-
-  _renderPlayerListItem = ({item}) => (
-    <Text>Player: {item.usernames} { this.props.showScore ? "- WPM: " item.wpm : null}</Text>
-  );
-
   render() {
-    console.log(this.props);
     return (
-      <View style={styles.container}>
-        <View style={styles.body}>
-          <Text style={styles.bodyText}>
-            Players List
-          </Text>
-          <View>{this._renderPlayerList()}</View>
-          <FlatList
-            data={this.props.roomJoined.playerList}
-            extraData={this.props.roomJoined}
-            keyExtractor={this._keyExtractor}
-            renderItem={this._renderPlayerListItem}
-          />
-          <Text>
-            List of players in the room, maybe cap at 10
-            and then show wpm if it has prop for wpm score
-          </Text>
-        </View>
+      <View>
+        <Text>
+          Players List
+        </Text>
+        <View>{this._renderPlayerList()}</View>
+        <Text>
+          List of players in the room, maybe cap at 10
+          and then show wpm if it has prop for wpm score
+        </Text>
       </View>
     );
   }

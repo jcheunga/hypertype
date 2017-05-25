@@ -32,7 +32,7 @@ class JoinGameView extends Component {
       room: {
         playerList: [
           {
-            usernames: this.props.user.usernames ? this.props.user.usernames : this.props.guestUsername
+            playerId: this.props.user ? this.props.user.usernames : this.props.guestUsername
           }
         ]
       }
@@ -45,10 +45,15 @@ class JoinGameView extends Component {
   }
 
   _handleGamePatched = (response) => {
+    console.log("patch response");
     console.log(response);
     if (response.gameStarted) {
-      this.props.multiplayStateActions.startGameForJoins(this.props.gameId, this.props.roomJoined);
+      // this.props.multiplayStateActions.startGameForJoins(this.props.gameId, this.props.roomJoined);
     }
+
+    this.setState({
+      room: response
+    });
   }
 
   componentWillReceiveProps (nextProps) {
@@ -93,9 +98,9 @@ class JoinGameView extends Component {
             {this.props.isStarting ? "Starting" : null}
           </Text>
           <Text style={styles.bodyText}>
-            {this.props.roomJoined.gameId}
+            Game ID: { this.state.room.gameId ? this.state.room.gameId : null}
           </Text>
-          <View>{showLobby}</View>
+          {showLobby}
           <Button
             title="Return to mutliplayer menu"
             onPress={() => this.props.resetView()}

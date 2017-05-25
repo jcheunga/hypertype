@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 
 import LobbyViewContainer from '../lobby/LobbyViewContainer';
+import app from '../../feathers';
 
 const window = Dimensions.get('window');
 
@@ -35,14 +36,13 @@ class CreateGameView extends Component {
   }
 
   _handleGamePatched = (response) => {
-    console.log(response);
-    if (response.gameStarted) {
-      this.props.multiplayStateActions.startGameForJoins(this.props.gameId, this.props.roomJoined);
-    }
+    this.setState({
+      room: response
+    });
   }
 
   render() {
-    const showLobby = this.props.room ? <LobbyViewContainer roomJoined={this.state.room}/> : null;
+    const showLobby = this.state.room ? <LobbyViewContainer roomJoined={this.state.room}/> : null;
 
     return (
       <View style={styles.container}>
