@@ -21,7 +21,7 @@ class CountdownView extends Component {
     this._listenToRoom();
   }
 
-  _listenToRoom = () => { // PATCH WITH WPM
+  _listenToRoom = () => {
     app.service(this.props.serviceType).on('patched', this._handleListenToRoom);
   }
 

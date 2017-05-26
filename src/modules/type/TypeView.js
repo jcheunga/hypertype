@@ -13,6 +13,8 @@ import TyperaceView from '../typerace/TyperaceView';
 import ScoreView from '../score/ScoreView';
 import { countdownToSeconds } from '../../utils/Utils';
 
+import app from '../../feathers';
+
 const window = Dimensions.get('window');
 
 class TypeView extends Component {
@@ -31,8 +33,22 @@ class TypeView extends Component {
       gameStartTime: countdownToSeconds(props.gameStartTime),
       countdownView: false,
       typingView: false,
-      scoreView: false
+      scoreView: false,
+      room: props.roomJoined
     };
+
+    this._listenToRoom();
+  }
+
+  _listenToRoom = () => {
+    app.service(this.props.serviceType).on('patched', this._handleListenToRoom);
+  }
+
+  _handleListenToRoom = (response) => {
+    console.log(response);
+    this.setState({
+      room: response
+    });
   }
 
   componentWillMount () {
@@ -86,6 +102,10 @@ class TypeView extends Component {
       typingView: false,
       scoreView: true
     });
+  }
+
+  componentWillUnmount () {
+    app.service(this.props.serviceType).removeListener('patched', this._handleListenToRoom);
   }
 
   render () {
