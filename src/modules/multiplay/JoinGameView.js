@@ -32,7 +32,7 @@ class JoinGameView extends Component {
       room: {
         playerList: [
           {
-            playerId: this.props.user.usernames ? this.props.user.usernames : this.props.guestUsername
+            playerId: this.props.user !== null ? this.props.user.usernames : this.props.guestUsername
           }
         ]
       }

@@ -102,7 +102,6 @@ export function joinRoomService (payload) {
       .find({
         $limit: 1,
         query: {
-          completed: false,
           gameId: gameId
         }
       })
@@ -162,8 +161,7 @@ export function startGameForJoinsService (payload) {
       .find({
         $limit: 1,
         query: {
-          _id: room._id,
-          completed: false
+          _id: room._id
         }
       })
       .then((response) => {

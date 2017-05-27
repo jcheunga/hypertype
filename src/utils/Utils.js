@@ -25,8 +25,8 @@ export function createRandomGuestUserId () {
 }
 
 export function getQuoteToType () {
-  const quoteArr = ["A", "B", "C"];
-  return quoteArr[getRandomNumberBetweenRange(0, 3)];
+  const quoteArr = ["aaaaa aaaaa aaaaa", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", "Lorem Ipsum is simply dummy text of the printing and typesetting industry."];
+  return quoteArr[getRandomNumberBetweenRange(0, quoteArr.length)];
 }
 
 export function countdownToSeconds (countdownValue) {

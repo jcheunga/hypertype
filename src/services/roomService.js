@@ -17,7 +17,6 @@ export function findRoomService (payload) {
       .find({
         $limit: 1,
         query: {
-          completed: false,
           gameStartTime: {
             $gte: Date.now() + countdownCutOffAmount
           }
@@ -59,7 +58,6 @@ export function findRoomService (payload) {
             gameEndTime: gameEndTime,
             quoteToType: quoteToType,
             quoteAfflink: quoteToType,
-            completed: false,
             playerList: [
               {
                 playerId: payload.user.usernames,

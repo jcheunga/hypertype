@@ -32,6 +32,7 @@ class HighscoreView extends Component {
   }
 
   componentDidMount () {
+    this._fetchScores();
     app.service("highscores").on("created", this._fetchScores);
   }
 
@@ -60,7 +61,7 @@ class HighscoreView extends Component {
   }
 
   _showError = () => {
-    if (this.props.hasError) {
+    if (this.props.hasError || !this.props.isFetching && this.props.scores.length === 0) {
       return (
         <View>
           <Text>Error Loading...</Text>

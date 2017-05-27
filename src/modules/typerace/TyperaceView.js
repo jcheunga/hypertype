@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 
 import app from '../../feathers';
+import { countdownToSeconds } from '../../utils/Utils';
 
 class TyperaceView extends Component {
   static displayName = 'TyperaceView';
@@ -30,7 +31,9 @@ class TyperaceView extends Component {
       currentString: "",
       currentLetter: 0,
       inputText: "",
-      room: props.roomJoined
+      characterCount: this.words[0].length,
+      room: props.roomJoined,
+      wpm: 0
     };
 
     this._listenToRoom();
@@ -41,42 +44,49 @@ class TyperaceView extends Component {
   }
 
   _handleListenToRoom = (response) => {
-    console.log(response);
     this.setState({
       room: response
     });
   }
 
   _registerTypeSpeed = () => {
-    const roomId = this.state.room._id;
+    // WPM = (characters / 5) / min
+    const timeElapsed = countdownToSeconds(this.props.gameStartTime) / 60;
+    // console.log(timeElapsed);
+    const characterCount = this.state.characterCount >=5 ? this.state.characterCount : 5;
+    // console.log(characterCount);
+    const wpm = Math.round((characterCount / 5) / timeElapsed);
+    console.log(wpm);
+    this.setState({
+      wpm: wpm
+    });
+    const usernames = this.props.user !== null ? this.props.user.usernames : this.props.guestUsername;
+    const room = this.state.room;
+    const roomId = room._id;
+    const patchedPlayerList = room.playerList;
+    for (let i = 0; i < patchedPlayerList.length; i++) {
+      if (patchedPlayerList[i].playerId === usernames) {
+        patchedPlayerList[i].wpm = this.state.wpm;
+      }
+    }
     app.service(this.props.serviceType).patch(roomId, {
-      ...room
+      playerList: patchedPlayerList
     });
   }
 
   _registerGameFinish = () => {
-    let user = user;
-    const playerToChange = {
-      playerId: user.usernames,
-      gameCreator: false,
-      wpm: 0, // PATCH THIS
-      completed: false
-    };
+    const usernames = this.props.user !== null ? this.props.user.usernames : this.props.guestUsername;
     const room = this.state.room;
     const roomId = room._id;
-    const patchedplayerList = room.playerList;
-    let matched = false;
-    for (let i = 0; i < patchedplayerList.length; i++) {
-      if (patchedplayerList[i].playerId === user.usernames) {
-        matched = true;
-        break;
+    const patchedPlayerList = room.playerList;
+    for (let i = 0; i < patchedPlayerList.length; i++) {
+      if (patchedPlayerList[i].playerId === usernames) {
+        patchedPlayerList[i].completed = true;
+        patchedPlayerList[i].wpm = this.state.wpm;
       }
     }
-    if (!matched) {
-      patchedplayerList.push(playerToChange);
-    }
     app.service(this.props.serviceType).patch(roomId, {
-      playerList: patchedplayerList
+      playerList: patchedPlayerList
     });
   }
 
@@ -125,25 +135,33 @@ class TyperaceView extends Component {
 
       // FINISH GAME AFTER LAST CORRECT WORD
       if (this.state.currentWord === this.wordCount - 1 && text === this.words[this.wordCount - 1] ) {
+        this._registerTypeSpeed();
+        console.log(this.state.wpm);
         this.setState({
           inputText: ""
         });
+        this._registerGameFinish();
         this.props.finishTyping();
       }
 
       // SPACE AND CORRECT WORD
       if (text.length === this.words[this.state.currentWord].length + 1 && text.substring(this.words[this.state.currentWord].length, this.words[this.state.currentWord].length + 1) === " " && text.trim() === this.words[this.state.currentWord]) {
 
+        this._registerTypeSpeed();
+
         if (text.trim().length === this.words[this.state.currentWord].length) {
           this.setState({
             currentWord: this.state.currentWord + 1,
             currentLetter: 0,
-            inputText: ""
+            inputText: "",
+            characterCount: this.state.characterCount + this.words[this.state.currentWord + 1].length
           });
         }
       }
 
     }
+
+    // this._registerTypeSpeed();
 
   }
 
@@ -167,8 +185,7 @@ class TyperaceView extends Component {
         />
         <Text style={{color: 'red'}}>Current Word: {this.state.currentWord + 1}</Text>
         <Text style={{color: 'red'}}>Current Letter: {this.state.currentLetter + 1}</Text>
-        <Text style={{color: 'red'}}>Input Text: {this.state.inputText}</Text>
-        <Text style={{marginBottom: 10, color: 'red'}}>Finished: {this.state.finishedTyping ? 'True' : 'False'}</Text>
+        <Text style={{color: 'red'}}>Current WPM: {this.state.wpm}</Text>
       </View>
     );
   }

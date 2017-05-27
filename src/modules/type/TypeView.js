@@ -36,19 +36,6 @@ class TypeView extends Component {
       scoreView: false,
       room: props.roomJoined
     };
-
-    this._listenToRoom();
-  }
-
-  _listenToRoom = () => {
-    app.service(this.props.serviceType).on('patched', this._handleListenToRoom);
-  }
-
-  _handleListenToRoom = (response) => {
-    console.log(response);
-    this.setState({
-      room: response
-    });
   }
 
   componentWillMount () {
@@ -102,10 +89,6 @@ class TypeView extends Component {
       typingView: false,
       scoreView: true
     });
-  }
-
-  componentWillUnmount () {
-    app.service(this.props.serviceType).removeListener('patched', this._handleListenToRoom);
   }
 
   render () {
