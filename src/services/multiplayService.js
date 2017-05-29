@@ -22,7 +22,7 @@ export function createRoomService (payload) {
       gameId: createGameId,
       quoteToType: quoteToType,
       quoteAfflink: quoteToType,
-      completed: false,
+      gameStarted: false,
       playerList: [
         {
           playerId: user.usernames,
@@ -102,7 +102,8 @@ export function joinRoomService (payload) {
       .find({
         $limit: 1,
         query: {
-          gameId: gameId
+          gameId: gameId,
+          gameStarted: false
         }
       })
       .then((response) => {
