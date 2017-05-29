@@ -26,7 +26,6 @@ class CountdownView extends Component {
   }
 
   _handleListenToRoom = (response) => {
-    console.log(response);
     this.setState({
       room: response
     });

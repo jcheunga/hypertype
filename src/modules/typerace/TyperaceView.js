@@ -82,7 +82,6 @@ class TyperaceView extends Component {
     for (let i = 0; i < patchedPlayerList.length; i++) {
       if (patchedPlayerList[i].playerId === usernames) {
         patchedPlayerList[i].completed = true;
-        patchedPlayerList[i].wpm = this.state.wpm;
       }
     }
     app.service(this.props.serviceType).patch(roomId, {
@@ -136,7 +135,6 @@ class TyperaceView extends Component {
       // FINISH GAME AFTER LAST CORRECT WORD
       if (this.state.currentWord === this.wordCount - 1 && text === this.words[this.wordCount - 1] ) {
         this._registerTypeSpeed();
-        console.log(this.state.wpm);
         this.setState({
           inputText: ""
         });

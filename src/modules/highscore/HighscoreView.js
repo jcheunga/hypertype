@@ -1,4 +1,3 @@
-
 import React, {PropTypes, Component} from 'react';
 import {
   StyleSheet,
@@ -77,9 +76,6 @@ class HighscoreView extends Component {
   componentWillUnmount () {
     app.service("highscores").removeListener("created", this._fetchScores);
   }
-
-  // _renderView = () => {
-  // }
 
   render() {
     return (
