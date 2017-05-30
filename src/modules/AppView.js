@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import {View, StyleSheet, StatusBar, ActivityIndicator} from 'react-native';
 import NavigatorViewContainer from './navigator/NavigatorViewContainer';
 import * as snapshotUtil from '../utils/snapshot';
@@ -13,9 +13,9 @@ import { AsyncStorage } from 'react-native';
 class AppView extends Component {
   static displayName = 'AppView';
 
-  static propTypes = {
-    isReady: PropTypes.bool.isRequired
-  };
+  // static propTypes = {
+  //   isReady: PropTypes.bool.isRequired
+  // };
 
   constructor(props) {
     super(props)

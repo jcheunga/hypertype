@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import {addNavigationHelpers} from 'react-navigation';
 
 import AppNavigator from './Navigator';
@@ -7,16 +7,16 @@ import AppNavigator from './Navigator';
 class NavigatorView extends Component {
   static displayName = 'NavigationView';
 
-  static propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    navigatorState: PropTypes.shape({
-      index: PropTypes.number.isRequired,
-      routes: PropTypes.arrayOf(PropTypes.shape({
-        key: PropTypes.string.isRequired,
-        routeName: PropTypes.string.isRequired
-      }))
-    }).isRequired
-  };
+  // static propTypes = {
+  //   dispatch: PropTypes.func.isRequired,
+  //   navigatorState: PropTypes.shape({
+  //     index: PropTypes.number.isRequired,
+  //     routes: PropTypes.arrayOf(PropTypes.shape({
+  //       key: PropTypes.string.isRequired,
+  //       routeName: PropTypes.string.isRequired
+  //     }))
+  //   }).isRequired
+  // };
 
   render() {
     return (
