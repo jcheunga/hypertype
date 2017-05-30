@@ -73,6 +73,7 @@ class MultiplayTypeView extends Component {
         { type: 'Navigation/NAVIGATE', routeName:'Multiplay'}
       ]
     });
+    // this.props.navigationStateActions.back();
   }
 
   finishCountdown = () => {

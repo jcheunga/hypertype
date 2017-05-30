@@ -37,6 +37,9 @@ const AppNavigator = StackNavigator({
   TypeView: {screen: TypeViewContainer},
   Multiplay: {screen: MultiplayViewContainer},
   MultiplayTypeView: {screen: MultiplayTypeViewContainer}
+},
+{
+  headerMode: 'screen'
 });
 
 export default AppNavigator;

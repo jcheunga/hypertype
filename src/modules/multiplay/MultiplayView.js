@@ -1,12 +1,10 @@
 import React, {PropTypes, Component} from 'react';
 import {
   StyleSheet,
-  Text,
   View,
-  Image,
-  Dimensions,
-  Button
+  Dimensions
 } from 'react-native';
+import MultiplayMenuView from './MultiplayMenuView';
 import CreateGameView from './CreateGameView';
 import JoinGameView from './JoinGameView';
 
@@ -30,10 +28,6 @@ class MultiplayView extends Component {
       createGameView: false,
       joinGameView: false
     }
-  }
-
-  componentWillMount () {
-    // console.log(this.props.gameId);
   }
 
   componentWillReceiveProps (nextProps) {
@@ -83,21 +77,7 @@ class MultiplayView extends Component {
 
   render() {
     const showMultiplayView = this.state.multiplayView || !this.props.gameId && !this.state.joinGameView ?
-      <View>
-        <Text>{this.props.isCreating ? "Creating game..." : null}</Text>
-        <Button
-          title="Create game"
-          onPress={() => this.createGame()}
-        />
-        <Button
-          title="Join game"
-          onPress={() => this.joinGame()}
-        />
-        <Button
-          title="Back to main menu"
-          onPress={() => this.gotoMainMenu()}
-        />
-      </View>
+    <MultiplayMenuView {...this.props} createGame={this.createGame} joinGame={this.joinGame} gotoMainMenu={this.gotoMainMenu}/>
     : null;
 
     const showCreateGameView = this.state.createGameView ?
@@ -122,25 +102,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#eaf8fd',
-    justifyContent: 'center'
-  },
-  cityCard: {
-    flex: 1,
-    overflow: 'hidden',
-    width: window.width,
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    marginTop: 20
-  },
-  title: {
-    marginTop: 20
-  },
-  pageIndicator: {
-    marginBottom: 20
-  },
-  buttonsContainer: {
-    flex: 1,
-    margin: 10,
     justifyContent: 'center'
   }
 });
