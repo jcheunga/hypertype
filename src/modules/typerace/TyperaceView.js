@@ -56,7 +56,7 @@ class TyperaceView extends Component {
     const characterCount = this.state.characterCount >=5 ? this.state.characterCount : 5;
     // console.log(characterCount);
     const wpm = Math.round((characterCount / 5) / timeElapsed);
-    console.log(wpm);
+    // console.log(wpm);
     this.setState({
       wpm: wpm
     });
@@ -75,7 +75,8 @@ class TyperaceView extends Component {
   }
 
   _registerGameFinish = () => {
-    const usernames = this.props.user !== null ? this.props.user.usernames : this.props.guestUsername;
+    const user = this.props.user;
+    const usernames = user !== null ? user.usernames : this.props.guestUsername;
     const room = this.state.room;
     const roomId = room._id;
     const patchedPlayerList = room.playerList;
@@ -86,6 +87,25 @@ class TyperaceView extends Component {
     }
     app.service(this.props.serviceType).patch(roomId, {
       playerList: patchedPlayerList
+    });
+
+    app.service("highscores").create({
+      gameId: room.gameId,
+      wpm: this.state.wpm,
+      playerName: usernames,
+      quote: room.quoteToType
+    });
+
+    const userId = user._id;
+    const userHighscores = user.highscores;
+    const highscoreToAdd = {
+      wpm: this.state.wpm,
+      quote: room.quoteToType,
+      gameId: room.gameId
+    };
+    userHighscores.push(highscoreToAdd);
+    app.service("users").patch(userId, {
+      highscores: userHighscores
     });
   }
 
@@ -174,6 +194,7 @@ class TyperaceView extends Component {
           {this.createLetters()}
         </View>
         <TextInput
+          autoCapitalize="none"
           style={{height: 40}}
           ref='typeit'
           onChangeText={(text) => this.onTextInput(text)}

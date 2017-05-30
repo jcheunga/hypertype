@@ -37,6 +37,19 @@ class UserProfileView extends Component {
     this.props.authStateActions.deleteAccount();
   }
 
+  _showScores = () => {
+    const scores = this.props.user.highscores;
+    if (scores.length > 0) {
+      return scores.map((highscore, index) => {
+        return (
+          <Text key={index}>{highscore.gameId}: {highscore.wpm}</Text>
+        );
+      });
+    } else {
+      return null;
+    }
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -50,6 +63,7 @@ class UserProfileView extends Component {
           <Text style={styles.bodyText}>
             My Highscores
           </Text>
+          <View>{this._showScores()}</View>
           <Button
             title="Logout"
             onPress={() => this._logoutAccount()}
