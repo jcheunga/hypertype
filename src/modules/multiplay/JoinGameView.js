@@ -2,15 +2,10 @@
 import React, {Component} from 'react';
 import {
   StyleSheet,
-  Image,
   Text,
   TextInput,
   View,
-  ListView,
-  Platform,
   Dimensions,
-  ActivityIndicator,
-  TouchableOpacity,
   Button
 } from 'react-native';
 

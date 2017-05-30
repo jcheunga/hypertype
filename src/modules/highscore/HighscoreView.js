@@ -1,14 +1,9 @@
 import React, {Component} from 'react';
 import {
   StyleSheet,
-  Image,
   Text,
   View,
-  ListView,
-  Platform,
   Dimensions,
-  ActivityIndicator,
-  TouchableOpacity,
   Button
 } from 'react-native';
 

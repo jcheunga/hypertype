@@ -1,14 +1,10 @@
 import React, {Component} from 'react';
 import {
   StyleSheet,
-  Image,
   Text,
   View,
-  Platform,
   Dimensions,
-  TouchableOpacity,
-  Button,
-  FlatList
+  Button
 } from 'react-native';
 
 const window = Dimensions.get('window');

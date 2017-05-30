@@ -32,6 +32,7 @@ export const START_GAME_SUCCESS = 'MultiplayState/START_GAME_SUCCESS';
 
 const JOIN_GAME = 'MultiplayState/JOIN_GAME';
 export const JOIN_GAME_SUCCESS = 'MultiplayState/JOIN_GAME_SUCCESS';
+export const JOIN_NEW_GAME_SUCCESS = 'MultiplayState/JOIN_NEW_GAME_SUCCESS';
 
 const START_GAME_FOR_JOINS = 'MultiplayState/START_GAME_FOR_JOINS';
 export const START_GAME_FOR_JOINS_SUCCESS = 'MultiplayState/START_GAME_FOR_JOINS_SUCCESS';
@@ -97,6 +98,17 @@ export default function MultiplayStateReducer(state = initialState, action = {})
         roomJoined: action.payload.room
       };
 
+    case CREATE_NEW_GAME_SUCCESS:
+      return {
+        ...state,
+        isCreating: false,
+        gameCreator: true,
+        isCreated: action.payload.isCreated,
+        inGame: action.payload.isCreated,
+        gameId: action.payload.gameId,
+        roomJoined: action.payload.room
+      };
+
     case START_GAME:
       return loop(
         {
@@ -135,6 +147,17 @@ export default function MultiplayStateReducer(state = initialState, action = {})
       );
 
     case JOIN_GAME_SUCCESS:
+      return {
+        ...state,
+        isJoining: false,
+        isJoined: action.payload.isJoined,
+        inGame: action.payload.isJoined,
+        gameId: action.payload.gameId,
+        gameCreator: false,
+        roomJoined: action.payload.room
+      };
+
+    case JOIN_NEW_GAME_SUCCESS:
       return {
         ...state,
         isJoining: false,

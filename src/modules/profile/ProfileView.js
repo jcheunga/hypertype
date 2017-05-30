@@ -1,16 +1,8 @@
 import React, {Component} from 'react';
 import {
   StyleSheet,
-  Image,
-  Text,
-  TextInput,
   View,
-  ListView,
-  Platform,
   Dimensions,
-  ActivityIndicator,
-  TouchableOpacity,
-  Button
 } from 'react-native';
 
 import UserProfileView from './UserProfileView';
@@ -36,9 +28,7 @@ class ProfileView extends Component {
     const userView = this.props.user ? <UserProfileView {...this.props}/> : <AuthViewContainer />;
     return (
       <View style={styles.container}>
-        <View style={styles.userContainer}>
-          {userView}
-        </View>
+        {userView}
       </View>
     );
   }
@@ -50,18 +40,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#eaf8fd'
-  },
-  userContainer: {
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  bodyText: {
-    fontSize: 18,
-    color: 'black',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontFamily: 'System'
-  },
+  }
 });
 
 export default ProfileView;

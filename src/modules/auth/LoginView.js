@@ -56,38 +56,35 @@ class LoginView extends Component {
 
   render() {
     return (
-      <View>
-        <View style={styles.userContainer}>
-          <Text style={styles.bodyText}>
-            Login
-          </Text>
-          <View>
-            <TextInput
-              autoCapitalize='none'
-              style={styles.input}
-              // autoFocus={true}
-              placeholder='Username'
-              returnKeyType='next'
-              value={this.state.username}
-              onChangeText={this._handleUsernameChange}
-            />
-          </View>
-          <View>
-            <TextInput
-              autoCapitalize='none'
-              style={styles.input}
-              secureTextEntry={true}
-              placeholder='Password'
-              returnKeyType='send'
-              value={this.state.password}
-              onChangeText={this._handlePasswordChange}
-            />
-          </View>
-          <Button
-            title="Login"
-            onPress={() => this._loginAccount()}
+      <View style={styles.container}>
+        <Text style={styles.bodyText}>
+          Login
+        </Text>
+        <View>
+          <TextInput
+            autoCapitalize='none'
+            style={styles.input}
+            placeholder='Username'
+            returnKeyType='next'
+            value={this.state.username}
+            onChangeText={this._handleUsernameChange}
           />
         </View>
+        <View>
+          <TextInput
+            autoCapitalize='none'
+            style={styles.input}
+            secureTextEntry={true}
+            placeholder='Password'
+            returnKeyType='send'
+            value={this.state.password}
+            onChangeText={this._handlePasswordChange}
+          />
+        </View>
+        <Button
+          title="Login"
+          onPress={() => this._loginAccount()}
+        />
       </View>
     );
   }
@@ -95,14 +92,10 @@ class LoginView extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#eaf8fd'
-  },
-  userContainer: {
-    justifyContent: 'center',
-    alignItems: 'center'
   },
   bodyText: {
     fontSize: 18,

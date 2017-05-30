@@ -1,15 +1,10 @@
 import React, {Component} from 'react';
 import {
   StyleSheet,
-  Image,
   Text,
   TextInput,
   View,
-  ListView,
-  Platform,
   Dimensions,
-  ActivityIndicator,
-  TouchableOpacity,
   Button
 } from 'react-native';
 
@@ -74,26 +69,24 @@ class AuthView extends Component {
   render() {
     return (
       <View>
-        <View style={styles.userContainer}>
-          <Text style={styles.bodyText}>
-            Welcome {this.props.guestUsername}
-          </Text>
-          <Text style={styles.bodyText}>
-            Login to save your scores and favourite quotes
-          </Text>
-          <View>
-            {this._showLoginView()}
-            {this._showRegisterView()}
-          </View>
-          <Text
-            onPress={() => this._switchLoginView()}>
-            Login
-          </Text>
-          <Text
-            onPress={() => this._switchRegisterView()}>
-            Register
-          </Text>
+        <Text style={styles.bodyText}>
+          Welcome {this.props.guestUsername}
+        </Text>
+        <Text style={styles.bodyText}>
+          Login to save your scores and favourite quotes
+        </Text>
+        <View>
+          {this._showLoginView()}
+          {this._showRegisterView()}
         </View>
+        <Text
+          onPress={() => this._switchLoginView()}>
+          Login
+        </Text>
+        <Text
+          onPress={() => this._switchRegisterView()}>
+          Register
+        </Text>
       </View>
     );
   }
@@ -105,10 +98,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#eaf8fd'
-  },
-  userContainer: {
-    justifyContent: 'center',
-    alignItems: 'center'
   },
   bodyText: {
     fontSize: 18,
