@@ -42,11 +42,16 @@ class UserProfileView extends Component {
     if (scores.length > 0) {
       return scores.map((highscore, index) => {
         return (
-          <Text key={index}>{highscore.gameId}: {highscore.wpm}</Text>
+          <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <Text>{highscore.gameId}</Text>
+            <Text>{highscore.wpm}</Text>
+          </View>
         );
       });
     } else {
-      return null;
+      return (
+        <Text>Start Playing!</Text>
+      );
     }
   }
 
@@ -55,16 +60,15 @@ class UserProfileView extends Component {
   }
 
   render() {
-    console.log(this.props.user.createdAt)
     return (
       <View>
-        <FloatingContainer first center>
+        <FloatingContainer first>
           <View style={{alignItems: 'center'}}>
             <Image
               style={{height: 100,borderRadius: 50, width: 100, marginBottom: 20}}
               source={{uri: 'https://placehold.it/100x100'}}
             />
-            <Text style={{fontSize: 20, fontWeight: '600', marginBottom: 10}}>
+            <Text style={{fontSize: 20, fontWeight: '600', marginBottom: 10, color: '#0073cd'}}>
               Welcome {this._showUserName()}!
             </Text>
             <Text style={{fontSize: 14, marginBottom: 20}}>
@@ -80,12 +84,16 @@ class UserProfileView extends Component {
         </FloatingContainer>
 
         <FloatingContainer>
-          <ListHeader>
-            My Highscores
-          </ListHeader>
-          <View>
-            {this._showScores()}
+          <View style={{alignItems: 'center'}}>
+            <ListHeader>
+              My Highscores
+            </ListHeader>
           </View>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between', borderBottomWidth: 2, borderBottomColor: '#2b2b2b',marginBottom: 5, paddingBottom: 5}}>
+            <Text style={{fontWeight: '600'}}>Game ID</Text>
+            <Text style={{fontWeight: '600'}}>WPM</Text>
+          </View>
+          {this._showScores()}
         </FloatingContainer>
       </View>
     );

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 // import PropTypes from 'prop-types';
-import {View, StyleSheet, StatusBar, ActivityIndicator} from 'react-native';
+import {View, StyleSheet, StatusBar, ActivityIndicator, AsyncStorage, Text} from 'react-native';
 import NavigatorViewContainer from './navigator/NavigatorViewContainer';
 import * as snapshotUtil from '../utils/snapshot';
 import * as SessionStateActions from '../modules/session/SessionState';
@@ -8,7 +8,6 @@ import store from '../redux/store';
 import DeveloperMenu from '../components/DeveloperMenu';
 
 import app from '../feathers';
-import { AsyncStorage } from 'react-native';
 
 class AppView extends Component {
   static displayName = 'AppView';
@@ -58,6 +57,7 @@ class AppView extends Component {
     if (!this.props.isReady) {
       return (
         <View style={{flex: 1}}>
+          <Text>SPLASH SCREEN</Text>
           <ActivityIndicator style={styles.centered} />
         </View>
       );
