@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {
-  StyleSheet,
   Text,
   TextInput,
   View,
   Dimensions,
-  Button
+  Button,
+  Image
 } from 'react-native';
 
 import LoginView from './LoginView';
@@ -69,10 +69,14 @@ class AuthView extends Component {
   render() {
     return (
       <View>
-        <Text style={styles.bodyText}>
+        <Image
+          style={{width: 375, height: 200}}
+          source={{uri: 'https://unsplash.it/375/200?random'}}
+        />
+        <Text>
           Welcome {this.props.guestUsername}
         </Text>
-        <Text style={styles.bodyText}>
+        <Text>
           Login to save your scores and favourite quotes
         </Text>
         <View>
@@ -91,24 +95,5 @@ class AuthView extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#eaf8fd'
-  },
-  bodyText: {
-    fontSize: 18,
-    color: 'black',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontFamily: 'System'
-  },
-  input: {
-    width: 100
-  }
-});
 
 export default AuthView;

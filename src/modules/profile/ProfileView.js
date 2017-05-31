@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import {
-  StyleSheet,
   View,
   Dimensions,
 } from 'react-native';
 
 import UserProfileView from './UserProfileView';
 import AuthViewContainer from '../auth/AuthViewContainer';
+
+import MainContainer from '../../styles/MainContainer';
 
 const window = Dimensions.get('window');
 
@@ -27,20 +28,11 @@ class ProfileView extends Component {
   render() {
     const userView = this.props.user ? <UserProfileView {...this.props}/> : <AuthViewContainer />;
     return (
-      <View style={styles.container}>
+      <MainContainer>
         {userView}
-      </View>
+      </MainContainer>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#eaf8fd'
-  }
-});
 
 export default ProfileView;

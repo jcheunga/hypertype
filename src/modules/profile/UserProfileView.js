@@ -46,46 +46,26 @@ class UserProfileView extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.userContainer}>
-          <Text style={styles.bodyText}>
-            Welcome {this.props.user.usernames}!
-          </Text>
-          <Text style={styles.bodyText}>
-            {this.props.user.createdAt}
-          </Text>
-          <Text style={styles.bodyText}>
-            My Highscores
-          </Text>
-          <View>{this._showScores()}</View>
-          <Button
-            title="Logout"
-            onPress={() => this._logoutAccount()}
-          />
+      <View>
+        <Text>
+          Welcome {this.props.user.usernames}!
+        </Text>
+        <Text>
+          {this.props.user.createdAt}
+        </Text>
+        <Text>
+          My Highscores
+        </Text>
+        <View>
+          {this._showScores()}
         </View>
+        <Button
+          title="Logout"
+          onPress={() => this._logoutAccount()}
+        />
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#eaf8fd'
-  },
-  userContainer: {
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  bodyText: {
-    fontSize: 18,
-    color: 'black',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontFamily: 'System'
-  },
-});
 
 export default UserProfileView;
