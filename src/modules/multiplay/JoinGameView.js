@@ -80,6 +80,8 @@ class JoinGameView extends Component {
             Enter in game id to join game
           </Text>
           <TextInput
+            underlineColorAndroid='transparent'
+            autoCorrect={false}
             autoCapitalize='none'
             editable={!this.state.gameJoined}
             onChange={(e) => this.handleIdInput(e)}
@@ -123,7 +125,7 @@ const styles = StyleSheet.create({
   },
   bodyText: {
     fontSize: 18,
-    color: 'black',
+    color: '#101010',
     justifyContent: 'center',
     alignItems: 'center',
     fontFamily: 'System'

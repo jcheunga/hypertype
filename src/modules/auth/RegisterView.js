@@ -60,32 +60,46 @@ class RegisterView extends Component {
     this.props.authStateActions.registerAccount(userData);
   }
 
+  focusNextField = (nextField) => {
+    this.refs[nextField].root.focus();
+  }
+
   render() {
     return (
       <View>
         <FormTextInput
+          underlineColorAndroid='transparent'
           placeholder='Email'
           autoCorrect={false}
           autoCapitalize='none'
           keyBoardType='email-address'
           returnKeyType='next'
+          autoCorrect={false}
           value={this.state.email}
           onChangeText={this._handleEmailChange}
+          onSubmitEditing={() => this.focusNextField('2')}
         />
         <FormTextInput
+          ref='2'
+          underlineColorAndroid='transparent'
           placeholder='Username'
           autoCorrect={false}
           autoCapitalize='none'
           returnKeyType='next'
+          autoCorrect={false}
           value={this.state.username}
           onChangeText={this._handleUsernameChange}
+          onSubmitEditing={() => this.focusNextField('3')}
         />
         <FormTextInput
+          ref='3'
+          underlineColorAndroid='transparent'
           secureTextEntry={true}
           placeholder='Password'
           autoCorrect={false}
           autoCapitalize='none'
-          returnKeyType='send'
+          returnKeyType='done'
+          autoCorrect={false}
           value={this.state.password}
           onChangeText={this._handlePasswordChange}
         />

@@ -5,7 +5,8 @@ import {
   View,
   Dimensions,
   Button,
-  Image
+  Image,
+  ScrollView
 } from 'react-native';
 
 import LoginView from './LoginView';
@@ -70,14 +71,14 @@ class AuthView extends Component {
 
   render() {
     return (
-      <View>
+      <ScrollView>
         <View>
           <Image
-            style={{width: 375, height: 200,justifyContent: 'center', alignItems: 'center'}}
+            style={{width: 375, height: 150,justifyContent: 'center', alignItems: 'center'}}
             source={require('../../assets/images/200.jpeg')}>
           <View style={{backgroundColor: 'rgba(0,0,0,0)'}}>
-            <Text style={{color: 'black', fontWeight: 'bold', fontSize: 22}}>
-              Welcome {this.props.guestUsername}! / LOGO
+            <Text style={{color: '#101010', fontWeight: 'bold', fontSize: 22}}>
+              HYPERTYPE
             </Text>
           </View>
           </Image>
@@ -100,11 +101,11 @@ class AuthView extends Component {
             {this._showRegisterView()}
           </View>
           <View style={{marginTop: 15, justifyContent: 'center', alignItems: 'center'}}>
-            <Text style={{fontSize: 18, marginBottom: 15, color: '#14171a'}}>Login to save highscores and quotes!</Text>
+            <Text style={{fontSize: 16, marginBottom: 15, color: '#14171a'}}>Login to save highscores and quotes!</Text>
             <Text style={{fontSize: 14, color: '#14171a'}}>Terms of service</Text>
           </View>
         </BodyContainer>
-      </View>
+      </ScrollView>
     );
   }
 }

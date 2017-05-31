@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   },
   bodyText: {
     fontSize: 18,
-    color: 'black',
+    color: '#101010',
     justifyContent: 'center',
     alignItems: 'center',
     fontFamily: 'System'

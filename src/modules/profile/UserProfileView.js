@@ -4,7 +4,8 @@ import {
   View,
   Dimensions,
   Button,
-  Image
+  Image,
+  ScrollView
 } from 'react-native';
 
 const window = Dimensions.get('window');
@@ -61,7 +62,7 @@ class UserProfileView extends Component {
 
   render() {
     return (
-      <View>
+      <ScrollView>
         <FloatingContainer first>
           <View style={{alignItems: 'center'}}>
             <Image
@@ -89,13 +90,13 @@ class UserProfileView extends Component {
               My Highscores
             </ListHeader>
           </View>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', borderBottomWidth: 2, borderBottomColor: '#2b2b2b',marginBottom: 5, paddingBottom: 5}}>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between', borderBottomWidth: 2, borderBottomColor: '#101010',marginBottom: 5, paddingBottom: 5}}>
             <Text style={{fontWeight: '600'}}>Game ID</Text>
             <Text style={{fontWeight: '600'}}>WPM</Text>
           </View>
           {this._showScores()}
         </FloatingContainer>
-      </View>
+      </ScrollView>
     );
   }
 }

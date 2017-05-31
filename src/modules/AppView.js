@@ -7,6 +7,8 @@ import * as SessionStateActions from '../modules/session/SessionState';
 import store from '../redux/store';
 import DeveloperMenu from '../components/DeveloperMenu';
 
+import SplashView from './splash/SplashView';
+
 import app from '../feathers';
 
 class AppView extends Component {
@@ -56,10 +58,7 @@ class AppView extends Component {
   render() {
     if (!this.props.isReady) {
       return (
-        <View style={{flex: 1}}>
-          <Text>SPLASH SCREEN</Text>
-          <ActivityIndicator style={styles.centered} />
-        </View>
+        <SplashView />
       );
     }
 

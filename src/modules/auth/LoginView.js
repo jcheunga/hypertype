@@ -33,6 +33,7 @@ class LoginView extends Component {
   }
 
   _handleUsernameChange = (text) => {
+    console.log(this.refs);
     this.setState({
       username: text
     });
@@ -52,21 +53,32 @@ class LoginView extends Component {
     this.props.authStateActions.authenticateAccount(userData);
   }
 
+  focusNextField = (nextField) => {
+    this.refs[nextField].root.focus();
+  }
+
   render() {
     return (
       <View>
         <FormTextInput
+          underlineColorAndroid='transparent'
           autoCapitalize='none'
           placeholder='Username'
-          returnKeyType='next'
+          returnKeyType = 'next'
+          autoCorrect={false}
           value={this.state.username}
           onChangeText={this._handleUsernameChange}
+          blurOnSubmit={false}
+          onSubmitEditing={() => this.focusNextField('2')}
         />
         <FormTextInput
+          ref='2'
+          underlineColorAndroid='transparent'
           autoCapitalize='none'
           secureTextEntry={true}
           placeholder='Password'
-          returnKeyType='send'
+          returnKeyType='done'
+          autoCorrect={false}
           value={this.state.password}
           onChangeText={this._handlePasswordChange}
         />

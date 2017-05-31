@@ -11,8 +11,8 @@ const FloatingContainer = styled.View`
   shadow-offset: 2px 4px;
   shadow-opacity: 0.2;
   shadow-radius: 2;
-  elevation: 1;
-  margin-top: ${props => props.first ? '60px' : '0'};
+  elevation: 2;
+  margin-top: ${props => props.first ? '25px' : '0'};
 `;
 
 export default FloatingContainer;

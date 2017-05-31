@@ -5,10 +5,15 @@ import {
   View,
   Image,
   Dimensions,
-  Button
 } from 'react-native';
 
 const window = Dimensions.get('window');
+
+import MainContainer from '../../styles/MainContainer';
+import BodyContainer from '../../styles/BodyContainer';
+
+import FormButton from '../../styles/FormButton';
+import FormButtonText from '../../styles/FormButtonText';
 
 class PlayView extends Component {
   static displayName = 'PlayView';
@@ -40,23 +45,32 @@ class PlayView extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.buttonsContainer}>
-          <Image
-            style={{width: 50, height: 50}}
-            source={{uri: 'https://facebook.github.io/react/img/logo_og.png'}}
-          />
-          <Text>WELCOME TO TYPESPRINT</Text>
-          <Button
-            title="Quick play"
-            onPress={() => this.quickPlay()}
-          />
-          <Button
-            title="Multi play"
-            onPress={() => this.multiPlay()}
-          />
-        </View>
-      </View>
+      <MainContainer>
+        <BodyContainer style={{flex: 1,justifyContent: 'center', alignItems: 'center'}}>
+          <View style={{alignItems: 'center', marginBottom: 40}}>
+            <Image
+              style={{width: 50, height: 50}}
+              source={{uri: 'https://facebook.github.io/react/img/logo_og.png'}}
+            />
+            <Text style={{fontSize: 24, fontWeight: '600', color:'#101010'}}>
+              HYPERTYPE
+            </Text>
+          </View>
+          <FormButton
+            style={{marginBottom: 15}}
+            onPress={() => this.quickPlay()}>
+            <FormButtonText>
+              Quick play
+            </FormButtonText>
+          </FormButton>
+          <FormButton
+            onPress={() => this.multiPlay()}>
+            <FormButtonText>
+              Multi play
+            </FormButtonText>
+          </FormButton>
+        </BodyContainer>
+      </MainContainer>
     );
   }
 }

@@ -10,7 +10,7 @@ const FormButton = styled.TouchableOpacity`
   shadow-offset: 2px 4px;
   shadow-opacity: 0.2;
   shadow-radius: 2;
-  elevation: 1;
+  elevation: 2;
   background-color: ${props => props.light ? '#ffffff' : '#fe463c'};
 `;
 

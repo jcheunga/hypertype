@@ -4,12 +4,18 @@ import {
   Text,
   View,
   Dimensions,
-  Button
+  Button,
+  ActivityIndicator
 } from 'react-native';
 
 import app from '../../feathers';
 
 const window = Dimensions.get('window');
+
+import MainContainer from '../../styles/MainContainer';
+import FloatingContainer from '../../styles/FloatingContainer';
+import FormButton from '../../styles/FormButton';
+import FormButtonText from '../../styles/FormButtonText';
 
 class HighscoreView extends Component {
   static displayName = 'HighscoreView';
@@ -38,7 +44,10 @@ class HighscoreView extends Component {
     if (this.props.scores.length > 0) {
       return this.props.scores.map((highscore, index) => {
         return (
-          <Text key={index}>{highscore.playerName}: {highscore.wpm}</Text>
+          <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <Text>{highscore.playerName}</Text>
+            <Text>{highscore.wpm}</Text>
+          </View>
         );
       });
     } else {
@@ -49,7 +58,7 @@ class HighscoreView extends Component {
   _showLoading = () => {
     if (this.props.isFetching) {
       return (
-        <Text>Loading...</Text>
+        <ActivityIndicator style={{alignSelf: 'center'}} />
       );
     }
   }
@@ -59,10 +68,12 @@ class HighscoreView extends Component {
       return (
         <View>
           <Text>Error Loading...</Text>
-          <Button
-            title="Refresh"
-            onPress={() => this._fetchScores()}
-          />
+          <FormButton
+            onPress={() => this._fetchScores()}>
+            <FormButtonText>
+              Refresh
+            </FormButtonText>
+          </FormButton>
         </View>
       );
     }
@@ -74,54 +85,24 @@ class HighscoreView extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.body}>
-          <Text style={styles.bodyText}>
-            Highscores
-          </Text>
-          <View>
-            {this._showScores()}
-            {this._showLoading()}
-            {this._showError()}
+      <MainContainer blue style={{justifyContent: 'center', alignItems: 'center'}}>
+        <FloatingContainer first style={{width:window.width - 40, flex: 1}}>
+          <View style={{alignItems: 'center'}}>
+            <Text style={{fontSize: 24, fontWeight: '600', color:'#101010', marginTop: 40, marginBottom: 40}}>
+              Highscores
+            </Text>
           </View>
-        </View>
-      </View>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between', borderBottomWidth: 2, borderBottomColor: '#101010',marginBottom: 5, paddingBottom: 5}}>
+            <Text style={{fontWeight: '600'}}>Player ID</Text>
+            <Text style={{fontWeight: '600'}}>WPM</Text>
+          </View>
+          {this._showScores()}
+          {this._showLoading()}
+          {this._showError()}
+        </FloatingContainer>
+      </MainContainer>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#eaf8fd'
-  },
-  header: {
-    flex: 1,
-    paddingTop: 20,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  body: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20
-  },
-  bodyText: {
-    fontSize: 18,
-    color: 'black',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontFamily: 'System'
-  },
-  footer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-});
 
 export default HighscoreView;

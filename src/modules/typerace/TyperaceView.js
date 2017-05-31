@@ -96,17 +96,19 @@ class TyperaceView extends Component {
       quote: room.quoteToType
     });
 
-    const userId = user._id;
-    const userHighscores = user.highscores;
-    const highscoreToAdd = {
-      wpm: this.state.wpm,
-      quote: room.quoteToType,
-      gameId: room.gameId
-    };
-    userHighscores.push(highscoreToAdd);
-    app.service("users").patch(userId, {
-      highscores: userHighscores
-    });
+    if (user) {
+      const userId = user._id;
+      const userHighscores = user.highscores;
+      const highscoreToAdd = {
+        wpm: this.state.wpm,
+        quote: room.quoteToType,
+        gameId: room.gameId
+      };
+      userHighscores.push(highscoreToAdd);
+      app.service("users").patch(userId, {
+        highscores: userHighscores
+      });
+    }
   }
 
   createLetters () {
@@ -194,6 +196,7 @@ class TyperaceView extends Component {
           {this.createLetters()}
         </View>
         <TextInput
+          underlineColorAndroid='transparent'
           autoCapitalize="none"
           style={{height: 40}}
           ref='typeit'
