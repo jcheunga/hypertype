@@ -1,27 +1,25 @@
 import React, {Component} from 'react';
 import {
-  StyleSheet,
-  Image,
   Text,
   TextInput,
   View,
-  ListView,
-  Platform,
   Dimensions,
-  ActivityIndicator,
-  TouchableOpacity,
   Button
 } from 'react-native';
 
 const window = Dimensions.get('window');
 
+import FormTextInput from '../../styles/FormTextInput';
+import FormButton from '../../styles/FormButton';
+import FormButtonText from '../../styles/FormButtonText';
+
 class LoginView extends Component {
   static displayName = 'LoginView';
 
   static navigationOptions = {
-    header: {
-      visible: false
-    }
+    // header: {
+    //   visible: false
+    // }
   }
 
   // Initialize the hardcoded data
@@ -56,56 +54,29 @@ class LoginView extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.bodyText}>
-          Login
-        </Text>
-        <View>
-          <TextInput
-            autoCapitalize='none'
-            style={styles.input}
-            placeholder='Username'
-            returnKeyType='next'
-            value={this.state.username}
-            onChangeText={this._handleUsernameChange}
-          />
-        </View>
-        <View>
-          <TextInput
-            autoCapitalize='none'
-            style={styles.input}
-            secureTextEntry={true}
-            placeholder='Password'
-            returnKeyType='send'
-            value={this.state.password}
-            onChangeText={this._handlePasswordChange}
-          />
-        </View>
-        <Button
-          title="Login"
-          onPress={() => this._loginAccount()}
+      <View>
+        <FormTextInput
+          autoCapitalize='none'
+          placeholder='Username'
+          returnKeyType='next'
+          value={this.state.username}
+          onChangeText={this._handleUsernameChange}
         />
+        <FormTextInput
+          autoCapitalize='none'
+          secureTextEntry={true}
+          placeholder='Password'
+          returnKeyType='send'
+          value={this.state.password}
+          onChangeText={this._handlePasswordChange}
+        />
+        <FormButton
+          onPress={() => this._loginAccount()}>
+          <FormButtonText>Login</FormButtonText>
+        </FormButton>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  bodyText: {
-    fontSize: 18,
-    color: 'black',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontFamily: 'System'
-  },
-  input: {
-    width: 100,
-    height: 40
-  }
-});
 
 export default LoginView;

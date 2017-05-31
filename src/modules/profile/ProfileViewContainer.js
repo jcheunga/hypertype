@@ -8,6 +8,7 @@ import * as AuthStateActions from '../auth/AuthState';
 export default connect(
   state => ({
     user: state.authState.user,
+    guestUsername: state.authState.guestUsername,
   }),
   dispatch => {
     return {

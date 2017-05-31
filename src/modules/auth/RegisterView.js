@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {
-  StyleSheet,
   Text,
   TextInput,
   View,
@@ -10,13 +9,17 @@ import {
 
 const window = Dimensions.get('window');
 
+import FormTextInput from '../../styles/FormTextInput';
+import FormButton from '../../styles/FormButton';
+import FormButtonText from '../../styles/FormButtonText';
+
 class RegisterView extends Component {
   static displayName = 'RegisterView';
 
   static navigationOptions = {
-    header: {
-      visible: false
-    }
+    // header: {
+    //   visible: false
+    // }
   }
 
   // Initialize the hardcoded data
@@ -60,70 +63,39 @@ class RegisterView extends Component {
   render() {
     return (
       <View>
-        <Text style={styles.bodyText}>
-          Register
-        </Text>
-        <View>
-          <TextInput
-            style={styles.input}
-            placeholder='Email'
-            autoCorrect={false}
-            autoCapitalize='none'
-            keyBoardType='email-address'
-            returnKeyType='next'
-            value={this.state.email}
-            onChangeText={this._handleEmailChange}
-          />
-        </View>
-        <View>
-          <TextInput
-            style={styles.input}
-            placeholder='Username'
-            autoCorrect={false}
-            autoCapitalize='none'
-            returnKeyType='next'
-            value={this.state.username}
-            onChangeText={this._handleUsernameChange}
-          />
-        </View>
-        <View>
-          <TextInput
-            style={styles.input}
-            secureTextEntry={true}
-            placeholder='Password'
-            autoCorrect={false}
-            autoCapitalize='none'
-            returnKeyType='send'
-            value={this.state.password}
-            onChangeText={this._handlePasswordChange}
-          />
-        </View>
-        <Button
-          title="Register"
-          onPress={() => this._registerAccount()}
+        <FormTextInput
+          placeholder='Email'
+          autoCorrect={false}
+          autoCapitalize='none'
+          keyBoardType='email-address'
+          returnKeyType='next'
+          value={this.state.email}
+          onChangeText={this._handleEmailChange}
         />
+        <FormTextInput
+          placeholder='Username'
+          autoCorrect={false}
+          autoCapitalize='none'
+          returnKeyType='next'
+          value={this.state.username}
+          onChangeText={this._handleUsernameChange}
+        />
+        <FormTextInput
+          secureTextEntry={true}
+          placeholder='Password'
+          autoCorrect={false}
+          autoCapitalize='none'
+          returnKeyType='send'
+          value={this.state.password}
+          onChangeText={this._handlePasswordChange}
+        />
+        <FormButton
+          onPress={() => this._registerAccount()}>
+          <FormButtonText>Register</FormButtonText>
+        </FormButton>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  bodyText: {
-    fontSize: 18,
-    color: 'black',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontFamily: 'System'
-  },
-  input: {
-    width: 100,
-    height: 40
-  }
-});
 
 export default RegisterView;

@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {
   View,
   Dimensions,
+  Image,
+  Text
 } from 'react-native';
 
 import UserProfileView from './UserProfileView';
@@ -15,6 +17,7 @@ class ProfileView extends Component {
   static displayName = 'ProfileView';
 
   static navigationOptions = {
+    // title: 'Profile',
     header: {
       visible: false
     }

@@ -13,13 +13,15 @@ import RegisterView from './RegisterView';
 
 const window = Dimensions.get('window');
 
+import BodyContainer from '../../styles/BodyContainer';
+
 class AuthView extends Component {
   static displayName = 'AuthView';
 
   static navigationOptions = {
-    header: {
-      visible: false
-    }
+    // header: {
+    //   visible: false
+    // }
   }
 
   // Initialize the hardcoded data
@@ -69,28 +71,39 @@ class AuthView extends Component {
   render() {
     return (
       <View>
-        <Image
-          style={{width: 375, height: 200}}
-          source={{uri: 'https://unsplash.it/375/200?random'}}
-        />
-        <Text>
-          Welcome {this.props.guestUsername}
-        </Text>
-        <Text>
-          Login to save your scores and favourite quotes
-        </Text>
         <View>
-          {this._showLoginView()}
-          {this._showRegisterView()}
+          <Image
+            style={{width: 375, height: 200,justifyContent: 'center', alignItems: 'center'}}
+            source={require('../../assets/images/200.jpeg')}>
+          <View style={{backgroundColor: 'rgba(0,0,0,0)'}}>
+            <Text style={{color: 'black', fontWeight: 'bold', fontSize: 22}}>
+              Welcome {this.props.user ? this.props.user.usernames : this.props.guestUsername}!
+            </Text>
+          </View>
+          </Image>
         </View>
-        <Text
-          onPress={() => this._switchLoginView()}>
-          Login
-        </Text>
-        <Text
-          onPress={() => this._switchRegisterView()}>
-          Register
-        </Text>
+        <BodyContainer>
+          <View style={{flexDirection: 'row', justifyContent: 'center', marginBottom: 15}}>
+            <Text
+              style={{paddingRight: 10}}
+              onPress={() => this._switchLoginView()}>
+              Login
+            </Text>
+            <Text
+              style={{paddingLeft: 10}}
+              onPress={() => this._switchRegisterView()}>
+              Register
+            </Text>
+          </View>
+          <View>
+            {this._showLoginView()}
+            {this._showRegisterView()}
+          </View>
+          <View style={{marginTop: 15, justifyContent: 'center', alignItems: 'center'}}>
+            <Text style={{fontSize: 18, marginBottom: 15}}>Login to save highscores and quotes!</Text>
+            <Text style={{fontSize: 14}}>Terms of service</Text>
+          </View>
+        </BodyContainer>
       </View>
     );
   }

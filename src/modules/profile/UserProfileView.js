@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {
-  StyleSheet,
   Text,
   View,
   Dimensions,
@@ -8,6 +7,11 @@ import {
 } from 'react-native';
 
 const window = Dimensions.get('window');
+
+import FormButton from '../../styles/FormButton';
+import FormButtonText from '../../styles/FormButtonText';
+
+import BodyContainer from '../../styles/BodyContainer';
 
 class UserProfileView extends Component {
   static displayName = 'UserProfileView';
@@ -46,23 +50,17 @@ class UserProfileView extends Component {
 
   render() {
     return (
-      <View>
-        <Text>
-          Welcome {this.props.user.usernames}!
-        </Text>
-        <Text>
-          {this.props.user.createdAt}
-        </Text>
+      <View style={{backgroundColor: 'red', margin: 15, flex: 1}}>
         <Text>
           My Highscores
         </Text>
         <View>
           {this._showScores()}
         </View>
-        <Button
-          title="Logout"
-          onPress={() => this._logoutAccount()}
-        />
+        <FormButton
+          onPress={() => this._logoutAccount()}>
+          <FormButtonText>Logout</FormButtonText>
+        </FormButton>
       </View>
     );
   }
