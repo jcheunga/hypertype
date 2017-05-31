@@ -77,7 +77,7 @@ class AuthView extends Component {
             source={require('../../assets/images/200.jpeg')}>
           <View style={{backgroundColor: 'rgba(0,0,0,0)'}}>
             <Text style={{color: 'black', fontWeight: 'bold', fontSize: 22}}>
-              Welcome {this.props.user ? this.props.user.usernames : this.props.guestUsername}!
+              Welcome {this.props.guestUsername}! / LOGO
             </Text>
           </View>
           </Image>
@@ -100,8 +100,8 @@ class AuthView extends Component {
             {this._showRegisterView()}
           </View>
           <View style={{marginTop: 15, justifyContent: 'center', alignItems: 'center'}}>
-            <Text style={{fontSize: 18, marginBottom: 15}}>Login to save highscores and quotes!</Text>
-            <Text style={{fontSize: 14}}>Terms of service</Text>
+            <Text style={{fontSize: 18, marginBottom: 15, color: '#14171a'}}>Login to save highscores and quotes!</Text>
+            <Text style={{fontSize: 14, color: '#14171a'}}>Terms of service</Text>
           </View>
         </BodyContainer>
       </View>

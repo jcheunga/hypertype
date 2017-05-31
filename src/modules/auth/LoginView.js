@@ -72,7 +72,9 @@ class LoginView extends Component {
         />
         <FormButton
           onPress={() => this._loginAccount()}>
-          <FormButtonText>Login</FormButtonText>
+          <FormButtonText>
+            Login
+          </FormButtonText>
         </FormButton>
       </View>
     );

@@ -91,7 +91,9 @@ class RegisterView extends Component {
         />
         <FormButton
           onPress={() => this._registerAccount()}>
-          <FormButtonText>Register</FormButtonText>
+          <FormButtonText>
+            Register
+          </FormButtonText>
         </FormButton>
       </View>
     );

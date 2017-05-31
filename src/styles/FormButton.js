@@ -1,7 +1,6 @@
 import styled from 'styled-components/native';
 
 const FormButton = styled.TouchableOpacity`
-  background-color: #fe463c;
   height: 40px;
   width: 100%;
   border-radius: 5px;
@@ -12,6 +11,7 @@ const FormButton = styled.TouchableOpacity`
   shadow-opacity: 0.2;
   shadow-radius: 2;
   elevation: 1;
+  background-color: ${props => props.light ? '#ffffff' : '#fe463c'};
 `;
 
 export default FormButton;
