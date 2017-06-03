@@ -90,7 +90,7 @@ class UserProfileView extends Component {
               My Highscores
             </ListHeader>
           </View>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', borderBottomWidth: 2, borderBottomColor: '#101010',marginBottom: 5, paddingBottom: 5}}>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between', borderBottomWidth: 2, borderBottomColor: '#dbdbdb',marginBottom: 5, paddingBottom: 5}}>
             <Text style={{fontWeight: '600'}}>Game ID</Text>
             <Text style={{fontWeight: '600'}}>WPM</Text>
           </View>

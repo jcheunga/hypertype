@@ -1,7 +1,6 @@
 
 import React, {Component} from 'react';
 import {
-  StyleSheet,
   Text,
   View,
   Dimensions,
@@ -10,37 +9,55 @@ import {
 
 const window = Dimensions.get('window');
 
+import MainContainer from '../../styles/MainContainer';
+import BodyContainer from '../../styles/BodyContainer';
+import FormButton from '../../styles/FormButton';
+import FormButtonText from '../../styles/FormButtonText';
+
+import HeaderContainer from '../../styles/HeaderContainer';
+import HeaderContainerHeading from '../../styles/HeaderContainerHeading';
+import HeaderContainerSubHeading from '../../styles/HeaderContainerSubHeading';
+
+import TextBackButton from '../../styles/TextBackButton';
+
+import Icon from 'react-native-vector-icons/Entypo';
+
 class MultiplayMenuView extends Component {
   static displayName = 'MultiplayMenuView';
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text>{this.props.isCreating ? "Creating game..." : null}</Text>
-        <Button
-          title="Create game"
-          onPress={() => this.props.createGame()}
-        />
-        <Button
-          title="Join game"
-          onPress={() => this.props.joinGame()}
-        />
-        <Button
-          title="Back to main menu"
-          onPress={() => this.props.gotoMainMenu()}
-        />
-      </View>
+      <MainContainer>
+        <BodyContainer>
+          <HeaderContainer>
+            <HeaderContainerHeading>
+              Multiplay
+            </HeaderContainerHeading>
+          </HeaderContainer>
+          <FormButton
+            style={{marginBottom: 15}}
+            onPress={() => this.props.createGame()}>
+            <FormButtonText>
+              Create game
+            </FormButtonText>
+          </FormButton>
+
+          <FormButton
+            style={{marginBottom: 15}}
+            onPress={() => this.props.joinGame()}>
+            <FormButtonText>
+              Join game
+            </FormButtonText>
+          </FormButton>
+
+          <TextBackButton
+            onPress={() => this.props.gotoMainMenu()}>
+            <Icon name="chevron-left" color='#242424'/>Back to main menu
+          </TextBackButton>
+        </BodyContainer>
+      </MainContainer>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#eaf8fd'
-  }
-});
 
 export default MultiplayMenuView;

@@ -12,6 +12,20 @@ import {
 import LobbyViewContainer from '../lobby/LobbyViewContainer';
 import app from '../../feathers';
 
+import MainContainer from '../../styles/MainContainer';
+import BodyContainer from '../../styles/BodyContainer';
+import FormButton from '../../styles/FormButton';
+import FormButtonText from '../../styles/FormButtonText';
+import FormTextInput from '../../styles/FormTextInput';
+
+import HeaderContainer from '../../styles/HeaderContainer';
+import HeaderContainerHeading from '../../styles/HeaderContainerHeading';
+import HeaderContainerSubHeading from '../../styles/HeaderContainerSubHeading';
+
+import TextBackButton from '../../styles/TextBackButton';
+
+import Icon from 'react-native-vector-icons/Entypo';
+
 const window = Dimensions.get('window');
 
 class JoinGameView extends Component {
@@ -74,67 +88,52 @@ class JoinGameView extends Component {
     const showLobby = this.state.room ? <LobbyViewContainer roomJoined={this.state.room}/> : null;
 
     return (
-      <View style={styles.container}>
-        <View style={styles.userContainer}>
-          <Text style={styles.bodyText}>
-            Enter in game id to join game
-          </Text>
-          <TextInput
+      <MainContainer>
+        <BodyContainer>
+          <HeaderContainer>
+            <HeaderContainerHeading>
+              Join game
+            </HeaderContainerHeading>
+            <HeaderContainerSubHeading>
+              Enter in game id to join game
+            </HeaderContainerSubHeading>
+          </HeaderContainer>
+          <FormTextInput
             underlineColorAndroid='transparent'
             autoCorrect={false}
             autoCapitalize='none'
+            placeholder='Game ID'
+            returnKeyType = 'done'
             editable={!this.state.gameJoined}
             onChange={(e) => this.handleIdInput(e)}
             value={this.state.enteredGameId}
-            style={styles.input}
           />
-          <Button
-            title="Join game"
-            onPress={() => this.props.joinGameWithId(this.state.enteredGameId, this.state.gameJoined)}
-          />
-          <Text style={styles.bodyText}>
+          <FormButton
+            onPress={() => this.props.joinGameWithId(this.state.enteredGameId, this.state.gameJoined)}>
+            <FormButtonText>
+              Join game
+            </FormButtonText>
+          </FormButton>
+          <Text>
             {this.props.isJoining ? "Joining" : null}
           </Text>
-          <Text style={styles.bodyText}>
+          <Text>
             {this.props.isStarting ? "Starting" : null}
           </Text>
-          <Text style={styles.bodyText}>
+          <Text>
             Game ID: { this.state.room.gameId ? this.state.room.gameId : null}
           </Text>
-          {showLobby}
-          <Button
-            title="Return to mutliplayer menu"
-            onPress={() => this.props.resetView()}
-          />
-        </View>
-      </View>
+          <View>
+            {showLobby}
+          </View>
+          <TextBackButton
+            onPress={() => this.props.resetView()}>
+            <Icon name="chevron-left" color='#242424'/>Back to mutliplayer menu
+          </TextBackButton>
+        </BodyContainer>
+      </MainContainer>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#eaf8fd'
-  },
-  userContainer: {
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  bodyText: {
-    fontSize: 18,
-    color: '#101010',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontFamily: 'System'
-  },
-  input: {
-    width: 100,
-    height: 40,
-    backgroundColor: 'red'
-  }
-});
 
 export default JoinGameView;

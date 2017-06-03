@@ -96,7 +96,7 @@ class TyperaceView extends Component {
       quote: room.quoteToType
     });
 
-    if (user) {
+    if (user !== null) {
       const userId = user._id;
       const userHighscores = user.highscores;
       const highscoreToAdd = {

@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 const FormButton = styled.TouchableOpacity`
   height: 40px;
   width: 100%;
-  border-radius: 5px;
+  border-radius: 50px;
   align-items: center;
   justify-content: center;
   shadow-color: #2b2b2b;

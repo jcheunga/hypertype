@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-const MainContainer = styled.View`
+const MainContainer = styled.ScrollView`
   flex: 1;
   background-color: ${props => {
     if (props.userOn) {

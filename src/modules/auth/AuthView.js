@@ -14,7 +14,12 @@ import RegisterView from './RegisterView';
 
 const window = Dimensions.get('window');
 
+import MainContainer from '../../styles/MainContainer';
 import BodyContainer from '../../styles/BodyContainer';
+
+import HeaderContainer from '../../styles/HeaderContainer';
+import HeaderContainerHeading from '../../styles/HeaderContainerHeading';
+import HeaderContainerSubHeading from '../../styles/HeaderContainerSubHeading';
 
 class AuthView extends Component {
   static displayName = 'AuthView';
@@ -71,19 +76,17 @@ class AuthView extends Component {
 
   render() {
     return (
-      <ScrollView>
-        <View>
-          <Image
-            style={{width: 375, height: 150,justifyContent: 'center', alignItems: 'center'}}
-            source={require('../../assets/images/200.jpeg')}>
-          <View style={{backgroundColor: 'rgba(0,0,0,0)'}}>
-            <Text style={{color: '#101010', fontWeight: 'bold', fontSize: 22}}>
-              HYPERTYPE
-            </Text>
-          </View>
-          </Image>
-        </View>
+      <MainContainer>
         <BodyContainer>
+          <HeaderContainer>
+            <HeaderContainerHeading>
+              Profile
+            </HeaderContainerHeading>
+            <HeaderContainerSubHeading>
+              Login to save highscores and quotes!
+            </HeaderContainerSubHeading>
+          </HeaderContainer>
+
           <View style={{flexDirection: 'row', justifyContent: 'center', marginBottom: 15}}>
             <Text
               style={{paddingRight: 10}}
@@ -101,11 +104,10 @@ class AuthView extends Component {
             {this._showRegisterView()}
           </View>
           <View style={{marginTop: 15, justifyContent: 'center', alignItems: 'center'}}>
-            <Text style={{fontSize: 16, marginBottom: 15, color: '#14171a'}}>Login to save highscores and quotes!</Text>
             <Text style={{fontSize: 14, color: '#14171a'}}>Terms of service</Text>
           </View>
         </BodyContainer>
-      </ScrollView>
+      </MainContainer>
     );
   }
 }

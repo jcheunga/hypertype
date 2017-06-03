@@ -13,9 +13,18 @@ import app from '../../feathers';
 const window = Dimensions.get('window');
 
 import MainContainer from '../../styles/MainContainer';
-import FloatingContainer from '../../styles/FloatingContainer';
+import BodyContainer from '../../styles/BodyContainer';
 import FormButton from '../../styles/FormButton';
 import FormButtonText from '../../styles/FormButtonText';
+
+import HeaderContainer from '../../styles/HeaderContainer';
+import HeaderContainerHeading from '../../styles/HeaderContainerHeading';
+import HeaderContainerSubHeading from '../../styles/HeaderContainerSubHeading';
+
+import ScoreContainer from '../../styles/ScoreContainer';
+import ScoreHeader from '../../styles/ScoreHeader';
+import ScoreListItem from '../../styles/ScoreListItem';
+import ScoreListText from '../../styles/ScoreListText';
 
 class HighscoreView extends Component {
   static displayName = 'HighscoreView';
@@ -44,10 +53,10 @@ class HighscoreView extends Component {
     if (this.props.scores.length > 0) {
       return this.props.scores.map((highscore, index) => {
         return (
-          <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-            <Text>{highscore.playerName}</Text>
-            <Text>{highscore.wpm}</Text>
-          </View>
+          <ScoreListItem key={index}>
+            <ScoreListText>{highscore.playerName}</ScoreListText>
+            <ScoreListText>{highscore.wpm}</ScoreListText>
+          </ScoreListItem>
         );
       });
     } else {
@@ -85,21 +94,29 @@ class HighscoreView extends Component {
 
   render() {
     return (
-      <MainContainer blue style={{justifyContent: 'center', alignItems: 'center'}}>
-        <FloatingContainer first style={{width:window.width - 40, flex: 1}}>
-          <View style={{alignItems: 'center'}}>
-            <Text style={{fontSize: 24, fontWeight: '600', color:'#101010', marginTop: 40, marginBottom: 40}}>
+      <MainContainer>
+        <BodyContainer>
+
+          <HeaderContainer>
+            <HeaderContainerHeading>
               Highscores
-            </Text>
-          </View>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', borderBottomWidth: 2, borderBottomColor: '#101010',marginBottom: 5, paddingBottom: 5}}>
-            <Text style={{fontWeight: '600'}}>Player ID</Text>
-            <Text style={{fontWeight: '600'}}>WPM</Text>
-          </View>
-          {this._showScores()}
-          {this._showLoading()}
-          {this._showError()}
-        </FloatingContainer>
+            </HeaderContainerHeading>
+            <HeaderContainerSubHeading>
+              Global
+            </HeaderContainerSubHeading>
+          </HeaderContainer>
+
+          <ScoreContainer>
+            <ScoreHeader>
+              <ScoreListText head>Player ID</ScoreListText>
+              <ScoreListText head>WPM</ScoreListText>
+            </ScoreHeader>
+            {this._showScores()}
+            {this._showLoading()}
+            {this._showError()}
+          </ScoreContainer>
+
+        </BodyContainer>
       </MainContainer>
     );
   }

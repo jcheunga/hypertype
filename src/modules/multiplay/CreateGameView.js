@@ -10,6 +10,19 @@ import {
 import LobbyViewContainer from '../lobby/LobbyViewContainer';
 import app from '../../feathers';
 
+import MainContainer from '../../styles/MainContainer';
+import BodyContainer from '../../styles/BodyContainer';
+import FormButton from '../../styles/FormButton';
+import FormButtonText from '../../styles/FormButtonText';
+
+import HeaderContainer from '../../styles/HeaderContainer';
+import HeaderContainerHeading from '../../styles/HeaderContainerHeading';
+import HeaderContainerSubHeading from '../../styles/HeaderContainerSubHeading';
+
+import TextBackButton from '../../styles/TextBackButton';
+
+import Icon from 'react-native-vector-icons/Entypo';
+
 const window = Dimensions.get('window');
 
 class CreateGameView extends Component {
@@ -43,47 +56,37 @@ class CreateGameView extends Component {
     const showLobby = this.state.room ? <LobbyViewContainer roomJoined={this.state.room}/> : null;
 
     return (
-      <View style={styles.container}>
-        <View style={styles.userContainer}>
-          <Text style={styles.bodyText}>
-            Share the game id to join your game
-          </Text>
-          <Text style={styles.bodyText}>
+      <MainContainer>
+        <BodyContainer>
+          <HeaderContainer>
+            <HeaderContainerHeading>
+              Create game
+            </HeaderContainerHeading>
+            <HeaderContainerSubHeading>
+              Share the game id to join your game
+            </HeaderContainerSubHeading>
+          </HeaderContainer>
+          <Text>
             Game id: {this.props.gameId}
           </Text>
-          <View>{showLobby}</View>
-          <Button
-            title="Start game"
-            onPress={() => this.props.startGame()}
-          />
-          <Button
-            title="Return to mutliplayer menu"
-            onPress={() => this.props.resetView()}
-          />
-        </View>
-      </View>
+          <View>
+            {showLobby}
+          </View>
+          <FormButton
+            onPress={() => this.props.startGame()}>
+            <FormButtonText>
+              Start game
+            </FormButtonText>
+          </FormButton>
+
+          <TextBackButton
+            onPress={() => this.props.resetView()}>
+            <Icon name="chevron-left" color='#242424'/>Back to mutliplayer menu
+          </TextBackButton>
+        </BodyContainer>
+      </MainContainer>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#eaf8fd'
-  },
-  userContainer: {
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  bodyText: {
-    fontSize: 18,
-    color: '#101010',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontFamily: 'System'
-  },
-});
 
 export default CreateGameView;

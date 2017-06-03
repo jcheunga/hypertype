@@ -15,6 +15,10 @@ import BodyContainer from '../../styles/BodyContainer';
 import FormButton from '../../styles/FormButton';
 import FormButtonText from '../../styles/FormButtonText';
 
+import HeaderContainer from '../../styles/HeaderContainer';
+import HeaderContainerHeading from '../../styles/HeaderContainerHeading';
+import HeaderContainerSubHeading from '../../styles/HeaderContainerSubHeading';
+
 class PlayView extends Component {
   static displayName = 'PlayView';
 
@@ -46,16 +50,12 @@ class PlayView extends Component {
   render() {
     return (
       <MainContainer>
-        <BodyContainer style={{flex: 1,justifyContent: 'center', alignItems: 'center'}}>
-          <View style={{alignItems: 'center', marginBottom: 40}}>
-            <Image
-              style={{width: 50, height: 50}}
-              source={{uri: 'https://facebook.github.io/react/img/logo_og.png'}}
-            />
-            <Text style={{fontSize: 24, fontWeight: '600', color:'#101010'}}>
-              HYPERTYPE
-            </Text>
-          </View>
+        <BodyContainer>
+          <HeaderContainer>
+            <HeaderContainerHeading>
+              HYPERTEXT
+            </HeaderContainerHeading>
+          </HeaderContainer>
           <FormButton
             style={{marginBottom: 15}}
             onPress={() => this.quickPlay()}>
