@@ -22,9 +22,7 @@ import HeaderContainer from '../../styles/HeaderContainer';
 import HeaderContainerHeading from '../../styles/HeaderContainerHeading';
 import HeaderContainerSubHeading from '../../styles/HeaderContainerSubHeading';
 
-import TextBackButton from '../../styles/TextBackButton';
-
-import Icon from 'react-native-vector-icons/Entypo';
+import TextBackButtonContainer from '../../components/TextBackButtonContainer';
 
 const window = Dimensions.get('window');
 
@@ -126,10 +124,10 @@ class JoinGameView extends Component {
           <View>
             {showLobby}
           </View>
-          <TextBackButton
-            onPress={() => this.props.resetView()}>
-            <Icon name="chevron-left" color='#242424'/>Back to mutliplayer menu
-          </TextBackButton>
+          <TextBackButtonContainer
+            onPress={this.props.resetView}
+            buttonText='Back to mutliplayer menu'
+          />
         </BodyContainer>
       </MainContainer>
     );

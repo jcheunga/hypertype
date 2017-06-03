@@ -18,9 +18,7 @@ import HeaderContainer from '../../styles/HeaderContainer';
 import HeaderContainerHeading from '../../styles/HeaderContainerHeading';
 import HeaderContainerSubHeading from '../../styles/HeaderContainerSubHeading';
 
-import TextBackButton from '../../styles/TextBackButton';
-
-import Icon from 'react-native-vector-icons/Entypo';
+import TextBackButtonContainer from '../../components/TextBackButtonContainer';
 
 class MultiplayMenuView extends Component {
   static displayName = 'MultiplayMenuView';
@@ -35,7 +33,6 @@ class MultiplayMenuView extends Component {
             </HeaderContainerHeading>
           </HeaderContainer>
           <FormButton
-            style={{marginBottom: 15}}
             onPress={() => this.props.createGame()}>
             <FormButtonText>
               Create game
@@ -43,17 +40,16 @@ class MultiplayMenuView extends Component {
           </FormButton>
 
           <FormButton
-            style={{marginBottom: 15}}
             onPress={() => this.props.joinGame()}>
             <FormButtonText>
               Join game
             </FormButtonText>
           </FormButton>
 
-          <TextBackButton
-            onPress={() => this.props.gotoMainMenu()}>
-            <Icon name="chevron-left" color='#242424'/>Back to main menu
-          </TextBackButton>
+          <TextBackButtonContainer
+            onPress={this.props.gotoMainMenu}
+            buttonText='Back to main menu'
+          />
         </BodyContainer>
       </MainContainer>
     );

@@ -21,6 +21,9 @@ import HeaderContainer from '../../styles/HeaderContainer';
 import HeaderContainerHeading from '../../styles/HeaderContainerHeading';
 import HeaderContainerSubHeading from '../../styles/HeaderContainerSubHeading';
 
+import AuthTabContainer from '../../styles/AuthTabContainer';
+import AuthTabText from '../../styles/AuthTabText';
+
 class AuthView extends Component {
   static displayName = 'AuthView';
 
@@ -83,28 +86,29 @@ class AuthView extends Component {
               Profile
             </HeaderContainerHeading>
             <HeaderContainerSubHeading>
-              Login to save highscores and quotes!
+              {this.state.loginView ? 'Login' : 'Register'} to save highscores and quotes!
             </HeaderContainerSubHeading>
           </HeaderContainer>
 
-          <View style={{flexDirection: 'row', justifyContent: 'center', marginBottom: 15}}>
-            <Text
-              style={{paddingRight: 10}}
+          <AuthTabContainer>
+            <AuthTabText
+              selected={this.state.loginView}
               onPress={() => this._switchLoginView()}>
               Login
-            </Text>
-            <Text
-              style={{paddingLeft: 10}}
+            </AuthTabText>
+            <AuthTabText
+              selected={this.state.registerView}
               onPress={() => this._switchRegisterView()}>
               Register
-            </Text>
-          </View>
+            </AuthTabText>
+          </AuthTabContainer>
+
           <View>
             {this._showLoginView()}
             {this._showRegisterView()}
           </View>
           <View style={{marginTop: 15, justifyContent: 'center', alignItems: 'center'}}>
-            <Text style={{fontSize: 14, color: '#14171a'}}>Terms of service</Text>
+            <Text style={{fontSize: 14, color: '#263238'}}>Terms of service</Text>
           </View>
         </BodyContainer>
       </MainContainer>
