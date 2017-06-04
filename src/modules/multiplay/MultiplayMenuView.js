@@ -27,6 +27,9 @@ class MultiplayMenuView extends Component {
     return (
       <MainContainer>
         <BodyContainer>
+          <TextBackButtonContainer
+            onPress={this.props.gotoMainMenu}
+          />
           <HeaderContainer>
             <HeaderContainerHeading>
               Multiplay
@@ -45,11 +48,6 @@ class MultiplayMenuView extends Component {
               Join game
             </FormButtonText>
           </FormButton>
-
-          <TextBackButtonContainer
-            onPress={this.props.gotoMainMenu}
-            buttonText='Back to main menu'
-          />
         </BodyContainer>
       </MainContainer>
     );

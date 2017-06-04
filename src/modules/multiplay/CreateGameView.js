@@ -21,6 +21,9 @@ import HeaderContainerSubHeading from '../../styles/HeaderContainerSubHeading';
 
 import TextBackButtonContainer from '../../components/TextBackButtonContainer';
 
+import GameIdContainer from '../../styles/GameIdContainer';
+import GameIdText from '../../styles/GameIdText';
+
 const window = Dimensions.get('window');
 
 class CreateGameView extends Component {
@@ -51,11 +54,14 @@ class CreateGameView extends Component {
   }
 
   render() {
-    const showLobby = this.state.room ? <LobbyViewContainer roomJoined={this.state.room}/> : null;
+    const showLobby = this.state.room ? <LobbyViewContainer lobbyName='Lobby' roomJoined={this.state.room}/> : null;
 
     return (
       <MainContainer>
         <BodyContainer>
+          <TextBackButtonContainer
+            onPress={this.props.resetView}
+          />
           <HeaderContainer>
             <HeaderContainerHeading>
               Create game
@@ -66,23 +72,17 @@ class CreateGameView extends Component {
           </HeaderContainer>
 
           <GameIdContainer>
-            Game id: {this.props.gameId}
+            <GameIdText>Game id: {this.props.gameId}</GameIdText>
           </GameIdContainer>
 
-          <View>
-            {showLobby}
-          </View>
+          {showLobby}
+
           <FormButton
             onPress={() => this.props.startGame()}>
             <FormButtonText>
               Start game
             </FormButtonText>
           </FormButton>
-
-          <TextBackButtonContainer
-            onPress={this.props.resetView}
-            buttonText='Back to mutliplayer menu'
-          />
         </BodyContainer>
       </MainContainer>
     );

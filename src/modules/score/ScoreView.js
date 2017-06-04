@@ -40,7 +40,7 @@ class ScoreView extends Component {
   }
 
   render() {
-    const showLobby = this.state.room ? <LobbyViewContainer roomJoined={this.state.room} showScore={true}/> : null;
+    const showLobby = this.state.room ? <LobbyViewContainer lobbyName='Player List' roomJoined={this.state.room} showScore={true}/> : null;
 
     return (
       <View>

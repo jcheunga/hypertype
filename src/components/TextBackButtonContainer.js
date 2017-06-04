@@ -13,12 +13,11 @@ class TextBackButtonContainer extends Component {
   render() {
     return (
       <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
-        <Icon name="chevron-thin-left" size={14} color='#263238'/>
-        <Text
-          style={{fontSize: 16, color: '#263238', paddingLeft: 2}}
-          onPress={() => this.props.onPress()}>
-          {this.props.buttonText}
-        </Text>
+        <Icon
+          onPress={() => this.props.onPress()}
+          name="chevron-thin-left"
+          size={20}
+          color='#263238'/>
       </View>
     );
   }

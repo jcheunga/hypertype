@@ -5,7 +5,6 @@ const ScoreHeader = styled.View`
   justify-content: space-between;
   border-bottom-width: 1;
   border-bottom-color: #dbdbdb;
-  margin-bottom: 10px;
   padding-bottom: 10px;
 `;
 
