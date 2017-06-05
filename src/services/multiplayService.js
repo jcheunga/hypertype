@@ -179,7 +179,6 @@ export function startGameForJoinsService (payload) {
         );
       })
       .catch((error) => {
-        console.log(error);
         reject({ message: "Error starting" })
       })
   });

@@ -12,6 +12,8 @@ const FormButton = styled.TouchableOpacity`
   shadow-radius: 2;
   elevation: 2;
   background-color: ${props => props.light ? '#ffffff' : '#fe463c'};
+  border-width: ${props => props.light ? '1px' : '0px'};
+  border-color: ${props => props.light ? '#fe463c' : '#fe463c'};
   margin-bottom: 15px;
 `;
 

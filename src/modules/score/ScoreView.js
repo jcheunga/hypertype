@@ -8,6 +8,16 @@ import {
 import LobbyViewContainer from '../lobby/LobbyViewContainer';
 import app from '../../feathers';
 
+import MainContainer from '../../styles/MainContainer';
+import BodyContainer from '../../styles/BodyContainer';
+import FormButton from '../../styles/FormButton';
+import FormButtonText from '../../styles/FormButtonText';
+import FormTextInput from '../../styles/FormTextInput';
+
+import HeaderContainer from '../../styles/HeaderContainer';
+import HeaderContainerHeading from '../../styles/HeaderContainerHeading';
+import HeaderContainerSubHeading from '../../styles/HeaderContainerSubHeading';
+
 class ScoreView extends Component {
   static displayName = 'ScoreView';
 
@@ -43,19 +53,38 @@ class ScoreView extends Component {
     const showLobby = this.state.room ? <LobbyViewContainer lobbyName='Player List' roomJoined={this.state.room} showScore={true}/> : null;
 
     return (
-      <View>
-        <Text style={{color: 'red'}}>Quote again</Text>
-        <Text style={{color: 'red'}}>This quote was from link to AMZN</Text>
-        <View>{showLobby}</View>
-        <Button
-          title="Play again?"
-          onPress={() => this.props.startNewQuickGame()}
-        />
-        <Button
-          title="Back to main menu"
-          onPress={() => this._leaveGame()}
-        />
-      </View>
+      <MainContainer>
+        <BodyContainer>
+          <HeaderContainer>
+            <HeaderContainerHeading>
+              You placed 1st!
+            </HeaderContainerHeading>
+          </HeaderContainer>
+
+          <View>
+            <Text style={{color: 'red'}}>{this.props.quoteToType}</Text>
+            <Text style={{color: 'red'}}>{this.props.quoteAffLink}</Text>
+          </View>
+
+          {showLobby}
+
+          <FormButton
+            onPress={() => this.props.startNewQuickGame()}>
+            <FormButtonText>
+              Play again?
+            </FormButtonText>
+          </FormButton>
+
+          <FormButton
+            light
+            onPress={() => this._leaveGame()}>
+            <FormButtonText
+              light>
+              Back to main menu
+            </FormButtonText>
+          </FormButton>
+        </BodyContainer>
+      </MainContainer>
     );
   }
 }

@@ -33,7 +33,6 @@ class LoginView extends Component {
   }
 
   _handleUsernameChange = (text) => {
-    console.log(this.refs);
     this.setState({
       username: text
     });

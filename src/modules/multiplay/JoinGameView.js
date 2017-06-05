@@ -27,6 +27,8 @@ import TextBackButtonContainer from '../../components/TextBackButtonContainer';
 import GameIdContainer from '../../styles/GameIdContainer';
 import GameIdText from '../../styles/GameIdText';
 
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 const window = Dimensions.get('window');
 
 class JoinGameView extends Component {
@@ -120,6 +122,7 @@ class JoinGameView extends Component {
           </FormButton>
 
           <GameIdContainer>
+            <Icon name="hashtag" size={18} color="#616161" style={{marginRight: 3}}/>
             <GameIdText>Game ID: { this.state.room.gameId ? this.state.room.gameId : null}</GameIdText>
           </GameIdContainer>
 

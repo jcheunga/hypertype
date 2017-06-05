@@ -52,11 +52,8 @@ class TyperaceView extends Component {
   _registerTypeSpeed = () => {
     // WPM = (characters / 5) / min
     const timeElapsed = countdownToSeconds(this.props.gameStartTime) / 60;
-    // console.log(timeElapsed);
     const characterCount = this.state.characterCount >=5 ? this.state.characterCount : 5;
-    // console.log(characterCount);
     const wpm = Math.round((characterCount / 5) / timeElapsed);
-    // console.log(wpm);
     this.setState({
       wpm: wpm
     });
@@ -197,7 +194,7 @@ class TyperaceView extends Component {
         </View>
         <TextInput
           underlineColorAndroid='transparent'
-          autoCapitalize="none"
+          autoCapitalize="none" // IOS NONE ANDROID AUTO
           style={{height: 40}}
           ref='typeit'
           onChangeText={(text) => this.onTextInput(text)}

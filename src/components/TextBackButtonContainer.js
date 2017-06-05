@@ -16,7 +16,7 @@ class TextBackButtonContainer extends Component {
         <Icon
           onPress={() => this.props.onPress()}
           name="chevron-thin-left"
-          size={20}
+          size={22}
           color='#263238'/>
       </View>
     );

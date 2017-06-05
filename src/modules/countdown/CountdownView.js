@@ -13,22 +13,10 @@ class CountdownView extends Component {
     super(props);
 
     this.state = {
-      countdownTime: props.gameStartTime,
-      room: props.roomJoined
+      countdownTime: props.gameStartTime
     };
 
     this.countInterval;
-    this._listenToRoom();
-  }
-
-  _listenToRoom = () => {
-    app.service(this.props.serviceType).on('patched', this._handleListenToRoom);
-  }
-
-  _handleListenToRoom = (response) => {
-    this.setState({
-      room: response
-    });
   }
 
   componentDidMount () {
@@ -47,14 +35,12 @@ class CountdownView extends Component {
 
   componentWillUnmount () {
     clearInterval(this.countInterval);
-    app.service(this.props.serviceType).removeListener('patched', this._handleListenToRoom);
   }
 
   render() {
     return (
       <View>
         <Text style={{color: 'blue'}}>Countdown: {this.state.countdownTime === 0 ? 'GO!' : this.state.countdownTime}</Text>
-        <Text style={{color: 'blue'}}>Number of players joined: {this.state.room.playerList.length}</Text>
         <Text style={{color: 'blue'}}>Half screen ad (Admob)</Text>
       </View>
     );
