@@ -18,6 +18,11 @@ import HeaderContainer from '../../styles/HeaderContainer';
 import HeaderContainerHeading from '../../styles/HeaderContainerHeading';
 import HeaderContainerSubHeading from '../../styles/HeaderContainerSubHeading';
 
+import QuoteContainer from '../../styles/QuoteContainer';
+import QuoteText from '../../styles/QuoteText';
+
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 class ScoreView extends Component {
   static displayName = 'ScoreView';
 
@@ -49,6 +54,10 @@ class ScoreView extends Component {
     app.service(this.props.serviceType).removeListener('patched', this._handleListenToRoom);
   }
 
+  _showPlacing = () => {
+
+  }
+
   render() {
     const showLobby = this.state.room ? <LobbyViewContainer lobbyName='Player List' roomJoined={this.state.room} showScore={true}/> : null;
 
@@ -61,10 +70,22 @@ class ScoreView extends Component {
             </HeaderContainerHeading>
           </HeaderContainer>
 
-          <View>
-            <Text style={{color: 'red'}}>{this.props.quoteToType}</Text>
-            <Text style={{color: 'red'}}>{this.props.quoteAffLink}</Text>
-          </View>
+          <QuoteContainer>
+            <Icon
+            name="quote-left"
+            size={14}
+            color='#263238'/>
+            <QuoteText icon>
+              {this.props.quoteToType}
+            </QuoteText>
+            <View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-end'}}>
+              <Icon
+              name="quote-right"
+              size={14}
+              color='#263238'/>
+            </View>
+            <QuoteText>This quote was from 'The boy who cried wolf'</QuoteText>
+          </QuoteContainer>
 
           {showLobby}
 

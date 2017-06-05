@@ -51,6 +51,7 @@ class LobbyView extends Component {
         <ScoreContainer>
           <ScoreHeader>
             <ScoreListText head>Player ID</ScoreListText>
+            { this.props.showScore ? <ScoreListText head>WPM</ScoreListText> : null}
           </ScoreHeader>
           {this._renderPlayerList()}
         </ScoreContainer>

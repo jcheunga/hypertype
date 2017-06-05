@@ -57,7 +57,6 @@ class PlayView extends Component {
             </HeaderContainerHeading>
           </HeaderContainer>
           <FormButton
-            style={{marginBottom: 15}}
             onPress={() => this.quickPlay()}>
             <FormButtonText>
               Quick play
