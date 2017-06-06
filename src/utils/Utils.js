@@ -32,3 +32,23 @@ export function getQuoteToType () {
 export function countdownToSeconds (countdownValue) {
   return Math.abs(Math.round((countdownValue - Date.now()) / 1000));
 }
+
+export function sortMapResponse (playerList) {
+  return playerList.sort((a, b) => {
+    return b.wpm - a.wpm;
+  })
+}
+
+import converter from 'number-to-words';
+
+export function getOrdinalValue (playerList, user) {
+  let sortedList = playerList.sort((a, b) => {
+    return b.wpm - a.wpm;
+  });
+
+  for (var i = 0; i < sortedList.length; i++) {
+    if (sortedList[i].playerId === user.usernames) {
+      return converter.toOrdinal(i + 1);
+    }
+  }
+}

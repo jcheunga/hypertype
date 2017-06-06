@@ -23,6 +23,8 @@ import QuoteText from '../../styles/QuoteText';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import { getOrdinalValue } from '../../utils/Utils';
+
 class ScoreView extends Component {
   static displayName = 'ScoreView';
 
@@ -55,7 +57,8 @@ class ScoreView extends Component {
   }
 
   _showPlacing = () => {
-
+    let user = this.props.user ? this.props.user : {usernames: this.props.guestUsername};
+    return getOrdinalValue(this.state.room.playerList, user);
   }
 
   render() {
@@ -66,7 +69,7 @@ class ScoreView extends Component {
         <BodyContainer>
           <HeaderContainer>
             <HeaderContainerHeading>
-              You placed 1st!
+              You placed {this._showPlacing()}!
             </HeaderContainerHeading>
           </HeaderContainer>
 

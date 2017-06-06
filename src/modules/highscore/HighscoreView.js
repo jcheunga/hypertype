@@ -26,6 +26,8 @@ import ScoreHeader from '../../styles/ScoreHeader';
 import ScoreListItem from '../../styles/ScoreListItem';
 import ScoreListText from '../../styles/ScoreListText';
 
+import { sortMapResponse } from '../../utils/Utils';
+
 class HighscoreView extends Component {
   static displayName = 'HighscoreView';
 
@@ -51,7 +53,8 @@ class HighscoreView extends Component {
 
   _showScores = () => {
     if (this.props.scores.length > 0) {
-      return this.props.scores.map((highscore, index) => {
+      let scores = sortMapResponse(this.props.scores);
+      return scores.map((highscore, index) => {
         return (
           <ScoreListItem key={index}>
             <ScoreListText>{highscore.playerName}</ScoreListText>
@@ -67,7 +70,7 @@ class HighscoreView extends Component {
   _showLoading = () => {
     if (this.props.isFetching) {
       return (
-        <ActivityIndicator style={{alignSelf: 'center'}} />
+        <ActivityIndicator style={{alignSelf: 'center', marginTop: 15, marginBottom: 15}} />
       );
     }
   }
@@ -76,7 +79,7 @@ class HighscoreView extends Component {
     if (this.props.hasError || !this.props.isFetching && this.props.scores.length === 0) {
       return (
         <View>
-          <Text>Error Loading...</Text>
+          <Text style={{marginTop: 15, marginBottom: 15}}>Error Loading...</Text>
           <FormButton
             onPress={() => this._fetchScores()}>
             <FormButtonText>

@@ -14,6 +14,8 @@ import ScoreListText from '../../styles/ScoreListText';
 
 import LobbyHeader from '../../styles/LobbyHeader';
 
+import { sortMapResponse } from '../../utils/Utils';
+
 class LobbyView extends Component {
   static displayName = 'LobbyView';
 
@@ -29,8 +31,7 @@ class LobbyView extends Component {
   }
 
   _renderPlayerList = () => {
-    const playerList = this.props.roomJoined.playerList;
-    const showScore = this.props.showScore;
+    let playerList =  sortMapResponse(this.props.roomJoined.playerList);
 
     return playerList.map((value, index) => {
       return(
