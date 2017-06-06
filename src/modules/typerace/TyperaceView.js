@@ -1,13 +1,20 @@
 import React, {Component} from 'react';
 import {
-  StyleSheet,
   Text,
   TextInput,
-  View
+  View,
+  Dimensions
 } from 'react-native';
 
 import app from '../../feathers';
 import { countdownToSeconds } from '../../utils/Utils';
+
+import MainContainer from '../../styles/MainContainer';
+import BodyContainer from '../../styles/BodyContainer';
+
+import FormTextInput from '../../styles/FormTextInput';
+
+const window = Dimensions.get('window');
 
 class TyperaceView extends Component {
   static displayName = 'TyperaceView';
@@ -109,19 +116,19 @@ class TyperaceView extends Component {
   }
 
   createLetters () {
-    var splitStr = this.textToType.split(" ");
-    var wordArr = [];
+    let splitStr = this.textToType.split(" ");
+    let wordArr = [];
 
-    for (var i = 0; i < splitStr.length; ++i) {
-      var individualLetterArr = splitStr[i].split("");
+    for (let i = 0; i < splitStr.length; ++i) {
+      let individualLetterArr = splitStr[i].split("");
       wordArr.push(individualLetterArr);
     }
 
-    return wordArr.map(function(word, i) {
+    return wordArr.map((word, i) => {
       return (
         <Text style={{color: 'blue', marginRight: 4}} key={i} word={i}>
           {
-            word.map(function(letter , j) {
+            word.map((letter , j) => {
               return (
                 <Text key={j} letter={j}>{letter}</Text>
               )
@@ -188,33 +195,26 @@ class TyperaceView extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={{flexWrap: 'wrap', alignItems: 'flex-start', flexDirection:'row',}}>
-          {this.createLetters()}
-        </View>
-        <TextInput
-          underlineColorAndroid='transparent'
-          autoCapitalize="none" // IOS NONE ANDROID AUTO
-          style={{height: 40}}
-          ref='typeit'
-          onChangeText={(text) => this.onTextInput(text)}
-          value={this.state.inputText}
-          autoCorrect={false}
-          autoFocus={true}
-        />
-        <Text style={{color: 'red'}}>Current Word: {this.state.currentWord + 1}</Text>
-        <Text style={{color: 'red'}}>Current Letter: {this.state.currentLetter + 1}</Text>
-        <Text style={{color: 'red'}}>Current WPM: {this.state.wpm}</Text>
-      </View>
+      <MainContainer>
+        <BodyContainer>
+          <View style={{flexWrap: 'wrap', flexDirection: 'row'}}>
+            {this.createLetters()}
+          </View>
+          <FormTextInput
+            underlineColorAndroid='transparent'
+            autoCapitalize="none" // IOS NONE ANDROID AUTO
+            style={{height: 40}}
+            ref='typeit'
+            onChangeText={(text) => this.onTextInput(text)}
+            value={this.state.inputText}
+            autoCorrect={false}
+            autoFocus={true}
+          />
+          <Text style={{color: 'red'}}>Current WPM: {this.state.wpm}</Text>
+        </BodyContainer>
+      </MainContainer>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#eaf8fd'
-  }
-});
 
 export default TyperaceView;

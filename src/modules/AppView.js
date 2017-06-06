@@ -29,7 +29,7 @@ class AppView extends Component {
 
       if (AsyncStorage['feathers-jwt']) {
         this.props.AuthStateActions.authenticateAccount()
-        .catch(err => console.log(err));
+        // .catch(err => console.log(err));  // CHANGE TO ERROR STATE
       }
 
     });
