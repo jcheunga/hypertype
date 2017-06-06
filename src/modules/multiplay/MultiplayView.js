@@ -80,7 +80,7 @@ class MultiplayView extends Component {
     <MultiplayMenuView {...this.props} createGame={this.createGame} joinGame={this.joinGame} gotoMainMenu={this.gotoMainMenu}/>
     : null;
 
-    const showCreateGameView = this.state.createGameView ?
+    const showCreateGameView = this.state.createGameView && this.props.gameId && !this.state.joinGameView ?
     <CreateGameView {...this.props} startGame={this.startGame} resetView={this.resetView}/>
     : null;
 

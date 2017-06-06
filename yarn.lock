@@ -4405,6 +4405,10 @@ react-dom@^15.4.0:
     object-assign "^4.1.0"
     prop-types "~15.5.7"
 
+react-native-animatable@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-animatable/-/react-native-animatable-1.2.1.tgz#2758326b298dddecc8c065446f4185174bdaa4e3"
+
 react-native-countdown-circle@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-native-countdown-circle/-/react-native-countdown-circle-1.0.2.tgz#b5ae27b300aa54c601f30ca19341ca053de53431"
