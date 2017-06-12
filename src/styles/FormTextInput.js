@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 
 const FormTextInput = styled.TextInput`
+  color: #616161;
   background-color: #f5f8fa;
   border-width: 2px;
   border-color: #e7e7e7;

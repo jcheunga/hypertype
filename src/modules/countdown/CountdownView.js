@@ -19,7 +19,7 @@ class CountdownView extends Component {
           radius={40}
           borderWidth={10}
           color="#fe463c"
-          bgColor="#fff"
+          bgColor="#f5f8fa"
           textStyle={{ fontSize: 24 }}
           onTimeElapsed={() => this.props.finishCountdown()}
         />
