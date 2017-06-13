@@ -15,6 +15,7 @@ const FormButton = styled.TouchableOpacity`
   border-width: ${props => props.light ? '1px' : '0px'};
   border-color: ${props => props.light ? '#fe463c' : '#fe463c'};
   margin-bottom: 15px;
+  flex-direction: row;
 `;
 
 export default FormButton;

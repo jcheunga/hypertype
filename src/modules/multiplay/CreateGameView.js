@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
 import {
-  StyleSheet,
-  Text,
-  View,
   Dimensions,
-  Button
+  ActivityIndicator
 } from 'react-native';
 
 import LobbyViewContainer from '../lobby/LobbyViewContainer';
@@ -79,6 +76,7 @@ class CreateGameView extends Component {
 
           <FormButton
             onPress={() => this.props.startGame()}>
+            { this.props.isStarting ? <ActivityIndicator style={{marginRight: 10}}/> : null}
             <FormButtonText>
               Start game
             </FormButtonText>

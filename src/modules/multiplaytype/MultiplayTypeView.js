@@ -57,12 +57,12 @@ class MultiplayTypeView extends Component {
     }
   }
 
-  startNewQuickGame = () => {
-    // IF JOINER OR CREATOR
-    this.props.multiplayStateActions.leaveGame();
-    let user = this.props.user ? this.props.user : {usernames: this.props.guestUsername};
-    this.props.multiplayStateActions.createNewGame(this.props.inGame, user);
-  }
+  // startNewQuickGame = () => {
+  //   // IF JOINER OR CREATOR
+  //   this.props.multiplayStateActions.leaveGame();
+  //   let user = this.props.user ? this.props.user : {usernames: this.props.guestUsername};
+  //   this.props.multiplayStateActions.createNewGame(this.props.inGame, user);
+  // }
 
   leaveGame = () => {
     this.props.multiplayStateActions.leaveGame();
@@ -102,7 +102,7 @@ class MultiplayTypeView extends Component {
     : null;
 
     const showScoreView = this.state.scoreView && this.props.inGame && this.props.gameId ?
-      <ScoreView {...this.props} startNewQuickGame={this.startNewQuickGame} leaveGame={this.leaveGame} serviceType="multirooms"/>
+      <ScoreView {...this.props} leaveGame={this.leaveGame} serviceType="multirooms"/>
     : null;
 
     return (

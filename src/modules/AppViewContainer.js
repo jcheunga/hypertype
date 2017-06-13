@@ -7,7 +7,8 @@ import * as AuthStateActions from './auth/AuthState';
 
 export default connect(
   state => ({
-    isReady: state.session.isReady
+    isReady: state.session.isReady,
+    isConnected: state.appState.isConnected
   }),
   dispatch => {
     return {

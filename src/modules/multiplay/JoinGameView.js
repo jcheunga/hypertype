@@ -1,12 +1,8 @@
 
 import React, {Component} from 'react';
 import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
   Dimensions,
-  Button
+  ActivityIndicator
 } from 'react-native';
 
 import LobbyViewContainer from '../lobby/LobbyViewContainer';
@@ -114,6 +110,7 @@ class JoinGameView extends Component {
           />
           <FormButton
             onPress={() => this.props.joinGameWithId(this.state.enteredGameId, this.state.gameJoined)}>
+            { this.props.isJoining ? <ActivityIndicator style={{marginRight: 10}}/> : null}
             <FormButtonText>
               Join game
             </FormButtonText>

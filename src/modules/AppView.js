@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 // import PropTypes from 'prop-types';
-import {View, StyleSheet, StatusBar, ActivityIndicator, AsyncStorage, Text} from 'react-native';
+import {View, StatusBar, ActivityIndicator, AsyncStorage, Text} from 'react-native';
 import NavigatorViewContainer from './navigator/NavigatorViewContainer';
 import * as snapshotUtil from '../utils/snapshot';
 import * as SessionStateActions from '../modules/session/SessionState';
 import store from '../redux/store';
 import DeveloperMenu from '../components/DeveloperMenu';
+import AppStatus from '../components/AppStatus';
 
 import SplashView from './splash/SplashView';
 
@@ -65,21 +66,15 @@ class AppView extends Component {
     return (
       <View style={{flex: 1}}>
         <StatusBar
-          backgroundColor='#fe8680'
+          backgroundColor='#33a7ff'
           // barStyle='light-content'
         />
         <NavigatorViewContainer />
+        <AppStatus {...this.props}/>
         {__DEV__ && <DeveloperMenu />}
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  centered: {
-    flex: 1,
-    alignSelf: 'center'
-  }
-});
 
 export default AppView;

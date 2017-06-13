@@ -31,7 +31,7 @@ class ProfileView extends Component {
   render() {
     const userView = this.props.user ? <UserProfileView {...this.props}/> : <AuthViewContainer />;
     return (
-      <MainContainer userOn={this.props.user}>
+      <MainContainer>
         {userView}
       </MainContainer>
     );

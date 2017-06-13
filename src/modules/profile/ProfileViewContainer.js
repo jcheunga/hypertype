@@ -9,6 +9,7 @@ export default connect(
   state => ({
     user: state.authState.user,
     guestUsername: state.authState.guestUsername,
+    isLoggingOut: state.authState.isLoggingOut
   }),
   dispatch => {
     return {

@@ -9,6 +9,8 @@ export default connect(
   state => ({
     user: state.authState.user,
     guestUsername: state.authState.guestUsername,
+    isRegistering: state.authState.isRegistering,
+    isAuthenticating: state.authState.isAuthenticating,
   }),
   dispatch => {
     return {

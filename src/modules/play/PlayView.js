@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import {
-  StyleSheet,
-  Text,
-  View,
   Image,
+  ActivityIndicator,
   Dimensions,
 } from 'react-native';
 
@@ -58,6 +56,7 @@ class PlayView extends Component {
           </HeaderContainer>
           <FormButton
             onPress={() => this.quickPlay()}>
+            { this.props.isLoading ? <ActivityIndicator style={{marginRight: 10}}/> : null}
             <FormButtonText>
               Quick play
             </FormButtonText>
@@ -73,13 +72,5 @@ class PlayView extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#eaf8fd',
-    justifyContent: 'center'
-  },
-});
 
 export default PlayView;

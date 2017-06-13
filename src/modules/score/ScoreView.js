@@ -92,12 +92,18 @@ class ScoreView extends Component {
 
           {showLobby}
 
-          <FormButton
-            onPress={() => this.props.startNewQuickGame()}>
-            <FormButtonText>
-              Play again?
-            </FormButtonText>
-          </FormButton>
+          {
+            this.props.startNewQuickGame
+            ?
+            <FormButton
+              onPress={() => this.props.startNewQuickGame()}>
+              <FormButtonText>
+                Play again?
+              </FormButtonText>
+            </FormButton>
+            :
+            null
+          }
 
           <FormButton
             light

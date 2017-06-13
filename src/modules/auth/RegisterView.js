@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import {
-  Text,
-  TextInput,
   View,
   Dimensions,
-  Button
+  ActivityIndicator
 } from 'react-native';
 
 const window = Dimensions.get('window');
@@ -105,6 +103,7 @@ class RegisterView extends Component {
         />
         <FormButton
           onPress={() => this._registerAccount()}>
+          { this.props.isRegistering ? <ActivityIndicator style={{marginRight: 10}}/> : null}
           <FormButtonText>
             Register
           </FormButtonText>

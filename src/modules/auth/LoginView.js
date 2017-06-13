@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import {
-  Text,
-  TextInput,
   View,
   Dimensions,
-  Button
+  ActivityIndicator
 } from 'react-native';
 
 const window = Dimensions.get('window');
@@ -83,6 +81,7 @@ class LoginView extends Component {
         />
         <FormButton
           onPress={() => this._loginAccount()}>
+          { this.props.isAuthenticating ? <ActivityIndicator style={{marginRight: 10}}/> : null}
           <FormButtonText>
             Login
           </FormButtonText>
