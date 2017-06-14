@@ -23,6 +23,8 @@ import TextBackButtonContainer from '../../components/TextBackButtonContainer';
 import GameIdContainer from '../../styles/GameIdContainer';
 import GameIdText from '../../styles/GameIdText';
 
+import ErrorText from '../../styles/ErrorText';
+
 const window = Dimensions.get('window');
 
 class JoinGameView extends Component {
@@ -77,6 +79,10 @@ class JoinGameView extends Component {
     });
   }
 
+  _handleIdSubmit = () => {
+    this.props.joinGameWithId(this.state.enteredGameId, this.state.gameJoined);
+  }
+
   componentWillUnmount () {
     app.service("multirooms").removeListener("patched", this._handleGamePatched);
   }
@@ -108,8 +114,11 @@ class JoinGameView extends Component {
             onChange={(e) => this.handleIdInput(e)}
             value={this.state.enteredGameId}
           />
+
+          { this.props.errorMessage ? <ErrorText>This is test error text</ErrorText> : null}
+
           <FormButton
-            onPress={() => this.props.joinGameWithId(this.state.enteredGameId, this.state.gameJoined)}>
+            onPress={() => this._handleIdSubmit()}>
             { this.props.isJoining ? <ActivityIndicator style={{marginRight: 10}}/> : null}
             <FormButtonText>
               Join game

@@ -11,14 +11,10 @@ import FormTextInput from '../../styles/FormTextInput';
 import FormButton from '../../styles/FormButton';
 import FormButtonText from '../../styles/FormButtonText';
 
+import ErrorText from '../../styles/ErrorText';
+
 class RegisterView extends Component {
   static displayName = 'RegisterView';
-
-  static navigationOptions = {
-    // header: {
-    //   visible: false
-    // }
-  }
 
   // Initialize the hardcoded data
   constructor(props) {
@@ -27,13 +23,16 @@ class RegisterView extends Component {
     this.state = {
       username: "",
       email: "",
-      password: ""
+      password: "",
+      usernameEntered: null,
+      emailEntered: null,
+      passwordEntered: null
     };
   }
 
   _handleUsernameChange = (text) => {
     this.setState({
-      username: text
+      username: text,
     });
   }
 
@@ -50,12 +49,14 @@ class RegisterView extends Component {
   }
 
   _registerAccount = () => {
-    const userData = {
-      usernames: this.state.username,
-      email: this.state.email,
-      password: this.state.password
-    };
-    this.props.authStateActions.registerAccount(userData);
+    if (this.state.usernameEntered && this.state.emailEntered && this.state.passwordEntered) {
+      const userData = {
+        usernames: this.state.username,
+        email: this.state.email,
+        password: this.state.password
+      };
+      this.props.authStateActions.registerAccount(userData);
+    }
   }
 
   focusNextField = (nextField) => {
@@ -101,6 +102,9 @@ class RegisterView extends Component {
           value={this.state.password}
           onChangeText={this._handlePasswordChange}
         />
+
+        { this.props.errorMessage ? <ErrorText>This is test error text</ErrorText> : null}
+
         <FormButton
           onPress={() => this._registerAccount()}>
           { this.props.isRegistering ? <ActivityIndicator style={{marginRight: 10}}/> : null}

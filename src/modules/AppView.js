@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, StatusBar, ActivityIndicator, AsyncStorage, Text} from 'react-native';
+import {View, StatusBar, ActivityIndicator, AsyncStorage} from 'react-native';
 import NavigatorViewContainer from './navigator/NavigatorViewContainer';
 import * as snapshotUtil from '../utils/snapshot';
 import * as SessionStateActions from '../modules/session/SessionState';

@@ -11,14 +11,10 @@ import FormTextInput from '../../styles/FormTextInput';
 import FormButton from '../../styles/FormButton';
 import FormButtonText from '../../styles/FormButtonText';
 
+import ErrorText from '../../styles/ErrorText';
+
 class LoginView extends Component {
   static displayName = 'LoginView';
-
-  static navigationOptions = {
-    // header: {
-    //   visible: false
-    // }
-  }
 
   // Initialize the hardcoded data
   constructor(props) {
@@ -26,7 +22,9 @@ class LoginView extends Component {
 
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      usernameEntered: null,
+      passwordEntered: null
     };
   }
 
@@ -43,11 +41,13 @@ class LoginView extends Component {
   }
 
   _loginAccount = () => {
-    const userData = {
-      usernames: this.state.username,
-      password: this.state.password
-    };
-    this.props.authStateActions.authenticateAccount(userData);
+    if (this.state.usernameEntered && this.state.passwordEntered) {
+      const userData = {
+        usernames: this.state.username,
+        password: this.state.password
+      };
+      this.props.authStateActions.authenticateAccount(userData);
+    }
   }
 
   focusNextField = (nextField) => {
@@ -79,6 +79,9 @@ class LoginView extends Component {
           value={this.state.password}
           onChangeText={this._handlePasswordChange}
         />
+
+        { this.props.errorMessage ? <ErrorText>This is test error text</ErrorText> : null}
+
         <FormButton
           onPress={() => this._loginAccount()}>
           { this.props.isAuthenticating ? <ActivityIndicator style={{marginRight: 10}}/> : null}
