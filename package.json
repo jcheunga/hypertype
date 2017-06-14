@@ -27,6 +27,9 @@
     "coverage": "rimraf coverage && jest --coverage",
     "version": "support/version-ios.sh"
   },
+   "rnpm": {
+    "assets": ["./src/assets/fonts"]
+  },
   "jest": {
     "preset": "react-native",
     "setupFiles": [

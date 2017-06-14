@@ -3,12 +3,13 @@ import {
   Image,
   ActivityIndicator,
   Dimensions,
+  View,
+  Text
 } from 'react-native';
 
 const window = Dimensions.get('window');
 
-import MainContainer from '../../styles/MainContainer';
-import BodyContainer from '../../styles/BodyContainer';
+import HomeContainer from '../../styles/HomeContainer';
 
 import FormButton from '../../styles/FormButton';
 import FormButtonText from '../../styles/FormButtonText';
@@ -56,28 +57,28 @@ class PlayView extends Component {
 
   render() {
     return (
-      <MainContainer>
-        <BodyContainer>
-          <HeaderContainer>
-            <HeaderContainerHeading>
-              HYPERTEXT
-            </HeaderContainerHeading>
-          </HeaderContainer>
-          <FormButton
-            onPress={() => this.quickPlay()}>
-            { this.props.isLoading ? <ActivityIndicator style={{marginRight: 10}}/> : null}
-            <FormButtonText>
-              Quick play
-            </FormButtonText>
-          </FormButton>
-          <FormButton
-            onPress={() => this.multiPlay()}>
-            <FormButtonText>
-              Multi play
-            </FormButtonText>
-          </FormButton>
-        </BodyContainer>
-      </MainContainer>
+      <HomeContainer>
+        <View style={{marginBottom: 40}}>
+          <Image
+            style={{width: 140, height: 140}}
+            source={require('../../assets/images/hypertype-logo.png')}
+          />
+          <Text style={{fontSize: 24, fontWeight: '600'}}>hypertype</Text>
+        </View>
+        <FormButton
+          onPress={() => this.quickPlay()}>
+          { this.props.isLoading ? <ActivityIndicator style={{marginRight: 10}}/> : null}
+          <FormButtonText>
+            Quick play
+          </FormButtonText>
+        </FormButton>
+        <FormButton
+          onPress={() => this.multiPlay()}>
+          <FormButtonText>
+            Multi play
+          </FormButtonText>
+        </FormButton>
+      </HomeContainer>
     );
   }
 }
