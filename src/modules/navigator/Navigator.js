@@ -30,10 +30,14 @@ export const MainScreenNavigator = TabNavigator({
     showIcon: true,
     activeTintColor: activeColor,
     ...Platform.select({
-      android: {
+      android: { // CHANGE TAB ICON STYLE IN TOP BAR TO 26 26
         inactiveTintColor: tabBarTextColor,
-        indicatorStyle: {backgroundColor: activeColor},
-        style: {backgroundColor: headerColor}
+        indicatorStyle: {backgroundColor: headerColor},
+        style: {backgroundColor: headerColor},
+        labelStyle: {
+          margin: 0,
+          fontSize: 10
+        }
       }
     })
   }

@@ -86,7 +86,7 @@ class AuthView extends Component {
               Profile
             </HeaderContainerHeading>
             <HeaderContainerSubHeading>
-              {this.state.loginView ? 'Login' : 'Register'} to save highscores and quotes!
+              {this.state.loginView ? 'Login' : 'Register'} to save highscores!
             </HeaderContainerSubHeading>
           </HeaderContainer>
 
@@ -108,7 +108,7 @@ class AuthView extends Component {
             {this._showRegisterView()}
           </View>
           <View style={{marginTop: 15, justifyContent: 'center', alignItems: 'center'}}>
-            <Text style={{fontSize: 14, color: '#263238'}}>Terms of service</Text>
+            <Text style={{fontSize: 14, color: '#263238', fontFamily: 'Poppins-Regular'}}>Terms of service</Text>
           </View>
         </BodyContainer>
       </MainContainer>

@@ -88,7 +88,7 @@ class HighscoreView extends Component {
     if (this.props.hasError || !this.props.isFetching && this.props.scores.length === 0) {
       return (
         <View>
-          <Text style={{marginTop: 15, marginBottom: 15}}>Error Loading...</Text>
+          <Text style={{marginTop: 15, marginBottom: 15, fontFamily: 'Poppins-Regular'}}>Error Loading...</Text>
           <FormButton
             onPress={() => this._fetchScores()}>
             <FormButtonText>

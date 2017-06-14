@@ -119,7 +119,7 @@ class JoinGameView extends Component {
 
           <FormButton
             onPress={() => this._handleIdSubmit()}>
-            { this.props.isJoining ? <ActivityIndicator style={{marginRight: 10}}/> : null}
+            { this.props.isJoining ? <ActivityIndicator style={{marginRight: 10}} color="#ffffff"/> : null}
             <FormButtonText>
               Join game
             </FormButtonText>

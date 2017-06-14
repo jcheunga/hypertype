@@ -97,6 +97,7 @@ class ScoreView extends Component {
             ?
             <FormButton
               onPress={() => this.props.startNewQuickGame()}>
+              { this.props.isLoading ? <ActivityIndicator style={{marginRight: 10}} color="#ffffff"/> : null}
               <FormButtonText>
                 Play again?
               </FormButtonText>

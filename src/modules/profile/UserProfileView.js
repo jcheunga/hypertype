@@ -99,7 +99,7 @@ class UserProfileView extends Component {
 
           <FormButton
             onPress={() => this._logoutAccount()}>
-            { this.props.isLoggingOut ? <ActivityIndicator style={{marginRight: 10}}/> : null}
+            { this.props.isLoggingOut ? <ActivityIndicator style={{marginRight: 10}} color="#ffffff"/> : null}
             <FormButtonText>
               Logout
             </FormButtonText>

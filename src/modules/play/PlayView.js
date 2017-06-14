@@ -68,7 +68,7 @@ class PlayView extends Component {
         </LogoContainer>
         <FormButton
           onPress={() => this.quickPlay()}>
-          { this.props.isLoading ? <ActivityIndicator style={{marginRight: 10}}/> : null}
+          { this.props.isLoading ? <ActivityIndicator style={{marginRight: 10}} color="#ffffff"/> : null}
           <FormButtonText>
             Quick play
           </FormButtonText>

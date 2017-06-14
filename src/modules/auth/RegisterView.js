@@ -110,7 +110,7 @@ class RegisterView extends Component {
 
         <FormButton
           onPress={() => this._registerAccount()}>
-          { this.props.isRegistering ? <ActivityIndicator style={{marginRight: 10}}/> : null}
+          { this.props.isRegistering ? <ActivityIndicator style={{marginRight: 10}} color="#ffffff"/> : null}
           <FormButtonText>
             Register
           </FormButtonText>

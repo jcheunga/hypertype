@@ -6,7 +6,7 @@ import React, {Component} from 'react';
 import {AppRegistry, BackHandler} from 'react-native';
 import {NavigationActions} from 'react-navigation';
 
-class LunchWheel extends Component {
+class Hypertype extends Component {
   componentWillMount() {
     BackHandler.addEventListener('hardwareBackPress', this.navigateBack);
   }
@@ -35,4 +35,4 @@ class LunchWheel extends Component {
   }
 }
 
-AppRegistry.registerComponent('LunchWheel', () => LunchWheel);
+AppRegistry.registerComponent('Hypertype', () => Hypertype);

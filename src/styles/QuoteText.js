@@ -5,6 +5,7 @@ const QuoteText = styled.Text`
   color: #263238;
   margin-bottom: ${props => props.icon ? '7px' : '0px'};
   margin-top: ${props => props.icon ? '7px' : '15px'};
+  font-family: 'Poppins-Regular';
 `;
 
 export default QuoteText;

@@ -8,6 +8,7 @@ const AuthTabText = styled.Text`
   margin-left: 5px;
   margin-right: 5px;
   padding-bottom: 3px;
+  font-family: ${props => props.selected ? 'Poppins-SemiBold' : 'Poppins-Regular'};
 `;
 
 export default AuthTabText;

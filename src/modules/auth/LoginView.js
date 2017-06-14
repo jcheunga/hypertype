@@ -84,7 +84,7 @@ class LoginView extends Component {
 
         <FormButton
           onPress={() => this._loginAccount()}>
-          { this.props.isAuthenticating ? <ActivityIndicator style={{marginRight: 10}}/> : null}
+          { this.props.isAuthenticating ? <ActivityIndicator style={{marginRight: 10}} color="#ffffff"/> : null}
           <FormButtonText>
             Login
           </FormButtonText>

@@ -1,4 +1,4 @@
-package com.lunchwheel;
+package com.hypertype;
 
 import android.app.Application;
 

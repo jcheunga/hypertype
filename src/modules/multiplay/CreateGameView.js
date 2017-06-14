@@ -76,7 +76,7 @@ class CreateGameView extends Component {
 
           <FormButton
             onPress={() => this.props.startGame()}>
-            { this.props.isStarting ? <ActivityIndicator style={{marginRight: 10}}/> : null}
+            { this.props.isStarting ? <ActivityIndicator style={{marginRight: 10}} color="#ffffff"/> : null}
             <FormButtonText>
               Start game
             </FormButtonText>
