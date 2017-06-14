@@ -3,7 +3,7 @@ import {
   START_GAME_SUCCESS,
   JOIN_GAME_SUCCESS,
   START_GAME_FOR_JOINS_SUCCESS,
-  LEAVE_GAME
+  SERVICE_ERROR
 } from '../modules/multiplay/MultiplayState';
 import { createRandomGameId, getQuoteToType } from '../utils/Utils';
 
@@ -49,7 +49,7 @@ export function createRoomService (payload) {
 
   return createGame
     .then((response) => ({type: CREATE_GAME_SUCCESS, payload: response }))
-    .catch((error) => ({type: LEAVE_GAME, payload: error.message}))
+    .catch((error) => ({type: SERVICE_ERROR, payload: error.message}))
 }
 
 export function startGameService (payload) {
@@ -89,7 +89,7 @@ export function startGameService (payload) {
 
   return startGame
     .then((response) => ({type: START_GAME_SUCCESS, payload: response }))
-    .catch((error) => ({type: LEAVE_GAME, payload: error.message}))
+    .catch((error) => ({type: SERVICE_ERROR, payload: error.message}))
 }
 
 export function joinRoomService (payload) {
@@ -143,13 +143,14 @@ export function joinRoomService (payload) {
         );
       })
       .catch((error) => {
+        console.log(error);
         reject({ message: error });
       });
   });
 
   return joinGame
     .then((response) => ({type: JOIN_GAME_SUCCESS, payload: response }))
-    .catch((error) => ({type: LEAVE_GAME, payload: error.message}))
+    .catch((error) => ({type: SERVICE_ERROR, payload: error.message}))
 }
 
 export function startGameForJoinsService (payload) {
@@ -185,5 +186,5 @@ export function startGameForJoinsService (payload) {
 
   return startGameForJoins
     .then((response) => ({type: START_GAME_FOR_JOINS_SUCCESS, payload: response }))
-    .catch((error) => ({type: LEAVE_GAME, payload: error.message}))
+    .catch((error) => ({type: SERVICE_ERROR, payload: error.message}))
 }

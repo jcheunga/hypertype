@@ -18,7 +18,8 @@ const initialState = {
   gameStartTime: null,
   quoteToType: null,
   quoteAfflink: null,
-  roomJoined: null
+  roomJoined: null,
+  errorMessage: null
 };
 
 // Actions
@@ -38,6 +39,8 @@ const START_GAME_FOR_JOINS = 'MultiplayState/START_GAME_FOR_JOINS';
 export const START_GAME_FOR_JOINS_SUCCESS = 'MultiplayState/START_GAME_FOR_JOINS_SUCCESS';
 
 export const LEAVE_GAME = 'MultiplayState/LEAVE_GAME';
+
+export const SERVICE_ERROR = 'MultiplayState/SERVICE_ERROR';
 
 // Action creators
 export function createGame(inGame, user) {
@@ -197,26 +200,44 @@ export default function MultiplayStateReducer(state = initialState, action = {})
       );
 
     case LEAVE_GAME:
-      return loop(
-        {
-          ...state,
-          isCreating: false,
-          isCreated: false,
-          isStarting: false,
-          isStarted: false,
-          isJoining: false,
-          isJoined: false,
-          inGame: false,
-          gameId: null,
-          gameEndTime: null,
-          gameStartTime: null,
-          quoteToType: null,
-          quoteAfflink: null,
-          gameCreator: null,
-          roomJoined: null
-        },
-        Effects.constant(ErrorState.addError(action.payload))
-      );
+      return {
+        ...state,
+        isCreating: false,
+        isCreated: false,
+        isStarting: false,
+        isStarted: false,
+        isJoining: false,
+        isJoined: false,
+        inGame: false,
+        gameId: null,
+        gameEndTime: null,
+        gameStartTime: null,
+        quoteToType: null,
+        quoteAfflink: null,
+        gameCreator: null,
+        roomJoined: null,
+        errorMessage: null
+      };
+
+    case SERVICE_ERROR:
+      return {
+        ...state,
+        isCreating: false,
+        isCreated: false,
+        isStarting: false,
+        isStarted: false,
+        isJoining: false,
+        isJoined: false,
+        inGame: false,
+        gameId: null,
+        gameEndTime: null,
+        gameStartTime: null,
+        quoteToType: null,
+        quoteAfflink: null,
+        gameCreator: null,
+        roomJoined: null,
+        errorMessage: action.payload
+      };
 
     default:
       return state;

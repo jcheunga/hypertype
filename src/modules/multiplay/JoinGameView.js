@@ -37,6 +37,7 @@ class JoinGameView extends Component {
     this.state = {
       enteredGameId: "",
       gameJoined: false,
+      gameIdEntered: null,
       room: {
         playerList: [
           {
@@ -75,12 +76,19 @@ class JoinGameView extends Component {
 
   handleIdInput = (e) => {
     this.setState({
-      enteredGameId: e.nativeEvent.text
+      enteredGameId: e.nativeEvent.text,
+      gameIdEntered: true
     });
   }
 
   _handleIdSubmit = () => {
-    this.props.joinGameWithId(this.state.enteredGameId, this.state.gameJoined);
+    if (this.state.enteredGameId.length === 0) {
+      this.setState({
+        gameIdEntered: false
+      });
+    } else {
+      this.props.joinGameWithId(this.state.enteredGameId, this.state.gameJoined);
+    }
   }
 
   componentWillUnmount () {
@@ -105,6 +113,7 @@ class JoinGameView extends Component {
             </HeaderContainerSubHeading>
           </HeaderContainer>
           <FormTextInput
+            style={{borderColor: this.state.gameIdEntered === false ? 'red' : '#e7e7e7'}}
             underlineColorAndroid='transparent'
             autoCorrect={false}
             autoCapitalize='none'
@@ -115,7 +124,7 @@ class JoinGameView extends Component {
             value={this.state.enteredGameId}
           />
 
-          { this.props.errorMessage ? <ErrorText>This is test error text</ErrorText> : null}
+          { this.props.errorMessage && !this.state.gameJoined ? <ErrorText>{this.props.errorMessage.message}</ErrorText> : null}
 
           <FormButton
             onPress={() => this._handleIdSubmit()}>

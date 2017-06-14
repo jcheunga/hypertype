@@ -22,7 +22,8 @@ export default connect(
     gameCreator: state.multiplayState.gameCreator,
     roomJoined: state.multiplayState.roomJoined,
     user: state.authState.user,
-    guestUsername: state.authState.guestUsername
+    guestUsername: state.authState.guestUsername,
+    errorMessage: state.multiplayState.errorMessage
   }),
   dispatch => {
     return {
