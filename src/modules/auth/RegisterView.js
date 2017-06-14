@@ -30,6 +30,9 @@ class RegisterView extends Component {
     };
   }
 
+  // https://stackoverflow.com/questions/36147276/how-to-validate-textinput-values-in-react-native
+  // https://stackoverflow.com/questions/33407665/disabling-buttons-on-react-native
+
   _handleUsernameChange = (text) => {
     this.setState({
       username: text,
