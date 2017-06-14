@@ -102,7 +102,7 @@ class MultiplayTypeView extends Component {
     : null;
 
     return (
-      <View>
+      <View style={{flex: 1}}>
         { showCountdownView }
         { showTypingView }
         { showScoreView }
