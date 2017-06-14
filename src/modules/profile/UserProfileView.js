@@ -9,6 +9,7 @@ import {
 
 const window = Dimensions.get('window');
 
+import MainContainer from '../../styles/BodyContainer';
 import BodyContainer from '../../styles/BodyContainer';
 
 import FormButton from '../../styles/FormButton';
@@ -69,40 +70,42 @@ class UserProfileView extends Component {
 
   render() {
     return (
-      <BodyContainer>
-        <View style={{alignItems: 'center', marginBottom: 30}}>
-          <Image
-            style={{height: 100,borderRadius: 50, width: 100, marginBottom: 20}}
-            source={{uri: 'https://placehold.it/100x100'}}
-          />
-          <Text style={{fontSize: 20, fontWeight: '600', marginBottom: 10, color: '#0073cd'}}>
-            Welcome {this._showUserName()}!
-          </Text>
-          <Text style={{fontSize: 14}}>
-            User since: {this.props.user.createdAt.slice(0,10)}
-          </Text>
-        </View>
+      <MainContainer>
+        <BodyContainer>
+          <View style={{alignItems: 'center', marginBottom: 30}}>
+            <Image
+              style={{height: 100,borderRadius: 50, width: 100, marginBottom: 20}}
+              source={{uri: 'https://placehold.it/100x100'}}
+            />
+            <Text style={{fontSize: 22, fontWeight: '600', marginBottom: 10, color: '#0073cd'}}>
+              Welcome {this._showUserName()}!
+            </Text>
+            <Text style={{fontSize: 14}}>
+              User since: {this.props.user.createdAt.slice(0,10)}
+            </Text>
+          </View>
 
-        <LobbyHeader>
-          my Highscores
-        </LobbyHeader>
+          <LobbyHeader>
+            my Highscores
+          </LobbyHeader>
 
-        <ScoreContainer>
-          <ScoreHeader>
-            <ScoreListText head>Game ID</ScoreListText>
-            <ScoreListText head>WPM</ScoreListText>
-          </ScoreHeader>
-          {this._showScores()}
-        </ScoreContainer>
+          <ScoreContainer>
+            <ScoreHeader>
+              <ScoreListText head>Game ID</ScoreListText>
+              <ScoreListText head>WPM</ScoreListText>
+            </ScoreHeader>
+            {this._showScores()}
+          </ScoreContainer>
 
-        <FormButton
-          onPress={() => this._logoutAccount()}>
-          { this.props.isLoggingOut ? <ActivityIndicator style={{marginRight: 10}}/> : null}
-          <FormButtonText>
-            Logout
-          </FormButtonText>
-        </FormButton>
-      </BodyContainer>
+          <FormButton
+            onPress={() => this._logoutAccount()}>
+            { this.props.isLoggingOut ? <ActivityIndicator style={{marginRight: 10}}/> : null}
+            <FormButtonText>
+              Logout
+            </FormButtonText>
+          </FormButton>
+        </BodyContainer>
+      </MainContainer>
     );
   }
 }

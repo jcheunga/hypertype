@@ -64,7 +64,7 @@ class CreateGameView extends Component {
               Create game
             </HeaderContainerHeading>
             <HeaderContainerSubHeading>
-              Share the game id to join your game
+              Share the Game ID for friends to join
             </HeaderContainerSubHeading>
           </HeaderContainer>
 

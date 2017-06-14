@@ -2,14 +2,10 @@ import React, {Component} from 'react';
 import {
   View,
   Dimensions,
-  Image,
-  Text
 } from 'react-native';
 
 import UserProfileView from './UserProfileView';
 import AuthViewContainer from '../auth/AuthViewContainer';
-
-import MainContainer from '../../styles/MainContainer';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -39,9 +35,9 @@ class ProfileView extends Component {
   render() {
     const userView = this.props.user ? <UserProfileView {...this.props}/> : <AuthViewContainer />;
     return (
-      <MainContainer>
+      <View style={{flex: 1}}>
         {userView}
-      </MainContainer>
+      </View>
     );
   }
 }

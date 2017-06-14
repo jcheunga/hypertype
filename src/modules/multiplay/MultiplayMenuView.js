@@ -11,6 +11,7 @@ const window = Dimensions.get('window');
 
 import MainContainer from '../../styles/MainContainer';
 import BodyContainer from '../../styles/BodyContainer';
+
 import FormButton from '../../styles/FormButton';
 import FormButtonText from '../../styles/FormButtonText';
 
@@ -34,7 +35,11 @@ class MultiplayMenuView extends Component {
             <HeaderContainerHeading>
               Multiplay
             </HeaderContainerHeading>
+            <HeaderContainerSubHeading>
+              Challenge friends to a typing duel!
+            </HeaderContainerSubHeading>
           </HeaderContainer>
+
           <FormButton
             onPress={() => this.props.createGame()}>
             <FormButtonText>

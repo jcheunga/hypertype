@@ -95,7 +95,7 @@ class JoinGameView extends Component {
               Join game
             </HeaderContainerHeading>
             <HeaderContainerSubHeading>
-              Enter in game id to join game
+              Enter in the Game ID to join
             </HeaderContainerSubHeading>
           </HeaderContainer>
           <FormTextInput

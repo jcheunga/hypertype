@@ -89,7 +89,7 @@ class MultiplayView extends Component {
     : null;
 
     return (
-      <View style={styles.container}>
+      <View style={{flex: 1}}>
         {showMultiplayView}
         {showCreateGameView}
         {showJoinGameView}
@@ -97,13 +97,5 @@ class MultiplayView extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#eaf8fd',
-    justifyContent: 'center'
-  }
-});
 
 export default MultiplayView;

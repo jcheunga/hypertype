@@ -12,6 +12,8 @@ import { countdownToSeconds } from '../../utils/Utils';
 import MainContainer from '../../styles/MainContainer';
 import BodyContainer from '../../styles/BodyContainer';
 
+import TextBackButtonContainer from '../../components/TextBackButtonContainer';
+
 import FormTextInput from '../../styles/FormTextInput';
 
 const window = Dimensions.get('window');
@@ -225,6 +227,9 @@ class TyperaceView extends Component {
     return (
       <MainContainer>
         <BodyContainer>
+          <TextBackButtonContainer
+            onPress={this.props.leaveGame}
+          />
           <View style={{flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', marginBottom: 15}}>
             <Text style={{fontSize: 14, color: '#616161'}}>wpm</Text>
             <Text style={{fontSize: 26, fontWeight: '600', color: '#263238', marginLeft: 10}}>{this.state.wpm}</Text>

@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {
-  Text,
   View,
-  ActivityIndicator
+  Image
 } from 'react-native';
 
 class SplashView extends Component {
@@ -10,7 +9,12 @@ class SplashView extends Component {
 
   render() {
     return (
-      <ActivityIndicator style={{flex: 1, alignSelf: 'center'}}/>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#e6f4ff'}}>
+        <Image
+          style={{width: 140, height: 140}}
+          source={require('../../assets/images/hypertype-greyscale-logo.png')}
+        />
+      </View>
     );
   }
 }

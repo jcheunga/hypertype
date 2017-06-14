@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
 import {
-  StyleSheet,
-  TextInput,
-  Text,
   View,
   Dimensions
 } from 'react-native';
@@ -96,7 +93,7 @@ class TypeView extends Component {
     : null;
 
     const showTypingView = this.state.typingView && this.props.inGame && this.props.gameId ?
-      <TyperaceView {...this.props} finishTyping={this.finishTyping} serviceType="rooms"/>
+      <TyperaceView {...this.props} finishTyping={this.finishTyping} leaveGame={this.leaveGame} serviceType="rooms"/>
     : null;
 
     const showScoreView = this.state.scoreView && this.props.inGame && this.props.gameId ?
@@ -104,7 +101,7 @@ class TypeView extends Component {
     : null;
 
     return (
-      <View style={styles.container}>
+      <View style={{flex: 1}}>
         { showCountdownView }
         { showTypingView }
         { showScoreView }
@@ -113,12 +110,5 @@ class TypeView extends Component {
   }
 
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#eaf8fd'
-  }
-});
 
 export default TypeView;

@@ -3,13 +3,14 @@ import {
   Image,
   ActivityIndicator,
   Dimensions,
-  View,
-  Text
 } from 'react-native';
 
 const window = Dimensions.get('window');
 
 import HomeContainer from '../../styles/HomeContainer';
+import LogoContainer from '../../styles/LogoContainer';
+
+import LogoHeader from '../../styles/LogoHeader';
 
 import FormButton from '../../styles/FormButton';
 import FormButtonText from '../../styles/FormButtonText';
@@ -58,13 +59,13 @@ class PlayView extends Component {
   render() {
     return (
       <HomeContainer>
-        <View style={{marginBottom: 40}}>
+        <LogoContainer>
           <Image
             style={{width: 140, height: 140}}
             source={require('../../assets/images/hypertype-logo.png')}
           />
-          <Text style={{fontSize: 24, fontWeight: '600'}}>hypertype</Text>
-        </View>
+          <LogoHeader>hypertype</LogoHeader>
+        </LogoContainer>
         <FormButton
           onPress={() => this.quickPlay()}>
           { this.props.isLoading ? <ActivityIndicator style={{marginRight: 10}}/> : null}

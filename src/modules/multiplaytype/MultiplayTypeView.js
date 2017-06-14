@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
 import {
-  StyleSheet,
-  TextInput,
-  Text,
   View,
   Dimensions
 } from 'react-native';
@@ -73,7 +70,6 @@ class MultiplayTypeView extends Component {
         { type: 'Navigation/NAVIGATE', routeName:'Multiplay'}
       ]
     });
-    // this.props.navigationStateActions.back();
   }
 
   finishCountdown = () => {
@@ -98,7 +94,7 @@ class MultiplayTypeView extends Component {
     : null;
 
     const showTypingView = this.state.typingView && this.props.inGame && this.props.gameId ?
-      <TyperaceView {...this.props} finishTyping={this.finishTyping} serviceType="multirooms"/>
+      <TyperaceView {...this.props} finishTyping={this.finishTyping} leaveGame={this.leaveGame} serviceType="multirooms"/>
     : null;
 
     const showScoreView = this.state.scoreView && this.props.inGame && this.props.gameId ?
@@ -106,7 +102,7 @@ class MultiplayTypeView extends Component {
     : null;
 
     return (
-      <View style={styles.container}>
+      <View>
         { showCountdownView }
         { showTypingView }
         { showScoreView }
@@ -115,12 +111,5 @@ class MultiplayTypeView extends Component {
   }
 
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#eaf8fd'
-  }
-});
 
 export default MultiplayTypeView;
