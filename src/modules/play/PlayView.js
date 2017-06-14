@@ -17,14 +17,23 @@ import HeaderContainer from '../../styles/HeaderContainer';
 import HeaderContainerHeading from '../../styles/HeaderContainerHeading';
 import HeaderContainerSubHeading from '../../styles/HeaderContainerSubHeading';
 
+import Icon from 'react-native-vector-icons/Entypo';
+
 class PlayView extends Component {
   static displayName = 'PlayView';
 
   static navigationOptions = {
     header: {
       visible: false
+    },
+    tabBar: {
+      icon: ( { tintColor, focused }) => {
+        return (
+          <Icon name="keyboard" size={26} style={{color: focused ? tintColor : '#929292'}}/>
+        );
+      }
     }
-  }
+  };
 
   // Initialize the hardcoded data
   constructor(props) {

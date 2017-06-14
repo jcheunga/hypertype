@@ -28,14 +28,23 @@ import ScoreListText from '../../styles/ScoreListText';
 
 import { sortMapResponse } from '../../utils/Utils';
 
+import Icon from 'react-native-vector-icons/Ionicons';
+
 class HighscoreView extends Component {
   static displayName = 'HighscoreView';
 
   static navigationOptions = {
     header: {
       visible: false
+    },
+    tabBar: {
+      icon: ( { tintColor, focused }) => {
+        return (
+          <Icon name="md-podium" size={26} style={{color: focused ? tintColor : '#929292'}}/>
+        );
+      }
     }
-  }
+  };
 
   // Initialize the hardcoded data
   constructor(props) {

@@ -11,15 +11,23 @@ import AuthViewContainer from '../auth/AuthViewContainer';
 
 import MainContainer from '../../styles/MainContainer';
 
+import Icon from 'react-native-vector-icons/Ionicons';
+
 const window = Dimensions.get('window');
 
 class ProfileView extends Component {
   static displayName = 'ProfileView';
 
   static navigationOptions = {
-    // title: 'Profile',
     header: {
       visible: false
+    },
+    tabBar: {
+      icon: ( { tintColor, focused }) => {
+        return (
+          <Icon name="md-person" size={26} style={{color: focused ? tintColor : '#929292'}}/>
+        );
+      }
     }
   }
 

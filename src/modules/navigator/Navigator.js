@@ -8,22 +8,30 @@ import TypeViewContainer from '../type/TypeViewContainer';
 import MultiplayViewContainer from '../multiplay/MultiplayViewContainer';
 import MultiplayTypeViewContainer from '../multiplaytype/MultiplayTypeViewContainer';
 
-const headerColor = '#666';
-const activeColor = 'white';
+const headerColor = '#F4F4F4';
+const activeColor = '#0073cd';
+const tabBarTextColor = '#929292';
 
 // TabNavigator is nested inside StackNavigator
 export const MainScreenNavigator = TabNavigator({
-  Play: {screen: PlayViewContainer},
-  Highscore: {screen: HighscoreViewContainer},
-  Profile: {screen: ProfileViewContainer},
+  Play: {
+    screen: PlayViewContainer,
+  },
+  Highscore: {
+    screen: HighscoreViewContainer
+  },
+  Profile: {
+    screen: ProfileViewContainer
+  },
 }, {
-  // lazyLoad: true,
   swipeEnabled: false,
   tabBarPosition: 'bottom',
   tabBarOptions: {
+    showIcon: true,
+    activeTintColor: activeColor,
     ...Platform.select({
       android: {
-        activeTintColor: activeColor,
+        inactiveTintColor: tabBarTextColor,
         indicatorStyle: {backgroundColor: activeColor},
         style: {backgroundColor: headerColor}
       }
