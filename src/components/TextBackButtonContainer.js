@@ -13,9 +13,9 @@ class TextBackButtonContainer extends Component {
   render() {
     return (
       <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => this.props.onPress()}>
           <Icon
-            onPress={() => this.props.onPress()}
             name="chevron-thin-left"
             size={22}
             color='#263238'/>
