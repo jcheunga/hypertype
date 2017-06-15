@@ -15,7 +15,8 @@ const initialState = {
   isRegisterd: false,
   isAuthenticating: false,
   isAuthenticated: false,
-  hasError: false
+  hasError: false,
+  errorMessage: null
 };
 
 // Actions
@@ -70,6 +71,7 @@ export default function AuthStateReducer(state = initialState, action = {}) {
           ...state,
           isAuthenticating: true,
           isAuthenticated: false,
+          errorMessage: null
         },
         Effects.promise(authenticateAccountService, action.payload)
       );
@@ -88,6 +90,7 @@ export default function AuthStateReducer(state = initialState, action = {}) {
           ...state,
           isLoggingOut: true,
           isLoggedOut: false,
+          errorMessage: null,
         },
         Effects.promise(logoutAccountService, action.payload)
       );
@@ -111,6 +114,7 @@ export default function AuthStateReducer(state = initialState, action = {}) {
           ...state,
           isRegistering: true,
           isRegistered: false,
+          errorMessage: null
         },
         Effects.promise(registerAccountService, action.payload)
       );
@@ -131,6 +135,7 @@ export default function AuthStateReducer(state = initialState, action = {}) {
           ...state,
           isDeleting: true,
           isDeleted: false,
+          errorMessage: null,
         },
         Effects.promise(deleteAccountService, action.payload)
       );
@@ -153,7 +158,8 @@ export default function AuthStateReducer(state = initialState, action = {}) {
         isRegisterd: false,
         isAuthenticating: false,
         isAuthenticated: false,
-        hasError: true
+        hasError: true,
+        errorMessage: action.payload
       };
 
     default:

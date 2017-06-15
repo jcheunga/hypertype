@@ -14,7 +14,6 @@ import RegisterView from './RegisterView';
 
 const window = Dimensions.get('window');
 
-import MainContainer from '../../styles/MainContainer';
 import BodyContainer from '../../styles/BodyContainer';
 
 import HeaderContainer from '../../styles/HeaderContainer';
@@ -79,39 +78,37 @@ class AuthView extends Component {
 
   render() {
     return (
-      <MainContainer>
-        <BodyContainer>
-          <HeaderContainer>
-            <HeaderContainerHeading>
-              Profile
-            </HeaderContainerHeading>
-            <HeaderContainerSubHeading>
-              {this.state.loginView ? 'Login' : 'Register'} to save highscores!
-            </HeaderContainerSubHeading>
-          </HeaderContainer>
+      <BodyContainer>
+        <HeaderContainer>
+          <HeaderContainerHeading>
+            Profile
+          </HeaderContainerHeading>
+          <HeaderContainerSubHeading>
+            {this.state.loginView ? 'Login' : 'Register'} to save highscores!
+          </HeaderContainerSubHeading>
+        </HeaderContainer>
 
-          <AuthTabContainer>
-            <AuthTabText
-              selected={this.state.loginView}
-              onPress={() => this._switchLoginView()}>
-              Login
-            </AuthTabText>
-            <AuthTabText
-              selected={this.state.registerView}
-              onPress={() => this._switchRegisterView()}>
-              Register
-            </AuthTabText>
-          </AuthTabContainer>
+        <AuthTabContainer>
+          <AuthTabText
+            selected={this.state.loginView}
+            onPress={() => this._switchLoginView()}>
+            Login
+          </AuthTabText>
+          <AuthTabText
+            selected={this.state.registerView}
+            onPress={() => this._switchRegisterView()}>
+            Register
+          </AuthTabText>
+        </AuthTabContainer>
 
-          <View>
-            {this._showLoginView()}
-            {this._showRegisterView()}
-          </View>
-          <View style={{marginTop: 15, justifyContent: 'center', alignItems: 'center'}}>
-            <Text style={{fontSize: 14, color: '#263238', fontFamily: 'Poppins-Regular'}}>Terms of service</Text>
-          </View>
-        </BodyContainer>
-      </MainContainer>
+        <View>
+          {this._showLoginView()}
+          {this._showRegisterView()}
+        </View>
+        <View style={{marginTop: 15, justifyContent: 'center', alignItems: 'center'}}>
+          <Text style={{fontSize: 14, color: '#263238', fontFamily: 'Poppins-Regular'}}>Terms of service</Text>
+        </View>
+      </BodyContainer>
     );
   }
 }

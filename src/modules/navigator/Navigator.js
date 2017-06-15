@@ -25,6 +25,7 @@ export const MainScreenNavigator = TabNavigator({
   },
 }, {
   swipeEnabled: false,
+  lazyLoad: true,
   tabBarPosition: 'bottom',
   tabBarOptions: {
     showIcon: true,

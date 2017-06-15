@@ -143,7 +143,6 @@ export function joinRoomService (payload) {
         );
       })
       .catch((error) => {
-        console.log(error);
         reject({ message: error });
       });
   });

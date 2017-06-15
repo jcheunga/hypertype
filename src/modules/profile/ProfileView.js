@@ -7,6 +7,8 @@ import {
 import UserProfileView from './UserProfileView';
 import AuthViewContainer from '../auth/AuthViewContainer';
 
+import MainContainer from '../../styles/MainContainer';
+
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const window = Dimensions.get('window');
@@ -35,9 +37,9 @@ class ProfileView extends Component {
   render() {
     const userView = this.props.user ? <UserProfileView {...this.props}/> : <AuthViewContainer />;
     return (
-      <View style={{flex: 1}}>
+      <MainContainer>
         {userView}
-      </View>
+      </MainContainer>
     );
   }
 }

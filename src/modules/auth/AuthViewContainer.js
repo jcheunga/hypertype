@@ -11,6 +11,7 @@ export default connect(
     guestUsername: state.authState.guestUsername,
     isRegistering: state.authState.isRegistering,
     isAuthenticating: state.authState.isAuthenticating,
+    errorMessage: state.authState.errorMessage,
   }),
   dispatch => {
     return {

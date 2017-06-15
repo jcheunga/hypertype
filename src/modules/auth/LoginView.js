@@ -24,24 +24,46 @@ class LoginView extends Component {
       username: "",
       password: "",
       usernameEntered: null,
-      passwordEntered: null
+      passwordEntered: null,
+      typing: false,
     };
   }
 
   _handleUsernameChange = (text) => {
     this.setState({
-      username: text
+      username: text,
+      usernameEntered: true,
+      typing: true
     });
   }
 
   _handlePasswordChange = (text) => {
     this.setState({
-      password: text
+      password: text,
+      passwordEntered: true,
+      typing: true
     });
   }
 
   _loginAccount = () => {
-    if (this.state.usernameEntered && this.state.passwordEntered) {
+    if (this.state.username.trim().length === 0) {
+      this.setState({
+        usernameEntered: false,
+        typing: false
+      });
+    }
+
+    if (this.state.password.trim().length === 0) {
+      this.setState({
+        passwordEntered: false,
+        typing: false
+      });
+    }
+
+    if (this.state.username.trim().length > 0 && this.state.password.trim().length > 0) {
+      this.setState({
+        typing: false
+      });
       const userData = {
         usernames: this.state.username,
         password: this.state.password
@@ -54,10 +76,24 @@ class LoginView extends Component {
     this.refs[nextField].root.focus();
   }
 
+  _parseErrorMessage = () => {
+    if (this.props.errorMessage.message) {
+      let errorMessage = this.props.errorMessage.message;
+
+      if (errorMessage.toLowerCase().indexOf("time") !== -1) {
+        return "Timed out";
+      }
+
+      return "Username or password is incorrect";
+    }
+  }
+
   render() {
+    console.log(this.props)
     return (
       <View>
         <FormTextInput
+          style={{borderColor: this.state.usernameEntered === false ? '#fe463c' : '#e7e7e7'}}
           underlineColorAndroid='transparent'
           autoCapitalize='none'
           placeholder='Username'
@@ -69,6 +105,7 @@ class LoginView extends Component {
           onSubmitEditing={() => this.focusNextField('2')}
         />
         <FormTextInput
+          style={{borderColor: this.state.passwordEntered === false ? '#fe463c' : '#e7e7e7'}}
           ref='2'
           underlineColorAndroid='transparent'
           autoCapitalize='none'
@@ -80,7 +117,7 @@ class LoginView extends Component {
           onChangeText={this._handlePasswordChange}
         />
 
-        { this.props.errorMessage ? <ErrorText>This is test error text</ErrorText> : null}
+        { this.props.errorMessage && !this.state.typing && this.state.username.trim().length > 0 && this.state.password.trim().length > 0 ? <ErrorText>{this._parseErrorMessage()}</ErrorText> : null}
 
         <FormButton
           onPress={() => this._loginAccount()}>

@@ -85,7 +85,8 @@ export default function MultiplayStateReducer(state = initialState, action = {})
       return loop(
         {
           ...state,
-          isCreating: true
+          isCreating: true,
+          errorMessage: null
         },
         Effects.promise(createRoomService, action.payload)
       );
@@ -116,7 +117,8 @@ export default function MultiplayStateReducer(state = initialState, action = {})
       return loop(
         {
           ...state,
-          isStarting: true
+          isStarting: true,
+          errorMessage: null
         },
         Effects.promise(startGameService, action.payload)
       );
@@ -144,7 +146,8 @@ export default function MultiplayStateReducer(state = initialState, action = {})
       return loop(
         {
           ...state,
-          isJoining: true
+          isJoining: true,
+          errorMessage: null
         },
         Effects.promise(joinRoomService, action.payload)
       );
@@ -175,7 +178,8 @@ export default function MultiplayStateReducer(state = initialState, action = {})
       return loop(
         {
           ...state,
-          isStarting: true
+          isStarting: true,
+          errorMessage: null
         },
         Effects.promise(startGameForJoinsService, action.payload)
       );

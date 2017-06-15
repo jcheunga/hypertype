@@ -38,6 +38,7 @@ class JoinGameView extends Component {
       enteredGameId: "",
       gameJoined: false,
       gameIdEntered: null,
+      typing: false,
       room: {
         playerList: [
           {
@@ -77,17 +78,36 @@ class JoinGameView extends Component {
   handleIdInput = (e) => {
     this.setState({
       enteredGameId: e.nativeEvent.text,
-      gameIdEntered: true
+      gameIdEntered: true,
+      typing: true
     });
   }
 
   _handleIdSubmit = () => {
-    if (this.state.enteredGameId.length === 0) {
+    if (this.state.enteredGameId.trim().length === 0) {
       this.setState({
-        gameIdEntered: false
+        gameIdEntered: false,
+        typing: false
       });
-    } else {
+    }
+
+    if (this.state.enteredGameId.trim().length > 0) {
+      this.setState({
+        typing: false
+      });
       this.props.joinGameWithId(this.state.enteredGameId, this.state.gameJoined);
+    }
+  }
+
+  _parseErrorMessage = () => {
+    if (this.props.errorMessage.message) {
+      let errorMessage = this.props.errorMessage.message;
+
+      if (errorMessage.toLowerCase().indexOf("time") !== -1) {
+        return "Timed out";
+      }
+
+      return errorMessage;
     }
   }
 
@@ -97,7 +117,6 @@ class JoinGameView extends Component {
 
   render() {
     const showLobby = this.state.room ? <LobbyViewContainer lobbyName='Lobby' roomJoined={this.state.room}/> : null;
-
     return (
       <MainContainer>
         <BodyContainer>
@@ -113,7 +132,7 @@ class JoinGameView extends Component {
             </HeaderContainerSubHeading>
           </HeaderContainer>
           <FormTextInput
-            style={{borderColor: this.state.gameIdEntered === false ? 'red' : '#e7e7e7'}}
+            style={{borderColor: this.state.gameIdEntered === false ? '#fe463c' : '#e7e7e7'}}
             underlineColorAndroid='transparent'
             autoCorrect={false}
             autoCapitalize='none'
@@ -124,7 +143,7 @@ class JoinGameView extends Component {
             value={this.state.enteredGameId}
           />
 
-          { this.props.errorMessage && !this.state.gameJoined ? <ErrorText>{this.props.errorMessage.message}</ErrorText> : null}
+          { this.props.errorMessage && !this.state.gameJoined && !this.state.typing && this.state.enteredGameId.trim().length > 0 ? <ErrorText>{this._parseErrorMessage()}</ErrorText> : null}
 
           <FormButton
             onPress={() => this._handleIdSubmit()}>

@@ -24,35 +24,66 @@ class RegisterView extends Component {
       username: "",
       email: "",
       password: "",
-      usernameEntered: null,
       emailEntered: null,
-      passwordEntered: null
+      usernameEntered: null,
+      passwordEntered: null,
+      typing: false,
     };
   }
 
   // https://stackoverflow.com/questions/36147276/how-to-validate-textinput-values-in-react-native
   // https://stackoverflow.com/questions/33407665/disabling-buttons-on-react-native
 
-  _handleUsernameChange = (text) => {
+  _handleEmailChange = (text) => {
     this.setState({
-      username: text,
+      email: text,
+      emailEntered: true,
+      typing: true
     });
   }
 
-  _handleEmailChange = (text) => {
+  _handleUsernameChange = (text) => {
     this.setState({
-      email: text
+      username: text,
+      usernameEntered: true,
+      typing: true
     });
   }
 
   _handlePasswordChange = (text) => {
     this.setState({
-      password: text
+      password: text,
+      passwordEntered: true,
+      typing: true
     });
   }
 
   _registerAccount = () => {
-    if (this.state.usernameEntered && this.state.emailEntered && this.state.passwordEntered) {
+    if (this.state.email.trim().length === 0) {
+      this.setState({
+        typing: false,
+        emailEntered: false,
+      });
+    }
+
+    if (this.state.username.trim().length === 0) {
+      this.setState({
+        typing: false,
+        usernameEntered: false,
+      });
+    }
+
+    if (this.state.password.trim().length === 0) {
+      this.setState({
+        typing: false,
+        passwordEntered: false,
+      });
+    }
+
+    if (this.state.email.trim().length > 0 && this.state.username.trim().length > 0 && this.state.password.trim().length > 0) {
+      this.setState({
+        typing: false,
+      });
       const userData = {
         usernames: this.state.username,
         email: this.state.email,
@@ -66,10 +97,31 @@ class RegisterView extends Component {
     this.refs[nextField].root.focus();
   }
 
+  _parseErrorMessage = () => {
+    if (this.props.errorMessage.message) {
+      let errorMessage = this.props.errorMessage.message;
+
+      if (errorMessage.toLowerCase().indexOf("time") !== -1) {
+        return "Timed out";
+      }
+
+      if (errorMessage.toLowerCase().indexOf("usernames") !== -1) {
+        return "Username already exists";
+      }
+
+      if (errorMessage.toLowerCase().indexOf("email") !== -1) {
+        return "Email already exists";
+      }
+
+      return errorMessage;
+    }
+  }
+
   render() {
     return (
       <View>
         <FormTextInput
+          style={{borderColor: this.state.emailEntered === false ? '#fe463c' : '#e7e7e7'}}
           underlineColorAndroid='transparent'
           placeholder='Email'
           autoCorrect={false}
@@ -82,6 +134,7 @@ class RegisterView extends Component {
           onSubmitEditing={() => this.focusNextField('2')}
         />
         <FormTextInput
+          style={{borderColor: this.state.usernameEntered === false ? '#fe463c' : '#e7e7e7'}}
           ref='2'
           underlineColorAndroid='transparent'
           placeholder='Username'
@@ -94,6 +147,7 @@ class RegisterView extends Component {
           onSubmitEditing={() => this.focusNextField('3')}
         />
         <FormTextInput
+          style={{borderColor: this.state.passwordEntered === false ? '#fe463c' : '#e7e7e7'}}
           ref='3'
           underlineColorAndroid='transparent'
           secureTextEntry={true}
@@ -106,7 +160,7 @@ class RegisterView extends Component {
           onChangeText={this._handlePasswordChange}
         />
 
-        { this.props.errorMessage ? <ErrorText>This is test error text</ErrorText> : null}
+        { this.props.errorMessage && !this.state.typing && this.state.email.trim().length > 0 && this.state.username.trim().length > 0 && this.state.password.trim().length > 0 ? <ErrorText>{this._parseErrorMessage()}</ErrorText> : null}
 
         <FormButton
           onPress={() => this._registerAccount()}>
