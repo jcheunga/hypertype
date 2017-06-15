@@ -55,10 +55,10 @@ class JoinGameView extends Component {
   }
 
   _handleGamePatched = (response) => {
-    console.log("patch response");
-    console.log(response);
+    // console.log("patch response");
+    // console.log(response);
     if (response.gameStarted) {
-      // this.props.multiplayStateActions.startGameForJoins(this.props.gameId, this.props.roomJoined);
+      this.props.multiplayStateActions.startGameForJoins(this.props.gameId, this.props.roomJoined);
     }
 
     this.setState({
