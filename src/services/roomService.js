@@ -9,7 +9,7 @@ import app from '../feathers';
 
 export function findRoomService (payload) {
   const user = payload.user;
-  const countdownAmount = 5000;
+  const countdownAmount = 10000;
   const countdownCutOffAmount = 5000;
 
   const fetchGame = new Promise(function(resolve, reject) {
