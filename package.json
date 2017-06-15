@@ -14,8 +14,10 @@
     "coverage": "rimraf coverage && jest --coverage",
     "version": "support/version-ios.sh"
   },
-   "rnpm": {
-    "assets": ["./src/assets/fonts"]
+  "rnpm": {
+    "assets": [
+      "./src/assets/fonts"
+    ]
   },
   "jest": {
     "preset": "react-native",
@@ -41,6 +43,7 @@
     "react-native": "0.44.2",
     "react-native-animatable": "^1.2.1",
     "react-native-animate-number": "^0.1.2",
+    "react-native-code-push": "^2.1.0-beta",
     "react-native-countdown-circle": "^1.0.2",
     "react-native-elements": "^0.12.2",
     "react-native-vector-icons": "^4.0.0",
