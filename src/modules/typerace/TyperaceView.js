@@ -35,6 +35,8 @@ class TyperaceView extends Component {
     this.letterCount = this.textToType.split(" ").join("").length;
     this.wordCount = this.textToType.split(" ").length;
 
+    this.timeoutGame;
+
     this.state = {
       currentWord: 0,
       currentString: "",
@@ -49,7 +51,14 @@ class TyperaceView extends Component {
     this._listenToRoom();
   }
 
-  _listenToRoom = () => { // PATCH WITH WPM
+  componentDidMount () {
+    this.timeoutGame = setTimeout(() => {
+      this._registerGameFinish();
+      this.props.finishTyping();
+    }, 130000)
+  }
+
+  _listenToRoom = () => {
     app.service(this.props.serviceType).on('patched', this._handleListenToRoom);
   }
 
@@ -220,10 +229,12 @@ class TyperaceView extends Component {
   }
 
   componentWillUnmount () {
+    clearTimeout(this.timeoutGame);
     app.service(this.props.serviceType).removeListener('patched', this._handleListenToRoom);
   }
 
   render() {
+    console.log(this.props);
     return (
       <MainContainer>
         <BodyContainer>
