@@ -9,7 +9,14 @@ export function fetchScoreService (payload) {
 
   const fetchScores = new Promise(function(resolve, reject) {
     app.service("highscores")
-      .find()
+      .find({
+        query: {
+          $limit: 50,
+          $sort: {
+            wpm: -1
+          }
+        }
+      })
       .then((res) => {
         resolve({
           data: res.data,

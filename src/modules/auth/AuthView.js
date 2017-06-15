@@ -1,12 +1,8 @@
 import React, {Component} from 'react';
 import {
   Text,
-  TextInput,
   View,
   Dimensions,
-  Button,
-  Image,
-  ScrollView
 } from 'react-native';
 
 import LoginView from './LoginView';
