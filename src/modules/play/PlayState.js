@@ -68,7 +68,6 @@ export default function PlayStateReducer(state = initialState, action = {}) {
         }))
       );
 
-    // FIX BACKSPACE FOR ANDROID TO LEAVE GAME OR LEAVE GAME ON PLAY VIEW
     case FIND_NEW_GAME_SUCCESS:
       return {
         ...state,

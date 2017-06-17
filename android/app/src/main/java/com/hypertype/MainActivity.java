@@ -42,8 +42,7 @@ public class MainActivity extends ReactActivity {
         //    return super.onKeyDown(keyCode, event);
 
         // Using method #1 without blocking multiple
-        super.onKeyDown(keyCode, event);
-        return true;
+        return super.onKeyDown(keyCode, event);
       }
 
       @Override  // <--- Add this method if you want to react to keyUp
@@ -59,7 +58,6 @@ public class MainActivity extends ReactActivity {
         //    return super.onKeyUp(keyCode, event);
 
         // Using method #1
-        super.onKeyUp(keyCode, event);
-        return true;
+        return super.onKeyUp(keyCode, event);
       }
 }

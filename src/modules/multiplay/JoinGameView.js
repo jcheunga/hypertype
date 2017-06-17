@@ -24,8 +24,6 @@ import GameIdText from '../../styles/GameIdText';
 
 import ErrorText from '../../styles/ErrorText';
 
-import KeyEvent from 'react-native-keyevent';
-
 class JoinGameView extends Component {
   static displayName = 'JoinGameView';
 
@@ -49,44 +47,30 @@ class JoinGameView extends Component {
     this._gameStartListen();
   }
 
-  componentDidMount() {
-    // if you want to react to keyDown
-    KeyEvent.onKeyDownListener((keyCode) => {
-      console.log(`Key code down pressed: ${keyCode}`);
-    });
-
-    // if you want to react to keyUp
-    KeyEvent.onKeyUpListener((keyCode) => {
-      console.log(`Key code up pressed: ${keyCode}`);
-    });
-  }
-
   _gameStartListen = () => {
     app.service("multirooms").on("patched", this._handleGamePatched)
   }
 
   _handleGamePatched = (response) => {
-    console.log("response");
-    console.log(response);
     this.setState({
       room: response
     });
     if (response.gameStarted) {
-      // this.props.multiplayStateActions.startGameForJoins(this.state.room._id, this.state.room);
-      this.props.navigationStateActions.navigate({
-        routeName: 'MultiplayTypeView'
-      })
+      this.props.multiplayStateActions.startGameForJoins(this.state.room._id, this.state.room);
+      // this.props.navigationStateActions.navigate({
+      //   routeName: 'MultiplayTypeView'
+      // })
     }
   }
 
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.isJoined) {
-      this.setState({
-        gameJoined: true,
-        room: nextProps.roomJoined
-      })
-    }
-  }
+  // componentWillReceiveProps (nextProps) {
+  //   if (nextProps.isJoined) {
+  //     this.setState({
+  //       gameJoined: true,
+  //       room: nextProps.roomJoined
+  //     })
+  //   }
+  // }
 
   handleIdInput = (e) => {
     this.setState({
@@ -125,18 +109,10 @@ class JoinGameView extends Component {
   }
 
   componentWillUnmount () {
-    console.log("join game view unmounting");
     app.service("multirooms").removeListener("patched", this._handleGamePatchedListener);
-
-    // if you are listening to keyDown
-    KeyEvent.removeKeyDownListener();
-
-     // if you are listening to keyUp
-    KeyEvent.removeKeyUpListener();
   }
 
   render() {
-    console.log("join game view rendering");
     const showLobby = this.state.room ? <LobbyViewContainer lobbyName='Lobby' roomJoined={this.state.room}/> : null;
     return (
       <MainContainer>

@@ -8,18 +8,17 @@ import app from '../../feathers';
 import CountdownCircle from 'react-native-countdown-circle';
 
 import HomeContainer from '../../styles/HomeContainer';
+import { countdownToSeconds } from '../../utils/Utils';
 
 class CountdownView extends Component {
   static displayName = 'CountdownScreen';
 
   render() {
-    console.log("countdownview mounted");
-    console.log(this.props.gameId);
     return (
       <HomeContainer>
         <Text style={{color: '#fe463c', marginBottom: 20, fontSize: 22, fontWeight: '600'}}>Game is starting!</Text>
         <CountdownCircle
-          seconds={this.props.gameStartTime}
+          seconds={countdownToSeconds(this.props.gameStartTime)}
           radius={40}
           borderWidth={10}
           color="#fe463c"

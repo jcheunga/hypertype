@@ -26,7 +26,6 @@ class TypeView extends Component {
     super(props)
 
     this.state = {
-      gameStartTime: countdownToSeconds(props.gameStartTime),
       countdownView: false,
       typingView: false,
       scoreView: false,
@@ -89,7 +88,7 @@ class TypeView extends Component {
 
   render () {
     const showCountdownView = this.state.countdownView && this.props.inGame && this.props.gameId ?
-      <CountdownView {...this.props} finishCountdown={this.finishCountdown} gameStartTime={this.state.gameStartTime} serviceType="rooms"/>
+      <CountdownView {...this.props} finishCountdown={this.finishCountdown} serviceType="rooms"/>
     : null;
 
     const showTypingView = this.state.typingView && this.props.inGame && this.props.gameId ?

@@ -35,9 +35,19 @@ class LobbyView extends Component {
 
     return playerList.map((value, index) => {
       return(
+        this.props.showScore
+        ?
+        value.wpm !== 0
+        ?
         <ScoreListItem key={index}>
           <ScoreListText>{value.playerId}</ScoreListText>
-          { this.props.showScore ? <ScoreListText>{value.wpm}</ScoreListText> : null}
+          <ScoreListText>{value.wpm}</ScoreListText>
+        </ScoreListItem>
+        :
+        null
+        :
+        <ScoreListItem key={index}>
+          <ScoreListText>{value.playerId}</ScoreListText>
         </ScoreListItem>
       );
     })

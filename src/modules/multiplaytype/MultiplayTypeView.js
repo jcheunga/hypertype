@@ -24,7 +24,6 @@ class MultiplayTypeView extends Component {
     super(props)
 
     this.state = {
-      gameStartTime: countdownToSeconds(props.gameStartTime),
       countdownView: false,
       typingView: false,
       scoreView: false
@@ -94,7 +93,7 @@ class MultiplayTypeView extends Component {
     console.log("multiplaytypeview mounted");
     console.log(this.props.gameId);
     const showCountdownView = this.state.countdownView && this.props.inGame && this.props.gameId ?
-      <CountdownView {...this.props} finishCountdown={this.finishCountdown} gameStartTime={this.state.gameStartTime} serviceType="multirooms"/>
+      <CountdownView {...this.props} finishCountdown={this.finishCountdown} serviceType="multirooms"/>
     : null;
 
     const showTypingView = this.state.typingView && this.props.inGame && this.props.gameId ?

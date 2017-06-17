@@ -34,9 +34,11 @@ export function countdownToSeconds (countdownValue) {
 }
 
 export function sortMapResponse (playerList) {
-  return playerList.sort((a, b) => {
-    return b.wpm - a.wpm;
-  })
+  if (playerList !== undefined) {
+    return playerList.sort((a, b) => {
+      return b.wpm - a.wpm;
+    })
+  }
 }
 
 import converter from 'number-to-words';
@@ -47,8 +49,10 @@ export function getOrdinalValue (playerList, user) {
   });
 
   for (var i = 0; i < sortedList.length; i++) {
-    if (sortedList[i].playerId === user.usernames) {
-      return converter.toOrdinal(i + 1);
+    if (sortedList[i].completed === true) {
+      if (sortedList[i].playerId === user.usernames) {
+        return converter.toOrdinal(i + 1);
+      }
     }
   }
 }

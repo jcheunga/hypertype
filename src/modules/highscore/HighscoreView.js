@@ -65,10 +65,14 @@ class HighscoreView extends Component {
       let scores = sortMapResponse(this.props.scores);
       return scores.map((highscore, index) => {
         return (
+          highscore.wpm !== 0
+          ?
           <ScoreListItem key={index}>
             <ScoreListText>{highscore.playerName}</ScoreListText>
             <ScoreListText>{highscore.wpm}</ScoreListText>
           </ScoreListItem>
+          :
+          null
         );
       });
     } else {
