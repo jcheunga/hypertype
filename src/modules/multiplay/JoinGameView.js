@@ -66,15 +66,17 @@ class JoinGameView extends Component {
   }
 
   _handleGamePatched = (response) => {
-    // console.log("patch response");
-    // console.log(response);
-    if (response.gameStarted) {
-      this.props.multiplayStateActions.startGameForJoins(this.props.gameId, this.props.roomJoined);
-    }
-
+    console.log("response");
+    console.log(response);
     this.setState({
       room: response
     });
+    if (response.gameStarted) {
+      // this.props.multiplayStateActions.startGameForJoins(this.state.room._id, this.state.room);
+      this.props.navigationStateActions.navigate({
+        routeName: 'MultiplayTypeView'
+      })
+    }
   }
 
   componentWillReceiveProps (nextProps) {
@@ -123,7 +125,8 @@ class JoinGameView extends Component {
   }
 
   componentWillUnmount () {
-    app.service("multirooms").removeListener("patched", this._handleGamePatched);
+    console.log("join game view unmounting");
+    app.service("multirooms").removeListener("patched", this._handleGamePatchedListener);
 
     // if you are listening to keyDown
     KeyEvent.removeKeyDownListener();
@@ -133,6 +136,7 @@ class JoinGameView extends Component {
   }
 
   render() {
+    console.log("join game view rendering");
     const showLobby = this.state.room ? <LobbyViewContainer lobbyName='Lobby' roomJoined={this.state.room}/> : null;
     return (
       <MainContainer>
@@ -151,6 +155,7 @@ class JoinGameView extends Component {
           <FormTextInput
             style={{borderColor: this.state.gameIdEntered === false ? '#fe463c' : '#e7e7e7'}}
             underlineColorAndroid='transparent'
+            autoFocus={true}
             autoCorrect={false}
             autoCapitalize='none'
             placeholder='Game ID'

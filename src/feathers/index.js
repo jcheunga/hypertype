@@ -7,9 +7,10 @@ import authentication from 'feathers-authentication-client';
 
 import { AsyncStorage } from 'react-native';
 
-const API_URL = 'http://192.168.20.3:3030';
+// const API_URL = 'http://192.168.20.3:3030';
 // const API_URL = 'http://10.0.2.2:3030'; // ANDROID
 // const API_URL = 'localhost:3030'; // IOS
+const API_URL = 'http://139.59.239.177';
 const options = {transports: ['websocket'], pingTimeout: 3000, pingInterval: 5000, jsonp: false};
 const socket = io(API_URL, options);
 

@@ -184,9 +184,27 @@ export default function MultiplayStateReducer(state = initialState, action = {})
         Effects.promise(startGameForJoinsService, action.payload)
       );
 
+    // case START_GAME_FOR_JOINS_SUCCESS:
+    //   return loop(
+    //     {
+    //       ...state,
+    //       isStarting: false,
+    //       isStarted: action.payload.isStarted,
+    //       inGame: action.payload.isStarted,
+    //       gameId: action.payload.gameId,
+    //       gameStartTime: action.payload.gameStartTime,
+    //       gameEndTime: action.payload.gameEndTime,
+    //       roomJoined: action.payload.room,
+    //       quoteToType: action.payload.quoteToType,
+    //       quoteAfflink: action.payload.quoteAfflink,
+    //     },
+    //     Effects.constant(NavigationActions.navigate({
+    //       routeName: 'MultiplayTypeView'
+    //     }))
+    //   );
+
     case START_GAME_FOR_JOINS_SUCCESS:
-      return loop(
-        {
+      return {
           ...state,
           isStarting: false,
           isStarted: action.payload.isStarted,
@@ -197,11 +215,7 @@ export default function MultiplayStateReducer(state = initialState, action = {})
           roomJoined: action.payload.room,
           quoteToType: action.payload.quoteToType,
           quoteAfflink: action.payload.quoteAfflink,
-        },
-        Effects.constant(NavigationActions.navigate({
-          routeName: 'MultiplayTypeView'
-        }))
-      );
+        }
 
     case LEAVE_GAME:
       return {

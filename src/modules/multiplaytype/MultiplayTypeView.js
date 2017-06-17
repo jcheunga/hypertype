@@ -33,6 +33,7 @@ class MultiplayTypeView extends Component {
 
   componentWillMount () {
     if (!this.props.gameId || !this.props.inGame || countdownToSeconds(this.props.gameStartTime) < 0 || countdownToSeconds(this.props.gameStartTime) > 10) {
+      console.log("is it leaving in the component will mount");
       this.leaveGame();
     } else {
       this.setState({countdownView: true});
@@ -42,6 +43,7 @@ class MultiplayTypeView extends Component {
   componentWillReceiveProps (nextProps) {
     if (nextProps.gameStartTime) {
       if (countdownToSeconds(nextProps.gameStartTime) < 0 || countdownToSeconds(nextProps.gameStartTime) > 10) {
+        console.log("is it leaving in comp will recieve props");
         this.leaveGame();
       } else {
         this.setState({
@@ -89,6 +91,8 @@ class MultiplayTypeView extends Component {
   }
 
   render () {
+    console.log("multiplaytypeview mounted");
+    console.log(this.props.gameId);
     const showCountdownView = this.state.countdownView && this.props.inGame && this.props.gameId ?
       <CountdownView {...this.props} finishCountdown={this.finishCountdown} gameStartTime={this.state.gameStartTime} serviceType="multirooms"/>
     : null;

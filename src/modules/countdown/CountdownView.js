@@ -13,6 +13,8 @@ class CountdownView extends Component {
   static displayName = 'CountdownScreen';
 
   render() {
+    console.log("countdownview mounted");
+    console.log(this.props.gameId);
     return (
       <HomeContainer>
         <Text style={{color: '#fe463c', marginBottom: 20, fontSize: 22, fontWeight: '600'}}>Game is starting!</Text>

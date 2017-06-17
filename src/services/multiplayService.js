@@ -153,34 +153,52 @@ export function joinRoomService (payload) {
 }
 
 export function startGameForJoinsService (payload) {
-  let user = payload.user;
-  let room = payload.room;
+  const room = payload.room;
+
+  console.log("multiplay service room payload");
+  console.log(room);
 
   const startGameForJoins = new Promise(function(resolve, reject) {
 
-    app.service("multirooms")
-      .find({
-        $limit: 1,
-        query: {
-          _id: room._id
+    if (room._id) {
+      resolve(
+        {
+          gameId: room.gameId,
+          gameStartTime: room.gameStartTime,
+          gameEndTime: room.gameEndTime,
+          quoteToType: room.quoteToType,
+          quoteAfflink: room.quoteToType,
+          isStarted: true,
+          room: room
         }
-      })
-      .then((response) => {
-        resolve(
-          {
-            gameId: response.startGameId,
-            gameEndTime: response.gameEndTime,
-            gameStartTime: response.gameStartTime,
-            quoteToType: response.quoteToType,
-            quoteAfflink: response.quoteAfflink,
-            room: response,
-            isStarted: true
-          }
-        );
-      })
-      .catch((error) => {
-        reject({ message: "Error starting" })
-      })
+      );
+    } else {
+      reject({ message: "Error starting" })
+    }
+
+    // app.service("multirooms")
+    //   .find({
+    //     $limit: 1,
+    //     query: {
+    //       _id: room._id
+    //     }
+    //   })
+    //   .then((response) => {
+    //     resolve(
+    //       {
+    //         gameId: response.gameId,
+    //         gameStartTime: response.gameStartTime,
+    //         gameEndTime: response.gameEndTime,
+    //         quoteToType: response.quoteToType,
+    //         quoteAfflink: response.quoteToType,
+    //         isStarted: true,
+    //         room: response
+    //       }
+    //     );
+    //   })
+    //   .catch((error) => {
+    //     reject({ message: "Error starting" })
+    //   })
   });
 
   return startGameForJoins
