@@ -155,9 +155,6 @@ export function joinRoomService (payload) {
 export function startGameForJoinsService (payload) {
   const room = payload.room;
 
-  console.log("multiplay service room payload");
-  console.log(room);
-
   const startGameForJoins = new Promise(function(resolve, reject) {
 
     if (room._id) {
