@@ -234,7 +234,6 @@ class TyperaceView extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <MainContainer>
         <BodyContainer>

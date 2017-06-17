@@ -1,7 +1,6 @@
 
 import React, {Component} from 'react';
 import {
-  Dimensions,
   ActivityIndicator
 } from 'react-native';
 
@@ -25,7 +24,7 @@ import GameIdText from '../../styles/GameIdText';
 
 import ErrorText from '../../styles/ErrorText';
 
-const window = Dimensions.get('window');
+import KeyEvent from 'react-native-keyevent';
 
 class JoinGameView extends Component {
   static displayName = 'JoinGameView';
@@ -48,6 +47,18 @@ class JoinGameView extends Component {
       }
     };
     this._gameStartListen();
+  }
+
+  componentDidMount() {
+    // if you want to react to keyDown
+    KeyEvent.onKeyDownListener((keyCode) => {
+      console.log(`Key code down pressed: ${keyCode}`);
+    });
+
+    // if you want to react to keyUp
+    KeyEvent.onKeyUpListener((keyCode) => {
+      console.log(`Key code up pressed: ${keyCode}`);
+    });
   }
 
   _gameStartListen = () => {
@@ -113,6 +124,12 @@ class JoinGameView extends Component {
 
   componentWillUnmount () {
     app.service("multirooms").removeListener("patched", this._handleGamePatched);
+
+    // if you are listening to keyDown
+    KeyEvent.removeKeyDownListener();
+
+     // if you are listening to keyUp
+    KeyEvent.removeKeyUpListener();
   }
 
   render() {

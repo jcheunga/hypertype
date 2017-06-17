@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
 import {
   Image,
-  ActivityIndicator,
-  Dimensions,
+  ActivityIndicator
 } from 'react-native';
-
-const window = Dimensions.get('window');
 
 import HomeContainer from '../../styles/HomeContainer';
 import LogoContainer from '../../styles/LogoContainer';

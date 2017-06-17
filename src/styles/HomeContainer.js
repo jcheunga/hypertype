@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import { Platform } from 'react-native';
 
 const HomeContainer = styled.View`
   padding: 20px;

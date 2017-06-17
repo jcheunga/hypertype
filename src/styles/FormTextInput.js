@@ -8,7 +8,6 @@ const FormTextInput = styled.TextInput`
   padding-left: 15px;
   padding-right: 15px;
   height: 40px;
-  width: 100%;
   border-radius: 5px;
   margin-bottom: 10px;
   font-family: 'Poppins-Regular';

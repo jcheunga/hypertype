@@ -23,8 +23,7 @@ class AppView extends Component {
       this.props.AppStateActions.connectApp();
 
       if (AsyncStorage['feathers-jwt']) {
-        this.props.AuthStateActions.authenticateAccount()
-        // .catch(err => console.log(err));  // CHANGE TO ERROR STATE
+        this.props.AuthStateActions.authenticateAccount();
       }
 
     });
@@ -60,8 +59,7 @@ class AppView extends Component {
     return (
       <View style={{flex: 1}}>
         <StatusBar
-          backgroundColor='#33a7ff'
-          // barStyle='light-content'
+          backgroundColor='#0091ff'
         />
         <NavigatorViewContainer />
         {__DEV__ && <DeveloperMenu />}

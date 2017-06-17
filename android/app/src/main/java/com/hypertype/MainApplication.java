@@ -3,6 +3,8 @@ package com.hypertype;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.github.kevinejohn.keyevent.KeyEventPackage;
+import io.sentry.RNSentryPackage;
 import com.microsoft.codepush.react.CodePush;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
@@ -31,7 +33,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new CodePush(null, getApplicationContext(), BuildConfig.DEBUG),
+            new KeyEventPackage(),
+            new RNSentryPackage(MainApplication.this),
+            new CodePush("HxD4e1qJN5zx1lDZQNi6aAYJCCfPde169649-1b88-4694-8f22-e5742a11c728", getApplicationContext(), BuildConfig.DEBUG),
             new VectorIconsPackage()
       );
     }

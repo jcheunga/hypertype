@@ -1,8 +1,10 @@
 import styled from 'styled-components/native';
+import { Dimensions } from 'react-native';
+const window = Dimensions.get('window');
 
 const FormButton = styled.TouchableOpacity`
+  width: ${window.width - 40 + 'px'}
   height: 40px;
-  width: 100%;
   border-radius: 50px;
   align-items: center;
   justify-content: center;
