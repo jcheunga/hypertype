@@ -3,7 +3,6 @@ package com.hypertype;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.github.kevinejohn.keyevent.KeyEventPackage;
 import io.sentry.RNSentryPackage;
 import com.microsoft.codepush.react.CodePush;
 import com.oblador.vectoricons.VectorIconsPackage;
