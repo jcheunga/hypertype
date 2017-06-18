@@ -44,7 +44,6 @@ class JoinGameView extends Component {
         ]
       }
     };
-    this._gameStartListen();
   }
 
   _gameStartListen = () => {
@@ -52,27 +51,36 @@ class JoinGameView extends Component {
   }
 
   _handleGamePatched = (response) => {
-    this.setState({
-      room: response
-    });
-    if (response.gameStarted) {
-      if (this.state.gameJoined) {
-
-      }
-      this.props.multiplayStateActions.startGameForJoins(this.state.room._id, this.state.room);
-    }
-  }
-
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.isJoined) {
-      if (!this.state.gameJoined) {
-        this.setState({
-          gameJoined: true,
-          room: nextProps.roomJoined
-        })
+    console.log("response");
+    console.log(response);
+    if (this.props.gameId) {
+      this.setState({
+        room: response,
+        gameJoined: true
+      });
+      if (response.gameStarted) {
+        if (this.state.gameJoined) {
+          console.log("is this happening");
+          app.service("multirooms").removeListener("patched", this._handleGamePatched);
+          this.props.multiplayStateActions.startGameForJoins(this.state.room._id, this.state.room);
+          this.setState({
+            gameJoined: false,
+          });
+        }
       }
     }
   }
+
+  // componentWillReceiveProps (nextProps) {
+  //   if (nextProps.isJoined) {
+  //     if (!this.state.gameJoined) {
+  //       this.setState({
+  //         gameJoined: true,
+  //         room: nextProps.roomJoined
+  //       })
+  //     }
+  //   }
+  // }
 
   handleIdInput = (e) => {
     this.setState({
@@ -94,6 +102,7 @@ class JoinGameView extends Component {
       this.setState({
         typing: false
       });
+      this._gameStartListen();
       this.props.joinGameWithId(this.state.enteredGameId, this.state.gameJoined);
     }
   }
@@ -115,6 +124,8 @@ class JoinGameView extends Component {
   }
 
   render() {
+    console.log("join game view mounting");
+    console.log(this.props);
     const showLobby = this.state.room ? <LobbyViewContainer lobbyName='Lobby' roomJoined={this.state.room}/> : null;
     return (
       <MainContainer>
