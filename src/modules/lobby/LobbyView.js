@@ -37,7 +37,7 @@ class LobbyView extends Component {
       return(
         this.props.showScore
         ?
-        value.wpm !== 0
+        value.wpm !== 0 || value.completed === true
         ?
         <ScoreListItem key={index}>
           <ScoreListText>{value.playerId}</ScoreListText>
