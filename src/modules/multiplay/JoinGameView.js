@@ -56,18 +56,23 @@ class JoinGameView extends Component {
       room: response
     });
     if (response.gameStarted) {
+      if (this.state.gameJoined) {
+
+      }
       this.props.multiplayStateActions.startGameForJoins(this.state.room._id, this.state.room);
     }
   }
 
-  // componentWillReceiveProps (nextProps) {
-  //   if (nextProps.isJoined) {
-  //     this.setState({
-  //       gameJoined: true,
-  //       room: nextProps.roomJoined
-  //     })
-  //   }
-  // }
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.isJoined) {
+      if (!this.state.gameJoined) {
+        this.setState({
+          gameJoined: true,
+          room: nextProps.roomJoined
+        })
+      }
+    }
+  }
 
   handleIdInput = (e) => {
     this.setState({
@@ -136,7 +141,6 @@ class JoinGameView extends Component {
             editable={!this.state.gameJoined}
             onChange={(e) => this.handleIdInput(e)}
             value={this.state.enteredGameId}
-            onKeyPress={(e => console.log(e.nativeEvent.key))}
           />
 
           { this.props.errorMessage && !this.state.gameJoined && !this.state.typing && this.state.enteredGameId.trim().length > 0 ? <ErrorText>{this._parseErrorMessage()}</ErrorText> : null}
