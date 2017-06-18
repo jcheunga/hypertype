@@ -44,7 +44,6 @@
     "react-native-animatable": "^1.2.1",
     "react-native-code-push": "^2.1.0-beta",
     "react-native-countdown-circle": "^1.0.2",
-    "react-native-keyevent": "^0.0.5",
     "react-native-sentry": "^0.12.12",
     "react-native-vector-icons": "^4.0.0",
     "react-navigation": "git+https://github.com/react-community/react-navigation.git#7edd9a7",

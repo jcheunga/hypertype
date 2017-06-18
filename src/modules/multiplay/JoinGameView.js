@@ -57,9 +57,6 @@ class JoinGameView extends Component {
     });
     if (response.gameStarted) {
       this.props.multiplayStateActions.startGameForJoins(this.state.room._id, this.state.room);
-      // this.props.navigationStateActions.navigate({
-      //   routeName: 'MultiplayTypeView'
-      // })
     }
   }
 
@@ -109,7 +106,7 @@ class JoinGameView extends Component {
   }
 
   componentWillUnmount () {
-    app.service("multirooms").removeListener("patched", this._handleGamePatchedListener);
+    app.service("multirooms").removeListener("patched", this._handleGamePatched);
   }
 
   render() {
@@ -139,6 +136,7 @@ class JoinGameView extends Component {
             editable={!this.state.gameJoined}
             onChange={(e) => this.handleIdInput(e)}
             value={this.state.enteredGameId}
+            onKeyPress={(e => console.log(e.nativeEvent.key))}
           />
 
           { this.props.errorMessage && !this.state.gameJoined && !this.state.typing && this.state.enteredGameId.trim().length > 0 ? <ErrorText>{this._parseErrorMessage()}</ErrorText> : null}

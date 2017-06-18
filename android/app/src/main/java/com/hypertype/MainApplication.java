@@ -32,7 +32,6 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new KeyEventPackage(),
             new RNSentryPackage(MainApplication.this),
             new CodePush("HxD4e1qJN5zx1lDZQNi6aAYJCCfPde169649-1b88-4694-8f22-e5742a11c728", getApplicationContext(), BuildConfig.DEBUG),
             new VectorIconsPackage()

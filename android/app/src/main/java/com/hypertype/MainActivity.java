@@ -12,13 +12,4 @@ public class MainActivity extends ReactActivity {
     protected String getMainComponentName() {
         return "Hypertype";
     }
-
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-      WritableMap params;
-      // params.put something
-      // filter only Backspace events if you wish etc.
-      reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-                              .emit("onKeyPressed", params);
-    }
 }
