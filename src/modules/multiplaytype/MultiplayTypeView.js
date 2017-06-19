@@ -65,10 +65,9 @@ class MultiplayTypeView extends Component {
   leaveGame = () => {
     this.props.multiplayStateActions.leaveGame();
     this.props.navigationStateActions.reset({
-      index: 1,
+      index: 0,
       actions: [
-        { type: 'Navigation/NAVIGATE', routeName:'Home'},
-        { type: 'Navigation/NAVIGATE', routeName:'Multiplay'}
+        { type: 'Navigation/NAVIGATE', routeName:'Home'}
       ]
     });
   }
