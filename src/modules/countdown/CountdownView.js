@@ -18,7 +18,7 @@ class CountdownView extends Component {
       <HomeContainer>
         <Text style={{color: '#fe463c', marginBottom: 20, fontSize: 22, fontWeight: '600'}}>Game is starting!</Text>
         <CountdownCircle
-          seconds={countdownToSeconds(this.props.gameStartTime)}
+          seconds={countdownToSeconds(this.props.gameStartTime)} // CHANGE THE NODE MODULE TO SHOW MATH ROUND BUT FOR THE COUTNDOWN TO BE IN UNROUNDED SECONDS
           radius={40}
           borderWidth={10}
           color="#fe463c"
