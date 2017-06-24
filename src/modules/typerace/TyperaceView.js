@@ -70,7 +70,8 @@ class TyperaceView extends Component {
 
   _registerTypeSpeed = () => {
     // WPM = (characters / 5) / min
-    const timeElapsed = countdownToSeconds(this.props.gameStartTime) / 60; // CHANGE THIS TO STATE
+    const gameStartTime = this.props.gameStartTime;
+    const timeElapsed = countdownToSeconds(Date.now() - gameStartTime) / 60; // CHANGE THIS TO STATE
     const characterCount = this.state.characterCount >=5 ? this.state.characterCount : 5;
     const wpm = Math.round((characterCount / 5) / timeElapsed);
     this.setState({
