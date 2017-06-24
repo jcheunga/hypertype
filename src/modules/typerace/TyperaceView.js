@@ -7,7 +7,6 @@ import {
 } from 'react-native';
 
 import app from '../../feathers';
-import { countdownToSeconds } from '../../utils/Utils';
 
 import MainContainer from '../../styles/MainContainer';
 import BodyContainer from '../../styles/BodyContainer';
@@ -73,7 +72,7 @@ class TyperaceView extends Component {
   _registerTypeSpeed = () => {
     // WPM = (characters / 5) / min
     const gameStartTime = this.props.gameStartTime;
-    const timeElapsed = countdownToSeconds(Date.now() - gameStartTime) / 60; // CHANGE THIS TO STATE
+    const timeElapsed = ((Date.now() - gameStartTime) / 1000) / 60; // CHANGE THIS TO STATE
     const characterCount = this.state.characterCount >=5 ? this.state.characterCount : 5;
     const wpm = Math.round((characterCount / 5) / timeElapsed);
     this.setState({
