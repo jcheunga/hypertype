@@ -37,13 +37,15 @@ class CreateGameView extends Component {
   }
 
   _gameStartListen = () => {
-    app.service("multirooms").on("patched", this._handleGamePatched)
+    app.service("multirooms").on('patched', this._handleGamePatched)
   }
 
   _handleGamePatched = (response) => {
-    this.setState({
-      room: response
-    });
+    if (response._id === this.state.room._id) {
+      this.setState({
+        room: response
+      });
+    }
   }
 
   componentWillUnmount () {

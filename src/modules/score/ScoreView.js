@@ -43,9 +43,11 @@ class ScoreView extends Component {
   }
 
   _handleListenToRoom = (response) => {
-    this.setState({
-      room: response
-    });
+    if (response._id === this.state.room._id) {
+      this.setState({
+        room: response
+      });
+    }
   }
 
   _leaveGame = () => {

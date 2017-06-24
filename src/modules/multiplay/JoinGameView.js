@@ -47,25 +47,27 @@ class JoinGameView extends Component {
   }
 
   _gameStartListen = () => {
-    app.service("multirooms").on("patched", this._handleGamePatched)
+    app.service("multirooms").on('patched', this._handleGamePatched)
   }
 
   _handleGamePatched = (response) => {
-    console.log("response");
-    console.log(response);
-    if (this.props.gameId) {
-      this.setState({
-        room: response,
-        gameJoined: true
-      });
-      if (response.gameStarted) {
-        if (this.state.gameJoined) {
-          console.log("is this happening");
-          app.service("multirooms").removeListener("patched", this._handleGamePatched);
-          this.props.multiplayStateActions.startGameForJoins(this.state.room._id, this.state.room);
-          this.setState({
-            gameJoined: false,
-          });
+    if (response._id === this.state.room._id) {
+      console.log("response");
+      console.log(response);
+      if (this.props.gameId) {
+        this.setState({
+          room: response,
+          gameJoined: true
+        });
+        if (response.gameStarted) {
+          if (this.state.gameJoined) {
+            console.log("is this happening");
+            app.service("multirooms").removeListener("patched", this._handleGamePatched);
+            this.props.multiplayStateActions.startGameForJoins(this.state.room._id, this.state.room);
+            this.setState({
+              gameJoined: false,
+            });
+          }
         }
       }
     }
