@@ -51,14 +51,16 @@ class JoinGameView extends Component {
   }
 
   _handleGamePatched = (response) => {
-    if (response._id === this.state.room._id) {
-      console.log("response");
-      console.log(response);
+    console.log("response");
+    console.log(response);
+    if (response.gameId === this.state.enteredGameId) {
+      console.log("this should set the game to joined");
+      this.setState({
+        room: response,
+        gameJoined: true
+      });
+
       if (this.props.gameId) {
-        this.setState({
-          room: response,
-          gameJoined: true
-        });
         if (response.gameStarted) {
           if (this.state.gameJoined) {
             console.log("is this happening");
@@ -70,19 +72,9 @@ class JoinGameView extends Component {
           }
         }
       }
+
     }
   }
-
-  // componentWillReceiveProps (nextProps) {
-  //   if (nextProps.isJoined) {
-  //     if (!this.state.gameJoined) {
-  //       this.setState({
-  //         gameJoined: true,
-  //         room: nextProps.roomJoined
-  //       })
-  //     }
-  //   }
-  // }
 
   handleIdInput = (e) => {
     this.setState({
@@ -128,6 +120,8 @@ class JoinGameView extends Component {
   render() {
     console.log("join game view mounting");
     console.log(this.props);
+    console.log("this state");
+    console.log(this.state);
     const showLobby = this.state.room ? <LobbyViewContainer lobbyName='Lobby' roomJoined={this.state.room}/> : null;
     return (
       <MainContainer>
@@ -167,7 +161,7 @@ class JoinGameView extends Component {
           </FormButton>
 
           <GameIdContainer>
-            <GameIdText>Game ID: #{ this.state.room.gameId ? this.state.room.gameId : null}</GameIdText>
+            <GameIdText>Game ID: #{ this.props.gameId ? this.props.gameId : null}</GameIdText>
           </GameIdContainer>
 
           {showLobby}
