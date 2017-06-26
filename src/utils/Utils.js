@@ -31,7 +31,7 @@ export function getQuoteToType () {
 
 export function countdownToSeconds (countdownValue) {
   if (countdownValue) {
-    return Math.round((Date.now() - countdownValue) / 1000);
+    return Math.round((countdownValue - Date.now()) / 1000);
   }
 }
 
