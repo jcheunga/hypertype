@@ -236,7 +236,6 @@ class TyperaceView extends Component {
   }
 
   render() {
-    console.log("typerace view mounted");
     return (
       <MainContainer>
         <BodyContainer>
