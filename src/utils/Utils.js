@@ -24,8 +24,7 @@ export function createRandomGuestUserId () {
   return gameId
 }
 
-export function getQuoteToType () {
-  const quoteArr = ["Aaaaa Aaaaa Aaaaa", "Lorem Ipsum is simply.", "Lorem"];
+export function getQuoteToType (quoteArr) {
   return quoteArr[getRandomNumberBetweenRange(0, quoteArr.length)];
 }
 
