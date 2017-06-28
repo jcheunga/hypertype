@@ -29,7 +29,7 @@ class TyperaceView extends Component {
   constructor (props) {
     super(props)
 
-    this.textToType = this.props.quoteToType;
+    this.textToType = this.props.quoteData.quote;
     this.words = this.textToType.split(" ");
     this.letterCount = this.textToType.split(" ").join("").length;
     this.wordCount = this.textToType.split(" ").length;
@@ -111,7 +111,7 @@ class TyperaceView extends Component {
       gameId: room.gameId,
       wpm: this.state.wpm,
       playerName: usernames,
-      quote: room.quoteToType
+      quote: room.quoteData.quote
     });
 
     if (user !== null) {
@@ -119,7 +119,7 @@ class TyperaceView extends Component {
       const userHighscores = user.highscores;
       const highscoreToAdd = {
         wpm: this.state.wpm,
-        quote: room.quoteToType,
+        quote: room.quoteData.quote,
         gameId: room.gameId
       };
       userHighscores.push(highscoreToAdd);

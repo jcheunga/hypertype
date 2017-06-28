@@ -46,7 +46,7 @@ export function findRoomService (payload) {
             playerList: patchedplayerList
           });
         } else {
-          const quoteToType = getQuoteToType();
+          const quoteData = getQuoteToType();
           const createGameId = createRandomGameId();
           const countdownStartTime = Date.now();
           const gameStartTime = countdownStartTime + countdownAmount;
@@ -56,8 +56,7 @@ export function findRoomService (payload) {
             gameId: createGameId,
             gameStartTime: gameStartTime,
             gameEndTime: gameEndTime,
-            quoteToType: quoteToType,
-            quoteAfflink: quoteToType,
+            quoteData: quoteData,
             playerList: [
               {
                 playerId: payload.user.usernames,
@@ -76,8 +75,7 @@ export function findRoomService (payload) {
             gameId: response.gameId,
             gameStartTime: response.gameStartTime,
             gameEndTime: response.gameEndTime,
-            quoteToType: response.quoteToType,
-            quoteAfflink: response.quoteAfflink,
+            quoteData: response.quoteData,
             room: response,
             inGame: true
           }
@@ -86,6 +84,10 @@ export function findRoomService (payload) {
       .catch((error) => {
         reject({ message: error });
       });
+  });
+
+  const fetchQuote = new Promise(function(resolve, reject) {
+
   });
 
   return fetchGame

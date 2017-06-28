@@ -16,8 +16,7 @@ const initialState = {
   gameId: null,
   gameEndTime: null,
   gameStartTime: null,
-  quoteToType: null,
-  quoteAfflink: null,
+  quoteData: null,
   roomJoined: null,
   errorMessage: null
 };
@@ -134,8 +133,7 @@ export default function MultiplayStateReducer(state = initialState, action = {})
           gameStartTime: action.payload.gameStartTime,
           gameEndTime: action.payload.gameEndTime,
           roomJoined: action.payload.room,
-          quoteToType: action.payload.quoteToType,
-          quoteAfflink: action.payload.quoteAfflink,
+          quoteData: action.payload.quoteData
         },
         Effects.constant(NavigationActions.navigate({
           routeName: 'MultiplayTypeView'
@@ -195,27 +193,12 @@ export default function MultiplayStateReducer(state = initialState, action = {})
           gameStartTime: action.payload.gameStartTime,
           gameEndTime: action.payload.gameEndTime,
           roomJoined: action.payload.room,
-          quoteToType: action.payload.quoteToType,
-          quoteAfflink: action.payload.quoteAfflink,
+          quoteData: action.payload.quoteData
         },
         Effects.constant(NavigationActions.navigate({
           routeName: 'MultiplayTypeView'
         }))
       );
-
-    // case START_GAME_FOR_JOINS_SUCCESS:
-    //   return {
-    //     ...state,
-    //     isStarting: false,
-    //     isStarted: action.payload.isStarted,
-    //     inGame: action.payload.isStarted,
-    //     gameId: action.payload.gameId,
-    //     gameStartTime: action.payload.gameStartTime,
-    //     gameEndTime: action.payload.gameEndTime,
-    //     roomJoined: action.payload.room,
-    //     quoteToType: action.payload.quoteToType,
-    //     quoteAfflink: action.payload.quoteAfflink,
-    //   }
 
     case LEAVE_GAME:
       return {
@@ -230,8 +213,7 @@ export default function MultiplayStateReducer(state = initialState, action = {})
         gameId: null,
         gameEndTime: null,
         gameStartTime: null,
-        quoteToType: null,
-        quoteAfflink: null,
+        quoteData: null,
         gameCreator: null,
         roomJoined: null,
         errorMessage: null
@@ -250,8 +232,7 @@ export default function MultiplayStateReducer(state = initialState, action = {})
         gameId: null,
         gameEndTime: null,
         gameStartTime: null,
-        quoteToType: null,
-        quoteAfflink: null,
+        quoteData: null,
         gameCreator: null,
         roomJoined: null,
         errorMessage: action.payload

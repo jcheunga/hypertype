@@ -81,7 +81,7 @@ class ScoreView extends Component {
             size={14}
             color='#263238'/>
             <QuoteText icon>
-              {this.props.quoteToType}
+              {this.props.quoteData.quote}
             </QuoteText>
             <View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-end'}}>
               <Icon
@@ -89,7 +89,7 @@ class ScoreView extends Component {
               size={14}
               color='#263238'/>
             </View>
-            <QuoteText>This quote was from 'The boy who cried wolf'</QuoteText>
+            <QuoteText>This quote was from {this.props.quoteData.title} by {this.props.quoteData.author}</QuoteText>
           </QuoteContainer>
 
           {showLobby}

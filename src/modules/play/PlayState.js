@@ -11,8 +11,7 @@ const initialState = {
   gameId: null,
   gameStartTime: null,
   gameEndTime: null,
-  quoteToType: null,
-  quoteAfflink: null,
+  quoteData: null,
   roomJoined: null
 };
 
@@ -59,8 +58,7 @@ export default function PlayStateReducer(state = initialState, action = {}) {
           gameId: action.payload.gameId,
           gameStartTime: action.payload.gameStartTime,
           gameEndTime: action.payload.gameEndTime,
-          quoteToType: action.payload.quoteToType,
-          quoteAfflink: action.payload.quoteAfflink,
+          quoteData: action.payload.quoteData,
           roomJoined: action.payload.room
         },
         Effects.constant(NavigationActions.navigate({
@@ -76,8 +74,7 @@ export default function PlayStateReducer(state = initialState, action = {}) {
         gameId: action.payload.gameId,
         gameStartTime: action.payload.gameStartTime,
         gameEndTime: action.payload.gameEndTime,
-        quoteToType: action.payload.quoteToType,
-        quoteAfflink: action.payload.quoteAfflink,
+        quoteData: action.payload.quoteData,
         roomJoined: action.payload.room
       };
 
@@ -90,8 +87,7 @@ export default function PlayStateReducer(state = initialState, action = {}) {
           gameId: null,
           gameStartTime: null,
           gameEndTime: null,
-          quoteToType: null,
-          quoteAfflink: null,
+          quoteData: null,
           roomJoined: null
         },
         Effects.constant(ErrorState.addError(action.payload))

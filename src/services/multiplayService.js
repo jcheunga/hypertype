@@ -15,13 +15,12 @@ export function createRoomService (payload) {
   const user = payload.user;
 
   const createGame = new Promise(function(resolve, reject) {
-    const quoteToType = getQuoteToType();
+    const quoteData = getQuoteToType();
     const createGameId = createRandomGameId();
 
     const createRoomData = {
       gameId: createGameId,
-      quoteToType: quoteToType,
-      quoteAfflink: quoteToType,
+      quoteData: quoteData,
       gameStarted: false,
       playerList: [
         {
@@ -75,8 +74,7 @@ export function startGameService (payload) {
             gameId: response.gameId,
             gameStartTime: response.gameStartTime,
             gameEndTime: response.gameEndTime,
-            quoteToType: response.quoteToType,
-            quoteAfflink: response.quoteToType,
+            quoteData: response.quoteData,
             isStarted: true,
             room: response
           }
@@ -163,8 +161,7 @@ export function startGameForJoinsService (payload) {
           gameId: room.gameId,
           gameStartTime: room.gameStartTime,
           gameEndTime: room.gameEndTime,
-          quoteToType: room.quoteToType,
-          quoteAfflink: room.quoteToType,
+          quoteData: room.quoteData,
           isStarted: true,
           room: room
         }
@@ -172,30 +169,6 @@ export function startGameForJoinsService (payload) {
     } else {
       reject({ message: "Error starting" })
     }
-
-    // app.service("multirooms")
-    //   .find({
-    //     $limit: 1,
-    //     query: {
-    //       _id: room._id
-    //     }
-    //   })
-    //   .then((response) => {
-    //     resolve(
-    //       {
-    //         gameId: response.gameId,
-    //         gameStartTime: response.gameStartTime,
-    //         gameEndTime: response.gameEndTime,
-    //         quoteToType: response.quoteToType,
-    //         quoteAfflink: response.quoteToType,
-    //         isStarted: true,
-    //         room: response
-    //       }
-    //     );
-    //   })
-    //   .catch((error) => {
-    //     reject({ message: "Error starting" })
-    //   })
   });
 
   return startGameForJoins
