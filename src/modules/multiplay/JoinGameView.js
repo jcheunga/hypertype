@@ -51,10 +51,7 @@ class JoinGameView extends Component {
   }
 
   _handleGamePatched = (response) => {
-    console.log("response");
-    console.log(response);
     if (response.gameId === this.state.enteredGameId) {
-      console.log("this should set the game to joined");
       this.setState({
         room: response,
         gameJoined: true
@@ -63,7 +60,6 @@ class JoinGameView extends Component {
       if (this.props.gameId) {
         if (response.gameStarted) {
           if (this.state.gameJoined) {
-            console.log("is this happening");
             app.service("multirooms").removeListener("patched", this._handleGamePatched);
             this.props.multiplayStateActions.startGameForJoins(this.state.room._id, this.state.room);
             this.setState({
@@ -118,10 +114,6 @@ class JoinGameView extends Component {
   }
 
   render() {
-    console.log("join game view mounting");
-    console.log(this.props);
-    console.log("this state");
-    console.log(this.state);
     const showLobby = this.state.room ? <LobbyViewContainer lobbyName='Lobby' roomJoined={this.state.room}/> : null;
     return (
       <MainContainer>
