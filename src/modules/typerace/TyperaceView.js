@@ -66,7 +66,7 @@ class TyperaceView extends Component {
       this.setState({
         room: response
       });
-    }    
+    }
   }
 
   _registerTypeSpeed = () => {
@@ -204,11 +204,28 @@ class TyperaceView extends Component {
           typingError: false,
           inputText: ""
         });
+        this._registerTypeSpeed();
         this._registerGameFinish();
         this.props.finishTyping();
       }
 
       // SPACE AND CORRECT WORD
+      if (this.words[this.state.currentWord - 1 ] !== undefined) {
+        if (text.substring(0, this.words[this.state.currentWord - 1 ].length) + " " === this.words[this.state.currentWord - 1] + " ") {
+          this._registerTypeSpeed();
+
+          if (text.trim().length === this.words[this.state.currentWord].length) {
+            this.setState({
+              currentWord: this.state.currentWord + 1,
+              currentLetter: 0,
+              inputText: "",
+              characterCount: this.state.characterCount + this.words[this.state.currentWord + 1].length,
+              typingError: false
+            });
+          }
+        }
+      }
+
       if (text.length === this.words[this.state.currentWord].length + 1 && text.substring(this.words[this.state.currentWord].length, this.words[this.state.currentWord].length + 1) === " " && text.trim() === this.words[this.state.currentWord]) {
 
         this._registerTypeSpeed();
@@ -225,8 +242,6 @@ class TyperaceView extends Component {
       }
 
     }
-
-    // this._registerTypeSpeed();
 
   }
 
