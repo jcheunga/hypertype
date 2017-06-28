@@ -5,11 +5,7 @@ export function fetchQuoteService (payload) {
 
   const fetchquotes = new Promise(function(resolve, reject) {
     app.service("quotes")
-      .find({
-        query: {
-          $limit: 50
-        }
-      })
+      .find()
       .then((response) => {
         resolve(getQuoteToType(response.data));
       })
