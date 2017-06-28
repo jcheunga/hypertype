@@ -5,7 +5,7 @@ import {
   START_GAME_FOR_JOINS_SUCCESS,
   SERVICE_ERROR
 } from '../modules/multiplay/MultiplayState';
-import { createRandomGameId, getQuoteToType } from '../utils/Utils';
+import { createRandomGameId } from '../utils/Utils';
 
 import app from '../feathers';
 
@@ -15,12 +15,10 @@ export function createRoomService (payload) {
   const user = payload.user;
 
   const createGame = new Promise(function(resolve, reject) {
-    const quoteData = getQuoteToType();
     const createGameId = createRandomGameId();
 
     const createRoomData = {
       gameId: createGameId,
-      quoteData: quoteData,
       gameStarted: false,
       playerList: [
         {

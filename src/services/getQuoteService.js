@@ -1,37 +1,26 @@
-import {
-  FETCH_SCORES_SUCCESS,
-  FETCH_FAILURE
-} from '../modules/highscore/HighscoreState';
-
 import app from '../feathers';
+import { getQuoteToType } from '../utils/Utils';
 
-export function fetchScoreService (payload) {
+export function fetchQuoteService (payload) {
 
   const fetchquotes = new Promise(function(resolve, reject) {
     app.service("quotes")
       .find({
         query: {
-          $limit: 50,
-          $sort: {
-            wpm: -1
-          }
+          $limit: 50
         }
       })
-      .then((res) => {
-        resolve({
-          data: res.data,
-          isFetched: true
-        });
+      .then((response) => {
+        resolve(getQuoteToType(response.data));
       })
-      .catch((err) => {
+      .catch((error) => {
         reject({
-          message: err,
-          hasError: true
+          message: "Cannot fetch quotes"
         })
       });
   });
 
-  return fetchScores
-    .then((response) => ({type: FETCH_SCORES_SUCCESS, payload: response }))
-    .catch((error) => ({type: FETCH_FAILURE, payload: error}))
+  return fetchquotes
+    .then((response) => ({payload: response }))
+    .catch((error) => ({payload: error.message}))
 }

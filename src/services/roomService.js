@@ -3,7 +3,7 @@ import {
   FIND_NEW_GAME_SUCCESS,
   LEAVE_GAME
 } from '../modules/play/PlayState';
-import { createRandomGameId, getQuoteToType } from '../utils/Utils';
+import { createRandomGameId } from '../utils/Utils';
 
 import app from '../feathers';
 
@@ -46,7 +46,6 @@ export function findRoomService (payload) {
             playerList: patchedplayerList
           });
         } else {
-          const quoteData = getQuoteToType();
           const createGameId = createRandomGameId();
           const countdownStartTime = Date.now();
           const gameStartTime = countdownStartTime + countdownAmount;
@@ -56,7 +55,6 @@ export function findRoomService (payload) {
             gameId: createGameId,
             gameStartTime: gameStartTime,
             gameEndTime: gameEndTime,
-            quoteData: quoteData,
             playerList: [
               {
                 playerId: payload.user.usernames,
@@ -84,10 +82,6 @@ export function findRoomService (payload) {
       .catch((error) => {
         reject({ message: error });
       });
-  });
-
-  const fetchQuote = new Promise(function(resolve, reject) {
-
   });
 
   return fetchGame
