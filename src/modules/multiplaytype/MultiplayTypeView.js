@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
   View,
   Dimensions
@@ -11,7 +11,7 @@ import { countdownToSeconds } from '../../utils/Utils';
 
 const window = Dimensions.get('window');
 
-class MultiplayTypeView extends Component {
+class MultiplayTypeView extends React.PureComponent {
   static displayName = 'MultiplayTypeView';
 
   static navigationOptions = {

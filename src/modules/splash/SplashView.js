@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
   View,
   Image
 } from 'react-native';
 
-class SplashView extends Component {
+class SplashView extends React.PureComponent {
   static displayName = 'SplashView';
 
   render() {

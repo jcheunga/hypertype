@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
   View,
   Dimensions,
@@ -13,7 +13,7 @@ import FormButtonText from '../../styles/FormButtonText';
 
 import ErrorText from '../../styles/ErrorText';
 
-class RegisterView extends Component {
+class RegisterView extends React.PureComponent {
   static displayName = 'RegisterView';
 
   // Initialize the hardcoded data

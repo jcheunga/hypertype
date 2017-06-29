@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {addNavigationHelpers} from 'react-navigation';
 
 import AppNavigator from './Navigator';
 
-class NavigatorView extends Component {
+class NavigatorView extends React.PureComponent {
   static displayName = 'NavigationView';
 
   render() {

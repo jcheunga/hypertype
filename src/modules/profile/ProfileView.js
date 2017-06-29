@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
   View,
   Dimensions,
@@ -13,7 +13,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 const window = Dimensions.get('window');
 
-class ProfileView extends Component {
+class ProfileView extends React.PureComponent {
   static displayName = 'ProfileView';
 
   static navigationOptions = {

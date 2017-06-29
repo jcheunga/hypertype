@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -30,7 +30,7 @@ import { sortMapResponse } from '../../utils/Utils';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
-class HighscoreView extends Component {
+class HighscoreView extends React.PureComponent {
   static displayName = 'HighscoreView';
 
   static navigationOptions = {

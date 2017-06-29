@@ -1,5 +1,5 @@
 
-import React, {Component} from 'react';
+import React from 'react';
 import {
   Text,
   View,
@@ -21,7 +21,7 @@ import HeaderContainerSubHeading from '../../styles/HeaderContainerSubHeading';
 
 import TextBackButtonContainer from '../../components/TextBackButtonContainer';
 
-class MultiplayMenuView extends Component {
+class MultiplayMenuView extends React.PureComponent {
   static displayName = 'MultiplayMenuView';
 
   render() {

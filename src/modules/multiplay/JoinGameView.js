@@ -1,5 +1,5 @@
 
-import React, {Component} from 'react';
+import React from 'react';
 import {
   ActivityIndicator
 } from 'react-native';
@@ -24,7 +24,7 @@ import GameIdText from '../../styles/GameIdText';
 
 import ErrorText from '../../styles/ErrorText';
 
-class JoinGameView extends Component {
+class JoinGameView extends React.PureComponent {
   static displayName = 'JoinGameView';
 
   // Initialize the hardcoded data

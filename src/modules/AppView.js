@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {View, StatusBar, ActivityIndicator, AsyncStorage} from 'react-native';
 import NavigatorViewContainer from './navigator/NavigatorViewContainer';
 import * as snapshotUtil from '../utils/snapshot';
@@ -10,7 +10,7 @@ import SplashView from './splash/SplashView';
 
 import app from '../feathers';
 
-class AppView extends Component {
+class AppView extends React.PureComponent {
   static displayName = 'AppView';
 
   constructor(props) {

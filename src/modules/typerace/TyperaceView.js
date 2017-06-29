@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
   Text,
   TextInput,
@@ -17,7 +17,7 @@ import FormTextInput from '../../styles/FormTextInput';
 
 const window = Dimensions.get('window');
 
-class TyperaceView extends Component {
+class TyperaceView extends React.Component {
   static displayName = 'TyperaceView';
 
   static navigationOptions = {
@@ -211,7 +211,7 @@ class TyperaceView extends Component {
 
       // SPACE AND CORRECT WORD
       if (this.words[this.state.currentWord - 1 ] !== undefined) {
-        if (text.substring(0, this.words[this.state.currentWord - 1 ].length) + " " === this.words[this.state.currentWord - 1] + " ") {
+        if (text.substring(0, this.words[this.state.currentWord - 1 ].length - 1) + " " === this.words[this.state.currentWord - 1] + " ") {
           this._registerTypeSpeed();
 
           if (text.trim().length === this.words[this.state.currentWord].length) {

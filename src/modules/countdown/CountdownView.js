@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
   View,
   Text
@@ -10,7 +10,7 @@ import CountdownCircle from 'react-native-countdown-circle';
 import HomeContainer from '../../styles/HomeContainer';
 import { countdownToSeconds } from '../../utils/Utils';
 
-class CountdownView extends Component {
+class CountdownView extends React.Component {
   static displayName = 'CountdownScreen';
 
   render() {

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
   Text,
   View,
@@ -23,7 +23,7 @@ import LobbyHeader from '../../styles/LobbyHeader';
 
 import { sortMapResponse } from '../../utils/Utils';
 
-class UserProfileView extends Component {
+class UserProfileView extends React.PureComponent {
   static displayName = 'UserProfileView';
 
   static navigationOptions = {

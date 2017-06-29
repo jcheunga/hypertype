@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
   View,
   Dimensions,
@@ -13,7 +13,7 @@ import FormButtonText from '../../styles/FormButtonText';
 
 import ErrorText from '../../styles/ErrorText';
 
-class LoginView extends Component {
+class LoginView extends React.PureComponent {
   static displayName = 'LoginView';
 
   // Initialize the hardcoded data

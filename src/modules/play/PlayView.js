@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
   Image,
   ActivityIndicator
@@ -18,7 +18,7 @@ import HeaderContainerSubHeading from '../../styles/HeaderContainerSubHeading';
 
 import Icon from 'react-native-vector-icons/Entypo';
 
-class PlayView extends Component {
+class PlayView extends React.PureComponent {
   static displayName = 'PlayView';
 
   static navigationOptions = {

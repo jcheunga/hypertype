@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
   Text,
   View,
@@ -19,7 +19,7 @@ import HeaderContainerSubHeading from '../../styles/HeaderContainerSubHeading';
 import AuthTabContainer from '../../styles/AuthTabContainer';
 import AuthTabText from '../../styles/AuthTabText';
 
-class AuthView extends Component {
+class AuthView extends React.PureComponent {
   static displayName = 'AuthView';
 
   static navigationOptions = {

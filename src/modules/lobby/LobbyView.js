@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
   Text,
   View,
@@ -16,7 +16,7 @@ import LobbyHeader from '../../styles/LobbyHeader';
 
 import { sortMapResponse } from '../../utils/Utils';
 
-class LobbyView extends Component {
+class LobbyView extends React.PureComponent {
   static displayName = 'LobbyView';
 
   static navigationOptions = {

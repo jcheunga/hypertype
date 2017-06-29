@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
   Text,
   View,
@@ -25,7 +25,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { getOrdinalValue } from '../../utils/Utils';
 
-class ScoreView extends Component {
+class ScoreView extends React.PureComponent {
   static displayName = 'ScoreView';
 
   constructor(props) {

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
   Dimensions,
   ActivityIndicator
@@ -23,7 +23,7 @@ import GameIdText from '../../styles/GameIdText';
 
 const window = Dimensions.get('window');
 
-class CreateGameView extends Component {
+class CreateGameView extends React.PureComponent {
   static displayName = 'CreateGameView';
 
   // Initialize the hardcoded data

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
   View,
   Dimensions
@@ -13,7 +13,7 @@ import app from '../../feathers';
 
 const window = Dimensions.get('window');
 
-class TypeView extends Component {
+class TypeView extends React.PureComponent {
   static displayName = 'TypeView';
 
   static navigationOptions = {

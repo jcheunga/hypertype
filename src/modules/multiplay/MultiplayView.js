@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
   StyleSheet,
   View,
@@ -10,7 +10,7 @@ import JoinGameView from './JoinGameView';
 
 const window = Dimensions.get('window');
 
-class MultiplayView extends Component {
+class MultiplayView extends React.PureComponent {
   static displayName = 'MultiplayView';
 
   static navigationOptions = {
