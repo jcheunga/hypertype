@@ -77,7 +77,7 @@ class UserProfileView extends React.PureComponent {
         <View style={{alignItems: 'center', marginBottom: 30}}>
           <Image
             style={{height: 100,borderRadius: 50, width: 100, marginBottom: 20}}
-            source={{uri: 'https://placehold.it/100x100'}}
+            source={require('../../assets/images/avatar.png')}
           />
           <Text style={{fontSize: 22, fontWeight: '600', marginBottom: 10, color: '#0073cd'}}>
             Welcome {this._showUserName()}!
