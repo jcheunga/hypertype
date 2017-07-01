@@ -52,26 +52,20 @@ export function createRoomService (payload) {
 export function startGameService (payload) {
   const user = payload.user;
   const roomId = payload.room._id;
-  const countdownAmount = 5000;
+  const countdownAmount = 5;
 
   const startGame = new Promise(function(resolve, reject) {
 
-    const countdownStartTime = Date.now();
-    const gameStartTime = countdownStartTime + countdownAmount;
-    const gameEndTime = gameStartTime + 120000;
-
     app.service("multirooms")
       .patch(roomId, {
-          gameStartTime: gameStartTime,
-          gameEndTime: gameEndTime,
+          countdownTime: countdownAmount,
           gameStarted: true
       })
       .then((response) => {
         resolve(
           {
             gameId: response.gameId,
-            gameStartTime: response.gameStartTime,
-            gameEndTime: response.gameEndTime,
+            countdownTime: response.countdownTime,
             quoteData: response.quoteData,
             isStarted: true,
             room: response
@@ -157,8 +151,7 @@ export function startGameForJoinsService (payload) {
       resolve(
         {
           gameId: room.gameId,
-          gameStartTime: room.gameStartTime,
-          gameEndTime: room.gameEndTime,
+          countdownTime: room.countdownTime,
           quoteData: room.quoteData,
           isStarted: true,
           room: room

@@ -9,8 +9,7 @@ export default connect(
   state => ({
     inGame: state.multiplayState.inGame,
     gameId: state.multiplayState.gameId,
-    gameEndTime: state.multiplayState.gameEndTime,
-    gameStartTime: state.multiplayState.gameStartTime,
+    countdownTime: state.multiplayState.countdownTime,
     quoteData: state.multiplayState.quoteData,
     gameCreator: state.multiplayState.gameCreator,
     roomJoined: state.multiplayState.roomJoined,

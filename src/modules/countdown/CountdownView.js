@@ -8,7 +8,6 @@ import app from '../../feathers';
 import CountdownCircle from 'react-native-countdown-circle';
 
 import HomeContainer from '../../styles/HomeContainer';
-import { countdownToSeconds } from '../../utils/Utils';
 
 class CountdownView extends React.Component {
   static displayName = 'CountdownScreen';
@@ -18,7 +17,7 @@ class CountdownView extends React.Component {
       <HomeContainer>
         <Text style={{color: '#fe463c', marginBottom: 20, fontSize: 22, fontWeight: '600'}}>Game is starting!</Text>
         <CountdownCircle
-          seconds={countdownToSeconds(this.props.gameStartTime)} // CHANGE THE NODE MODULE TO SHOW MATH ROUND BUT FOR THE COUTNDOWN TO BE IN UNROUNDED SECONDS
+          seconds={this.props.countdownTimeDuration} // CHANGE THE NODE MODULE TO SHOW MATH ROUND BUT FOR THE COUTNDOWN TO BE IN UNROUNDED SECONDS
           radius={40}
           borderWidth={10}
           color="#fe463c"

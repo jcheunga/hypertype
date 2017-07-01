@@ -41,21 +41,6 @@ class TypeView extends React.PureComponent {
     }
   }
 
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.gameStartTime) {
-      if (countdownToSeconds(nextProps.gameStartTime) < 0 || countdownToSeconds(nextProps.gameStartTime) > 10) {
-        this.leaveGame();
-      } else {
-        this.setState({
-          gameStartTime: countdownToSeconds(nextProps.gameStartTime),
-          countdownView: true,
-          scoreView: false,
-          typingView: false
-        });
-      }
-    }
-  }
-
   startNewQuickGame = () => {
     let user = this.props.user ? this.props.user : {usernames: this.props.guestUsername};
     this.props.playStateActions.leaveGame();
@@ -88,7 +73,7 @@ class TypeView extends React.PureComponent {
 
   render () {
     const showCountdownView = this.state.countdownView && this.props.inGame && this.props.gameId ?
-      <CountdownView {...this.props} finishCountdown={this.finishCountdown} serviceType="rooms"/>
+      <CountdownView {...this.props} finishCountdown={this.finishCountdown} countdownTimeDuration={countdownToSeconds(this.props.gameStartTime)} serviceType="rooms"/>
     : null;
 
     const showTypingView = this.state.typingView && this.props.inGame && this.props.gameId ?

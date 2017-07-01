@@ -31,25 +31,10 @@ class MultiplayTypeView extends React.PureComponent {
   }
 
   componentWillMount () {
-    if (!this.props.gameId || !this.props.inGame || countdownToSeconds(this.props.gameStartTime) < 0 || countdownToSeconds(this.props.gameStartTime) > 10) {
+    if (!this.props.gameId || !this.props.inGame || this.props.countdownTime < 0 || this.props.countdownTime > 5) {
       this.leaveGame();
     } else {
       this.setState({countdownView: true});
-    }
-  }
-
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.gameStartTime) {
-      if (countdownToSeconds(nextProps.gameStartTime) < 0 || countdownToSeconds(nextProps.gameStartTime) > 10) {
-        this.leaveGame();
-      } else {
-        this.setState({
-          gameStartTime: countdownToSeconds(nextProps.gameStartTime),
-          countdownView: true,
-          scoreView: false,
-          typingView: false
-        });
-      }
     }
   }
 
@@ -87,8 +72,9 @@ class MultiplayTypeView extends React.PureComponent {
   }
 
   render () {
+    console.log(this.props);
     const showCountdownView = this.state.countdownView && this.props.inGame && this.props.gameId ?
-      <CountdownView {...this.props} finishCountdown={this.finishCountdown} serviceType="multirooms"/>
+      <CountdownView {...this.props} finishCountdown={this.finishCountdown} countdownTimeDuration={this.props.countdownTime} serviceType="multirooms"/>
     : null;
 
     const showTypingView = this.state.typingView && this.props.inGame && this.props.gameId ?
