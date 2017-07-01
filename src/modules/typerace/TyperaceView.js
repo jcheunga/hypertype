@@ -44,7 +44,8 @@ class TyperaceView extends React.Component {
       characterCount: this.words[0].length,
       room: props.roomJoined,
       wpm: 0,
-      typingError: false
+      typingError: false,
+      gameStartedTime: Date.now()
     };
 
     this._listenToRoom();
@@ -71,8 +72,7 @@ class TyperaceView extends React.Component {
 
   _registerTypeSpeed = () => {
     // WPM = (characters / 5) / min
-    const gameStartTime = this.props.gameStartTime;
-    const timeElapsed = ((Date.now() - gameStartTime) / 1000) / 60; // CHANGE THIS TO STATE
+    const timeElapsed = ((Date.now() - this.state.gameStartedTime) / 1000) / 60; // CHANGE THIS TO STATE
     const characterCount = this.state.characterCount >=5 ? this.state.characterCount : 5;
     const wpm = Math.round((characterCount / 5) / timeElapsed);
     this.setState({
@@ -104,6 +104,7 @@ class TyperaceView extends React.Component {
       }
     }
     app.service(this.props.serviceType).patch(roomId, {
+      completedGame: true,
       playerList: patchedPlayerList
     });
 
@@ -210,23 +211,9 @@ class TyperaceView extends React.Component {
       }
 
       // SPACE AND CORRECT WORD
-      if (this.words[this.state.currentWord - 1 ] !== undefined) {
-        if (text.substring(0, this.words[this.state.currentWord - 1 ].length - 1) + " " === this.words[this.state.currentWord - 1] + " ") {
-          this._registerTypeSpeed();
-
-          if (text.trim().length === this.words[this.state.currentWord].length) {
-            this.setState({
-              currentWord: this.state.currentWord + 1,
-              currentLetter: 0,
-              inputText: "",
-              characterCount: this.state.characterCount + this.words[this.state.currentWord + 1].length,
-              typingError: false
-            });
-          }
-        }
-      }
-
-      if (text.length === this.words[this.state.currentWord].length + 1 && text.substring(this.words[this.state.currentWord].length, this.words[this.state.currentWord].length + 1) === " " && text.trim() === this.words[this.state.currentWord]) {
+      if (text.length === this.words[this.state.currentWord].length + 1 &&
+          text.substring(this.words[this.state.currentWord].length, this.words[this.state.currentWord].length + 1) === " " &&
+          text.trim() === this.words[this.state.currentWord]) {
 
         this._registerTypeSpeed();
 
