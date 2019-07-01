@@ -10,7 +10,8 @@ import { AsyncStorage } from 'react-native';
 // const API_URL = 'http://192.168.20.3:3030';
 // const API_URL = 'http://10.0.2.2:3030'; // ANDROID
 // const API_URL = 'localhost:3030'; // IOS
-const API_URL = 'https://hypertype-api.jcapps.xyz';
+
+const API_URL = 'http://hypertype-api.jcapps.xyz';
 const options = {transports: ['websocket'], pingTimeout: 3000, pingInterval: 5000, jsonp: false};
 const socket = io(API_URL, options);
 
